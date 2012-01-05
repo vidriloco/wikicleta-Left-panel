@@ -1,0 +1,15 @@
+<%= render 'shared_actions' %>
+
+
+<b><%= @user.full_name %></b><%=link_to t("user_accounts.settings.sections.profile.change_name"), settings_account_path %>
+
+<%= form_for(@user, :url => settings_changed_path(@user), :html => { :method => :put }) do |f| %>
+	
+	<div><%= f.label :bio %><br />
+  <%= f.text_area :bio %></div>
+
+	<div><%= f.label :personal_page %><br />
+  <%= f.text_field :personal_page %></div>
+	
+	<%= f.submit t("user_accounts.settings.save") %>
+<% end %>

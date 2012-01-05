@@ -1,0 +1,9 @@
+<h1><%=t "user_accounts.settings.title" %></h1>
+
+<div class="accounts-settings">
+	<%= link_to t('user_accounts.settings.account'), settings_account_path %>
+	<%= link_to t('user_accounts.settings.access'), settings_access_path %>
+	<%= link_to t('user_accounts.settings.profile'), settings_profile_path %>
+</div>
+
+<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>

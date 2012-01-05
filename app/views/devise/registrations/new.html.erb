@@ -1,0 +1,22 @@
+<h2><%=t 'user_accounts.registrations.new.title' %></h2>
+
+<%= form_for(resource, :as => resource_name, :url => account_create_path) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :full_name %><br />
+  <%= f.text_field :full_name %></div>
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email %></div>
+
+  <div><%= f.label :password %><br />
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+  <div><%= f.label :username %><br />
+  <%= f.text_field :username %></div>
+
+  <div><%= f.submit t('user_accounts.registrations.new.commit') %></div>
+<% end %>

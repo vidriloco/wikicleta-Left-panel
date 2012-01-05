@@ -1,0 +1,21 @@
+<%= render 'shared_actions' %>
+
+<%= form_for(@user, :url => settings_changed_path(@user), :html => { :method => :put }) do |f| %>
+	
+	<div><%= f.label :full_name %><br />
+  <%= f.text_field :full_name %></div>
+
+	<div><%= f.label :email %><br />
+  <%= f.email_field :email %></div>
+	
+	<div><%= f.label :username %><br />
+  <%= f.text_field :username %></div>
+	
+	<div><%= f.label :share_location %>
+  <%= f.check_box :share_location %></div><br/>
+
+	<%= f.submit t("user_accounts.settings.save") %>
+<% end %>
+
+<%= link_to t("user_accounts.settings.sections.account.deactivate"), account_deactivate_path, 
+	:confirm => t("user_accounts.settings.sections.account.deactivate_confirmation"), :method => :delete %>
