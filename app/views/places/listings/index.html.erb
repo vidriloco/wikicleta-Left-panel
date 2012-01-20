@@ -1,0 +1,36 @@
+<div id="main-box">
+	<%= t 'places.views.index.title' %>
+	<%= link_to t('places.views.index.new'), new_place_path %>
+	
+	<%= render 'categories/all' %>
+	
+	<select id="l-params">
+	  <option value="nothing"><%= t('places.views.index.all') %></option>
+	  <option value="accessible"><%= t('places.views.index.accessible') %></option>
+	  <option value="recent"><%= t('places.views.index.recent') %></option>
+	  <option value="popular"><%= t('places.views.index.popular') %></option>
+	</select>
+	
+	<div id="l-places">
+		<%= render :partial => 'places/listings/place', :collection => @places %>
+	</div>
+</div>
+
+<div id="side-box">
+	<%= link_to t('places.views.index.search'), "" %>
+	
+	<% if user_signed_in? %>
+		<div class="lgd_in">
+			<%= link_to t('places.views.index.followed_by_me'), "" %>
+			<%= link_to t('places.views.index.shared_by_me'), "" %>
+		</div>
+	<% else %>
+		<div class="lgd_in_not">
+			<%= link_to t('places.views.index.registration_invitation'), "" %>
+		</div>
+	<% end %>
+</div>
+
+<div id="map-box">
+	<div style="width:100%; height:400px;" id="map" class="is-editable displays-points radio-3 shadowed-light"></div>
+</div>

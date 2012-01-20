@@ -1,0 +1,6 @@
+<div class="cats">
+	<% @categories.each do |cat| %>
+		<%= check_box_tag cat.standard_name, '', true , :class => "item", :id => "cat-#{cat.id}" %>
+		<% I18n.t("categories.all.#{cat.standard_name}") %>
+	<% end %>
+</div>

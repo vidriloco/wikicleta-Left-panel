@@ -1,0 +1,53 @@
+es_MX:
+  activerecord:
+    models:
+      place: "Lugar"
+    attributes:
+      place: 
+        mobility_kindness_index: "MovAi"
+        name: "Nombre"
+        description: "Descripción"
+        category: "Categoría"
+        location: "Ubicación"
+  places:
+    common_actions:
+      follow: "Seguir"
+    custom_validations:
+      coordinates_missing: 'No ha sido seleccionada ninguna ubicación en el mapa'
+      twitter_bad_format: "no debe llevar el símbolo @"
+    views:
+      edit:
+        title: "Modificar Lugar"
+      show:
+        followers: "Seguidores"
+        photos: "Fotos"
+        announcements: "Anuncios"
+        comments: "Comentarios"
+        how_to_arrive: "¿Cómo llegar?"
+        edit: "Modificar"
+        empty:
+          followers: "Este lugar no tiene seguidores aún"
+      index: 
+        title: "Lugares"
+        new: "Agrega un lugar"
+        search: "Buscar lugares"
+        registration_invitation: "Registrate para compartir, seguir y reseñear lugares"
+        followed_by_me: "Lugares que sigo"
+        shared_by_me: "Lugares que compartí"
+        
+        all: "Todos"
+        recent: "Recientes"
+        popular: "Populares"
+        accessible: "De fácil acceso"
+      new:
+        title: "Nuevo Lugar"
+        instruction: "Selecciona un punto en el mapa"
+        approximate_address: "Dirección aproximada"
+        form:
+          name_field: "Aquí va el nombre del lugar"
+          description_field: "Comparte una descripción"
+          address_field: "Escribe una dirección si la aproximada no te convence"
+          category_field: "Selecciona una categoría"
+        
+
+      

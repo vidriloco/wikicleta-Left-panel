@@ -7,6 +7,8 @@ gem 'rails', '3.1.3'
 
 gem 'pg'
 gem 'devise'
+gem 'formtastic'
+gem 'spatial_adapter', :git => 'https://github.com/Empact/spatial_adapter.git'
 
 group :test do
 	gem 'capybara'
@@ -15,6 +17,7 @@ group :test do
   gem 'steak'
   gem 'gherkin'
   gem 'autotest'
+	gem 'delorean'
   gem 'ZenTest', "~> 4.4.2"
 	# macos
 	gem 'autotest-fsevent'

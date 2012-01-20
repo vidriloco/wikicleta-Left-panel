@@ -71,6 +71,7 @@ Spork.each_run do
   load "#{Rails.root}/config/routes.rb"
   
   Dir["#{Rails.root}/app/**/*.rb"].each { |f| load f }
+  I18n.reload!
   
   require 'factory_girl_rails'
 end

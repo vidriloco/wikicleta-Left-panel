@@ -1,0 +1,47 @@
+es_MX:
+  activerecord:
+    models:
+      user: "Usuario"
+    attributes:
+      user:
+        full_name: "Nombre" 
+        password: "Contraseña"
+        password_confirmation: "Confirmación de la contraseña"
+        username: "Nombre de usuario"
+        email: "Correo"
+        remember_me: "Recuérdame"
+        login: "Nombre de Usuario o Correo"
+        personal_page: "Página personal"
+        bio: "Bio"
+        share_location: "Compartir ubicación"
+        reset_password_token: "El token para reestablecer contraseña"
+  user_accounts:
+    forgot_password: "¿Olvidaste tu contraseña?"
+    passwords:
+      reset_password: "Reestablecer contraseña"
+    registrations:
+      new:
+        title: "Muévete por tu ciudad"
+        commit: "Registrarme"
+        start: "Entrar"
+    sessions:
+      new:
+        title: "Inicia sesión"
+        start: "Entrar"
+        sign_up: "Registrate"
+    settings:
+      title: "Preferencias"
+      account: "Cuenta"
+      access: "Acceso"
+      profile: "Perfil"
+      save: "Guardar"
+      successful_save: "Tus preferencias han sido guardadas"
+      unsuccessful_save: "No ha sido posible guardar tus preferencias"
+      sections:
+        account:
+          deactivate: "Desactivar mi cuenta"
+          deactivate_confirmation: "¿Realmente deseas desactivar tu cuenta?"
+        access:
+          current_password: "Contraseña Actual"
+        profile:
+          change_name: "Cambiar nombre"

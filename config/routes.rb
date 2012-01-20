@@ -18,7 +18,13 @@ Ciudadio::Application.routes.draw do
     match "profile", :via => :get
     match "changed", :via => :put
   end
-
+  
+  match "places" => 'places/listings#index', :via => :get
+  match "places/new" => 'places/commits#new', :via => :get, :as => "new_place"
+  match "places" => "places/commits#create", :via => :post
+  match "places/:id" => 'places/representations#show', :via => :get, :as => "place"
+  match "places/edit/:id" => 'places/commits#edit', :via => :get, :as => "edit_place"
+  match "places/:id" => "places/commits#update", :via => :put
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

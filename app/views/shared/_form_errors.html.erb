@@ -1,0 +1,16 @@
+<% if object.errors.any? %>
+  <div id="error_explanation" class="radio-5">
+    <h2><%= t('app_name') + " " + t("messages.#{message}", :element => @place.class.model_name.human) %></h2>
+
+    <ul>
+    <% object.errors.each do |msg| %>
+			<% if msg == :base %>
+					<% object.errors[:base].each do |error| %>
+						<li><%= error %></li>
+					<% end %>
+			<% end %>
+      
+    <% end %>
+    </ul>
+  </div>
+<% end %>

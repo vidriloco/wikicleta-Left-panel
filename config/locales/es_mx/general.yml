@@ -1,0 +1,9 @@
+es_MX:
+  app_name: "Metropolí"
+  messages:
+    save_failure: "no pudo guardar este %{element} debido a:"
+  actions:
+    save: "Guardar"
+    update: "Guardar cambios"
+  connectives:
+    by: "Por"

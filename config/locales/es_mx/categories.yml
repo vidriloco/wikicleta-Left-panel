@@ -1,0 +1,14 @@
+es_MX:
+  activerecord:
+    models:
+      category: "Categoria"
+  categories:
+    all:
+      workshop: "Taller"
+      restaurant: "Restaurante"
+      transport_station: "Estación"
+      store: "Tienda"
+      museum: "Museo"
+      cinema: "Cine"
+      park: "Parque"
+      square: "Plaza"

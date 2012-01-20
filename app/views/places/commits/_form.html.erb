@@ -1,0 +1,9 @@
+<%= render :partial => 'shared/form_errors', :locals => {:message => "save_failure", :object => @place} %>
+
+<%= p.input :name, :label => false %>
+<%= p.input :description, :label => false %>
+<%= p.input :address, :label => false %>
+<%= p.input :category,  :as => :select, :collection => categories_for_select, :label => false %>
+<%= p.input :twitter %>
+<%= hidden_field_tag "coordinates[lat]" %>
+<%= hidden_field_tag "coordinates[lon]" %>

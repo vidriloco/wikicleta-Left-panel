@@ -1,0 +1,19 @@
+
+<div id="side-box">
+	<p><%=t('places.views.new.approximate_address') %></p>
+	<p class="address"><%=t('places.views.new.instruction') %></div>
+	<div id="map-box">
+		<div style="width:100%; height:400px;" id="map" class="hide-address-on-load is-editable displays-points radio-3 shadowed-light"></div>
+	</div>
+</div>
+
+<div id="main-box">
+	<h1><%=t('places.views.new.title') %></h1>
+	
+	<%= semantic_form_for @place do |p| %>
+	
+		<%= render :partial => 'form', :locals => {:p => p} %>
+		<%= p.submit t('actions.save') %>
+	<% end %>
+	
+</div>

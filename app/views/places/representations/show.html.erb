@@ -1,0 +1,67 @@
+<div id="main-box">
+	<h1><%= @place.name %></h1>
+	
+	
+	<p class="<%= "not-given-" unless @place.address.blank? %>address"><%= @place.address %></p>
+	
+	<div class="social-nets">
+		<% unless @place.twitter.blank? %>
+			<span class="twitter">@<%= @place.twitter %></span>
+		<% end %>
+	</div>
+
+	<%= link_to t('places.common_actions.follow'), "" %>
+	
+	<%= t('connectives.by') %> <%= @place.get_any_owner.username %>
+	<% if @place.owned_by?(current_user) %>
+		<%= link_to t('places.views.show.edit'), edit_place_path(@place) %>
+	<% end %>
+
+	<span class="description"><%= @place.description %></span>
+
+	<div id="status-bar">
+		<div class="followers">
+			<span class="count"><%= @place.followers_count %></span>
+			<span class="saying"><%= t('places.views.show.followers') %></span>
+		</div>
+	
+		<div class="photos">
+			<span class="count"><%= @place.photos_count %></span>
+			<span class="saying"><%= t('places.views.show.photos') %></span>
+		</div>
+	
+		<div class="announcements">
+			<span class="count"><%= @place.announcements.count %></span>
+			<span class="saying"><%= t('places.views.show.announcements') %></span>
+		</div>
+	
+		<div class="comments">
+			<span class="count"><%= @place.comments_count %></span>
+			<span class="saying"><%= t('places.views.show.comments') %></span>
+		</div>
+	
+		<div class="mo-index">
+			<span class="name"><%= @place.mobility_kindness_index %></span>
+			<%= Place.human_attribute_name(:mobility_kindness_index) %>
+		</div>
+	
+		<%= link_to t('places.views.show.how_to_arrive') , '' %>
+	</div>
+
+	<div id="tabbed-content">
+		<h3><%= t('places.views.show.empty.followers') %></h3>
+		<%= link_to t('places.common_actions.follow'), "" %>
+	
+	</div>
+</div>
+
+<div id="side-box">
+	<div id="map-box">
+		<div style="width:100%; height:400px;" id="map" class="displays-points radio-3 shadowed-light"></div>
+	</div>
+</div>
+
+<% unless @place.coordinates.nil? %>
+	<%= hidden_field_tag 'coordinates[lat]', @place.coordinates.lat %>
+	<%= hidden_field_tag 'coordinates[lon]', @place.coordinates.lon %>
+<% end %>

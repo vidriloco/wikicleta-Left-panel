@@ -11,7 +11,46 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120102054207) do
+ActiveRecord::Schema.define(:version => 20120118074932) do
+
+  create_table "announcements", :force => true do |t|
+    t.string   "message"
+    t.boolean  "is_temporal"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "place_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "categories", :force => true do |t|
+    t.string   "standard_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "follows", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "place_id"
+    t.boolean  "is_owner",   :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "places", :force => true do |t|
+    t.string   "name"
+    t.integer  "mobility_kindness_index"
+    t.text     "description"
+    t.string   "address"
+    t.integer  "category_id"
+    t.string   "twitter"
+    t.integer  "followers_count",                        :default => 0
+    t.integer  "photos_count",                           :default => 0
+    t.integer  "comments_count",                         :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.point    "coordinates",             :limit => nil,                :srid => 4326
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
