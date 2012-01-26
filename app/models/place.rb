@@ -1,12 +1,24 @@
 class Place < ActiveRecord::Base
+  include Follows
+  include Comments
+  include Geography
+  
   has_many :follows
-  has_many :followers, :through => :follows
+  has_many :followers, :through => :follows, :source => :user
+  
   has_many :announcements
+  
+  has_many :place_comments
+  has_many :commenters, :through => :place_comments, :source => :user
   
   belongs_to :category
   
   validates_presence_of :name, :description, :category
   validate :coordinates_are_set, :twitter_correct_format
+
+  def self.with_comments(id)
+    self.find(:first, :conditions => {:id => id}, :include => :commenters)
+  end
 
   def self.filtering_with(sort_order, categories=[])
     category_conds = {:category_id => categories}
@@ -22,34 +34,4 @@ class Place < ActiveRecord::Base
     new_place
   end
   
-  def apply_geo(coordinates)
-    return self if coordinates.nil? || (coordinates["lon"].blank? || coordinates["lat"].blank?)
-    self.coordinates = Point.from_lon_lat(coordinates["lon"].to_f, coordinates["lat"].to_f, 4326)
-    self
-  end
-  
-  def owned_by?(user)
-    return false if user.nil?
-    !self.follows.where("user_id = ? AND is_owner = ?", user.id, true).empty?
-  end
-  
-  def owners
-    Follow.find(:all, :conditions => {:is_owner => true}, :include => :user)
-  end
-  
-  def get_any_owner
-    owner= owners.first
-    return owner.user unless owner.nil?
-    nil
-  end
-  
-  private 
-  def coordinates_are_set
-    errors.add(:base, I18n.t('places.custom_validations.coordinates_missing')) if self.coordinates.nil?
-  end
-  
-  def twitter_correct_format
-    return true if self.twitter.blank?
-    errors.add(:twitter, I18n.t('places.custom_validations.twitter_bad_format')) if !self.twitter.match(/@(\w+)/).nil?
-  end
 end

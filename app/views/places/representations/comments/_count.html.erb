@@ -1,0 +1,8 @@
+<span class="count"><%= @place.comments_count %></span>
+<span class="saying">
+	<% if @place.comments_count == 1 %>
+		<%= link_to t('places.views.show.comments').singularize, places_comments_path(@place), :remote => true %>
+	<% else %>
+		<%= link_to t('places.views.show.comments'), places_comments_path(@place), :remote => true %>
+	<% end %>
+</span>

@@ -1,0 +1,6 @@
+<% if user_signed_in? %>
+	$('#main-box #tabbed-content').html("<%= escape_javascript(render 'places/representations/comments/listing').html_safe %>");
+	$('#main-box #status-bar .comments').html("<%= escape_javascript(render 'places/representations/comments/count').html_safe %>");	
+<% else %>
+	$('#notifications').html("<%=  t('places.messages.error.login_required', :action => t('places.messages.error.complements.commenting')) %>");
+<% end %>

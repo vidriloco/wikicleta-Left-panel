@@ -10,15 +10,31 @@ es_MX:
         category: "Categoría"
         location: "Ubicación"
   places:
+    messages:
+      error: 
+        login_required: "Necesitas estar logeado para %{action}"
+        complements: 
+          follow: "seguir un lugar"
+          commenting: "comentar un lugar"
     common_actions:
       follow: "Seguir"
+      following: "Siguiendo"
+      unfollow: "Dejar de Seguir"
+      owning: "A cargo"
     custom_validations:
       coordinates_missing: 'No ha sido seleccionada ninguna ubicación en el mapa'
       twitter_bad_format: "no debe llevar el símbolo @"
+    subviews:
+      show:
+        comments:
+          empty: "No hay comentarios para éste lugar aún"
+          actions:
+            delete: "Borrar"
     views:
       edit:
         title: "Modificar Lugar"
       show:
+        new_comment: "Comentar"
         followers: "Seguidores"
         photos: "Fotos"
         announcements: "Anuncios"

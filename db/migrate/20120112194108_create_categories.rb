@@ -4,5 +4,10 @@ class CreateCategories < ActiveRecord::Migration
       t.string :standard_name 
       t.timestamps
     end
+    
+    require 'factory_girl_rails'
+    Factory(:workshop)
+    Factory(:restaurant)
+    
   end
 end

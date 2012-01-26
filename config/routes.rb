@@ -25,6 +25,13 @@ Ciudadio::Application.routes.draw do
   match "places/:id" => 'places/representations#show', :via => :get, :as => "place"
   match "places/edit/:id" => 'places/commits#edit', :via => :get, :as => "edit_place"
   match "places/:id" => "places/commits#update", :via => :put
+  match "places/:id/follow/on" => 'places/commits#follow', :via => :put, :as => "place_follow_on", :defaults => { :follow => "on" }
+  match "places/:id/follow/off" => 'places/commits#follow', :via => :put, :as => "place_follow_off", :defaults => { :follow => "off" }
+  
+  match "/places/:id/comments" => 'places/representations#comments', :via => :get, :as => "places_comments"
+  match "/places/:id/comments" => 'places/commits#comment', :via => :post
+  match "/places/:id/comments" => 'places/commits#uncomment', :via => :delete, :as => "delete_place_comment"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

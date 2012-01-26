@@ -1,7 +1,7 @@
 #encoding: utf-8
 require 'acceptance/acceptance_helper'
 
-feature 'Representations: Individual description of places' do
+feature 'Individual description of places: ' do
   
   describe "Given Taller del Costumbre has been just registered" do
     
@@ -18,7 +18,7 @@ feature 'Representations: Individual description of places' do
       current_path.should == place_path(@costumbre)
     end
     
-    scenario "viewing it's details coming from the places listing page" do
+    scenario "reviewing it's details should be possible" do
       visit place_path(@costumbre)
             
       within('#main-box') do
@@ -26,7 +26,7 @@ feature 'Representations: Individual description of places' do
         page.should have_content @costumbre.name
         page.should have_content @costumbre.address
         page.should have_content @costumbre.twitter
-        find_link I18n.t('places.common_actions.follow')
+        find_button I18n.t('places.common_actions.follow')
         page.should have_content @costumbre.description
       
         page.should have_content I18n.t('connectives.by') 
@@ -62,7 +62,7 @@ feature 'Representations: Individual description of places' do
       
         within('#tabbed-content') do
           page.should have_content I18n.t('places.views.show.empty.followers')
-          find_link I18n.t('places.common_actions.follow')
+          find_button I18n.t('places.common_actions.follow')
         end
         
       end
@@ -71,7 +71,7 @@ feature 'Representations: Individual description of places' do
       
     end
     
-    describe "and someone changes it's address to an empty valued field" do
+    describe "and someone changes it's address to an empty valued field it" do
       
       before(:each) do
         @costumbre.update_attribute(:address, "")
@@ -88,7 +88,7 @@ feature 'Representations: Individual description of places' do
       
     end
     
-    describe "and someone changes it's twitter account to an empty valued field" do
+    describe "and someone changes it's twitter account to an empty valued field it" do
       before(:each) do
         @costumbre.update_attribute(:twitter, "")
       end
@@ -102,7 +102,7 @@ feature 'Representations: Individual description of places' do
         
         page.has_css?('#side-box').should be_true
       end
-    end
+    end    
     
     describe "having three transit stops nearby" do
       
@@ -110,7 +110,7 @@ feature 'Representations: Individual description of places' do
       
     end
     
-    describe "having five similar places" do
+    describe "being registered five similar places" do
       
       it "should show them in the sidebar"
       

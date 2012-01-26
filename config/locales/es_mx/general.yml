@@ -3,6 +3,7 @@ es_MX:
   messages:
     save_failure: "no pudo guardar este %{element} debido a:"
   actions:
+    share: "Compartir"
     save: "Guardar"
     update: "Guardar cambios"
   connectives:

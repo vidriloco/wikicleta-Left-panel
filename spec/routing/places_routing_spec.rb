@@ -25,5 +25,27 @@ describe "Places routing" do
     it "matches /places with controller :commits action #update" do
       { :put => "/places/1"}.should route_to(:action => "update", :controller => "places/commits", :id => "1")
     end
+    
+    it "matches /places/1/follow/on with controller :commits action #follow" do
+      { :put => "places/1/follow/on" }.should route_to(:action => "follow", :controller => "places/commits", :id => "1", :follow => "on")
+    end
+    
+    it "matches /places/1/follow/off with controller :commits action #follow" do
+      { :put => "places/1/follow/off" }.should route_to(:action => "follow", :controller => "places/commits", :id => "1", :follow => "off")
+    end
+    
+    # Comments
+    
+    it "matches /places/1/comments with controller :representations action #comments" do
+      { :get => "/places/1/comments" }.should route_to(:action => "comments", :controller => "places/representations", :id => "1")
+    end
+    
+    it "matches /places/1/comments with controller :commits action #comments" do
+      { :post => "/places/1/comments" }.should route_to(:action => "comment", :controller => "places/commits", :id => "1")
+    end
+    
+    it "matches /places/1/comments with controller :commits action #uncomment" do
+      { :delete => "/places/1/comments" }.should route_to(:action => "uncomment", :controller => "places/commits", :id => "1")
+    end
   end
 end

@@ -1,0 +1,9 @@
+<div id="comment-<%= comment.id %>">
+	<div class="image"></div>
+	<%= comment.user.username %>
+	<%= comment.content %>
+	
+	<% if !current_user.nil? && current_user.owns_comment?(comment) %>
+		<%= link_to t('places.subviews.show.comments.actions.delete'), delete_place_comment_path(comment), :method => :delete, :remote => true, :confirm => t('comments.actions.delete.confirm') %>		
+	<% end %>
+</div>

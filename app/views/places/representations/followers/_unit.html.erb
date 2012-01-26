@@ -1,0 +1,5 @@
+<div id="follower-<%= follower.id %>">
+	<div class="image"></div>
+	<%= follower.username %>
+	<%= I18n.t('places.common_actions.owning') if @place.owned_by?(follower) %>
+</div>

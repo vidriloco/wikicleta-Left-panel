@@ -94,60 +94,112 @@ describe Places::CommitsController do
     end
   end
   
-  describe "PUT update" do
+  describe "if logged-in" do
     
     before(:each) do
-      @place = Factory(:popular_place)
+      @user = Factory(:user)
+      sign_in @user
     end
-       
-    describe "if logged-in" do
+    
+    describe "with a place registered" do
       
       before(:each) do
-        @user = Factory(:user)
-        sign_in @user
+        @place = Factory(:popular_place)
       end
+      
+      describe "PUT update" do
 
-    
-      it "should receive params and attempt update of an existing place" do
-        Place.stub(:find).with("37") { @place }
-      
-        @place.should_receive(:update_attributes).with({'these' => 'params'})
-        @place.should_receive(:apply_geo).with({"lat" => "19.2232", "lon" => "-99.343"})
-      
-        put :update, :id => "37", :place => {'these' => 'params'}, :coordinates => {:lat => 19.2232, :lon => -99.343}
-        assigns(:place).should be(@place)
+        it "should receive params and attempt update of an existing place" do
+          Place.stub(:find).with("37") { @place }
+
+          @place.should_receive(:update_attributes).with({'these' => 'params'})
+          @place.should_receive(:apply_geo).with({"lat" => "19.2232", "lon" => "-99.343"})
+
+          put :update, :id => "37", :place => {'these' => 'params'}, :coordinates => {:lat => 19.2232, :lon => -99.343}
+          assigns(:place).should be(@place)
+        end
+
+        describe "with valid parameters" do
+
+          before(:each) do
+            @place.stub(:update_attributes).and_return(true)
+          end
+
+          it "redirects to the newly created place" do
+            Place.stub(:find).with("11") { @place }
+            @place.stub(:apply_geo)
+
+            put :update, :id => "11"
+            response.should redirect_to(@place)
+          end
+
+        end
+
+        describe "with invalid parameters" do
+
+          before(:each) do
+            @place.stub(:update_attributes).and_return(false)
+          end
+
+          it "renders action 'edit'" do
+            Place.stub(:find) { @place }
+            put :update, :id => "11"
+            response.should render_template("edit")
+          end
+
+        end
       end
-  
-      describe "with valid parameters" do
-  
+      
+      describe "PUT follow" do
+
         before(:each) do
-          @place.stub(:update_attributes).and_return(true)
+          @status = "on"
         end
 
-        it "redirects to the newly created place" do
-          Place.stub(:find).with("11") { @place }
-          @place.stub(:apply_geo)
-  
-          put :update, :id => "11"
-          response.should redirect_to(@place)
+        it "should change the follow status of a user respect a given place" do
+          Place.should_receive(:find).with("1") { @place }
+          @place.should_receive(:change_follow_status_for).with(@user, @status)
+          
+          put :follow, :id => "1", :follow => @status
+          
+          assigns(:place).should be(@place)
         end
-      
+
       end
-  
-      describe "with invalid parameters" do
-
+      
+      describe "POST comment" do
+        
+        it "should receive some params and register a new comment" do
+          Place.should_receive(:find).with("1") { @place }
+          @place.should_receive(:add_comment).with(@user, "One comment")
+          
+          post :comment, :id => "1", :place_comment => {:content => "One comment"}
+          assigns(:place).should be(@place)
+        end
+        
+      end
+      
+      describe "DELETE uncomment" do
+        
         before(:each) do
-          @place.stub(:update_attributes).and_return(false)
+          @place_c = PlaceComment.new
         end
-
-        it "renders action 'edit'" do
-          Place.stub(:find) { @place }
-          put :update, :id => "11"
-          response.should render_template("edit")
+        
+        it "should receive the parameters for deleting a comment" do
+          PlaceComment.should_receive(:find).with("1") { @place_c }
+          @place_c.should_receive(:destroy) { true }
+          
+          delete :uncomment, :id => "1"
+          
+          assigns(:place_comment_destroyed).should be_true
         end
-
+        
       end
     end
   end
+      
+
+  
+  
   
 end

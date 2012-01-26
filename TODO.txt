@@ -1,0 +1,1 @@
+1. Change the followers_count, comments_count updaters to a trigger in the active model

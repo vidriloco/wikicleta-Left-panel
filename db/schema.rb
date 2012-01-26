@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120118074932) do
+ActiveRecord::Schema.define(:version => 20120122064058) do
 
   create_table "announcements", :force => true do |t|
     t.string   "message"
@@ -37,6 +37,14 @@ ActiveRecord::Schema.define(:version => 20120118074932) do
     t.datetime "updated_at"
   end
 
+  create_table "place_comments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "place_id"
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "places", :force => true do |t|
     t.string   "name"
     t.integer  "mobility_kindness_index"
@@ -49,7 +57,7 @@ ActiveRecord::Schema.define(:version => 20120118074932) do
     t.integer  "comments_count",                         :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.point    "coordinates",             :limit => nil,                :srid => 4326
+    t.geometry "coordinates",             :limit => nil
   end
 
   create_table "users", :force => true do |t|

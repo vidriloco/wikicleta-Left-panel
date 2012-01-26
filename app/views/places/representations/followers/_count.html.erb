@@ -1,0 +1,8 @@
+<span class="count"><%= @place.followers_count %></span>
+<span class="saying">
+	<% if @place.followers_count == 1 %>
+		<%= t('places.views.show.followers').singularize %>
+	<% else %>
+		<%= t('places.views.show.followers') %>
+	<% end %>
+</span>

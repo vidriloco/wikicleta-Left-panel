@@ -10,7 +10,9 @@
 		<% end %>
 	</div>
 
-	<%= link_to t('places.common_actions.follow'), "" %>
+	<div class="follow">
+		<%= render 'places/representations/followers/action_link' %>	
+	</div>
 	
 	<%= t('connectives.by') %> <%= @place.get_any_owner.username %>
 	<% if @place.owned_by?(current_user) %>
@@ -21,8 +23,7 @@
 
 	<div id="status-bar">
 		<div class="followers">
-			<span class="count"><%= @place.followers_count %></span>
-			<span class="saying"><%= t('places.views.show.followers') %></span>
+			<%= render 'places/representations/followers/count' %>
 		</div>
 	
 		<div class="photos">
@@ -36,8 +37,7 @@
 		</div>
 	
 		<div class="comments">
-			<span class="count"><%= @place.comments_count %></span>
-			<span class="saying"><%= t('places.views.show.comments') %></span>
+			<%= render 'places/representations/comments/count' %>
 		</div>
 	
 		<div class="mo-index">
@@ -49,9 +49,7 @@
 	</div>
 
 	<div id="tabbed-content">
-		<h3><%= t('places.views.show.empty.followers') %></h3>
-		<%= link_to t('places.common_actions.follow'), "" %>
-	
+		<%= render 'places/representations/followers/listing' %>
 	</div>
 </div>
 

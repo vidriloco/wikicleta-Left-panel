@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
-  has_many :follows
-  has_many :places, :through => :follows
+  has_many :place_follows
+  has_many :places, :through => :place_follows
+  
+  has_many :place_comments
+  has_many :places_commented, :through => :place_comments
   
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -9,6 +12,11 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :full_name, :username, :login, :bio, :personal_page
   validates_presence_of :username, :full_name
   validates_uniqueness_of :username
+  
+  def owns_comment?(comment)
+    return false if comment.nil?
+    !self.place_comments.where("user_id = ?", self.id).empty?
+  end
   
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
