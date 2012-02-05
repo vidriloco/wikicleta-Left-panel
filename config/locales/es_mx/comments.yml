@@ -1,6 +1,0 @@
-es_MX:
-  comments:
-    actions:
-      delete:
-        confirm: "¿Eliminar este comentario?"
-  

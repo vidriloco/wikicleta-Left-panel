@@ -1,0 +1,4 @@
+<% if @announcement.persisted? %>
+	$('#main-box #tabbed-content').html("<%= escape_javascript(render 'places/representations/announcements/listing').html_safe %>");	
+	$('#main-box #status-bar .announcements').html("<%= escape_javascript(render 'places/representations/announcements/count').html_safe %>");
+<% end %>

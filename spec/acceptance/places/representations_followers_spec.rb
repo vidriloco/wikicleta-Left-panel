@@ -34,13 +34,18 @@ feature 'Follows in places HTML show:' do
           within('#tabbed-content') do
             page.should have_content @user.username
             page.should have_content I18n.t('places.common_actions.owning')
-            page.should have_content I18n.t('places.views.show.empty.followers')
-            find_button I18n.t('places.common_actions.following')
           end
         end
       end
       
-      it "should not allow me to unfollow it"
+      it "should not allow me to unfollow it", :js => true do
+        visit place_path(@fondita)
+        within('#main-box') do
+          click_button I18n.t('places.common_actions.following')
+        end
+        
+        page.should have_content I18n.t('places.messages.error.only_owner_cannot_unfollow')
+      end
       
     end
     
@@ -57,7 +62,7 @@ feature 'Follows in places HTML show:' do
           find_button I18n.t('places.common_actions.following')
           
           within('#tabbed-content') do
-            page.should_not have_content I18n.t('places.views.show.empty.followers')
+            page.should_not have_content I18n.t('places.subviews.show.followers.empty')
           end
           
           within(".followers") do
@@ -69,7 +74,7 @@ feature 'Follows in places HTML show:' do
           find_button I18n.t('places.common_actions.follow')
           
           within('#tabbed-content') do
-            page.should have_content I18n.t('places.views.show.empty.followers')
+            page.should have_content I18n.t('places.subviews.show.followers.empty')
             find_button I18n.t('places.common_actions.follow')
           end
           

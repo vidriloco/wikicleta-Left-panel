@@ -1,0 +1,18 @@
+<h2><%= t('places.views.search.title') %></h2>
+
+<div id="map-box">
+	<div style="width:100%; height:400px;" id="map" class="is-editable displays-points radio-3 shadowed-light"></div>
+</div>
+<%= form_tag places_search_path do %>
+	
+	<%= text_field_tag "search[place[name]]" %>
+	<%= text_field_tag "search[place[description]]" %>
+	<%= label_tag t('places.views.search.fields.consider_map_visible_area') %>
+	<%= check_box_tag "search[place[map]]", 1, true %>
+	
+	<div class="map-search-msgs">
+		<%= t('places.views.search.suggestions.select_map_area') %>
+	</div>
+	
+	<%= submit_tag t('actions.search') %>
+<% end %>

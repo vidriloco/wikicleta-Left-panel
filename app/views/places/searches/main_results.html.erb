@@ -1,0 +1,9 @@
+<h2><%= t('places.views.search_results.title') %></h2>
+
+<div id="found-places">
+	<% if @places.empty? %>
+		<%= t('places.views.search_results.nothing_found') %>
+	<% else %>
+		<%= render :partial => 'places/listings/place', :collection => @places %>
+	<% end %>
+</div>

@@ -6,5 +6,16 @@ es_MX:
     share: "Compartir"
     save: "Guardar"
     update: "Guardar cambios"
+    cancel: "Cancelar"
+    search: "Buscar"
   connectives:
     by: "Por"
+  
+  common_answers:
+    yes: "Si"
+    no: "No"
+  
+  questions:
+    mobility:
+      bike_parking: "¿Tiene estacionamiento para bicicletas?"
+      bike_easy_arriving: "¿Es fácil llegar en bici?"

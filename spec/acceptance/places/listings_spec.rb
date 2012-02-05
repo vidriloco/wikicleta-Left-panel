@@ -6,44 +6,15 @@ feature 'Places listing' do
     @user=Factory(:user)
   end
   
-  describe "categorized with some three places registered" do
+  describe "Having some places categories registered" do
     
     before(:each) do
-      Factory(:workshop)
+      @workshop = Factory(:workshop)
       @restaurant = Factory(:restaurant)
       @t_station = Factory(:transport_station)
       @store = Factory(:store)
       Factory(:museum)
       Factory(:cinema)
-      
-      
-      @places = { :all => [], :recent => [], :accessible => [], :popular => [], :categorized => []}
-
-      # A place is recent when it's creation date is within this week date
-      recent_place = Factory(:recent_place, :name => "Recent", :mobility_kindness_index => 2, :category => @restaurant)
-      @places[:all] << recent_place
-      @places[:accessible] << recent_place
-      @places[:categorized] << recent_place
-      
-      Delorean.time_travel_to("1 month ago") do
-        # A place is considered accessible when it's mobility kindness index is greater than 7
-        @places[:all] << Factory(:accessible_place, :name => "Accesible", :mobility_kindness_index => Random.new.rand(7..10), :category => @t_station)
-        
-      end
-      @places[:accessible].insert(0,@places[:all].last)
-      @places[:popular] = @places[:all]
-      Delorean.time_travel_to("3 months ago") do
-        # A place is popular depending on it's number of followers
-        popular_place = Factory(:popular_place, :name => "Popular", :mobility_kindness_index => 5, :category => @store)
-        popular_place.stub(:followers_count) { Random.new.rand(1..200) }
-        @places[:all] << popular_place
-        @places[:popular].insert(0, popular_place)
-        @places[:categorized] << popular_place
-      end
-      @places[:recent] = @places[:all]
-      @places[:accessible].insert(1, @places[:all].last)
-      
-      
     end
     
     describe "while logged in" do
@@ -51,20 +22,29 @@ feature 'Places listing' do
       before(:each) do
         login_with(@user)
       end
-    
-      scenario "visiting the main places page" do
-        visit places_path
-        within('#side-box') do
-          find_link I18n.t('places.views.index.search')
-          
-          page.has_css?('#lgd_in_not').should be_false
-          within('.lgd_in') do
-            find_link I18n.t('places.views.index.followed_by_me')
-            find_link I18n.t('places.views.index.shared_by_me')
-          end
+      
+      describe "having two places registered" do
+      
+        before(:each) do
+          @places = []
+          @places << Factory(:recent_place, :category => @t_station)
+          @places << Factory(:popular_place, :category => @workshop)
         end
-        content_specs_with(@places[:all])
+      
+        scenario "visiting the main places page" do
+          visit places_path
+          within('#side-box') do
+            find_link I18n.t('places.views.index.search')
+          
+            page.has_css?('#lgd_in_not').should be_false
+            within('.lgd_in') do
+              find_link I18n.t('places.views.index.followed_by_me')
+              find_link I18n.t('places.views.index.shared_by_me')
+            end
+          end
+          content_specs_with(@places)
         
+        end
       end
       
       scenario "I can see the new place registration page" do
@@ -85,22 +65,31 @@ feature 'Places listing' do
         visit places_path
       end
       
-      scenario "visiting the main places page" do
-              
-        within('#side-box') do
-          find_link I18n.t('places.views.index.search')
-          
-          page.has_css?('#lgd_in').should be_false
-          within('.lgd_in_not') do
-            find_link I18n.t('places.views.index.registration_invitation')
-          end
+      describe "having two places registered" do
+      
+        before(:each) do
+          @places = []
+          @places << Factory(:recent_place, :category => @t_station)
+          @places << Factory(:popular_place, :category => @workshop)
         end
         
-        content_specs_with(@places[:all])
-    
+        scenario "visiting the main places page should show those places listed" do
+          visit places_path
+          within('#side-box') do
+            find_link I18n.t('places.views.index.search')
+          
+            page.has_css?('#lgd_in').should be_false
+            within('.lgd_in_not') do
+              find_link I18n.t('places.views.index.registration_invitation')
+            end
+          end
+        
+          content_specs_with(@places)
+        end
+        
       end
       
-      scenario "I get asked to log-in" do
+      scenario "I get asked to log-in when attempting to register a new place" do
         
         within('#main-box') do
           click_link I18n.t('places.views.index.new')
@@ -110,41 +99,86 @@ feature 'Places listing' do
         
       end
       
-      scenario "visiting the main places page filtering by place category" do
-        within('#main-box') do
-          select I18n.t('places.views.index.all'), :from => "l-params"
+      describe "having two places with categories 'restaurant' 'store'" do
+        
+        before(:each) do
+          @categorized = []
+          Factory(:accessible_place, :name => "Zapata", :mobility_kindness_index => 9, :category => @t_station)
+          
+          @categorized << Factory(:accessible_place, :name => "Accesible", :category => @restaurant)
+          Delorean.time_travel_to("1 month ago") do
+            @categorized << Factory(:popular_place, :name => "Popular", :category => @store)
+          end
+        end
+        
+        scenario "when filtering by those categories should only show two and ordered" do
+          within('#main-box') do
+            select I18n.t('places.views.index.all'), :from => "l-params"
 
-          find('.cats').uncheck('workshop')
-          find('.cats').uncheck('museum')
-          find('.cats').uncheck('cinema')
-          find('.cats').uncheck('transport_station')
-                    
-          page.evaluate_script("$('#l-places').children().length;").should == 2
-          places_with_ordering_spec(@places[:categorized])
+            find('.cats').uncheck('workshop')
+            find('.cats').uncheck('museum')
+            find('.cats').uncheck('cinema')
+            find('.cats').uncheck('transport_station')
+            page.evaluate_script("$('#l-places').children().length;").should == 2
+            places_with_ordering_spec(@categorized)
+          end
         end
       end
       
-      scenario "visiting the main places page and show the most recent first" do
-        within('#main-box') do
-          select I18n.t('places.views.index.recent'), :from => "l-params"
+      describe "having two places registered at different dates" do
+      
+        before(:each) do
+          @recent = []
+          Delorean.time_travel_to("1 month ago") do
+            @recent << Factory(:accessible_place, :name => "Recent 1", :category => @t_station)
+          end
+
+          Delorean.time_travel_to("3 months ago") do
+            @recent << Factory(:popular_place, :name => "Popular", :mobility_kindness_index => 5, :category => @store)
+          end
+        end
+      
+        scenario "when filtering by those more recent should show the most recent first" do
+          within('#main-box') do
+            select I18n.t('places.views.index.recent'), :from => "l-params"
           
-          places_with_ordering_spec(@places[:recent])
+            places_with_ordering_spec(@recent)
+          end
+        end
+      
+      end
+      
+      describe "having two places wich have diff number of followers" do
+      
+        before(:each) do
+          @popular = []
+          @popular << Factory(:popular_place, :name => "Popular", :category => @restaurant, :followers_count => 20)
+          @popular << Factory(:recent_place, :name => "Recent", :category => @t_station, :followers_count => 10)
+        end
+      
+        scenario "visiting the main places page and show the most popular first" do
+          within('#main-box') do
+            select I18n.t('places.views.index.popular'), :from => "l-params"
+          
+            places_with_ordering_spec(@popular)
+          end
         end
       end
       
-      scenario "visiting the main places page and show the most popular first" do
-        within('#main-box') do
-          select I18n.t('places.views.index.popular'), :from => "l-params"
-          
-          places_with_ordering_spec(@places[:popular])
-        end
-      end
+      describe "having two places with diff accessibility rankings" do
       
-      scenario "visiting the main places page and show the most accessible first" do
-        within('#main-box') do
-          select I18n.t('places.views.index.accessible'), :from => "l-params"
+        before(:each) do
+          @accessible = []
+          @accessible << Factory(:accessible_place, :name => "Most Accessible", :mobility_kindness_index => 9, :category => @t_station)
+          @accessible << Factory(:accessible_place, :name => "Accesible", :mobility_kindness_index => 6, :category => @restaurant)
+        end
+      
+        scenario "visiting the main places page and show the most accessible first" do
+          within('#main-box') do
+            select I18n.t('places.views.index.accessible'), :from => "l-params"
           
-          places_with_ordering_spec(@places[:accessible])
+            places_with_ordering_spec(@accessible)
+          end
         end
       end
     end
@@ -181,18 +215,10 @@ def content_specs_with(places)
   end
 end
 
-def place_view_spec(place)
-  page.has_css?('.image').should be_true
-  page.should have_content place.name
-  page.should have_content place.address
-  page.should have_content place.mobility_kindness_index
-  page.should have_content Place.human_attribute_name(:mobility_kindness_index)
-end
-
 def places_with_ordering_spec(places)
   places.each_with_index do |place, index|
     within("#place-#{place.id}") do
-      page.has_css?("order-#{index}")
+      page.has_css?(".order-#{index}").should be_true
       place_view_spec(place)
       find_link I18n.t('places.common_actions.follow')
     end

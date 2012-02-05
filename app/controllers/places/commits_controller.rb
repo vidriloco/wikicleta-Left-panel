@@ -38,7 +38,7 @@ module Places
     
     def follow
       if user_signed_in?
-        render(:nothing => true) && return if !@place.change_follow_status_for(current_user, params[:follow])
+        @unfollowed_by_owner = !@place.change_follow_status_for(current_user, params[:follow])
       end
       
       respond_to do |format|
@@ -56,11 +56,44 @@ module Places
     
     def uncomment
       @place_comment = PlaceComment.find(params[:id])
-      @place = @place_comment.place
-      @place_comment_destroyed = @place_comment.destroy
       
-      respond_to do |format|
-        format.js 
+      if @place_comment.owned_by?(current_user)
+        @place = @place_comment.place
+        @place_comment_destroyed = @place_comment.destroy
+      
+        respond_to do |format|
+          format.js 
+        end
+      else
+        render(:nothing => true)
+      end
+    end
+    
+    def announce
+      
+      @place = Place.find(params[:place_id])
+
+      if (@announcement = @place.add_announcement(current_user, params[:announcement]))
+        respond_to do |format|
+          format.js 
+        end
+      else
+        render(:nothing => true)
+      end
+    end
+    
+    def unannounce
+      @announcement = Announcement.find(params[:id])
+      @place = @announcement.place
+      
+      if @place.verified_owner_is?(current_user)
+        @announcement_destroyed = @announcement.destroy
+      
+        respond_to do |format|
+          format.js 
+        end
+      else
+        render(:nothing => true)
       end
     end
     

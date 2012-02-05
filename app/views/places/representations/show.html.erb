@@ -32,8 +32,7 @@
 		</div>
 	
 		<div class="announcements">
-			<span class="count"><%= @place.announcements.count %></span>
-			<span class="saying"><%= t('places.views.show.announcements') %></span>
+			<%= render 'places/representations/announcements/count' %>
 		</div>
 	
 		<div class="comments">

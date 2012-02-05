@@ -1,7 +1,8 @@
 <%= render :partial => 'places/representations/followers/unit', :collection => @place.followers, :as => :follower %>
 
-<% if @place.followers_count <= 1 %>
-	<h3><%= t('places.views.show.empty.followers') %></h3>
+<% if @place.followers_count <= 1 && !@place.owned_by?(current_user) %>
+	<h3><%= t('places.subviews.show.followers.empty') %></h3>
+	
 	<div class="follow">
 		<%= render 'places/representations/followers/action_link' %>	
 	</div>

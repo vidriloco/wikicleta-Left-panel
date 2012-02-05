@@ -1,0 +1,17 @@
+<% if Time.now < announcement.end_date %>
+	<div id="announcement-<%= announcement.id %>">
+		<%= announcement.header %>
+		<%= announcement.message %>
+	
+		<% if Time.now < announcement.start_date %>
+			<%= t('places.subviews.show.announcements.starts_in') %> <%= distance_of_time_in_words_to_now(announcement.start_date) %>
+		<% else %>
+			<%= t('places.subviews.show.announcements.finishes_in') %> <%= distance_of_time_in_words_to_now(announcement.end_date) %>
+		<% end %>
+		
+		<% if @place.verified_owner_is?(current_user) %>
+			<%= link_to t('places.subviews.show.announcements.actions.delete'), delete_place_announcement_path(announcement), 
+				  :method => :delete, :remote => true, :confirm => t('places.subviews.show.announcements.actions.confirm') %>
+		<% end %>
+	</div>
+<% end %>

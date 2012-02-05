@@ -1,4 +1,6 @@
 Ciudadio::Application.routes.draw do
+  devise_for :admins
+
   devise_for :users, :only => [:passwords] do
     get "/sign_up", :to => "devise/registrations#new"
     get "/sign_in", :to => "devise/sessions#new", :as => "new_user_session"
@@ -19,18 +21,29 @@ Ciudadio::Application.routes.draw do
     match "changed", :via => :put
   end
   
-  match "places" => 'places/listings#index', :via => :get
+  namespace :places do
+    match 'search' => 'searches#main', :via => :get
+    match 'search' => 'searches#execute_main', :via => :post
+    match '/' => 'listings#index', :via => :get
+    match "/" => "commits#create", :via => :post
+    match ":id" => "commits#update", :via => :put
+    match ":place_id/announcements" => 'commits#announce', :via => :post
+    match ":id/followers" => 'representations#followers', :via => :get, :as => "followers"
+    match ":id/announcements" => 'representations#announcements', :via => :get, :as => "announcements"
+    match ":id/comments" => 'representations#comments', :via => :get, :as => "comments"
+    match ":id/comments" => 'commits#comment', :via => :post
+  end
+
   match "places/new" => 'places/commits#new', :via => :get, :as => "new_place"
-  match "places" => "places/commits#create", :via => :post
   match "places/:id" => 'places/representations#show', :via => :get, :as => "place"
   match "places/edit/:id" => 'places/commits#edit', :via => :get, :as => "edit_place"
-  match "places/:id" => "places/commits#update", :via => :put
+  
+  match "/places/:id/announcements" => 'places/commits#unannounce', :via => :delete, :as => "delete_place_announcement"
   match "places/:id/follow/on" => 'places/commits#follow', :via => :put, :as => "place_follow_on", :defaults => { :follow => "on" }
   match "places/:id/follow/off" => 'places/commits#follow', :via => :put, :as => "place_follow_off", :defaults => { :follow => "off" }
   
-  match "/places/:id/comments" => 'places/representations#comments', :via => :get, :as => "places_comments"
-  match "/places/:id/comments" => 'places/commits#comment', :via => :post
   match "/places/:id/comments" => 'places/commits#uncomment', :via => :delete, :as => "delete_place_comment"
+  
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

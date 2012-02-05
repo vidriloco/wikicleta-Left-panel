@@ -1,0 +1,22 @@
+
+<% if @place.verified_owner_is?(current_user) %>
+	<%= link_to t('places.subviews.show.announcements.actions.new'), 'javascript:void(0);', :class => "form-show-trigger" %>
+	
+	<div class="hidden form-area">
+		<%= form_for places_announcements_path(@place), :remote => true do |f| %>
+			<%= f.text_field :header, :id => "announcement_header", :name => "announcement[header]" %>
+			<%= f.text_field :message, :id => "announcement_message", :name => "announcement[message]" %>
+			<%= select_datetime(Time.now, :prefix => 'announcement[start_date]') %>
+			<%= select_datetime(Time.now + 1.day, :prefix => 'announcement[end_date]') %>
+			<%= f.submit t('actions.save') %>
+			<%= link_to t('actions.cancel'), 'javascript:void(0);', :class => "form-hide-trigger" %>
+		<% end %>
+	</div>
+	
+<% end %>
+
+<% if @place.announcements.empty? %>
+	<h3><%= t('places.subviews.show.announcements.empty') %></h3>
+<% else %>
+	<%= render :partial => 'places/representations/announcements/unit', :collection => @place.announcements, :as => :announcement %>
+<% end %>

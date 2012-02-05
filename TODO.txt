@@ -1,1 +1,1 @@
-1. Change the followers_count, comments_count updaters to a trigger in the active model
+1. Counting on announcements should show only those next, the passed ones no

@@ -10,4 +10,9 @@ class PlaceComment < ActiveRecord::Base
   def update_places_comment_count
     self.place.update_comments_count
   end
+  
+  def owned_by?(user)
+    return false if user.nil?
+    self.user == user
+  end
 end

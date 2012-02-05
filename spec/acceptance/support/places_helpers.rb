@@ -1,0 +1,3 @@
+module HelperMethods::Places
+  
+end

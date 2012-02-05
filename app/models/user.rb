@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  has_many :place_follows
-  has_many :places, :through => :place_follows
+  has_many :follows
+  has_many :places, :through => :follows
   
   has_many :place_comments
   has_many :places_commented, :through => :place_comments

@@ -4,14 +4,8 @@ module Place::Follows
     self.update_attribute(:followers_count, Follow.where("place_id" => self.id).count)
   end
   
-  def add_follower(user)
-    Follow.create(:user => user, :place => self)
-    update_followers_count
-  end
-  
-  def owned_by?(user)
-    return false if user.nil?
-    !self.follows.where("user_id = ? AND is_owner = ?", user.id, true).empty?
+  def add_follower(user, opts=[])
+    Follow.create(:user => user, :place => self, :is_owner => opts.include?(:owner), :is_verified => opts.include?(:verified))
   end
   
   def followed_by?(user)
@@ -28,6 +22,18 @@ module Place::Follows
       follow.first.delete
       update_followers_count
     end
+  end
+  
+  # Ownings code
+  
+  def verified_owner_is?(user)
+    return false if user.nil?
+    !self.follows.where("user_id = ? AND is_owner = ? AND is_verified = ?", user.id, true, true).empty?
+  end
+  
+  def owned_by?(user)
+    return false if user.nil?
+    !self.follows.where("user_id = ? AND is_owner = ?", user.id, true).empty?
   end
   
   def owners

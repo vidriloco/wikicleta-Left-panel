@@ -13,6 +13,7 @@ es_MX:
     messages:
       error: 
         login_required: "Necesitas estar logeado para %{action}"
+        only_owner_cannot_unfollow: "No puedes dejar de seguir a un lugar que tú registraste, mejor elimínalo"
         complements: 
           follow: "seguir un lugar"
           commenting: "comentar un lugar"
@@ -26,11 +27,37 @@ es_MX:
       twitter_bad_format: "no debe llevar el símbolo @"
     subviews:
       show:
+        mobility_index:
+          unranked: "--"
+        announcements:
+          empty: "Por ahora, no hay anuncios en éste lugar"
+          starts_in: "Empieza en "
+          finishes_in: "Termina en "
+          validations: 
+            errors:
+              time_mismatch: "Las fecha de inicio ocurre después que la fecha de termino"
+          actions: 
+            new: "Nuevo"
+            confirm: "¿Eliminar este anuncio?"
+            delete: "Eliminar"
+        followers:
+          empty: "Este lugar no tiene seguidores aún" 
         comments:
           empty: "No hay comentarios para éste lugar aún"
           actions:
-            delete: "Borrar"
+            confirm: "¿Eliminar este comentario?"
+            delete: "Eliminar"
     views:
+      search_results:
+        title: "Resultados de la búsqueda"
+        nothing_found: "No se encontraron lugares que coincidieran con:"
+      search:
+        title: "Búsqueda de Lugares"
+        suggestions:
+          select_map_area: "Ajusta el área de búsqueda geográfica acercando/alejando el mapa y arrastrándolo a la zona de interés"
+        fields:
+          within_categories: "Con las siguientes categorías:"
+          consider_map_visible_area: "Considerar la ubicación geográfica del lugar"
       edit:
         title: "Modificar Lugar"
       show:
@@ -41,8 +68,6 @@ es_MX:
         comments: "Comentarios"
         how_to_arrive: "¿Cómo llegar?"
         edit: "Modificar"
-        empty:
-          followers: "Este lugar no tiene seguidores aún"
       index: 
         title: "Lugares"
         new: "Agrega un lugar"

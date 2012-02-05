@@ -4,7 +4,7 @@
 <% end %>
 
 <% if @place.place_comments.empty? %>
-	<%= t('places.subviews.show.comments.empty') %>
+	<h3><%= t('places.subviews.show.comments.empty') %></h3>
 <% else %>
 	<%= render :partial => 'places/representations/comments/unit', :collection => @place.place_comments, :as => :comment %>
 <% end %>

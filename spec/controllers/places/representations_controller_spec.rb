@@ -22,8 +22,28 @@ describe Places::RepresentationsController do
   describe "GET comments" do
     
     it "should fetch all the comments from a given place" do
-      Place.with_comments("1") { @place }
+      Place.should_receive(:include_with).with("1", :commenters) { @place }
       get :comments, :id => "1"
+      assigns(:place).should == @place
+    end
+    
+  end
+  
+  describe "GET followers" do
+    
+    it "should fetch all the followers from a given place" do
+      Place.should_receive(:include_with).with("1", :followers) { @place }
+      get :followers, :id => "1"
+      assigns(:place).should == @place
+    end
+    
+  end
+  
+  describe "GET announcements" do
+    
+    it "should fetch all the announcements for a given place" do
+      Place.should_receive(:include_with).with("1", :announcements) { @place }
+      get :announcements, :id => "1"
       assigns(:place).should == @place
     end
     

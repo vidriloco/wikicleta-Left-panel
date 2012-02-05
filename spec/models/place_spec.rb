@@ -62,6 +62,16 @@ describe Place do
       
     end
     
+    it "should let me add a new owner to any of them" do
+      @place_two.add_follower(@pipo, [:owner])
+      @place_two.owned_by?(@pipo).should be_true
+    end
+    
+    it "should let me add a new verified owner to any of them" do
+      @place_one.add_follower(@pipo, [:owner, :verified])
+      @place_one.verified_owner_is?(@pipo).should be_true
+    end
+    
     describe "and place two has two followers" do
       
       before(:each) do
@@ -89,7 +99,39 @@ describe Place do
       end
       
     end
+    
+    it "should NOT allow Pipo to add an announcement to a place given he is not a verified owner" do
+      announcement_hash = {:header => "An announcement", :message => "A message", :start_date => Time.now-5, :end_date => Time.now+5}
+      @place_one.add_announcement(@pipo, announcement_hash).should be_false
+    end
+    
+    describe "given PIPO is now a verified owner of a place" do
+      
+      before(:each) do
+        @place_one.add_follower(@pipo, [:owner, :verified])
+      end
+      
+      it "should allow him to add an announcement to a place" do
+        announcement_hash = {:header => "An announcement", :message => "A message", :start_date => Time.now-5, :end_date => Time.now+5}
+        @place_one.add_announcement(@pipo, announcement_hash).should be_true
+      end
+      
+      it "should not save an announcement whose start and end dates are not correct" do
+        announcement_hash = {:header => "An announcement", :message => "A message", :start_date => Time.now+50, :end_date => Time.now+5}
+        @place_one.add_announcement(@pipo, announcement_hash).should_not be_persisted
+      end
+      
+      it "should correctly parse a pair of date hash values when adding an announcement" do
+        dates = {:start_date => {"year" => "2012", "month" => "1", "day" => "23", "hour" => "5", "minute" => "30"}, 
+                 :end_date => {"year" => "2012", "month" => "7", "day" => "3", "hour" => "16", "minute" => "15"}}
+        announcement_hash = {:header => "An announcement", :message => "A message"}.merge(dates)
 
+        announcement = @place_one.add_announcement(@pipo, announcement_hash)
+        announcement.start_date.should == Time.local(2012, 1, 23, 5, 30)
+        announcement.end_date.should == Time.local(2012, 7, 3, 16, 15)
+      end
+    end
+    
     it "should allow me to change the coordinates of a place" do
       @place_one.apply_geo({"lat" => "19.4", "lon" => "-99.15"})
       @place_one.coordinates.lat.should == 19.4

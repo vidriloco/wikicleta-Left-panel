@@ -6,7 +6,23 @@ module Places
     end
     
     def comments
-      @place = Place.with_comments(params[:id])
+      @place = Place.include_with(params[:id], :commenters)
+      
+      respond_to do |format|
+        format.js
+      end
+    end
+    
+    def followers
+      @place = Place.include_with(params[:id], :followers)
+      
+      respond_to do |format|
+        format.js
+      end
+    end
+    
+    def announcements
+      @place = Place.include_with(params[:id], :announcements)
       
       respond_to do |format|
         format.js
