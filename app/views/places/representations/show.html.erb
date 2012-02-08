@@ -1,7 +1,6 @@
 <div id="main-box">
 	<h1><%= @place.name %></h1>
 	
-	
 	<p class="<%= "not-given-" unless @place.address.blank? %>address"><%= @place.address %></p>
 	
 	<div class="social-nets">
@@ -10,8 +9,8 @@
 		<% end %>
 	</div>
 
-	<div class="follow">
-		<%= render 'places/representations/followers/action_link' %>	
+	<div class="recommend">
+		<%= render 'places/recommendations/action_link' %>	
 	</div>
 	
 	<%= t('connectives.by') %> <%= @place.get_any_owner.username %>
@@ -22,9 +21,6 @@
 	<span class="description"><%= @place.description %></span>
 
 	<div id="status-bar">
-		<div class="followers">
-			<%= render 'places/representations/followers/count' %>
-		</div>
 	
 		<div class="photos">
 			<span class="count"><%= @place.photos_count %></span>
@@ -48,7 +44,9 @@
 	</div>
 
 	<div id="tabbed-content">
-		<%= render 'places/representations/followers/listing' %>
+		<% unless @place.category.meta_survey.nil? %>
+			<%= render 'places/evaluations/listing' %>
+		<% end %>
 	</div>
 </div>
 

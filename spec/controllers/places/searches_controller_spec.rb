@@ -24,4 +24,18 @@ describe Places::SearchesController do
   
   end
   
+  describe "GET main" do
+    
+    before(:each) do
+      @categories = []
+    end
+    
+    it "should fetch the places categories" do
+      Category.should_receive(:all).and_return(@categories)
+      get :main
+      response.should be_success
+    end
+    
+  end
+  
 end

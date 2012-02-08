@@ -152,8 +152,8 @@ feature 'Places listing' do
       
         before(:each) do
           @popular = []
-          @popular << Factory(:popular_place, :name => "Popular", :category => @restaurant, :followers_count => 20)
-          @popular << Factory(:recent_place, :name => "Recent", :category => @t_station, :followers_count => 10)
+          @popular << Factory(:popular_place, :name => "Popular", :category => @restaurant, :recommendations_count => 20)
+          @popular << Factory(:recent_place, :name => "Recent", :category => @t_station, :recommendations_count => 10)
         end
       
         scenario "visiting the main places page and show the most popular first" do
@@ -208,7 +208,6 @@ def content_specs_with(places)
     places.each do |place|
       within("#place-#{place.id}") do
         place_view_spec(place)
-        find_link I18n.t('places.common_actions.follow')
       end
     end
     
@@ -220,7 +219,6 @@ def places_with_ordering_spec(places)
     within("#place-#{place.id}") do
       page.has_css?(".order-#{index}").should be_true
       place_view_spec(place)
-      find_link I18n.t('places.common_actions.follow')
     end
   end
 end

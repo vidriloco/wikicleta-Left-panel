@@ -20,7 +20,10 @@ $(document).ready(function() {
 		"domEditable" : ".is-editable",
 		"domAddress" : "p.address",
 		"pointsMode" : ".displays-points",
-		"domPoint" : "#coordinates"
+		"domPoint" : "#coordinates",
+		"searchMode" : ".selectable-for-search",
+		"neDOM" : "#search_place_coordinates_ne",
+		"swDOM" : "#search_place_coordinates_sw"
 	}
 
 	mapWrap = new MapWrapper(new google.maps.Map(document.getElementById("map"), mapDefaultOpts), mapInteractionOpts);

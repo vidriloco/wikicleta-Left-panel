@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>Admin :: Wikiando</title>
+	  <%= stylesheet_link_tag    "application" %>
+	  <%= javascript_include_tag "application" %>
+	  <%= csrf_meta_tags %>
+	</head>
+<body>
+
+	<div id="header">
+		<div class="administrable-items">
+			<%= link_to MetaSurvey.model_name.human.pluralize, admins_evaluations_index_path %>
+		</div>
+	</div>
+	<div id="subheader">
+		<%= yield :sub_header %>
+	</div>
+	<div id="notifications"><%= yield :notifications %></div>
+
+	<div id="content">
+		<%= yield :body %>
+	</div>
+
+</body>
+</html>

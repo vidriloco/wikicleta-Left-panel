@@ -12,7 +12,6 @@ module Places
         format.html #index.html.erb
         format.js
       end
-      
     end
   end
 end

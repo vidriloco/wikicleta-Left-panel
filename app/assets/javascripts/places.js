@@ -32,4 +32,8 @@ $(document).ready(function() {
 		} 
 	});
 
+	$('.display-js-notification').live('click', function() {
+		$('#notifications p').fadeIn(100).delay(4000).fadeOut(400);
+	});
+
 });

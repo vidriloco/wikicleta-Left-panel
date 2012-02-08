@@ -1,0 +1,15 @@
+es_MX:
+  activerecord:
+    models:
+      admin: "Administrador"
+    attributes:
+      admin:
+        password: "Contraseña"
+        password_confirmation: "Confirmación de la contraseña"
+        email: "Correo"
+  admin:
+    views:
+      login:
+        title: "Acceso"
+      index:
+        welcome_message: "Has ingresado al panel de administración"

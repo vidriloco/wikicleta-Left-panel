@@ -12,27 +12,6 @@ feature "Comments in places HTML show:" do
       @fondita.save
     end
     
-    scenario "I can see the followers listing from here", :js => true do
-      visit place_path(@fondita)
-      
-      within("#status-bar") do
-        within(".followers") do
-          page.should have_content 1
-          click_link I18n.t('places.views.show.followers').singularize
-        end
-      end
-      
-      within('#main-box') do
-        
-        within('#tabbed-content') do
-          page.should have_content @user.username
-          page.should have_content I18n.t('places.common_actions.owning')
-          page.should have_content I18n.t('places.subviews.show.followers.empty')
-        end
-      end
-      
-    end
-    
     describe "that has no comments yet" do
       
       it "shows an empty comment message", :js => true do

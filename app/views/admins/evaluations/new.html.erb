@@ -1,0 +1,11 @@
+<% content_for(:body) do %>
+<h2><%= t('meta_survey.views.new.title') %></h2>
+
+	<%= semantic_form_for @meta_survey, :url => admins_evaluations_path(@meta_survey), :html_options => {:multipart => true} do |f| %>
+		<%= f.input :category, :as => :select, :collection => Category.all, :label => t('meta_survey.views.common.form.category'), :input_html => { :id => "category"} %>
+		<%= f.input :survey_descriptor_file, :as => :file, :label => t('meta_survey.views.common.form.descriptor_file'), :input_html => { :id => "descriptor_file"} %>
+		
+	  <%= f.submit t('actions.save') %>
+	<% end %>
+
+<% end %>

@@ -14,22 +14,13 @@
 ActiveRecord::Schema.define(:version => 20120205004020) do
 
   create_table "admins", :force => true do |t|
-    t.string   "email",                                 :default => "", :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                         :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string   "email",                             :default => "", :null => false
+    t.string   "encrypted_password", :limit => 128, :default => "", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
-  add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
 
   create_table "announcements", :force => true do |t|
     t.string   "header"
@@ -42,17 +33,51 @@ ActiveRecord::Schema.define(:version => 20120205004020) do
     t.datetime "updated_at"
   end
 
+  create_table "answers", :force => true do |t|
+    t.integer  "meta_answer_option_id"
+    t.integer  "meta_answer_item_id"
+    t.integer  "survey_id"
+    t.string   "open_value"
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "categories", :force => true do |t|
     t.string   "standard_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "follows", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "place_id"
-    t.boolean  "is_owner",    :default => false
-    t.boolean  "is_verified", :default => false
+  create_table "meta_answer_items", :force => true do |t|
+    t.integer  "meta_question_id"
+    t.string   "human_value"
+    t.string   "identifier"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "meta_answer_options", :force => true do |t|
+    t.integer  "meta_question_id"
+    t.string   "human_value"
+    t.string   "identifier"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "meta_questions", :force => true do |t|
+    t.integer  "meta_survey_id"
+    t.string   "title"
+    t.string   "instruction"
+    t.string   "order_identifier"
+    t.string   "type_of"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "meta_surveys", :force => true do |t|
+    t.string   "name"
+    t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -72,16 +97,37 @@ ActiveRecord::Schema.define(:version => 20120205004020) do
     t.string   "address"
     t.integer  "category_id"
     t.string   "twitter"
-    t.integer  "followers_count",                        :default => 0
+    t.integer  "recommendations_count",                  :default => 0
     t.integer  "photos_count",                           :default => 0
     t.integer  "comments_count",                         :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.geometry "coordinates",             :limit => nil
+    t.point    "coordinates",             :limit => nil,                :srid => 4326
   end
 
   create_table "questions", :force => true do |t|
-    t.string   "text"
+    t.integer  "meta_question_id"
+    t.integer  "survey_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "recommendations", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "place_id"
+    t.boolean  "is_owner",    :default => false
+    t.boolean  "is_verified", :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "surveys", :force => true do |t|
+    t.integer  "meta_survey_id"
+    t.integer  "evaluable_id"
+    t.string   "evaluable_type"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

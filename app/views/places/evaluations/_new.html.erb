@@ -1,0 +1,29 @@
+<div class="header">
+	<h3><%= t('places.subviews.show.evaluations.new.title') %></h3>
+</div>
+
+<div id="meta-survey-<%= @place.category.meta_survey.id %>" class="evaluation-form">
+	
+<%= form_tag places_evaluations_path(@place), :remote => true do |f| %>
+	<%= hidden_field_tag 'survey[meta_survey_id]', @place.category.meta_survey.id %>
+	
+	<% @place.category.meta_survey.meta_questions.each  do |meta_question| %>
+	<div id="meta-question-<%= meta_question.id %>" class="question">
+		<span class="number"><%= meta_question.order_identifier %>.</span>
+		<span class="title"><%= meta_question.title %></span>
+		
+		<div class="options">
+		<% meta_question.meta_answer_items.each do |meta_answer_item| %>
+			<div id="meta-answer-item-<%= meta_answer_item.id %>" class="answer-item">
+					<%= radio_button_tag "survey[questions[#{meta_question.id}[answers]]]", "#{meta_answer_item.id}", false, :id => meta_answer_item.human_value %>
+					<span class="value"><%= meta_answer_item.human_value %></span>
+					
+			</div>
+		<% end %>
+		</div>
+	</div>
+	<% end %>
+	
+	<%= submit_tag t('actions.save') %>
+<% end %>
+</div>

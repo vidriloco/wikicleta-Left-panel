@@ -1,0 +1,8 @@
+<span class="count"><%= @place.recommendations_count %></span>
+<span class="saying">
+	<% if @place.recommendations_count == 1 %>
+		<%= link_to t('places.views.show.followers').singularize, places_followers_path(@place), :remote => true %>
+	<% else %>
+		<%= link_to t('places.views.show.followers'), places_followers_path(@place), :remote => true %>
+	<% end %>
+</span>

@@ -8,6 +8,9 @@ es_MX:
     update: "Guardar cambios"
     cancel: "Cancelar"
     search: "Buscar"
+    new: 
+      fem: "Nueva"
+      masc: "Nuevo"
   connectives:
     by: "Por"
   

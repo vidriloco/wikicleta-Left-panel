@@ -1,12 +1,13 @@
 class User < ActiveRecord::Base
-  has_many :follows
-  has_many :places, :through => :follows
+  has_many :recommendations
+  has_many :places, :through => :recommendations
   
   has_many :place_comments
   has_many :places_commented, :through => :place_comments
+  has_many :surveys
   
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:login]
 
   attr_accessor :login
   attr_accessible :email, :password, :password_confirmation, :remember_me, :full_name, :username, :login, :bio, :personal_page

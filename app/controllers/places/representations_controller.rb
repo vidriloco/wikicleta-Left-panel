@@ -13,14 +13,6 @@ module Places
       end
     end
     
-    def followers
-      @place = Place.include_with(params[:id], :followers)
-      
-      respond_to do |format|
-        format.js
-      end
-    end
-    
     def announcements
       @place = Place.include_with(params[:id], :announcements)
       

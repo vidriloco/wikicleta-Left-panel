@@ -1,0 +1,15 @@
+
+<% content_for(:sub_header) do %>
+	<%= link_to t('actions.new.fem'), admins_evaluations_new_path %>
+<% end %>
+
+<% content_for(:body) do %>
+<h2><%= MetaSurvey.model_name.human.pluralize %></h2>
+
+	<% if @meta_surveys.empty? %>
+		<%= t('meta_survey.views.index.empty') %>
+	<% else %>
+		<%= render :partial => 'admins/evaluations/meta_surveys/unit', :collection => @meta_surveys, :as => :meta_survey %>
+	<% end %>
+	
+<% end %>

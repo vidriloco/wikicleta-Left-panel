@@ -152,32 +152,6 @@ describe Places::CommitsController do
         end
       end
       
-      describe "PUT follow" do
-
-        before(:each) do
-          @status = "on"
-        end
-
-        it "should change the follow status of a user respect a given place" do
-          Place.should_receive(:find).with("1") { @place }
-          @place.should_receive(:change_follow_status_for).with(@user, @status)
-          
-          put :follow, :id => "1", :follow => @status
-          
-          assigns(:place).should be(@place)
-        end
-        
-        it "should NOT change the follow status of a owner of a place respect that place" do
-          Place.should_receive(:find).with("1") { @place }
-          
-          put :follow, :id => "1", :follow => @status
-          @place.stub(:change_follow_status_for) { false }
-          
-          assigns(:unfollowed_by_owner).should == false
-        end
-
-      end
-      
       describe "POST comment" do
         
         it "should receive some params and register a new comment" do

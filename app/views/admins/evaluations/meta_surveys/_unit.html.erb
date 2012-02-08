@@ -1,0 +1,13 @@
+<div id="<%= meta_survey.id %>-ms" class="msurvey">
+	
+	<h3><%= meta_survey.name %></h3>
+	<p><b><%= t('meta_survey.views.show.fields.category') %>:</b> <%= meta_survey.category.name %></p>
+	
+	<span class="questions_number"><%= t('meta_survey.views.show.fields.number_of_questions') %>: <%= meta_survey.meta_questions.size %></span><br/>
+	
+	<%= link_to t('meta_survey.views.index.show_questions'), 'javascript:void(0);', :class => 'toggle-mquestions' %>
+	
+	<div class="mquestions hidden">
+		<%= render :partial => 'admins/evaluations/meta_questions/listing', :collection => meta_survey.meta_questions, :as => :meta_question %>
+	</div>
+</div>

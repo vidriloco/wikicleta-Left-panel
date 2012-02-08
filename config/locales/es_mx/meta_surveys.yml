@@ -1,0 +1,22 @@
+es_MX:
+  activerecord:
+    models:
+      meta_survey: "Evaluación"
+    attributes:
+      meta_survey:
+  meta_survey:
+    views:
+      common:
+        form:
+          descriptor_file: "Descriptor de evaluación"
+          category: "Categoría"
+      show:
+        fields:
+          category: "Categoría"
+          number_of_questions: "Número de preguntas"
+      index:
+        empty: "No hay evaluaciones registradas aún"
+        show_questions: "Mostrar preguntas"
+      new:
+        title: "Registrar nueva evaluación"
+        

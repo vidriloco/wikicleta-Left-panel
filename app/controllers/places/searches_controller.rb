@@ -1,6 +1,7 @@
 module Places
   class SearchesController < ApplicationController
     def main
+      @categories = Category.all
     end
     
     def execute_main

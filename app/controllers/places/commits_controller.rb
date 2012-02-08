@@ -1,8 +1,8 @@
 module Places
   class CommitsController < ApplicationController
     
-    before_filter :authenticate_user!, :except => [:follow, :comment]
-    before_filter :find_user, :only => [:edit, :update, :follow, :comment]
+    before_filter :authenticate_user!, :except => [:comment]
+    before_filter :find_user, :only => [:edit, :update, :comment]
     
     def new
       @place = Place.new
@@ -33,16 +33,6 @@ module Places
         else
           format.html { render :action => "edit" }
         end
-      end
-    end
-    
-    def follow
-      if user_signed_in?
-        @unfollowed_by_owner = !@place.change_follow_status_for(current_user, params[:follow])
-      end
-      
-      respond_to do |format|
-        format.js 
       end
     end
     
@@ -89,6 +79,18 @@ module Places
       if @place.verified_owner_is?(current_user)
         @announcement_destroyed = @announcement.destroy
       
+        respond_to do |format|
+          format.js 
+        end
+      else
+        render(:nothing => true)
+      end
+    end
+    
+    def evaluate
+      survey = Survey.from_hash(params[:survey].merge(:user_id => current_user.id))
+      
+      if survey.save
         respond_to do |format|
           format.js 
         end

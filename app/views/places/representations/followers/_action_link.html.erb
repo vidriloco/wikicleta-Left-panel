@@ -1,5 +1,0 @@
-<% if @place.followed_by?(current_user) %>
-	<%= button_to t('places.common_actions.following'), place_follow_off_path(@place), :method => :put, :remote => true %>
-<% else %>
-	<%= button_to t('places.common_actions.follow'), place_follow_on_path(@place), :method => :put, :remote => true %>
-<% end %>

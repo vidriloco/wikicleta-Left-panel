@@ -12,14 +12,17 @@ es_MX:
   places:
     messages:
       error: 
-        login_required: "Necesitas estar logeado para %{action}"
-        only_owner_cannot_unfollow: "No puedes dejar de seguir a un lugar que tú registraste, mejor elimínalo"
+        login_required: "Necesitas estar logeado para poder %{action}"
+        only_owner_cannot_stop_recommending: "No puedes dejar de recomendar un lugar que tú registraste"
         complements: 
-          follow: "seguir un lugar"
+          recommend: "recomendar un lugar"
           commenting: "comentar un lugar"
+          evaluate: "evaluar un lugar"
     common_actions:
-      follow: "Seguir"
-      following: "Siguiendo"
+      re_evaluate: "Cambiar calificación"
+      evaluate: "Calificar"
+      recommend: "Recomendar"
+      recommending: "Tú lo recomiendas"
       unfollow: "Dejar de Seguir"
       owning: "A cargo"
     custom_validations:
@@ -29,6 +32,14 @@ es_MX:
       show:
         mobility_index:
           unranked: "--"
+        evaluations:
+          new:
+            title: "Evaluando"
+          show:
+            title: "Evaluación"
+            count:
+              one: "ha calificado"
+              other: "han calificado"
         announcements:
           empty: "Por ahora, no hay anuncios en éste lugar"
           starts_in: "Empieza en "

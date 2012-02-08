@@ -1,0 +1,5 @@
+<div id="recommender-<%= recommender.id %>">
+	<div class="image"></div>
+	<%= recommender.username %>
+	<%= I18n.t('places.common_actions.owning') if @place.owned_by?(recommender) %>
+</div>

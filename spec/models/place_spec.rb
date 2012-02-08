@@ -10,11 +10,11 @@ describe Place do
       @place.save      
     end
     
-    it "should add the registerer as follower and as owner" do
-      following = @place.follows.first
-      following.place.should == @place
-      following.user.should == @user
-      following.is_owner.should be_true
+    it "should add the registerer as recommender and as owner" do
+      recommending = @place.recommendations.first
+      recommending.place.should == @place
+      recommending.user.should == @user
+      recommending.is_owner.should be_true
     end
     
     it "should confirm that the registerer is it's owner" do
@@ -36,7 +36,7 @@ describe Place do
     end
     
     it "filtering by popular store should retrieve one record only" do
-      Place.filtering_with(:popular, [@place_one.category.id]).should == [@place_one]
+      Place.filtering_with(:most_recommended, [@place_one.category.id]).should == [@place_one]
     end
     
     it "filtering by nothing but categories store and museum should retrieve two records" do
@@ -47,55 +47,90 @@ describe Place do
       results.size.should == 2
     end
     
-    describe "and place one has two followers" do
+    describe "searching" do
+      
+      it "should find all matching a given name" do
+        search_hash={:place => {:name => @place_two.name}}
+        Place.find_by(search_hash).should == [@place_two]
+      end
+      
+      it "should find all matching a given description" do
+        search_hash={:place => {:description => @place_two.description}}
+        Place.find_by(search_hash).should == [@place_two]
+      end
+      
+      it "should find all matching the selected categories" do
+        search_hash={:place => {:categories => { @place_one.category.id => "on", @place_three.category.id => "on" }}}
+        Place.find_by(search_hash).should == [@place_one, @place_three]
+      end
+      
+      it "should find all matching a given partial name and partial description" do
+        search_hash={:place => {:description => @place_two.description[3,9], :name => @place_two.name[4,8]}}
+        Place.find_by(search_hash).should == [@place_two]
+      end
+      
+      it "should find those matching a given description, categories and name" do
+        search_hash={:place => {:description => @place_one.description, :name => @place_one.name, :categories => {@place_one.category.id => "on"}}}
+        Place.find_by(search_hash).should == [@place_one]
+      end
+      
+      it "should NOT find a place with an innexistant name even though a valid category has been selected" do
+        search_hash={:place => {:name => "Pepito's place", :categories => {@place_one.category.id => "on"}}}
+        Place.find_by(search_hash).should == []
+      end
+      
+    end
+    
+    
+    describe "and place one has two add_recommenders" do
       
       before(:each) do
-        @place_one.add_follower(@pipo)
-        @place_one.add_follower(@pancho)
+        @place_one.add_recommender(@pipo)
+        @place_one.add_recommender(@pancho)
         @place_one.save
       end
       
-      it "should retrieve them ordered by their number of followers" do
-        order = Place.order("followers_count DESC")
+      it "should retrieve them ordered by their number of recommenders" do
+        order = Place.order("recommendations_count DESC")
         order.first.should == @place_one
       end
       
     end
     
     it "should let me add a new owner to any of them" do
-      @place_two.add_follower(@pipo, [:owner])
+      @place_two.add_recommender(@pipo, [:owner])
       @place_two.owned_by?(@pipo).should be_true
     end
     
     it "should let me add a new verified owner to any of them" do
-      @place_one.add_follower(@pipo, [:owner, :verified])
+      @place_one.add_recommender(@pipo, [:owner, :verified])
       @place_one.verified_owner_is?(@pipo).should be_true
     end
     
-    describe "and place two has two followers" do
+    describe "and place two has two recommenders" do
       
       before(:each) do
-        @place_two.add_follower(@pipo)
-        @place_two.add_follower(@pancho)
+        @place_two.add_recommender(@pipo)
+        @place_two.add_recommender(@pancho)
         @place_two.save
       end
       
-      it "should retrieve them ordered by their number of followers" do
-        order = Place.order("followers_count DESC")
+      it "should retrieve them ordered by their number of recommenders" do
+        order = Place.order("recommendations_count DESC")
         order.first.should == @place_two
       end
       
-      it "should let me know if a user is follower or not" do
-        @place_one.followed_by?(@pipo).should be_false
-        @place_two.followed_by?(@pancho).should be_true
+      it "should let me know if a user is a recommender or not" do
+        @place_one.recommended_by?(@pipo).should be_false
+        @place_two.recommended_by?(@pancho).should be_true
       end
       
-      it "should let me change the user status for a follower" do
-        @place_one.change_follow_status_for(@pipo, :on)
-        @place_one.followed_by?(@pipo).should be_true
+      it "should let me change the recommendation status for a user" do
+        @place_one.change_recommendation_status_for(@pipo, :on)
+        @place_one.recommended_by?(@pipo).should be_true
         
-        @place_two.change_follow_status_for(@pancho, :off)
-        @place_two.followed_by?(@pancho).should be_false
+        @place_two.change_recommendation_status_for(@pancho, :off)
+        @place_two.recommended_by?(@pancho).should be_false
       end
       
     end
@@ -108,7 +143,7 @@ describe Place do
     describe "given PIPO is now a verified owner of a place" do
       
       before(:each) do
-        @place_one.add_follower(@pipo, [:owner, :verified])
+        @place_one.add_recommender(@pipo, [:owner, :verified])
       end
       
       it "should allow him to add an announcement to a place" do
@@ -144,7 +179,5 @@ describe Place do
       @place_one.place_comments.first.content.should == "Nice comment"
     end
   end
-  
-  
  
 end

@@ -1,6 +1,13 @@
 Ciudadio::Application.routes.draw do
-  devise_for :admins
-
+  devise_for :admins, :only => [:sessions]
+  namespace :admins do
+    get '/' => 'main#index', :as => :index
+    
+    get '/evaluations' => 'evaluations#index', :as => :evaluations_index
+    get '/evaluations/new' => 'evaluations#new', :as => :evaluations_new
+    post '/evaluations' => 'evaluations#create', :as => :evaluations
+  end
+  
   devise_for :users, :only => [:passwords] do
     get "/sign_up", :to => "devise/registrations#new"
     get "/sign_in", :to => "devise/sessions#new", :as => "new_user_session"
@@ -15,90 +22,40 @@ Ciudadio::Application.routes.draw do
   end
   
   namespace :settings do
-    match "account", :via => :get
-    match "access", :via => :get
-    match "profile", :via => :get
-    match "changed", :via => :put
+    get "account", :via => :get
+    get "access", :via => :get
+    get "profile", :via => :get
+    put "changed", :via => :put
   end
   
   namespace :places do
-    match 'search' => 'searches#main', :via => :get
-    match 'search' => 'searches#execute_main', :via => :post
-    match '/' => 'listings#index', :via => :get
-    match "/" => "commits#create", :via => :post
-    match ":id" => "commits#update", :via => :put
-    match ":place_id/announcements" => 'commits#announce', :via => :post
-    match ":id/followers" => 'representations#followers', :via => :get, :as => "followers"
-    match ":id/announcements" => 'representations#announcements', :via => :get, :as => "announcements"
-    match ":id/comments" => 'representations#comments', :via => :get, :as => "comments"
-    match ":id/comments" => 'commits#comment', :via => :post
+    get 'search' => 'searches#main'
+    post 'search' => 'searches#execute_main'
+    get '/' => 'listings#index'
+    post "/" => "commits#create"
+    put ":id" => "commits#update"
+    post ":place_id/announcements" => 'commits#announce'
+    get ":id/announcements" => 'representations#announcements', :as => "announcements"
+    get ":id/comments" => 'representations#comments', :as => "comments"
+    post ":id/comments" => 'commits#comment'
+    
+    get ":place_id/recommendations" => 'recommendations#index', :as => "recommendations"
+    put ":place_id/recommendations/on" => 'recommendations#update', :as => 'recommendation_on', :defaults => { :recommend => 'on' }
+    put ":place_id/recommendations/off" => 'recommendations#update', :as => 'recommendation_off', :defaults => { :recommend => 'off' }
+    
+    post ':place_id/evaluations' => 'evaluations#create', :as => "evaluations"
+    get ':place_id/evaluations/new' => 'evaluations#new', :as => 'new_evaluation'
+    get ":place_id/evaluations/edit/:evaluation_id" => "evaluations#edit", :as => "edit_evaluation"
   end
 
-  match "places/new" => 'places/commits#new', :via => :get, :as => "new_place"
-  match "places/:id" => 'places/representations#show', :via => :get, :as => "place"
-  match "places/edit/:id" => 'places/commits#edit', :via => :get, :as => "edit_place"
+  get "places/new" => 'places/commits#new', :via => :get, :as => "new_place"
+  get "places/:id" => 'places/representations#show', :via => :get, :as => "place"
+  get "places/edit/:id" => 'places/commits#edit', :via => :get, :as => "edit_place"
   
-  match "/places/:id/announcements" => 'places/commits#unannounce', :via => :delete, :as => "delete_place_announcement"
-  match "places/:id/follow/on" => 'places/commits#follow', :via => :put, :as => "place_follow_on", :defaults => { :follow => "on" }
-  match "places/:id/follow/off" => 'places/commits#follow', :via => :put, :as => "place_follow_off", :defaults => { :follow => "off" }
+  delete "/places/:id/announcements" => 'places/commits#unannounce', :as => "delete_place_announcement"
   
-  match "/places/:id/comments" => 'places/commits#uncomment', :via => :delete, :as => "delete_place_comment"
-  
-  
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
-
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
-
-  # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
+  delete "/places/:id/comments" => 'places/commits#uncomment', :as => "delete_place_comment"
+    
   root :to => 'welcome#index'
 
-  # See how all your routes lay out with "rake routes"
-
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
 end

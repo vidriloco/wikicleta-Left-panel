@@ -182,6 +182,23 @@ var MapWrapper = Backbone.Model.extend({
 		if("linesMode" in interactionOpts) {
 			this.set({ linesMode : interactionOpts["linesMode"] });
 		}
+		
+		if("searchMode" in interactionOpts) {
+			
+			this.set({ searchMode : interactionOpts["searchMode"] })
+			
+			if("swDOM" in interactionOpts && "neDOM" in interactionOpts) {
+				this.set({southWestDom : interactionOpts["swDOM"]});
+				this.set({northEastDom : interactionOpts["neDOM"]});
+				var theWrapper = this;
+				google.maps.event.addListener(map, "drag", function(event) {
+					if(theWrapper.has("southWestDom") && theWrapper.has("northEastDom") && $.isDefined(theWrapper.get("searchMode"))) {
+						theWrapper.setSearchMapParams();
+						return true;
+					}
+				});
+			}
+		}
 
 		if("domEditable" in interactionOpts) {
 			this.set({domEditable : interactionOpts["domEditable"] });
@@ -267,6 +284,11 @@ var MapWrapper = Backbone.Model.extend({
 		}
 	},
 	
+	simulatePinPointSearch: function(opts) {
+		this.placeViewportAt(opts);
+		this.setSearchMapParams();
+	},
+	
 	simulatePinPoint: function(lat, lon) {
 		// this blocks mimics what method writePointToDom does
 		this._coordsToMap(new google.maps.LatLng(lat, lon));
@@ -326,6 +348,17 @@ var MapWrapper = Backbone.Model.extend({
 	
 	isEditable: function() {
 		return $.isDefined(this.get("domEditable"));
+	},
+	
+	setSearchMapParams: function() {
+		var map = this.get("currentMap");
+		var limites = map.getBounds();
+		var ne = limites.getNorthEast();
+		var sw = limites.getSouthWest();
+		
+		$(this.get("southWestDom")).val(sw.lat() + "," + sw.lng());
+		$(this.get("northEastDom")).val(ne.lat() + "," + ne.lng());
+		return true;
 	},
 	
 	_coordsToMap: function(coordinates) {

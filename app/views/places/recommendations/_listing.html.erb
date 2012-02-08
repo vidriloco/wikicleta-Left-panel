@@ -1,0 +1,9 @@
+<%= render :partial => 'places/recommendations/unit', :collection => @place.recommendations, :as => :recommender %>
+
+<% if @place.recommendations_count <= 1 && !@place.owned_by?(current_user) %>
+	<h3><%= t('places.subviews.show.followers.empty') %></h3>
+	
+	<div class="follow">
+		<%= render 'places/recommendations/action_link' %>	
+	</div>
+<% end %>
