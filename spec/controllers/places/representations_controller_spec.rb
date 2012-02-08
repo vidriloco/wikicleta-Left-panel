@@ -19,14 +19,4 @@ describe Places::RepresentationsController do
   
   end
   
-  describe "GET announcements" do
-    
-    it "should fetch all the announcements for a given place" do
-      Place.should_receive(:include_with).with("1", :announcements) { @place }
-      get :announcements, :id => "1"
-      assigns(:place).should == @place
-    end
-    
-  end
-  
 end

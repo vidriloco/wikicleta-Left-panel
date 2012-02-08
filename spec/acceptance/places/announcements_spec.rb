@@ -35,7 +35,7 @@ feature "Announcements in places HTML show:" do
       
     end 
     
-    describe "having two announcements registered it" do
+    describe "having two announcements registered" do
       
       before(:each) do
         announcer = Factory(:pipo)

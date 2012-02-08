@@ -12,11 +12,10 @@
 			<%= link_to t('actions.cancel'), 'javascript:void(0);', :class => "form-hide-trigger" %>
 		<% end %>
 	</div>
-	
 <% end %>
 
 <% if @place.announcements.empty? %>
 	<h3><%= t('places.subviews.show.announcements.empty') %></h3>
 <% else %>
-	<%= render :partial => 'places/representations/announcements/unit', :collection => @place.announcements, :as => :announcement %>
+	<%= render :partial => 'places/announcements/unit', :collection => @place.announcements, :as => :announcement %>
 <% end %>

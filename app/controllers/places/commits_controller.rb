@@ -36,34 +36,6 @@ module Places
       end
     end
     
-    def announce
-      
-      @place = Place.find(params[:place_id])
-
-      if (@announcement = @place.add_announcement(current_user, params[:announcement]))
-        respond_to do |format|
-          format.js 
-        end
-      else
-        render(:nothing => true)
-      end
-    end
-    
-    def unannounce
-      @announcement = Announcement.find(params[:id])
-      @place = @announcement.place
-      
-      if @place.verified_owner_is?(current_user)
-        @announcement_destroyed = @announcement.destroy
-      
-        respond_to do |format|
-          format.js 
-        end
-      else
-        render(:nothing => true)
-      end
-    end
-    
     def evaluate
       survey = Survey.from_hash(params[:survey].merge(:user_id => current_user.id))
       

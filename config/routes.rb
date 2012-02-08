@@ -34,9 +34,10 @@ Ciudadio::Application.routes.draw do
     get '/' => 'listings#index'
     post "/" => "commits#create"
     put ":id" => "commits#update"
-    post ":place_id/announcements" => 'commits#announce'
-    get ":id/announcements" => 'representations#announcements', :as => "announcements"
     
+    get ":place_id/announcements" => 'announcements#index', :as => "announcements"
+    post ":place_id/announcements" => 'announcements#create'
+    delete ":place_id/announcements/:id" => 'announcements#destroy', :as => "delete_announcement"
     
     get ":place_id/comments" => 'comments#index', :as => "comments"
     post ":place_id/comments" => 'comments#create'
@@ -55,7 +56,6 @@ Ciudadio::Application.routes.draw do
   get "places/:id" => 'places/representations#show', :via => :get, :as => "place"
   get "places/edit/:id" => 'places/commits#edit', :via => :get, :as => "edit_place"
   
-  delete "/places/:id/announcements" => 'places/commits#unannounce', :as => "delete_place_announcement"
     
   root :to => 'welcome#index'
 

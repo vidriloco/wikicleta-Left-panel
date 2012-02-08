@@ -10,7 +10,7 @@
 		<% end %>
 		
 		<% if @place.verified_owner_is?(current_user) %>
-			<%= link_to t('places.subviews.show.announcements.actions.delete'), delete_place_announcement_path(announcement), 
+			<%= link_to t('places.subviews.show.announcements.actions.delete'), places_delete_announcement_path(@place, announcement), 
 				  :method => :delete, :remote => true, :confirm => t('places.subviews.show.announcements.actions.confirm') %>
 		<% end %>
 	</div>

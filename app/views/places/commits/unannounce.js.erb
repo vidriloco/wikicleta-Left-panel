@@ -1,4 +1,0 @@
-<% if @announcement_destroyed %>
-	$('#announcement-<%= @announcement.id %>').fadeOut(100).remove();
-	$('#main-box #status-bar .announcements').html("<%= escape_javascript(render 'places/representations/announcements/count').html_safe %>");
-<% end %>
