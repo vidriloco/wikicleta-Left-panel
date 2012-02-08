@@ -1,4 +1,0 @@
-<% if @place_comment_destroyed %>
-	$('#comment-<%= @place_comment.id %>').fadeOut(100).remove();
-	$('#main-box #status-bar .comments').html("<%= escape_javascript(render 'places/representations/comments/count').html_safe %>");	
-<% end %>

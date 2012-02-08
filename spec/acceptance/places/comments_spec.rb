@@ -65,13 +65,8 @@ feature "Comments in places HTML show:" do
       
       within('#main-box') do
         show_comments
-        
-        fill_in "place_comment", :with => "Está muy buena la comida, además puedo llegar en bici"
-        click_button I18n.t('actions.share')
-        
+        page.should have_content I18n.t('places.messages.error.login_required', :action => I18n.t('places.messages.error.complements.commenting'))
       end
-      
-      page.should have_content I18n.t('places.messages.error.login_required', :action => I18n.t('places.messages.error.complements.commenting'))
     end
     
     describe "if I am logged-in it" do

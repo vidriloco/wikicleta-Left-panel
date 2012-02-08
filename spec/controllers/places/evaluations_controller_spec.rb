@@ -71,10 +71,5 @@ describe Places::EvaluationsController do
       end
       
     end
-    
-
-    
   end
-  
-  
 end

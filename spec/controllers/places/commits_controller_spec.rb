@@ -94,8 +94,6 @@ describe Places::CommitsController do
     end
   end
   
-  
-  
   describe "if logged-in" do
     
     before(:each) do
@@ -150,59 +148,6 @@ describe Places::CommitsController do
           end
 
         end
-      end
-      
-      describe "POST comment" do
-        
-        it "should receive some params and register a new comment" do
-          Place.should_receive(:find).with("1") { @place }
-          @place.should_receive(:add_comment).with(@user, "One comment")
-          
-          post :comment, :id => "1", :place_comment => {:content => "One comment"}
-          assigns(:place).should be(@place)
-        end
-        
-      end
-            
-      describe "DELETE uncomment" do
-        
-        before(:each) do
-          @comment = PlaceComment.new
-        end
-        
-        describe "when logged-in user is the comment owner" do
-          
-          before(:each) do
-            @comment.stub(:owned_by?) { true }
-          end
-          
-          it "should succeed on deleting the comment" do
-            PlaceComment.should_receive(:find).with("1") { @comment }
-            @comment.should_receive(:destroy).and_return(true)
-          
-            delete :uncomment, :id => "1"
-          
-            assigns(:place_comment_destroyed).should be_true
-          end
-        end
-        
-        describe "when logged-in user is the comment owner" do
-          
-          before(:each) do
-            @comment.stub(:owned_by?) { false }
-          end
-          
-          it "should NOT succeed on deleting the comment and render an empty response" do
-            PlaceComment.should_receive(:find).with("1") { @comment }
-            @comment.should_not_receive(:destroy)
-            
-            delete :uncomment, :id => "1"
-            
-            response.body.should be_blank
-          end
-          
-        end
-        
       end
       
       describe "POST announce" do
