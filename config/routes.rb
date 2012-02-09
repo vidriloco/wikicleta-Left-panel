@@ -28,12 +28,14 @@ Ciudadio::Application.routes.draw do
     put "changed", :via => :put
   end
   
+  get '/places/' => 'places#index'
+  post "/places/" => "places#create"
+  put "/places/:id" => "places#update"
+  get "/places/new" => 'places#new', :as => "new_place"
+  
   namespace :places do
     get 'search' => 'searches#main'
     post 'search' => 'searches#execute_main'
-    get '/' => 'listings#index'
-    post "/" => "commits#create"
-    put ":id" => "commits#update"
     
     get ":place_id/announcements" => 'announcements#index', :as => "announcements"
     post ":place_id/announcements" => 'announcements#create'
@@ -52,9 +54,9 @@ Ciudadio::Application.routes.draw do
     get ":place_id/evaluations/edit/:evaluation_id" => "evaluations#edit", :as => "edit_evaluation"
   end
 
-  get "places/new" => 'places/commits#new', :via => :get, :as => "new_place"
-  get "places/:id" => 'places/representations#show', :via => :get, :as => "place"
-  get "places/edit/:id" => 'places/commits#edit', :via => :get, :as => "edit_place"
+
+  get "/places/:id" => 'places#show', :as => "place"
+  get "/places/edit/:id" => 'places#edit', :as => "edit_place"
   
     
   root :to => 'welcome#index'

@@ -12,12 +12,12 @@
 	</select>
 	
 	<div id="l-places">
-		<%= render :partial => 'places/listings/place', :collection => @places %>
+		<%= render :partial => 'unit', :collection => @places, :as => :place %>
 	</div>
 </div>
 
 <div id="side-box">
-	<%= link_to t('places.views.index.search'), "" %>
+	<%= link_to t('places.views.index.search'), places_search_path %>
 	
 	<% if user_signed_in? %>
 		<div class="lgd_in">
