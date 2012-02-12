@@ -4,7 +4,7 @@
 
 <div id="meta-survey-<%= @place.category.meta_survey.id %>" class="evaluation-form">
 	
-<%= form_tag places_evaluations_path(@place), :remote => true do |f| %>
+<%= form_tag places_evaluation_path(@place, @survey), :method => :put, :remote => true do |f| %>
 	
 	<%= render :partial => 'form', :locals => {:f => f, :meta_survey => @place.category.meta_survey} %>
 	

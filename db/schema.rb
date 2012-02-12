@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(:version => 20120205004020) do
     t.datetime "updated_at"
   end
 
+  add_index "categories", ["standard_name"], :name => "standard_name_index", :unique => true
+
   create_table "meta_answer_items", :force => true do |t|
     t.integer  "meta_question_id"
     t.string   "human_value"

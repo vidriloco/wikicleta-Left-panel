@@ -13,9 +13,12 @@ describe Places::EvaluationsController do
     end
     
     it "matches /places/1/evaluations/edit/1 with controller :evaluations action #edit" do
-      { :get => '/places/1/evaluations/edit/1' }.should route_to(:action => "edit", :controller => "places/evaluations", :place_id => "1", :evaluation_id => "1")
+      { :get => '/places/1/evaluations/edit/1' }.should route_to(:action => "edit", :controller => "places/evaluations", :place_id => "1", :id => "1")
     end
     
+    it "matches /places/1/evaluations/1 with controller :evaluations action #update" do
+      { :put => '/places/1/evaluations/1' }.should route_to(:action => "update", :controller => "places/evaluations", :place_id => "1", :id => "1")
+    end
   end
   
 end

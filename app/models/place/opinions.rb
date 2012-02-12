@@ -1,4 +1,5 @@
-module Place::Evaluations
+module Place::Opinions
+  
   def evaluation_from(user)
     Survey.where({:user_id => user.id, :evaluable_id => self.id, :evaluable_type => self.class.to_s}).first
   end

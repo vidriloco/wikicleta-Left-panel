@@ -1,0 +1,5 @@
+<% if @survey.persisted? %>
+	$('#tabbed-content').html("<%= escape_javascript render('listing') %>");
+<% else %>
+	$('#notifications').html("<p><%= t('places.subviews.show.evaluations.validations.errors.missing_answers') %></p>").delay(2000).fadeOut(500);
+<% end %>

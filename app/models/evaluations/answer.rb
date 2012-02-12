@@ -37,10 +37,10 @@ class Answer < ActiveRecord::Base
   end
   
   def self.corresponds_to_open_value_question?(meta_question)
-    MetaQuestion.find(:first, :conditions => [ "type_of IN (?) AND id = ?", Quantus.open_question_types, meta_question])
+    MetaQuestion.find(:first, :conditions => [ "type_of IN (?) AND id = ?", Evaluations.open_question_types, meta_question])
   end
   
   def self.corresponds_to_binary_value_question?(meta_question)
-    MetaQuestion.find(:first, :conditions => [ "type_of IN (?) AND id = ?", Quantus.binary_question_types, meta_question])
+    MetaQuestion.find(:first, :conditions => [ "type_of IN (?) AND id = ?", Evaluations.binary_question_types, meta_question])
   end
 end

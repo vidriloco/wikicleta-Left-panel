@@ -27,9 +27,9 @@ describe Place do
   describe "having three places registered" do
     
     before(:each) do
-      @place_one = Factory(:popular_place)
-      @place_two = Factory(:recent_place)
-      @place_three = Factory(:accessible_place, :category => Factory.build(:museum))
+      @place_one = Factory(:popular_place, :category => Factory(:restaurant))
+      @place_two = Factory(:recent_place, :category => Factory(:cinema))
+      @place_three = Factory(:accessible_place, :category => Factory(:museum))
       
       @pipo = Factory(:pipo)
       @pancho =  Factory(:pancho)

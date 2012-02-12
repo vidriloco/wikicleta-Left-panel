@@ -49,9 +49,10 @@ Ciudadio::Application.routes.draw do
     put ":place_id/recommendations/on" => 'recommendations#update', :as => 'recommendation_on', :defaults => { :recommend => 'on' }
     put ":place_id/recommendations/off" => 'recommendations#update', :as => 'recommendation_off', :defaults => { :recommend => 'off' }
     
-    post ':place_id/evaluations' => 'evaluations#create', :as => "evaluations"
+    post ':place_id/evaluations/' => 'evaluations#create', :as => "evaluations"
+    put ":place_id/evaluations/:id" => "evaluations#update", :as => "evaluation"
     get ':place_id/evaluations/new' => 'evaluations#new', :as => 'new_evaluation'
-    get ":place_id/evaluations/edit/:evaluation_id" => "evaluations#edit", :as => "edit_evaluation"
+    get ":place_id/evaluations/edit/:id" => "evaluations#edit", :as => "edit_evaluation"
   end
 
 
@@ -60,5 +61,4 @@ Ciudadio::Application.routes.draw do
   
     
   root :to => 'welcome#index'
-
 end

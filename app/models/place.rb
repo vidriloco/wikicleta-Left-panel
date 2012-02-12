@@ -1,10 +1,10 @@
 class Place < ActiveRecord::Base
+  include Opinions
   include Recommendations
   include Comments
   include Announcements
   include Geography
   include Search
-  include Evaluations
   
   has_many :recommendations
   has_many :recommenders, :through => :recommendations, :source => :user
@@ -36,6 +36,18 @@ class Place < ActiveRecord::Base
     new_place = self.new(params)
     new_place.recommendations.build(:user => user, :is_owner => true, :place => new_place)
     new_place
+  end
+  
+  def evaluation_from(user)
+    Survey.where({:user_id => user.id, :evaluable_id => self.id, :evaluable_type => self.class.to_s}).first
+  end
+  
+  def evaluation_count_for(meta_answer_item) 
+    self.surveys.joins(:answers).where(
+                                    :answers => 
+                                      {:meta_answer_item_id => meta_answer_item.id},
+                                    :surveys => 
+                                      {:evaluable_id => self.id, :evaluable_type => self.class.to_s}).count
   end
   
 end

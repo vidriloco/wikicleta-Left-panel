@@ -33,7 +33,10 @@ es_MX:
         mobility_index:
           unranked: "--"
         evaluations:
-          new:
+          validations:
+            errors:
+              missing_answers: "Hay preguntas sin responder"
+          new_or_edit:
             title: "Evaluando"
           show:
             title: "Evaluación"

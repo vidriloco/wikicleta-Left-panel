@@ -1,4 +1,5 @@
-module Quantus
+# this module stores the metadata por evaluations
+module Evaluations
   #
   # Here we set the identifiers for meta questions with open answers as used in YML descriptor files 
   # or internally in the application meta questions representations

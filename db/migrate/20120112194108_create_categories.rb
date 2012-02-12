@@ -9,5 +9,6 @@ class CreateCategories < ActiveRecord::Migration
     Factory(:workshop)
     Factory(:restaurant)
     
+    add_index(:categories, :standard_name, :unique => true, :name => "standard_name_index")
   end
 end

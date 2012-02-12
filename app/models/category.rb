@@ -2,6 +2,8 @@ class Category < ActiveRecord::Base
   has_many :places
   has_one :meta_survey
   
+  validates_uniqueness_of :standard_name
+  
   def name
     I18n.t("categories.all.#{standard_name}")
   end
