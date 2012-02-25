@@ -14,5 +14,8 @@
   <div><%= f.submit t("user_accounts.sessions.new.start") %></div>
 <% end %>
 
+<%= link_to t('user_accounts.omniauth.login', :network => "Twitter"), user_omniauth_authorize_path(:twitter) %>
+<%= link_to t('user_accounts.omniauth.login', :network => "Facebook"), user_omniauth_authorize_path(:facebook) %>
+
 <%= link_to t("user_accounts.forgot_password"), account_recover_password_path %>
 <%= link_to t("user_accounts.sessions.new.sign_up"), sign_up_path %><br />

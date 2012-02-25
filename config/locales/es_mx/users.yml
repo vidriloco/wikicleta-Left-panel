@@ -16,10 +16,22 @@ es_MX:
         share_location: "Compartir ubicación"
         reset_password_token: "El token para reestablecer contraseña"
   user_accounts:
+    omniauth:
+      login: "Iniciar sesión con %{network}"
     forgot_password: "¿Olvidaste tu contraseña?"
     passwords:
       reset_password: "Reestablecer contraseña"
     registrations:
+      oauth:
+        commit: "Completar"
+        retrieved_fields: "Si necesitas cambiar alguno de los siguientes datos, puedes hacerlo"
+        missing_field: "Por favor, escribe tu %{field} para continuar"
+        twitter:
+          new:
+            title: "Nuevo registro vía twitter"
+        facebook:
+          new:
+            title: "Nuevo registro vía facebook"
       new:
         title: "Muévete por tu ciudad"
         commit: "Registrarme"

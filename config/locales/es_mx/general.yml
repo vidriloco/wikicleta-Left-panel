@@ -8,6 +8,8 @@ es_MX:
     update: "Guardar cambios"
     cancel: "Cancelar"
     search: "Buscar"
+    registrations:
+      cancel: "Cancelar registro"
     new: 
       fem: "Nueva"
       masc: "Nuevo"

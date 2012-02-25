@@ -44,16 +44,20 @@ describe SettingsController do
   describe "PUT changed" do
     
     it "updates user and sets it to @user" do
-      @user.stub(:update_attributes).with({ 'some' => 'attrs' }).and_return(true)
-      put :changed, :user => { 'some' => 'attrs' }
+      params= { 'email' => 'someone@example.com' }
+      
+      @user.stub(:update_attributes).with(params).and_return(true)
+      put :changed, :user => params
       
       assigns(:user).should == @user
       flash[:notice].should eql(I18n.t("user_accounts.settings.successful_save"))
     end
     
     it "does not updates user but it also sets it to @user" do
-      @user.stub(:update_attributes).with({ 'password' => 'p', 'password_confirmation' => 'pd' }).and_return(false)
-      put :changed, :user => {'password' => 'p', 'password_confirmation' => 'pd' }
+      params = { 'password' => 'p', 'password_confirmation' => 'pd' }
+      
+      @user.stub(:update_attributes).with(params).and_return(false)
+      put :changed, :user => params
       
       assigns(:user).should == @user
       flash[:notice].should eql(I18n.t("user_accounts.settings.unsuccessful_save"))

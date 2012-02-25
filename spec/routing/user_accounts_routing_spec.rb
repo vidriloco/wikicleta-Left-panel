@@ -22,6 +22,14 @@ describe "User accounts routing" do
       { :post => "/account/create" }.should route_to(:action=>"create", :controller=>"devise/registrations")
     end
     
+    it "matches /users/auth/create with controller action #create on omniauth_callbacks" do
+      { :post => "/users/auth/create" }.should route_to(:action=>"create", :controller=>"users/omniauth_callbacks")
+    end
+    
+    it "matches /users/auth/cancel with controller action #cancel on omniauth_callbacks" do
+      { :delete => "/users/auth/cancel" }.should route_to(:action => "cancel", :controller => "users/omniauth_callbacks")
+    end
+    
     it "matches /account/deactivate with controller action #delete on registrations" do
       { :delete => "/account/deactivate" }.should route_to(:action=>"destroy", :controller=>"devise/registrations")
     end
@@ -33,6 +41,5 @@ describe "User accounts routing" do
     it "matches /account/reset_password with controller action #edit on passwords" do
       { :get => "/account/reset_password" }.should route_to(:action=>"edit", :controller=>"devise/passwords")
     end
-    
   end
 end

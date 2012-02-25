@@ -4,7 +4,7 @@ Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
-  config.mailer_sender = "no-reply@wikicleta.com"
+  config.mailer_sender = "no-reply@wikiando.mx"
 
   # Configure the class responsible to send e-mails.
   config.mailer = "Devise::Mailer"
@@ -197,7 +197,8 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
-
+  config.omniauth :twitter, "0CqRjzDDgQYdxFgSvZBrBg", "x5jSwqmG3uOqNy0zISKszNEu5que1dQ51WDzGBzPo"
+  config.omniauth :facebook, "261609860582235", "caed03bb63f400abc91bf072e7187b6b"
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

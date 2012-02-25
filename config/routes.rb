@@ -1,4 +1,8 @@
 Ciudadio::Application.routes.draw do
+  #mount TransportAdder::Engine => "/mobility"  
+  
+  
+  
   devise_for :admins, :only => [:sessions]
   namespace :admins do
     get '/' => 'main#index', :as => :index
@@ -8,10 +12,17 @@ Ciudadio::Application.routes.draw do
     post '/evaluations' => 'evaluations#create', :as => :evaluations
   end
   
-  devise_for :users, :only => [:passwords] do
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }, :only => [:passwords, :omniauth_callbacks]
+  
+  devise_scope :user do
     get "/sign_up", :to => "devise/registrations#new"
     get "/sign_in", :to => "devise/sessions#new", :as => "new_user_session"
     delete "/sign_out", :to => "devise/sessions#destroy", :as => "destroy_user_session"
+    
+    namespace :users do
+      post '/auth/create', :to => "omniauth_callbacks#create", :as => :auth_sign_up
+      delete '/auth/cancel', :to => "omniauth_callbacks#cancel", :as => :cancel_auth_sign_up
+    end
     
     post "/account/create", :to => "devise/registrations#create"
     delete "/account/deactivate", :to => "devise/registrations#destroy"

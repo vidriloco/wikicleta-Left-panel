@@ -9,6 +9,11 @@ gem 'pg'
 gem 'devise'
 gem 'formtastic'
 gem 'spatial_adapter', :git => 'https://github.com/Empact/spatial_adapter.git'
+# gem 'transport_adder', :require => 'transport_adder', :path => 'vendor/plugins/transport_adder/'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'twitter'
 
 group :test do
 	gem 'capybara'

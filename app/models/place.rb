@@ -50,4 +50,10 @@ class Place < ActiveRecord::Base
                                       {:evaluable_id => self.id, :evaluable_type => self.class.to_s}).count
   end
   
+  private
+  def twitter_correct_format
+    return true if self.twitter.blank?
+    errors.add(:twitter, I18n.t('places.custom_validations.twitter_bad_format')) if !self.twitter.match(/@(\w+)/).nil?
+  end
+  
 end

@@ -24,4 +24,10 @@ FactoryGirl.define do
     u.full_name "Pancho Gomez"
     u.username "pancho"
   end
+  
+  factory :someone, :class => "User" do |u|
+    u.email "someone@example.com"
+    u.full_name "Someone P"
+    u.username "someone"
+  end
 end
