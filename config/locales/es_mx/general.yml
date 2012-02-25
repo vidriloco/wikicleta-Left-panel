@@ -8,6 +8,7 @@ es_MX:
     update: "Guardar cambios"
     cancel: "Cancelar"
     search: "Buscar"
+    back: "Atrás"
     registrations:
       cancel: "Cancelar registro"
     new: 

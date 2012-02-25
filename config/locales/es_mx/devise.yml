@@ -48,7 +48,7 @@ es_MX:
       send_paranoid_instructions: 'Si su cuenta existe, usted recibirá un correo electrónico con instrucciones sobre como desbloquear su cuenta en unos minutos.'
     omniauth_callbacks:
       success: 'Has iniciado sesión desde tu cuenta de %{kind}.'
-      failure: 'No fue posible iniciar sesión desde tu cuenta de %{kind}'
+      failure: 'No fue posible iniciar sesión desde la cuenta de tu red social seleccionada'
     mailer:
       confirmation_instructions:
         subject: 'Instrucciones de Confirmación'

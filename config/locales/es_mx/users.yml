@@ -54,6 +54,9 @@ es_MX:
           deactivate: "Desactivar mi cuenta"
           deactivate_confirmation: "¿Realmente deseas desactivar tu cuenta?"
         access:
+          external_reset: "Si accedes a Wikiando a través de Facebook o Twitter, no es necesario que reestablezcas tu contraseña para seguir haciéndolo"
+          reset_password: "Si has olvidado tu contraseña, puedes reestablecerla a través de un link que podemos enviar a tu correo para hacerlo"
           current_password: "Contraseña Actual"
+          reset: "Reestablecer"
         profile:
           change_name: "Cambiar nombre"

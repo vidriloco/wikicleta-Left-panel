@@ -82,7 +82,37 @@ feature 'User accounts settings' do
       User.find(@user.id).valid_password?("bicicleta").should be_true
     end
     
-    scenario "if I forgot my password I should be able to recover it"
+    describe "and being myself an externally logged-in user" do
+    
+      before(:each) do
+        Factory(:authorization, :user_id => @user.id)
+      end
+    
+      scenario "if I forgot my password I should be able to request a new password to be send to my email" do
+        
+        visit settings_profile_path
+        click_on I18n.t("user_accounts.settings.access")
+        
+        page.should have_content I18n.t('user_accounts.settings.sections.access.external_reset')
+        
+        click_on I18n.t('user_accounts.settings.sections.access.reset')
+        
+        page.should have_content I18n.t('devise.passwords.send_instructions')
+      end
+    end
+    
+    scenario "if I forgot my password I should be able to request a new password to be send to my email" do
+      
+      visit settings_profile_path
+      click_on I18n.t("user_accounts.settings.access")
+      
+      page.should_not have_content I18n.t('user_accounts.settings.sections.access.external_reset')
+      
+      click_on I18n.t('user_accounts.settings.sections.access.reset')
+      
+      page.should have_content I18n.t('devise.passwords.send_instructions')
+      
+    end
     
     scenario "it should let me change my bio and personal page through my profile settings section" do
       visit settings_profile_path

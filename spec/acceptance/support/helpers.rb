@@ -52,8 +52,7 @@ module HelperMethods
   end
   
   def mock_omniauth_user_for(provider)
-    hash = {"info" => {"name" => "A user's name", "nickname" => "usernicks"}}
-    Authorization.create(:uid => 12345, :provider => provider.to_s, :user => User.create_from_hash!(hash))
+    Authorization.create(:uid => 12345, :provider => provider.to_s, :user_id => Factory(:pipo).id)
   end
 end
 

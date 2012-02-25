@@ -38,12 +38,31 @@ feature 'User accounts registration' do
         OmniAuth.config.test_mode = true
       end
       
+      describe "with an unsuccessful login" do
+        
+        before(:each) do
+          OmniAuth.config.mock_auth[:twitter] = :invalid_message
+        end
+        
+        scenario "renders a failure login page" do
+        
+          visit new_user_session_path
+          click_on I18n.t('user_accounts.omniauth.login', :network => "Twitter")
+      
+          page.current_path.should == user_omniauth_callback_path(:twitter)
+          page.should have_content I18n.t("devise.omniauth_callbacks.failure")
+        
+          find_link I18n.t('actions.back')
+        end
+        
+      end
+      
       describe "using my twitter account" do
       
         before(:each) do
           mock_omniauth_for(:twitter)
         end
-      
+            
         scenario "I can register and log-in" do
           visit new_user_session_path
           click_on I18n.t('user_accounts.omniauth.login', :network => "Twitter")

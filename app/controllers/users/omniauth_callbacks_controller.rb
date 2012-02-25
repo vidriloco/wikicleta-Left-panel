@@ -44,7 +44,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   protected
   
   def check_for_failure
-    render :action => :failure if auth_hash.nil?
+    render(:action => :failure) if auth_hash.nil?
   end
   
   def peek_authorization

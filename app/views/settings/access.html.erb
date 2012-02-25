@@ -1,5 +1,20 @@
 <%= render 'shared_actions' %>
 
+<p>
+	<span><%= t('user_accounts.settings.sections.access.reset_password') %></span>
+	<%= form_for(@user, :url => user_password_path, :html => { :method => :post }) do |f| %>
+
+	  <%= f.hidden_field :email, :value => @user.email %></div>
+
+	  <div><%= f.submit t('user_accounts.settings.sections.access.reset') %></div>
+	<% end %>
+	<br/>
+	<% unless @user.authorizations.empty? %>
+		<span class="note"><%= t('user_accounts.settings.sections.access.external_reset') %></span>
+	<% end %>
+</p>
+
+
 <%= form_for(@user, :url => settings_changed_path(@user), :html => { :method => :put }) do |f| %>
 		
 	<div><%= f.label :password %><br />
