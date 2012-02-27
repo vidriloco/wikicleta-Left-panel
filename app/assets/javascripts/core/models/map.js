@@ -151,7 +151,7 @@ var PolyLineWrapper = Backbone.Model.extend({
 var MapWrapper = Backbone.Model.extend({
 	
   initialize: function(map, interactionOpts, callback) {
-		this.set({ currentMap : map, lastMarker : null });
+		this.set({ currentMap : map, lastMarker : null, markerList : [] });
 		
 		if("pointsMode" in interactionOpts) {
 			this.set({pointsMode : interactionOpts["pointsMode"] });
@@ -330,6 +330,32 @@ var MapWrapper = Backbone.Model.extend({
 		});
 		
 		this.set({ lastMarker : marker });
+	},
+	
+	addCoordinatesAsMarkerToList: function(lat, lon, content, action) {
+		if(lat=="" || lon=="") {
+			return false;
+		}
+		
+		var map = this.get("currentMap");
+		var marker = new google.maps.Marker({
+			position: new google.maps.LatLng(lat, lon),
+			map: map
+		});
+		
+		google.maps.event.addListener(marker, 'click', function() {
+			action(content);
+		});
+		this.get("markerList").push(marker);
+	},
+	
+	resetMarkersList: function() {
+		var markersList = this.get("markerList");
+		if (markersList) {
+			for (i in markersList) {
+				markersList[i].setMap(null);
+			}
+		}
 	},
 	
 	writeAddressOn: function() {

@@ -64,10 +64,10 @@ Ciudadio::Application.routes.draw do
     get ":place_id/evaluations/edit/:id" => "evaluations#edit", :as => "edit_evaluation"
   end
 
-
   get "/places/:id" => 'places#show', :as => "place"
   get "/places/edit/:id" => 'places#edit', :as => "edit_place"
-  
+
+  resources :incidents
     
   root :to => 'welcome#index'
 end

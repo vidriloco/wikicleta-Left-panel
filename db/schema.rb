@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120222071942) do
+ActiveRecord::Schema.define(:version => 20120225073356) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                             :default => "", :null => false
@@ -53,6 +53,14 @@ ActiveRecord::Schema.define(:version => 20120222071942) do
     t.datetime "updated_at"
   end
 
+  create_table "bike_items", :force => true do |t|
+    t.integer  "category"
+    t.string   "name"
+    t.string   "details"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "categories", :force => true do |t|
     t.string   "standard_name"
     t.datetime "created_at"
@@ -60,6 +68,20 @@ ActiveRecord::Schema.define(:version => 20120222071942) do
   end
 
   add_index "categories", ["standard_name"], :name => "standard_name_index", :unique => true
+
+  create_table "incidents", :force => true do |t|
+    t.string   "description"
+    t.integer  "kind"
+    t.integer  "bike_item_id"
+    t.boolean  "complaint_issued"
+    t.string   "bike_description"
+    t.string   "vehicle_identifier"
+    t.datetime "date_and_time"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.point    "coordinates",        :limit => nil, :srid => 4326
+  end
 
   create_table "meta_answer_items", :force => true do |t|
     t.integer  "meta_question_id"

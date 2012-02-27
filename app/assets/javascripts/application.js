@@ -6,6 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui-min
 //= require underscore
 //= require backbone
 //= require core/models/map.js

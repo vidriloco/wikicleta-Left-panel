@@ -1,0 +1,13 @@
+<div id="<%= incident.id %>" class="<%= incident.symbol_kind %> item">
+	<div class="description"><%= incident.description %></div>
+	<div class="to-right">
+		<span class="time"><%= distance_of_time_in_words(incident.date_and_time, Time.now, true) %></span> 
+		<span class="reporter"><%= reporter_of(incident) %></span>
+	</div>
+	
+	<div class="lat hidden"><%= incident.coordinates.lat %></div>
+	<div class="lon hidden"><%= incident.coordinates.lon %></div>
+	<%= link_to t('incidents.index.list.item.details'), 'javascript:void(0);', :class => "itemdetails-toggle see-details" %>
+	
+	<%= render :partial => 'extended_incident', :locals => { :incident => incident } %>
+</div>

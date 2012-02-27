@@ -1,0 +1,7 @@
+<div class="<%= kind %>">
+	<% if as_link %>
+		<%= link_to partial_numbers_for(@incident_ocurrence, kind), 'javascript:void(0);', :class => "#{kind}-toggle" %>
+	<% else %>
+		<%= partial_numbers_for(@incident_ocurrence, kind) %>
+	<% end %>
+</div>

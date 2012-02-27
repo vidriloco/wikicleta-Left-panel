@@ -1,4 +1,5 @@
 class Place < ActiveRecord::Base
+  include Shared::Geography
   include Opinions
   include Recommendations
   include Comments

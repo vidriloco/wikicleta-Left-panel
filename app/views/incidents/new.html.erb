@@ -1,0 +1,47 @@
+<% content_for :attrs_for_map, "is-editable radio-3 shadowed-light" %>
+
+<h1><%= t('incidents.new.title') %> <span class="kind"><%= t('incidents.new.kind.bike') %></span></h1>
+
+<% if user_signed_in? %>
+	<%= t('incidents.new.reporting.as', :account => current_user.username) %>
+<% else %>
+	<%= t('incidents.new.reporting.anonymously') %>
+<% end %>
+
+<%= form_for(@incident) do |f| %>
+	<%= f.label :description, Incident.human_attribute_name(:description) %>
+	<%= f.text_area :description, :cols => 90, :rows => 3 %>
+	
+	<%= f.label :date_and_time, Incident.human_attribute_name(:date_and_time) %>
+	<%= f.datetime_select :date_and_time %>
+	
+	<%= f.label :kind, Incident.human_attribute_name(:kind) %>
+	<%= f.select :kind, options_for_select(Incident.humanized_kinds.invert, @incident.kind), {:include_blank => true} %>
+	<div class="hidden" id="stolen-activators"><%= Incident.kind_for(:theft) %>-<%= Incident.kind_for(:assault) %></div>
+	<div class="hidden" id="vehicle-activators"><%= Incident.kind_for(:accident) %>-<%= Incident.kind_for(:regulation_infraction) %></div>
+	
+	<div class="hidden selectable" id="stolen">	
+		<%= f.label :attacher_used, Incident.human_attribute_name(:attacher_used) %>
+		<%= f.select :bike_item_id, options_from_collection_for_select(BikeItem.all, "id", "name", @incident.bike_item_id), {:include_blank => true} %>
+		
+		<%= f.label :bike_description, Incident.human_attribute_name(:bike_description) %>
+		<%= f.text_area :bike_description, :cols => 90, :rows => 3 %>
+	</div>
+	
+	<%= f.label :complaint_issued, Incident.human_attribute_name(:complaint_issued) %>
+	<%= f.check_box :complaint_issued, {}, false || @incident.complaint_issued %>
+	
+	<div class="hidden selectable" id="vehicle">
+		<%= f.label :vehicle_identifier, Incident.human_attribute_name(:vehicle_identifier) %>
+		<%= f.text_field :vehicle_identifier %>
+	</div>
+	
+	<%= hidden_field_tag "coordinates[lat]" %>
+	<%= hidden_field_tag "coordinates[lon]" %>
+	
+	<%= f.submit t('actions.save') %>
+<% end %>
+
+<div id="map-box">
+	<div style="width:100%; height:400px;" id="map" class="is-editable displays-points radio-3 shadowed-light"></div>
+</div>

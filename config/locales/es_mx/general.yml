@@ -1,5 +1,5 @@
 es_MX:
-  app_name: "Metropolí"
+  app_name: "Wikiando"
   messages:
     save_failure: "no pudo guardar este %{element} debido a:"
   actions:
@@ -16,6 +16,8 @@ es_MX:
       masc: "Nuevo"
   connectives:
     by: "Por"
+  
+  missing: "No proporcionado"
   
   common_answers:
     yes: "Si"

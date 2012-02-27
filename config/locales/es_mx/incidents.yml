@@ -1,0 +1,63 @@
+es_MX:
+  activerecord:
+    models:
+      incident: "Incidente"
+    attributes:
+      incident: 
+        kind: "Tipo"
+        description: "Descripción"
+        date_and_time: "Fecha y hora"
+        coordinates: "Ubicación"
+        attacher_used: "Equipo de seguridad usado"
+        complaint_issued: "¿Denuncia levantada?"
+        vehicle_identifier: "Placa del vehículo"
+        bike_description: "Descripción de la bici"
+  incidents:
+    kinds:
+      theft: "Robo"
+      assault: "Robo armado o con violencia"
+      accident: "Accidente"
+      regulation_infraction: "Infracción al reglamento"
+    index:
+      title: "Incidentes"
+      description: "En este mapa aparecen reportes de robos y accidentes en bici ocurridos en la zona metropolitana del valle de México"
+      new: "Nuevo Incidente"
+      search: "Filtrar"
+      kind:
+        bike: "Bicicleta"
+      numbers:
+        total:
+          one: "1 incidente"
+          other: "%{count} incidentes"
+        assault: 
+          one: "1 robo violento"
+          other: "%{count} robos violentos"
+        theft:
+          one: "1 robo"
+          other: "%{count} robos"
+        accident:
+          one: "1 accidente"
+          other: "%{count} accidentes"
+        regulation_infraction:
+          one: "1 infracción"
+          other: "%{count} infracciones"
+      list:
+        close: "Ocultar"
+        item:
+          complaint_issued:
+            yes: "Levanto denuncia"
+            no: "No levanto denuncia"
+          reporter:
+            anonymous: "por Anónimo" 
+            user: "por %{user}"
+          details: "Ver detalles"
+    create:
+      saved: "Incidente registrado. ¡Gracias!"
+    new:
+      title: "Incidente nuevo"
+      kind:
+        bike: "Bicicleta"
+      reporting: 
+        as: "Este incidente aparecerá reportado por %{account}"
+        anonymously: "Este será un incidente reportado de manera anónima. No podrás modificarlo/eliminarlo posteriormente"
+        

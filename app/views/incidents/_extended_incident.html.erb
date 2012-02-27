@@ -1,0 +1,36 @@
+<div class="extended-incident hidden">
+	
+	<div class="close-button"></div>
+	<div class="back-button"></div>
+	
+	<p class="type"><%= incident.humanized_kind %></p>
+	<p class="description"><%= incident.description %></p>
+	
+	
+	<div class="extra-fields rounded-5">
+		<% if incident.is_of_kind?(:theft) %>
+		
+			<span><%= t('activerecord.attributes.incident.attacher_used') %>: </span>
+			<div class="value to-right"><%= incident.bike_item.nil? ? t('missing') : incident.bike_item.name %></div>
+				
+		<% elsif incident.is_of_kind?(:accident) || incident.is_of_kind?(:regulation_infraction) %>
+			<span><%= t('activerecord.attributes.incident.vehicle_identifier') %>: </span>
+			<div class="value to-right"><%= incident.vehicle_identifier || "---" %></div>
+		
+		<% end %>
+		<% if incident.is_of_kind?(:assault) %>
+			<span><%= t('activerecord.attributes.incident.bike_description') %>: </span>
+			<div class="value to-right"><%= incident.bike_description %></div>
+		<% end %>
+	</div>
+	
+	<p class="complaint_issued">
+		<%= t('incidents.index.list.item.complaint_issued')[incident.complaint_issued] %>
+	</p>
+	
+	<div class="separator"></div>
+	<span class="time"><%= incident.date_and_time.to_s(:short) %></span>
+	
+	<div class="to-right"><span class="reporter"><%= reporter_of(incident) %></span></div>
+
+</div>

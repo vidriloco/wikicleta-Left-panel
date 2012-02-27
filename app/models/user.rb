@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :places_commented, :through => :place_comments
   has_many :surveys
   
+  has_many :incidents
+  
   devise :omniauthable, :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:login]
   attr_accessor :login
   attr_accessible :email, :password, :password_confirmation, :remember_me, :full_name, :username, :login, :bio, :personal_page
