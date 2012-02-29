@@ -3,12 +3,12 @@ source 'http://rubygems.org'
 gem 'rails', '3.1.3'
 
 # Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
+# gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
 gem 'devise'
 gem 'formtastic'
-gem 'spatial_adapter', :git => 'https://github.com/Empact/spatial_adapter.git'
+gem 'spatial_adapter', :git => 'http://github.com/Empact/spatial_adapter.git'
 # gem 'transport_adder', :require => 'transport_adder', :path => 'vendor/plugins/transport_adder/'
 gem 'omniauth'
 gem 'omniauth-twitter'

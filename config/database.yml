@@ -40,8 +40,8 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: ciudadio_production
+  database: wikiando_production
   pool: 5
-  username: ioorchestrator
-  password:
+  username: froyo
+  password: helado
 
