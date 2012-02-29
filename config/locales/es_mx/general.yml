@@ -9,7 +9,16 @@ es_MX:
     cancel: "Cancelar"
     search: "Buscar"
     back: "Atrás"
+    close: "Cerrar"
+    sessions: 
+      first_person:
+        start: "Inicia sesión"
+        close: "Sal"
+    verify_fields_on_red: "Por favor, verifica los campos en rojo"
+    show_on_map: "Ver en mapa"
     registrations:
+      first_person:
+        new: "Registrate"
       cancel: "Cancelar registro"
     new: 
       fem: "Nueva"

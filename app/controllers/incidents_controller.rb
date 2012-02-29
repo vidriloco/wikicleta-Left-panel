@@ -1,9 +1,8 @@
 class IncidentsController < ActionController::Base
-  layout 'map'
+  layout 'full_page_map'
   
   def new
     @incident = Incident.new
-    render :layout => "application"
   end
   
   def create

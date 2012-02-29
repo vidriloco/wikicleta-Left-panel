@@ -1,21 +1,26 @@
-<h2><%=t "user_accounts.sessions.new.title" %></h2>
+<div class="board rounded-5 shadow-light">
+	<h2><%=t "user_accounts.sessions.new.title" %></h2>
+	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+		<div class="styled-form green">
+		  <%= f.text_field :login, :placeholder => t('activerecord.attributes.user.login'), :size => 38 %>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :login %><br />
-  <%= f.text_field :login %></div>
+		  <%= f.password_field :password, :placeholder => t('activerecord.attributes.user.password') %>
+		</div>
+		
+		<div class="actions">
+	  	<%= f.submit t("user_accounts.sessions.new.start"), :class => 'to-right main-button blue-button' %>
+		</div>
+	<% end %>
+	<div class="separator"></div>
+	<ul>
+		<li><%= link_to t("user_accounts.forgot_password"), account_recover_password_path %></li>
+		<li><%= link_to t("user_accounts.sessions.new.sign_up"), sign_up_path %></li>
+	</ul>
+	
+</div>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+<div class="connects">
+	<%= link_to '', user_omniauth_authorize_path(:twitter), :class => "twitter-sign-in", :id => "twitter_sign_in" %>
+	<%= link_to '', user_omniauth_authorize_path(:facebook), :class => "facebook-sign-in", :id => "facebook_sign_in" %>
+</div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
-
-  <div><%= f.submit t("user_accounts.sessions.new.start") %></div>
-<% end %>
-
-<%= link_to t('user_accounts.omniauth.login', :network => "Twitter"), user_omniauth_authorize_path(:twitter) %>
-<%= link_to t('user_accounts.omniauth.login', :network => "Facebook"), user_omniauth_authorize_path(:facebook) %>
-
-<%= link_to t("user_accounts.forgot_password"), account_recover_password_path %>
-<%= link_to t("user_accounts.sessions.new.sign_up"), sign_up_path %><br />

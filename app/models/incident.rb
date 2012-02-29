@@ -5,7 +5,8 @@ class Incident < ActiveRecord::Base
   belongs_to :bike_item
   
   validates_presence_of :coordinates, :kind, :description
-  
+  validates :vehicle_identifier, :format => /^[[A-Z0-9]\-]+[A-Z0-9]$/, :allow_blank => true, :if => :accident_or_regulation_infraction?
+  validates_presence_of :bike_description, :if => :theft_or_assault?
   def self.kinds
     { 1 => :theft, 2 => :assault, 3 => :accident, 4 => :regulation_infraction }
   end
@@ -29,6 +30,14 @@ class Incident < ActiveRecord::Base
   
   def self.humanized_kind_for(kind)
     I18n.t("incidents.kinds.#{kind}")
+  end
+  
+  def theft_or_assault?
+    symbol_kind.eql?(:theft) || symbol_kind.eql?(:assault)
+  end
+  
+  def accident_or_regulation_infraction?
+    symbol_kind.eql?(:regulation_infraction) || symbol_kind.eql?(:accident)
   end
   
   def humanized_kind

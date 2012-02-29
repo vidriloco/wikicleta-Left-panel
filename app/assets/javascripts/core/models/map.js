@@ -7,6 +7,10 @@ $.extend({
 		return x*Math.PI/180;
 	},
 	
+	isBlank: function(dom) {
+		return $.trim($(dom).html()).length == 0;
+	},
+	
 	distanceBetween: function(coord1, coord2) {
 		var R = 6371; // km
 		var dLat = $.rad((coord2.lat()-coord1.lat()));

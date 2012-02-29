@@ -17,6 +17,23 @@ module IncidentsHelper
     count == 1 ? t("incidents.index.numbers.#{kind}.one") : t("incidents.index.numbers.#{kind}.other", :count => count)
   end
   
+  def incident_types_for(incidents)
+    incidents = [incidents] if incidents.is_a?(Symbol)
+    with_incidents = incidents.each.inject(String.new) do |collected,incident|
+      collected += " incident-#{Incident.kind_for(incident)}"
+      collected
+    end
+    "#{with_incidents} incident-selectable"
+  end
+    
+  def is_visible(incidents, object)
+    incidents = [incidents] if incidents.is_a?(Symbol)
+    incidents.each do |incident|
+      return if Incident.kind_for(incident) == object.kind
+    end
+    "hidden"
+  end 
+  
   def reporter_of(incident)
     if incident.user.nil?
       t('incidents.index.list.item.reporter.anonymous')

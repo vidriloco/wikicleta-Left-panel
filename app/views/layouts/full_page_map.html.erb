@@ -5,21 +5,25 @@
 
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 
-  <%= stylesheet_link_tag    "application" %>
+  <%= stylesheet_link_tag    "full_page_map" %>
   <%= javascript_include_tag "application" %>
 	
   <%= csrf_meta_tags %>
 </head>
 <body>
 	
-	<div id="notifications">
+	<div id="notifications" class="rounded-5 shadow-light hidden">
 		<%= flash[:notice] || yield(:notices) %>
+	</div>
+	
+	<div id="alerts" class="rounded-5 shadow-light">
+		<%= flash[:alert] || yield(:alerts) %>
 	</div>
 	
 	<div id="header">
 		<div class="menu"></div>
 		
-		<div class="mini-header shadow-light rounded-bottom-5">
+		<div class="mini-header shadow-light rounded-bottom-5 <%= yield(:classes_for_header) %>">
 			<%= yield :header %>
 		</div>
 		
@@ -27,7 +31,7 @@
 	
 	<%= yield :map_area %>
 
-	<div style="width:100%; height:100%;" id="map" class="<%=yield(:map_classes)%> displays-points"></div>
+	<div style="width:100%; height:100%;" id="map" class="<%= yield(:classes_for_map) %> displays-points"></div>
 
 </body>
 </html>

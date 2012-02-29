@@ -3,7 +3,7 @@
 	<h1><%= t('incidents.index.title') %><span class="type rounded-5"><%= t('incidents.index.kind.bike') %></span></h1>
 	
 	<div class="actions">
-		<%= link_to t('incidents.index.new'), new_incident_path, :class => "main-button" %>
+		<%= link_to t('incidents.index.new'), new_incident_path, :class => "main-button blue-button" %>
 	</div>
 <% end %>
 
@@ -32,7 +32,7 @@
 	
 	
 	<div id="itemlist" class="incidents rounded-5 shadow-strong">
-		<div class="close-button"></div>
+		<div class="close-button"><%= t('actions.close') %></div>
 		<%= render :partial => 'status_block', :locals => { :as_link => true } %>
 		<br/>
 		<%= render @incidents %>

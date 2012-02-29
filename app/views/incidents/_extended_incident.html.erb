@@ -1,11 +1,14 @@
 <div class="extended-incident hidden">
-	
-	<div class="close-button"></div>
-	<div class="back-button"></div>
+	<span class="back-button">&larr; <%= t('actions.back') %></span>
+	<span class="close-button"><%= t('actions.close') %></span>
 	
 	<p class="type"><%= incident.humanized_kind %></p>
-	<p class="description"><%= incident.description %></p>
 	
+	<%= link_to t('actions.show_on_map'), "javascript:void(0);", :class => "show-on-map rounded-5" %>
+	<div class="lat hidden"><%= incident.coordinates.lat %></div>
+	<div class="lon hidden"><%= incident.coordinates.lon %></div>
+	
+	<p class="description"><%= incident.description %></p>
 	
 	<div class="extra-fields rounded-5">
 		<% if incident.is_of_kind?(:theft) %>
@@ -19,8 +22,8 @@
 		
 		<% end %>
 		<% if incident.is_of_kind?(:assault) %>
-			<span><%= t('activerecord.attributes.incident.bike_description') %>: </span>
-			<div class="value to-right"><%= incident.bike_description %></div>
+			<span><%= t('activerecord.attributes.incident.bike_description') %>: </span><br>
+			<div class="value"><%= incident.bike_description %></div>
 		<% end %>
 	</div>
 	

@@ -4,7 +4,7 @@ es_MX:
       user: "Usuario"
     attributes:
       user:
-        full_name: "Nombre" 
+        full_name: "Nombre completo" 
         password: "Contraseña"
         password_confirmation: "Confirmación de la contraseña"
         username: "Nombre de usuario"
@@ -33,7 +33,7 @@ es_MX:
           new:
             title: "Nuevo registro vía facebook"
       new:
-        title: "Muévete por tu ciudad"
+        title: "Registro"
         commit: "Registrarme"
         start: "Entrar"
     sessions:

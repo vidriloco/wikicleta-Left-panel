@@ -2,8 +2,10 @@ module HelperMethods
   
   def login_with(user, path=new_user_session_path)
     visit path
-    fill_in User.human_attribute_name(:email), :with => user.email
-    fill_in User.human_attribute_name(:password), :with => user.password
+    
+    login_attr=user.is_a?(Admin) ? "email" : "login"
+    fill_in "#{user.class.to_s.downcase}_#{login_attr}", :with => user.email
+    fill_in "#{user.class.to_s.downcase}_password", :with => user.password
     click_on I18n.t("user_accounts.sessions.new.start")
   end
   

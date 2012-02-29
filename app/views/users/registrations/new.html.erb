@@ -1,22 +1,35 @@
-<h2><%=t 'user_accounts.registrations.new.title' %></h2>
 
-<%= form_for(resource, :as => resource_name, :url => account_create_path) do |f| %>
-  <%= devise_error_messages! %>
+<div class="sheet shadow-light">
+	<h2><%=t 'user_accounts.registrations.new.title' %></h2>
 
-  <div><%= f.label :full_name %><br />
-  <%= f.text_field :full_name %></div>
+	<%= form_for(resource, :as => resource_name, :url => account_create_path) do |f| %>
+	  <%= devise_error_messages! %>
+		
+		<div class="styled-form">
+	  	<div>
+		  	<%= f.text_field :full_name, :placeholder => t('activerecord.attributes.user.full_name') %>
+			</div>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+		  <div>
+		  	<%= f.email_field :email, :placeholder => t('activerecord.attributes.user.email') %>
+			</div>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+		  <div>
+		  	<%= f.password_field :password, :placeholder => t('activerecord.attributes.user.password') %>
+			</div>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+		  <div>
+		  	<%= f.password_field :password_confirmation, :placeholder => t('activerecord.attributes.user.password_confirmation') %>
+			</div>
 
-  <div><%= f.label :username %><br />
-  <%= f.text_field :username %></div>
-
-  <div><%= f.submit t('user_accounts.registrations.new.commit') %></div>
-<% end %>
+		  <div>
+		  	<%= f.text_field :username, :placeholder => t('activerecord.attributes.user.username') %></div>
+			</div>
+	  <div>
+		
+		<div class="to-right actions">
+			<%= link_to t('actions.back'), new_user_session_path %>
+			<%= f.submit t('user_accounts.registrations.new.commit'), :class => "main-button green-button" %>
+		</div>
+	<% end %>
+</div>

@@ -7,7 +7,25 @@ feature "Reporting bike incidents:" do
     @chain = Factory(:bike_item)
   end
   
+  scenario "cannot add an incident report which lacks required fields", :js => true do
+    visit new_incident_path
+    click_on I18n.t('actions.save')
+    
+    page.should have_content I18n.t('actions.verify_fields_on_red')
+  end
+  
   describe "anonymously" do
+    
+    scenario "should be able to login from here so I can use my account to register the incident" do
+      visit new_incident_path
+      
+      page.should have_content I18n.t('incidents.new.title')
+      page.should have_content I18n.t('incidents.new.kind.bike')
+      page.should have_content I18n.t('incidents.new.reporting.anonymously')
+      
+      page.should have_content I18n.t('incidents.new.reporting.invitation')
+      find_link I18n.t('actions.sessions.first_person.start').downcase
+    end
     
     scenario "can add a stolen bike report", :js => true do
       visit new_incident_path
@@ -20,6 +38,7 @@ feature "Reporting bike incidents:" do
       select Incident.humanized_kind_for(:theft), :from => "incident_kind"
       check "incident_complaint_issued"
       select @chain.name, :from => "incident_bike_item_id"
+      fill_in "incident_bike_description", :with => "My blue giant bike"
       
       simulate_click_on_map({:lat => 19.4000762084, :lon => -99.265484})
       
@@ -41,6 +60,7 @@ feature "Reporting bike incidents:" do
       select Incident.humanized_kind_for(:assault), :from => "incident_kind"
       check "incident_complaint_issued"
       
+      fill_in "incident_bike_description", :with => "My blue giant bike"
       simulate_click_on_map({:lat => 19.4000762084, :lon => -99.265484})
       
       click_on I18n.t('actions.save')

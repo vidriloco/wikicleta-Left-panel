@@ -13,12 +13,12 @@ feature 'User accounts registration' do
       
       page.should have_content I18n.t("user_accounts.registrations.new.title")
             
-      fill_in User.human_attribute_name(:full_name), :with => "Pepe Cocolin"
-      fill_in User.human_attribute_name(:email), :with => "pepe@example.com"
-      fill_in User.human_attribute_name(:password), :with => "mysecret"
-      fill_in User.human_attribute_name(:password_confirmation), :with => "mysecret"
+      fill_in "user_full_name", :with => "Pepe Cocolin"
+      fill_in "user_email", :with => "pepe@example.com"
+      fill_in "user_password", :with => "mysecret"
+      fill_in "user_password_confirmation", :with => "mysecret"
       
-      fill_in User.human_attribute_name(:username), :with => "pepito"
+      fill_in "user_username", :with => "pepito"
       
       click_on I18n.t("user_accounts.registrations.new.commit")
       
@@ -47,7 +47,7 @@ feature 'User accounts registration' do
         scenario "renders a failure login page" do
         
           visit new_user_session_path
-          click_on I18n.t('user_accounts.omniauth.login', :network => "Twitter")
+          click_on "twitter_sign_in"
       
           page.current_path.should == user_omniauth_callback_path(:twitter)
           page.should have_content I18n.t("devise.omniauth_callbacks.failure")
@@ -65,7 +65,7 @@ feature 'User accounts registration' do
             
         scenario "I can register and log-in" do
           visit new_user_session_path
-          click_on I18n.t('user_accounts.omniauth.login', :network => "Twitter")
+          click_on "twitter_sign_in"
         
           page.current_path.should == user_omniauth_callback_path(:twitter)
         
@@ -83,7 +83,7 @@ feature 'User accounts registration' do
       
         scenario "I can cancel the registration process" do
           visit new_user_session_path
-          click_on I18n.t('user_accounts.omniauth.login', :network => "Twitter")
+          click_on "twitter_sign_in"
         
           page.current_path.should == user_omniauth_callback_path(:twitter)
           click_on I18n.t('actions.registrations.cancel')
@@ -99,7 +99,7 @@ feature 'User accounts registration' do
         
           scenario "I can log-in again with it" do
             visit new_user_session_path
-            click_on I18n.t('user_accounts.omniauth.login', :network => "Twitter")
+            click_on "twitter_sign_in"
 
             page.current_path.should == root_path
             page.should have_content I18n.t("devise.omniauth_callbacks.success", :kind => "Twitter")
@@ -115,7 +115,7 @@ feature 'User accounts registration' do
         
         scenario "I can register and log-in" do
           visit new_user_session_path
-          click_on I18n.t('user_accounts.omniauth.login', :network => "Facebook")
+          click_on "facebook_sign_in"
         
           page.current_path.should == user_omniauth_callback_path(:facebook)
         
@@ -133,7 +133,7 @@ feature 'User accounts registration' do
       
         scenario "I can cancel the registration process" do
           visit new_user_session_path
-          click_on I18n.t('user_accounts.omniauth.login', :network => "Facebook")
+          click_on "facebook_sign_in"
         
           page.current_path.should == user_omniauth_callback_path(:facebook)
           click_on I18n.t('actions.registrations.cancel')
@@ -149,7 +149,7 @@ feature 'User accounts registration' do
         
           scenario "I can log-in again with it" do
             visit new_user_session_path
-            click_on I18n.t('user_accounts.omniauth.login', :network => "Facebook")
+            click_on "facebook_sign_in"
 
             page.current_path.should == root_path
             page.should have_content I18n.t("devise.omniauth_callbacks.success", :kind => "Facebook")
@@ -177,12 +177,13 @@ feature 'User accounts registration' do
     scenario "I should not be able to get registered with that same username" do
       visit sign_up_path
 
-      fill_in User.human_attribute_name(:full_name), :with => "Pepe Cocolin"
-      fill_in User.human_attribute_name(:email), :with => "pepe@example.com"
-      fill_in User.human_attribute_name(:password), :with => "mysecret"
-      fill_in User.human_attribute_name(:password_confirmation), :with => "mysecret"
+      fill_in "user_full_name", :with => "Pepe Cocolin"
+      fill_in "user_email", :with => "pepe@example.com"
+      fill_in "user_password", :with => "mysecret"
+      fill_in "user_password_confirmation", :with => "mysecret"
       
-      fill_in User.human_attribute_name(:username), :with => "pepito"
+      fill_in "user_username", :with => "pepito"
+
       click_on I18n.t("user_accounts.registrations.new.commit")
       
       
@@ -203,7 +204,7 @@ feature 'User accounts registration' do
       current_path.should == account_recover_password_path
       page.should have_content I18n.t("user_accounts.forgot_password")
       
-      fill_in User.human_attribute_name(:email), :with => "pepe@example.com"
+      fill_in "user_email", :with => "pepe@example.com"
       click_on I18n.t("user_accounts.passwords.reset_password")
     end
     
@@ -222,8 +223,8 @@ feature 'User accounts registration' do
         current_path.should == "/sign_in"
 
         page.should have_content I18n.t("user_accounts.sessions.new.title")
-        fill_in User.human_attribute_name(:login), :with => "pepito"
-        fill_in User.human_attribute_name(:password), :with => "passwd"
+        fill_in "user_login", :with => "pepito"
+        fill_in "user_password", :with => "passwd"
 
         click_on I18n.t("user_accounts.sessions.new.start")
 
@@ -235,8 +236,8 @@ feature 'User accounts registration' do
         current_path.should == "/sign_in"
 
         page.should have_content I18n.t("user_accounts.sessions.new.title")
-        fill_in User.human_attribute_name(:login), :with => "pepe@example.com"
-        fill_in User.human_attribute_name(:password), :with => "passwd"
+        fill_in "user_login", :with => "pepe@example.com"
+        fill_in "user_password", :with => "passwd"
 
         click_on I18n.t("user_accounts.sessions.new.start")
 

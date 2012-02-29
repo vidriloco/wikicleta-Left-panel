@@ -59,5 +59,11 @@ es_MX:
         bike: "Bicicleta"
       reporting: 
         as: "Este incidente aparecerá reportado por %{account}"
-        anonymously: "Este será un incidente reportado de manera anónima. No podrás modificarlo/eliminarlo posteriormente"
-        
+        anonymously: "Este será un incidente reportado de manera anónima."
+        invitation: "Para poder reportarlo usando tu cuenta de usuario"
+      form:
+        fields:
+          description: "Escribe una breve descripción del incidente ..."
+          bike_description: "Aquí va la descripción de la bici robada ..."
+          vehicle_identifier: "Placa del vehículo en mayúsculas (si aplica)"
+          coordinates: "No olvides seleccionar en el mapa la ubicación del incidente"

@@ -1,12 +1,10 @@
-<h2><%=t 'user_accounts.registrations.oauth.facebook.new.title'%></h2>
+<div class="sheet shadow-light">
+	<h2><%=t 'user_accounts.registrations.oauth.facebook.new.title'%></h2>
 
-<%= form_for(@user, :as => :user, :url => users_auth_sign_up_path) do |f| %>
-	
-	<%= devise_error_messages! %>
+	<%= form_for(@user, :as => :user, :url => users_auth_sign_up_path) do |f| %>
+		<%= devise_error_messages! %>
 
-	<%= render :partial => 'form', :locals =>  {:f => f} %>
-	
-  <div><%= f.submit t('user_accounts.registrations.oauth.commit') %></div>
-<% end %>
-
-<%= link_to t('actions.registrations.cancel'), users_cancel_auth_sign_up_path, :method => :delete %>
+		<%= render :partial => 'form', :locals =>  {:f => f} %>
+	  <%= render :partial => 'actions', :locals => {:f => f} %>
+	<% end %>
+</div>
