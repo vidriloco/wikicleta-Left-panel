@@ -1,5 +1,5 @@
 body, html {
-	background: url('../crosses.png');
+	background: url('/assets/crosses.png');
 	font-family: calibri;
 	font-size: 15px;
 }
@@ -90,22 +90,22 @@ ul li {
 }
 
 .twitter-sign-in {
-	background: url('../twitter_sign_in.png');
+	background: url('/assets/twitter_sign_in.png');
 	background-position: 0 -24px;
 }
 
 .twitter-sign-in:hover {
-	background: url('../twitter_sign_in.png');
+	background: url('/assets/twitter_sign_in.png');
 	background-position: -24 -48px;
 }
 
 .facebook-sign-in {
-	background: url('../facebook_sign_in.png');
+	background: url('/assets/facebook_sign_in.png');
 	background-position: 0 -24px;
 }
 
 .facebook-sign-in:hover {
-	background: url('../facebook_sign_in.png');
+	background: url('/assets/facebook_sign_in.png');
 	background-position: -24 -48px;
 }
 
