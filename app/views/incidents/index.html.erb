@@ -8,34 +8,10 @@
 <% end %>
 
 <%= content_for :map_area do %>
-	<div id="submenu">
-		
-		<div class="options rounded-bottom-5 shadow-light">
-			<%= link_to total_numbers_for(@incident_ocurrence), 'javascript:void(0);', :class => "incidents-count itemlist-toggle" %>
-			<%= link_to t('incidents.index.search'), 'javascript:void(0);', :class => "incidents-filter filteringbox-toggle" %>
-		</div>
-		
-		<div class="status rounded-5 shadow-light">
-			<div class="numbers">
-				
-				<% [:theft, :accident, :assault, :regulation_infraction].each do |category| %>
-					<% text=status_numbers_for(@incident_ocurrence, category) %>
-					<div class="stat">
-						<span class="number"><%= text[0,text.index(" ")] %></span>
-						<p class="category"><%= text[text.index(" "), text.length] %></p>
-					</div>
-				<% end %>
-				
-			</div>
-		</div>
-	</div>
+	<div id="submenu"><%= render 'submenu' %></div>
 	
-	
-	<div id="itemlist" class="incidents rounded-5 shadow-strong">
-		<div class="close-button"><%= t('actions.close') %></div>
-		<%= render :partial => 'status_block', :locals => { :as_link => true } %>
-		<br/>
-		<%= render @incidents %>
-	</div>
+	<div id="itemlist" class="incidents rounded-5 shadow-strong"><%= render 'listing' %></div>
 	<div id="itemdetails" class="hidden rounded-5 shadow-light"></div>
+	
+	<div id="itemsfiltering" class="hidden rounded-bottom-5 shadow-light"><%= render 'filtering' %></div>
 <% end %>

@@ -60,7 +60,8 @@ body {margin-top: 0px; margin-right: 0px; margin-left: 0px; margin-bottom: 0px; 
 	margin-top: -4px;
 }
 
-#submenu .options, #submenu .status, .mini-header, #itemlist, #itemdetails, #newitem, #notifications {
+#submenu .options, #submenu .status, .mini-header, #itemlist, #itemdetails, #itemsfiltering, #newitem, #notifications
+{
 	z-index: 9999;
 	position: fixed;
 }
@@ -155,14 +156,14 @@ body {margin-top: 0px; margin-right: 0px; margin-left: 0px; margin-bottom: 0px; 
 #itemlist, #itemdetails {
 	display: none;
 	padding: 15px;
-	width: 400px;
-	left: 50%; margin-left: -210px;
+	width: 440px;
+	left: 50%; margin-left: -220px;
 	top: 30%;
 }
 
 #itemlist { padding-top: 20px }
 
-#itemlist .numbers { margin-top: 20px }
+#itemlist .numbers { margin-top: 20px; text-align: center }
 #itemlist .numbers a:hover {
 	background-color:#6F6F6F;
 	color:#DEDEDE;
@@ -283,7 +284,7 @@ body {margin-top: 0px; margin-right: 0px; margin-left: 0px; margin-bottom: 0px; 
 	color: #E3B0B5;
 	background-color:#996464;
 	padding: 5px 8px;
-	font-size: 16px;
+	font-size: 15px;
 	text-align: center;
 }
 
@@ -298,4 +299,74 @@ body {margin-top: 0px; margin-right: 0px; margin-left: 0px; margin-bottom: 0px; 
 	padding: 15px 10px;
 	left: 50%; margin-left: -150px;
 	top: 50%;
+}
+
+#itemsfiltering {
+	z-index: 9995;
+	width: 300px;
+	left: 50%; margin-left: -173px;
+	top: 93px;
+	background-color: rgba(0,0,0,0.8);
+	padding: 20px 30px 10px 30px;
+	color: white;
+	border: 2px solid #C0C0C0;
+}
+
+#itemsfiltering div {
+	display: inline-block;
+	margin-bottom: 10px;
+}
+
+#itemsfiltering label, #itemsfiltering span.as-label {
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0px 10px 5px 0;
+}
+
+#itemsfiltering .group {
+	margin-left: 5px;
+	border: 1px solid #474747;
+	padding: 5px;
+	font-size: 13px;
+}
+
+#itemsfiltering .close-button:hover {
+	color:#91AFFF;
+}
+
+#itemsfiltering .close-button {
+	color: #D0E9FF;
+	border: none;
+	margin-right: 20px;
+}
+
+#itemsfiltering h2 {
+	margin-top: 0px;
+}
+
+#itemsfiltering .separator {
+	display: block;
+	margin: 7px 0 10px 0;
+	height: 1px;
+	background-color: #353236;
+}
+
+#itemsfiltering .main-button {
+	padding: 5px 10px;
+	font-size: 12px;
+}
+
+#itemsfiltering .actions {
+	text-align: center;
+}
+
+#itemsfiltering .note {
+	font-size: 13px;
+	text-align: center;
+}
+
+.kind-group .empty {
+	text-align: center;
+	font-style: italic;
+	font-size: 13px;
 }

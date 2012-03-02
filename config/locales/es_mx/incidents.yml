@@ -18,11 +18,21 @@ es_MX:
       assault: "Robo armado o con violencia"
       accident: "Accidente"
       regulation_infraction: "Infracción al reglamento"
+    filtering:
+      title: "Filtrar por"
+      map_search: "Filtrar dentro del área visible del mapa"
+      fields:
+        date:
+          last_week: "Última semana"
+          last_month: "Último mes"
+          last_year: "Último año"
+          all: "Siempre"
     index:
       title: "Incidentes"
       description: "En este mapa aparecen reportes de robos y accidentes en bici ocurridos en la zona metropolitana del valle de México"
       new: "Nuevo Incidente"
       search: "Filtrar"
+      empty: "No hay reportes de este tipo registrados"
       kind:
         bike: "Bicicleta"
       numbers:

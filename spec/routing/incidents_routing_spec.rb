@@ -15,5 +15,9 @@ describe IncidentsController do
       { :get => "/incidents" }.should route_to(:action => "index", :controller => "incidents")
     end
     
+    it "matches /incidents/filtering with controller :incidents action #post" do
+      { :post => "/incidents/filtering" }.should route_to(:action => "filtering", :controller => "incidents")
+    end
+    
   end
 end

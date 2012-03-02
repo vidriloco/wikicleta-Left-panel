@@ -68,6 +68,7 @@ Ciudadio::Application.routes.draw do
   get "/places/edit/:id" => 'places#edit', :as => "edit_place"
 
   resources :incidents
-    
+  post '/incidents/filtering' => 'incidents#filtering', :as => 'incidents_filtering'
+  
   root :to => 'welcome#index'
 end

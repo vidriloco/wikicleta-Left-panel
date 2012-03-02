@@ -1,4 +1,4 @@
-<div id="<%= incident.id %>" class="<%= incident.symbol_kind %> item">
+<div id="<%= incident.id %>" class="item">
 	<div class="description"><%= incident.description %></div>
 	<div class="to-right">
 		<span class="time"><%= distance_of_time_in_words(incident.date_and_time, Time.now, true) %></span> 

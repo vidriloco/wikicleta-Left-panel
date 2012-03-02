@@ -16,7 +16,14 @@ class IncidentsController < ActionController::Base
   end
   
   def index
-    @incident_ocurrence = Incident.count(:all, :group => :kind)
-    @incidents = Incident.all
+    @incidents = Incident.filtering_with(:nothing)
+  end
+  
+  def filtering
+    @incidents = Incident.filtering_with(params[:incident])
+    
+    respond_to do |format|
+      format.js
+    end
   end
 end

@@ -1,17 +1,16 @@
 var defaultZoom=13;
-$(document).ready(function(){
-	
-	// map to zoom
-	mapWrap.placeViewportAt({zoom: defaultZoom});
+
+var mapIncidents = function() {
+	mapWrap.resetMarkersList();
 	// Load all the incidents coordinates into the map
 	var items = $('#itemlist').children('.item');
-	
+
 	for(var idx =0; idx < items.length; idx++) {
 		var lat = $($(items[idx]).children('.lat')[0]).text();
 		var lon = $($(items[idx]).children('.lon')[0]).text();
-		
+	
 		var itemDescription = $($(items[idx]).children('.extended-incident')[0]).html();
-		
+	
 		mapWrap.addCoordinatesAsMarkerToList(lat, lon, itemDescription, function(content) {
 			if($('#itemlist').is(':visible')) {
 				$('#itemlist').toggle();
@@ -24,7 +23,13 @@ $(document).ready(function(){
 			$('#itemdetails').html(content);
 		});
 	}
-	// end load
+}
+
+$(document).ready(function(){
+	
+	// map to zoom
+	mapWrap.placeViewportAt({zoom: defaultZoom});
+	mapIncidents();
 	
 	$('#incident_kind').change(function() {
 		var selected = $(this).val();
@@ -33,25 +38,40 @@ $(document).ready(function(){
 		$('.'+matchingString).toggle();
 	});
 	
-	$('.itemlist-toggle').click(function() {
+	$('.itemlist-toggle').live('click', function() {
 		$('#submenu').toggle();
 		$("#itemlist").toggle();
 		$('#'+$('#default-group').text()).click();
 	});
 	
-	$('.group-toggle').click(function() {
+	$('.group-toggle').live('click', function() {
 		var group = $(this).attr('id');
-		$('#itemlist .item').hide();
+		$('.kind-group').hide();
 		$('.'+group).toggle();
 		$('.group-toggle').removeClass('selected');
 		$(this).addClass('selected');
 	});
 	
-	$('.itemdetails-toggle').click(function() {
+	$('.itemdetails-toggle').live('click', function() {
 		$('#itemlist').toggle();
 		$('#itemdetails').toggle();
 		$('#itemdetails').html($(this).siblings('.extended-incident').html());
 	});
+	
+	$('.itemsfiltering-toggle').live('click', function() {
+		$('#submenu').toggle();
+		$('#itemsfiltering').slideToggle();
+	});
+	
+	$('#itemsfiltering .close-button').live('click', function() {
+		$('#itemsfiltering').slideToggle();
+		$('#submenu').show(600);
+	});
+	
+	$('#filtering-start').live('click', function() {
+		var kinds = $('#filtering-kind-list').children(":checkbox:checked");
+		return kinds.length>0;
+	})
 	
 	$('#itemdetails .close-button').live('click', function() {
 		mapWrap.placeViewportAt({zoom: defaultZoom});

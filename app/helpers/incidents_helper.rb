@@ -1,9 +1,13 @@
 module IncidentsHelper
   
-  def total_numbers_for(ocurrences)
-    count = ocurrences.values.each.inject(0) { |accum, val| accum += val; accum }
+  def total_numbers_for(count)
     return t('incidents.index.numbers.total.one') if count == 1
     t('incidents.index.numbers.total.other', :count => count)
+  end
+  
+  def incidents_collection(hash)
+    hash.delete(:total)
+    hash.values.flatten
   end
   
   def partial_numbers_for(ocurrences, kind, as_link=false)
@@ -12,8 +16,9 @@ module IncidentsHelper
     result.html_safe
   end
   
-  def status_numbers_for(ocurrences, kind)
-    count = ocurrences[Incident.kind_for(kind)] || 0
+  def status_numbers_for(hash, kind)
+    ocurrences = hash[Incident.kind_for(kind)]
+    count = ocurrences == nil ? 0 : ocurrences.size
     count == 1 ? t("incidents.index.numbers.#{kind}.one") : t("incidents.index.numbers.#{kind}.other", :count => count)
   end
   

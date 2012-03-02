@@ -1,0 +1,19 @@
+<div class="close-button"><%= t('actions.close') %></div>
+<div id="default-group" class="hidden"><%= Incident.kinds.values.first %></div>
+<div class="numbers">
+	<%= partial_numbers_for(@incidents, :theft, true) %>
+	<%= partial_numbers_for(@incidents, :accident, true) %>
+	<%= partial_numbers_for(@incidents, :assault, true) %>
+	<%= partial_numbers_for(@incidents, :regulation_infraction, true) %>
+</div>
+<br/>
+
+<% [:theft, :accident, :assault, :regulation_infraction].each do |kind| %>
+<div class="<%= kind %> kind-group">
+	<% unless @incidents[Incident.kind_for(kind)].nil? %>
+		<%= render @incidents[Incident.kind_for(kind)] %>
+	<% else %>
+		<p class="empty"><%= t('incidents.index.empty') %></p>
+	<% end %>
+</div>
+<% end %>

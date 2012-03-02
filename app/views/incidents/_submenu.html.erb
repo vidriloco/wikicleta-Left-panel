@@ -1,0 +1,18 @@
+<div class="options rounded-bottom-5 shadow-light">
+	<%= link_to total_numbers_for(@incidents[:total]), 'javascript:void(0);', :class => "incidents-count itemlist-toggle" %>
+	<%= link_to t('incidents.index.search'), 'javascript:void(0);', :class => "incidents-filter itemsfiltering-toggle" %>
+</div>
+
+<div class="status rounded-5 shadow-light">
+	<div class="numbers">
+		
+		<% [:theft, :accident, :assault, :regulation_infraction].each do |category| %>
+			<% text=status_numbers_for(@incidents, category) %>
+			<div class="stat <%= category %>-s">
+				<span class="number"><%= text[0,text.index(" ")] %></span>
+				<p class="category"><%= text[text.index(" "), text.length] %></p>
+			</div>
+		<% end %>
+		
+	</div>
+</div>

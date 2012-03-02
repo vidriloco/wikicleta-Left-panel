@@ -14,6 +14,10 @@
 	-webkit-border-radius: 10px;
 }
 
+.ml-20 {
+	margin-left: 40px;
+}
+
 .rounded-bottom-5 {
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
@@ -126,6 +130,42 @@ a:visited {
 	-webkit-box-shadow:
 		0px 1px 2px rgba(000,000,000,0.5),
 		inset 0px -1px 0px rgba(051,120,189,1);
+}
+
+.green-button {
+	background: -moz-linear-gradient(
+		top,
+		#227A2D 0%,
+		#55A55B);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#227A2D),
+		to(#55A55B));
+	border: 1px solid #2A8B44;
+	-moz-box-shadow:
+		0px 1px 2px rgba(000,000,000,0.5),
+		inset 0px -1px 0px rgba(35,153,40,1);
+	-webkit-box-shadow:
+		0px 1px 2px rgba(000,000,000,0.5),
+		inset 0px -1px 0px rgba(35,153,40,1);
+}
+
+.green-button:hover {
+	background: -moz-linear-gradient(
+		top,
+		#289435 0%,
+		#55A55B);
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#289435),
+		to(#55A55B));
+	border: 1px solid #26813F;
+	-moz-box-shadow:
+		0px 1px 2px rgba(000,000,000,0.5),
+		inset 0px -1px 0px rgba(35,153,40,1);
+	-webkit-box-shadow:
+		0px 1px 2px rgba(000,000,000,0.5),
+		inset 0px -1px 0px rgba(35,153,40,1);
 }
 
 .actions .main-button {

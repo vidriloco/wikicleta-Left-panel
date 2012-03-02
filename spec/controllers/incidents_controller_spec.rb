@@ -78,7 +78,6 @@ describe IncidentsController do
     end
   end
   
-  
   describe "GET index" do
     
     before(:each) do
@@ -87,8 +86,23 @@ describe IncidentsController do
     
     it "should assign the incident ocurrence" do
       get :index
-      assigns(:incident_ocurrence).should == {@incident.kind =>1}
-      assigns(:incidents).should == [@incident]
+      assigns(:incidents).should == {@incident.kind => [@incident], "total" => 1}
+    end
+    
+  end
+  
+  describe "POST filtering" do
+    
+    before(:each) do
+      @incident = Factory.create(:assault)
+      @incidents = {@incident.kind => [@incident], "total" => 1}
+    end
+    
+    it "should receive the parameters for the search" do
+      Incident.should_receive(:filtering_with).and_return(@incidents)
+      post :filtering, :incident => {}
+      
+      assigns(:incidents).should == @incidents
     end
     
   end

@@ -5,5 +5,6 @@
 <%= p.input :address, :label => false %>
 <%= p.input :category,  :as => :select, :collection => categories_for_select, :label => false %>
 <%= p.input :twitter %>
-<%= hidden_field_tag "coordinates[lat]" %>
-<%= hidden_field_tag "coordinates[lon]" %>
+
+<%= hidden_field_tag 'coordinates[lat]', @place.coordinates.nil? ? "" : @place.coordinates.lat %>
+<%= hidden_field_tag 'coordinates[lon]', @place.coordinates.nil? ? "" : @place.coordinates.lon %>

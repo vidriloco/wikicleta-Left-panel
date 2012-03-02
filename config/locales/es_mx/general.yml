@@ -8,6 +8,7 @@ es_MX:
     update: "Guardar cambios"
     cancel: "Cancelar"
     search: "Buscar"
+    accept: "Aceptar"
     back: "Atrás"
     close: "Cerrar"
     sessions: 

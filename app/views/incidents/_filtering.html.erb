@@ -1,0 +1,48 @@
+<% content_for :classes_for_map, "selectable-for-search" %>
+
+<h2><%= t('incidents.filtering.title') %></h2>
+
+<%= form_tag incidents_filtering_path, :remote => true do %>
+	<div id="filtering-kind-list" class="group rounded-5">
+		
+		<%= check_box_tag "incident[type[theft]]" %>
+		<span><%= t('incidents.kinds.theft') %></span>
+		<br/>
+		<%= check_box_tag "incident[type[assault]]" %>
+		<span><%= t('incidents.kinds.assault') %></span>
+		<br/>
+		<%= check_box_tag "incident[type[accident]]" %>
+		<span><%= t('incidents.kinds.accident') %></span>
+		<br/>
+		<%= check_box_tag "incident[type[regulation_infraction]]" %>
+		<span><%= t('incidents.kinds.regulation_infraction') %></span>
+		
+	</div>
+	<br/>
+	
+	<%= label_tag t('activerecord.attributes.incident.date_and_time') %>
+	<div>
+		<%= select_tag "incident[range_date]", options_for_select(Incident.humanized_date_filtering_options.invert) %>
+	</div>
+	
+	<br/>
+	<span class="as-label"><%= t('activerecord.attributes.incident.complaint_issued') %></span>
+	<div>
+		<%= select_tag "incident[complaint_issued]", 
+				options_for_select({t('common_answers')[true] => true, t('common_answers')[false] => false}),  
+				{:include_blank => true} %> 
+	</div>
+	
+	<br/>
+	<%= check_box_tag "incident[map_enabled]" %>
+	<span class="as-label"><%= t('incidents.filtering.map_search') %></span>
+	
+	<%= hidden_field_tag 'incident[coordinates[sw]]]', {}, :id => 'coordinates_sw' %>
+	<%= hidden_field_tag 'incident[coordinates[ne]]]', {}, :id => 'coordinates_ne' %>
+	
+	<div class="separator"></div>
+	<div class="actions to-right">
+		<%= link_to t('actions.close'), 'javascript:void(0);', :class=> "close-button" %>
+		<%= submit_tag t('actions.accept'), :class => "main-button green-button", :id => 'filtering-start' %>
+	</div>
+<% end %>
