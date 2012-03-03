@@ -3,7 +3,7 @@ var defaultZoom=13;
 var mapIncidents = function() {
 	mapWrap.resetMarkersList();
 	// Load all the incidents coordinates into the map
-	var items = $('#itemlist .kind-group').children('.item');
+	var items = $('#itemlist .kind-group div').children('.item');
 
 	for(var idx =0; idx < items.length; idx++) {
 		var lat = $($(items[idx]).children('.lat')[0]).text();
@@ -84,6 +84,7 @@ $(document).ready(function(){
 		$('#itemdetails').toggle();
 		$('#itemdetails').empty();
 		$('#itemlist').toggle();
+		$('#'+$(this).attr('id').split("-")[0]).click();
 	});
 	
 	$('#itemlist .close-button').live('click', function() {
@@ -99,7 +100,6 @@ $(document).ready(function(){
 		$('#notifications').fadeIn().delay(3000).fadeOut(2000);
 		$("#submenu").delay(5000).fadeIn(500);
 	} 
-	
 	
 	$('#itemlist').draggable({cursor: 'move'});
 	$('#itemdetails').draggable({cursor: 'move'});

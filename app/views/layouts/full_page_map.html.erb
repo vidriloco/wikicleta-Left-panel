@@ -7,7 +7,7 @@
 
   <%= stylesheet_link_tag    "full_page_map" %>
   <%= javascript_include_tag "application" %>
-	
+	<%= yield(:javascripts) %>
   <%= csrf_meta_tags %>
 </head>
 <body>

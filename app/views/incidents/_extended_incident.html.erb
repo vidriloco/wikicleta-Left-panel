@@ -1,6 +1,6 @@
 <div class="extended-incident hidden">
-	<span class="back-button">&larr; <%= t('actions.back') %></span>
-	<span class="close-button"><%= t('actions.close') %></span>
+	<%= link_to "&larr; #{t('actions.back')}".html_safe, 'javascript:void(0);', :class => 'back-button', :id => "#{incident.symbol_kind.to_s}-back" %>
+	<%= link_to t('actions.close'), 'javascript:void(0);', :class => 'close-button' %>
 	
 	<p class="type"><%= incident.humanized_kind %></p>
 	

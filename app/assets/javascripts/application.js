@@ -9,5 +9,6 @@
 //= require jquery-ui-min
 //= require underscore
 //= require backbone
+//= require easypaginate.min
 //= require core/models/map.js
 //= require_tree .

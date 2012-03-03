@@ -370,3 +370,32 @@ body {margin-top: 0px; margin-right: 0px; margin-left: 0px; margin-bottom: 0px; 
 	font-style: italic;
 	font-size: 13px;
 }
+
+ol#pagination {
+	list-style: none;
+}
+
+ol#pagination li:hover {
+	color:#505050;
+	border: 1px solid #545454;
+}
+
+ol#pagination li {
+	font-size: 15px;
+	color:#A7A7A7;
+	display: inline-block !important;
+	padding: 0 7px;
+	margin-right: 5px;
+	border: 1px solid #A7A7A7;
+	cursor: pointer;
+}
+
+ol#pagination li.current {
+	color: #F6F6F6;
+	background-color:#888;
+	border: 1px solid #717171;
+}
+
+ol#pagination li.next, ol#pagination li.previous {
+	color:#6D6D6D;
+}

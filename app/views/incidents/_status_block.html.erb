@@ -1,7 +1,0 @@
-<div id="default-group" class="hidden"><%= Incident.kinds.values.first %></div>
-<div class="numbers">
-	<%= partial_numbers_for(@incident_ocurrence, :theft, as_link) %>
-	<%= partial_numbers_for(@incident_ocurrence, :accident, as_link) %>
-	<%= partial_numbers_for(@incident_ocurrence, :assault, as_link) %>
-	<%= partial_numbers_for(@incident_ocurrence, :regulation_infraction, as_link) %>
-</div>

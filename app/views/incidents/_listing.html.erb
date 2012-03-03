@@ -11,7 +11,15 @@
 <% [:theft, :accident, :assault, :regulation_infraction].each do |kind| %>
 <div class="<%= kind %> kind-group">
 	<% unless @incidents[Incident.kind_for(kind)].nil? %>
-		<%= render @incidents[Incident.kind_for(kind)] %>
+		<div class="paginated-<%= kind %>">
+			<%= render @incidents[Incident.kind_for(kind)] %>
+			<script>
+				$( ".paginated-<%= kind %>" ).easyPaginate({
+					step: 5,
+					nextprev: false
+				});
+			</script>
+		</div>
 	<% else %>
 		<p class="empty"><%= t('incidents.index.empty') %></p>
 	<% end %>
