@@ -3,7 +3,7 @@ var defaultZoom=13;
 var mapIncidents = function() {
 	mapWrap.resetMarkersList();
 	// Load all the incidents coordinates into the map
-	var items = $('#itemlist').children('.item');
+	var items = $('#itemlist .kind-group').children('.item');
 
 	for(var idx =0; idx < items.length; idx++) {
 		var lat = $($(items[idx]).children('.lat')[0]).text();
