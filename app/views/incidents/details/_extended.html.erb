@@ -1,31 +1,27 @@
 <div class="extended-incident hidden">
-	<%= link_to "&larr; #{t('actions.back')}".html_safe, 'javascript:void(0);', :class => 'back-button', :id => "#{incident.symbol_kind.to_s}-back" %>
-	<%= link_to t('actions.close'), 'javascript:void(0);', :class => 'close-button' %>
+	<%= render :partial => 'incidents/details/navigation', :locals => {:incident => incident} %>
 	
 	<p class="type"><%= incident.humanized_kind %></p>
-	
 	<%= link_to t('actions.show_on_map'), "javascript:void(0);", :class => "show-on-map rounded-5" %>
 	<div class="lat hidden"><%= incident.coordinates.lat %></div>
 	<div class="lon hidden"><%= incident.coordinates.lon %></div>
-	
 	<p class="description"><%= incident.description %></p>
 	
-	<div class="extra-fields rounded-5">
-		<% if incident.is_of_kind?(:theft) %>
-		
+	<% if incident.is_of_kind?(:theft) %>
+		<div class="extra-fields rounded-5">
 			<span><%= t('activerecord.attributes.incident.attacher_used') %>: </span>
 			<div class="value to-right"><%= incident.bike_item.nil? ? t('missing') : incident.bike_item.name %></div>
-				
-		<% elsif incident.is_of_kind?(:accident) || incident.is_of_kind?(:regulation_infraction) %>
+			<br/>
+		</div>
+		<%= render :partial => 'incidents/details/bike_description', :locals => {:incident => incident} %>
+	<% elsif incident.is_of_kind?(:accident) || incident.is_of_kind?(:regulation_infraction) %>
+		<div class="extra-fields rounded-5">
 			<span><%= t('activerecord.attributes.incident.vehicle_identifier') %>: </span>
 			<div class="value to-right"><%= incident.vehicle_identifier || "---" %></div>
-		
-		<% end %>
-		<% if incident.is_of_kind?(:assault) %>
-			<span><%= t('activerecord.attributes.incident.bike_description') %>: </span><br>
-			<div class="value"><%= incident.bike_description %></div>
-		<% end %>
-	</div>
+		</div>
+	<% elsif incident.is_of_kind?(:assault) %>
+		<%= render :partial => 'incidents/details/bike_description', :locals => {:incident => incident} %>
+	<% end %>
 	
 	<p class="complaint_issued">
 		<%= t('incidents.index.list.item.complaint_issued')[incident.complaint_issued] %>
@@ -35,5 +31,4 @@
 	<span class="time"><%= incident.date_and_time.to_s(:short) %></span>
 	
 	<div class="to-right"><span class="reporter"><%= reporter_of(incident) %></span></div>
-
 </div>

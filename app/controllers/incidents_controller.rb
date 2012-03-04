@@ -9,6 +9,7 @@ class IncidentsController < ActionController::Base
     @incident = Incident.new_with(params[:incident], params[:coordinates], current_user)
     
     if @incident.save
+      flash[:posted_incident] = @incident
       redirect_to incidents_path, :notice => I18n.t('incidents.create.saved')
     else
       render :new

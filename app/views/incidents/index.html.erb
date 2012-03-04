@@ -14,4 +14,11 @@
 	<div id="itemdetails" class="hidden rounded-5 shadow-light"></div>
 	
 	<div id="itemsfiltering" class="hidden rounded-bottom-5 shadow-light"><%= render 'filtering' %></div>
+	
+	<% if flash[:posted_incident] %>
+		<div id="just-posted" class="hidden">
+			<span class="kind"><%= flash[:posted_incident].symbol_kind %></span>
+			<span class="id"><%= flash[:posted_incident].id %></span>
+		</div>
+	<% end %>
 <% end %>

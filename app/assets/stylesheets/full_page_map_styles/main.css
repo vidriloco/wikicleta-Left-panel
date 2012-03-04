@@ -246,12 +246,13 @@ body {margin-top: 0px; margin-right: 0px; margin-left: 0px; margin-bottom: 0px; 
 #itemdetails .extra-fields {
 	background-color: #C9C9C9;
 	padding: 10px;
+	margin-bottom: 7px;
 }
 
 #itemdetails .extra-fields span {
 	font-weight: bold;
 	color:#6E6E6E;
-	font-size: 13px;
+	font-size: 14px;
 }
 
 #itemdetails .extra-fields div {

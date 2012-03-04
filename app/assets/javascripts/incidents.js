@@ -25,11 +25,24 @@ var mapIncidents = function() {
 	}
 }
 
+var fetchFromItemListAndZoomToMap = function(id, kind) {
+	var postedItem = $($($('#itemlist').children(kind)[0]).children()[0]).children(id)[0];
+	var lat = $($(postedItem).children('.lat')[0]).text();
+	var lon = $($(postedItem).children('.lon')[0]).text();
+	mapWrap.placeViewportAt({lat: lat, lon: lon, zoom:19});
+}
+
 $(document).ready(function(){
 	
 	// map to zoom
 	mapWrap.placeViewportAt({zoom: defaultZoom});
 	mapIncidents();
+	
+	var id = $('#just-posted .id').text();
+	var kind = $('#just-posted .kind').text();
+	if(id != "" && kind != "") {
+		fetchFromItemListAndZoomToMap("#"+id, "."+kind);
+	}
 	
 	$('#incident_kind').change(function() {
 		var selected = $(this).val();
