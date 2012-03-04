@@ -10,5 +10,6 @@
 //= require underscore
 //= require backbone
 //= require easypaginate.min
+//= require jquery.charcounter
 //= require core/models/map.js
 //= require_tree .

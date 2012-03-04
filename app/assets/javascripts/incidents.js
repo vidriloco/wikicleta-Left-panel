@@ -125,4 +125,16 @@ $(document).ready(function(){
 		mapWrap.placeViewportAt({lat: lat, lon: lon, zoom:19});
 	});
 	
+	var opts = {
+		format: "%1 caracteres restantes"
+	}
+	
+	$("#incident_description").charCounter(130, $.extend(opts, {
+		container: "#incident_description_count",
+	}));
+	
+	$("#incident_bike_description").charCounter(130, $.extend(opts, {
+		container: "#incident_bike_description_count"
+	}));
+	
 });

@@ -1,4 +1,5 @@
 <%= f.text_area :description, :cols => 48, :rows => 3, :placeholder => t('incidents.new.form.fields.description') %>
+<div id="incident_description_count" class="field-counter"></div>
 
 <div class="field">
 	<%= f.check_box :complaint_issued, :checked => @incident.complaint_issued || false %>
@@ -19,6 +20,7 @@
 </div>
 <div class="<%= is_visible([:theft, :assault], @incident) %> <%= incident_types_for([:theft, :assault]) %>">
 	<%= f.text_area :bike_description, :cols => 48, :rows => 3, :placeholder => t('incidents.new.form.fields.bike_description') %>
+	<div id="incident_bike_description_count" class="field-counter"></div>
 </div>
 
 <div class="<%= errors_for(:vehicle_identifier, @incident) %> 

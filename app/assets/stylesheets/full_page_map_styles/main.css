@@ -400,3 +400,11 @@ ol#pagination li.current {
 ol#pagination li.next, ol#pagination li.previous {
 	color:#6D6D6D;
 }
+
+.field-counter {
+	text-align: right;
+	margin-right: 40px;
+	font-size: 14px;
+	font-style: italic;
+	color:#3D3D3D;
+}
