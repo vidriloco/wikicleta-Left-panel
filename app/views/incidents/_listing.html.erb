@@ -13,13 +13,13 @@
 	<% unless @incidents[Incident.kind_for(kind)].nil? %>
 		<div class="paginated-<%= kind %>">
 			<%= render @incidents[Incident.kind_for(kind)] %>
-			<script>
-				$( ".paginated-<%= kind %>" ).easyPaginate({
-					step: 5,
-					nextprev: false
-				});
-			</script>
 		</div>
+		<script>
+			$( ".paginated-<%= kind %>" ).easyPaginate({
+				step: 4,
+				nextprev: false
+			});
+		</script>
 	<% else %>
 		<p class="empty"><%= t('incidents.index.empty') %></p>
 	<% end %>
