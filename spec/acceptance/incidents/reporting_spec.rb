@@ -105,8 +105,7 @@ feature "Reporting bike incidents:" do
       
       page.current_path.should == incidents_path
       page.should have_content I18n.t('incidents.create.saved')
-    end
-    
+    end    
   end
   
   

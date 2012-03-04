@@ -61,6 +61,9 @@ es_MX:
             anonymous: "por Anónimo" 
             user: "por %{user}"
           details: "Ver detalles"
+    destroy:
+      success: "El incidente ha sido eliminado"
+      confirm: "¿Deseas eliminar este incidente?"
     create:
       saved: "Incidente registrado. ¡Gracias!"
     new:

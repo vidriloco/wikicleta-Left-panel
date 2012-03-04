@@ -265,6 +265,34 @@ feature "Listing and filtering bike incidents:" do
     
   end
   
+  describe "Deleting: " do
+    
+    before(:each) do
+      login_with(@reporter)
+    end
+    
+    scenario "Given I am logged in, and being the owner of an incident post, then I can delete it", :js => true do
+      visit incidents_path
+    
+      click_link I18n.t('incidents.index.numbers.total.other', :count => 4)
+      
+      click_link I18n.t('incidents.index.numbers.accident.one')
+      
+      within("##{@accident.id}") do
+        click_link I18n.t('incidents.index.list.item.details')
+      end
+      
+      within("#itemdetails") do
+        click_on I18n.t('actions.delete')
+      end
+      page.driver.browser.switch_to.alert.accept
+      
+      page.should have_content I18n.t('incidents.destroy.success')
+      
+      find_link I18n.t('incidents.index.numbers.total.other', :count => 3)
+    end
+    
+  end
 end
 
 def stats_for(hash)

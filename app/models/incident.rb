@@ -80,6 +80,11 @@ class Incident < ActiveRecord::Base
     end
   end
   
+  def owned_by_user?(passed_user)
+    return false if passed_user.nil?
+    user = passed_user
+  end
+  
   def self.range_date_for(option)
     return false if(option.nil? || Incident.date_filtering_option_for(:all) == option)
     now = Time.now

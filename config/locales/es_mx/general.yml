@@ -11,6 +11,7 @@ es_MX:
     accept: "Aceptar"
     back: "Atrás"
     close: "Cerrar"
+    delete: "Eliminar"
     sessions: 
       first_person:
         start: "Inicia sesión"

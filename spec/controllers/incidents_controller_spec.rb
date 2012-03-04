@@ -91,6 +91,27 @@ describe IncidentsController do
     
   end
   
+  describe "DELETE destroy" do
+    
+    before(:each) do
+      @incident = Factory.create(:assault)
+      @incidents = {"total" => 0}
+    end
+    
+    it "destroys the requested incident" do
+      expect {
+        delete :destroy, :id => @incident.id
+      }.to change(Incident, :count).by(-1)
+    end
+
+    it "fetches all the remaining incidents" do
+      delete :destroy, :id => @incident.id
+      
+      assigns(:incidents).should == @incidents
+    end
+    
+  end
+  
   describe "POST filtering" do
     
     before(:each) do
@@ -99,7 +120,6 @@ describe IncidentsController do
     end
     
     it "should receive the parameters for the search" do
-      Incident.should_receive(:filtering_with).and_return(@incidents)
       post :filtering, :incident => {}
       
       assigns(:incidents).should == @incidents

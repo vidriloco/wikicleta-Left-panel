@@ -20,6 +20,17 @@ class IncidentsController < ActionController::Base
     @incidents = Incident.filtering_with(:nothing)
   end
   
+  def destroy
+    incident = Incident.find(params[:id])
+    incident.destroy
+    
+    @incidents = Incident.filtering_with(:nothing)
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+  
   def filtering
     @incidents = Incident.filtering_with(params[:incident])
     

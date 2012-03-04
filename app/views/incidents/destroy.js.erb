@@ -1,0 +1,8 @@
+$('#notifications').html("<%= t('incidents.destroy.success') %>").fadeIn(1000).delay(1000).fadeOut(500);
+$('#itemdetails .close-button').click();
+$('#submenu').html("<%= escape_javascript(render 'submenu') %>").hide().delay(2500).fadeIn(300);
+$('#itemlist').html("<%= escape_javascript(render 'listing') %>");
+mapIncidents();
+
+
+
