@@ -13,7 +13,7 @@ feature "Listing and filtering bike incidents:" do
   
   describe "Listing: " do
     scenario "when visiting the incidents index I should see the status of all incidents" do
-      visit incidents_path
+      visit map_incidents_path
     
       page.should have_content I18n.t('incidents.index.title')
       page.should have_content I18n.t('incidents.index.kind.bike')
@@ -30,7 +30,7 @@ feature "Listing and filtering bike incidents:" do
     end
   
     scenario "when visiting the incidents index I should see the listing of them after clicking totals", :js => true do
-      visit incidents_path
+      visit map_incidents_path
     
       page.find("#itemlist").should_not be_visible
       page.find("#submenu").should be_visible
@@ -69,7 +69,7 @@ feature "Listing and filtering bike incidents:" do
     end
   
     scenario "when visiting the incidents index I should be able to see the details of an incident", :js => true do
-      visit incidents_path
+      visit map_incidents_path
     
       click_link I18n.t('incidents.index.numbers.total.other', :count => 4)
     
@@ -171,7 +171,7 @@ feature "Listing and filtering bike incidents:" do
     end
     
     scenario "should not let me search if I do not select a kind of incident", :js => true do
-      visit incidents_path
+      visit map_incidents_path
       
       click_link I18n.t('incidents.index.search')
       
@@ -184,7 +184,7 @@ feature "Listing and filtering bike incidents:" do
     end
     
     scenario "should let me refine the incidents appearing on the map", :js => true do
-      visit incidents_path
+      visit map_incidents_path
       
       find_link I18n.t('incidents.index.numbers.total.other', :count => 5)
       stats_for(:accident => 1, :assault => 2, :theft => 1, :regulation_infraction => 1)
@@ -242,7 +242,7 @@ feature "Listing and filtering bike incidents:" do
       end
       
       it "should show only one", :js => true do
-        visit incidents_path
+        visit map_incidents_path
         
         page.execute_script('mapWrap.simulatePinPointSearch({lat: 19.298197, lon: -99.119725, zoom: 19 });')
         click_link I18n.t('incidents.index.search')
@@ -272,7 +272,7 @@ feature "Listing and filtering bike incidents:" do
     end
     
     scenario "Given I am logged in, and being the owner of an incident post, then I can delete it", :js => true do
-      visit incidents_path
+      visit map_incidents_path
     
       click_link I18n.t('incidents.index.numbers.total.other', :count => 4)
       

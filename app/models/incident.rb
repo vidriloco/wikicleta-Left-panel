@@ -5,9 +5,13 @@ class Incident < ActiveRecord::Base
   belongs_to :user
   belongs_to :bike_item
   
+  validates_length_of :description, :maximum => 130
+  validates_length_of :bike_description, :maximum => 130, :if => :theft_or_assault?
   validates_presence_of :coordinates, :kind, :description
   validates :vehicle_identifier, :format => /[A-Z0-9]{4}/, :allow_blank => true, :if => :accident_or_regulation_infraction?
   validates_presence_of :bike_description, :if => :theft_or_assault?
+  
+  attr_protected :user_id
   
   def self.new_with(params, coordinates, user)
     user= user.nil? ? new(params) : new(params.merge(:user => user)) 

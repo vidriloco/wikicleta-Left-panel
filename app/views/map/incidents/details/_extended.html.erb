@@ -1,5 +1,5 @@
 <div class="extended-incident hidden">
-	<%= render :partial => 'incidents/details/navigation', :locals => {:incident => incident} %>
+	<%= render :partial => 'map/incidents/details/navigation', :locals => {:incident => incident} %>
 	
 	<p class="type"><%= incident.humanized_kind %></p>
 	<%= link_to t('actions.show_on_map'), "javascript:void(0);", :class => "show-on-map rounded-5" %>
@@ -13,14 +13,14 @@
 			<div class="value to-right"><%= incident.bike_item.nil? ? t('missing') : incident.bike_item.name %></div>
 			<br/>
 		</div>
-		<%= render :partial => 'incidents/details/bike_description', :locals => {:incident => incident} %>
+		<%= render :partial => 'map/incidents/details/bike_description', :locals => {:incident => incident} %>
 	<% elsif incident.is_of_kind?(:accident) || incident.is_of_kind?(:regulation_infraction) %>
 		<div class="extra-fields rounded-5">
 			<span><%= t('activerecord.attributes.incident.vehicle_identifier') %>: </span>
 			<div class="value to-right"><%= incident.vehicle_identifier || "---" %></div>
 		</div>
 	<% elsif incident.is_of_kind?(:assault) %>
-		<%= render :partial => 'incidents/details/bike_description', :locals => {:incident => incident} %>
+		<%= render :partial => 'map/incidents/details/bike_description', :locals => {:incident => incident} %>
 	<% end %>
 	
 	<p class="complaint_issued">
@@ -31,7 +31,7 @@
 	<% if incident.owned_by_user?(current_user) %>
 		<div class="spacer"></div>
 		<div class="actions inlined">
-			<%= link_to t('actions.delete'), incident, :method => :delete, :remote => true, :confirm => t('incidents.destroy.confirm'), :class => "main-button red-button" %>
+			<%= link_to t('actions.delete'), [:map, incident], :method => :delete, :remote => true, :confirm => t('incidents.destroy.confirm'), :class => "main-button red-button" %>
 		</div>
 		<div class="to-right inlined">
 			<span class="time"><%= incident.date_and_time.to_s(:short) %></span> 

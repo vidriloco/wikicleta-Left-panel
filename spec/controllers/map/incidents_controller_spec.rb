@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe IncidentsController do    
+describe Map::IncidentsController do    
   
   def valid_params
     Factory.attributes_for(:assault).inject({}){|memo,(k,v)| memo[k.to_s] = v.to_s; memo}
@@ -58,7 +58,7 @@ describe IncidentsController do
         @incident.stub(:apply_geo)
   
         post :create
-        response.should redirect_to(incidents_path)
+        response.should redirect_to(map_incidents_path)
       end
       
     end

@@ -63,12 +63,21 @@ Ciudadio::Application.routes.draw do
     get ':place_id/evaluations/new' => 'evaluations#new', :as => 'new_evaluation'
     get ":place_id/evaluations/edit/:id" => "evaluations#edit", :as => "edit_evaluation"
   end
+  
+  namespace :map do
+    resources :street_marks, :only => [:index]
+    resources :incidents, :except => [:edit, :update] do
+      collection do 
+        post :filtering
+      end
+    end
+  end
 
   get "/places/:id" => 'places#show', :as => "place"
   get "/places/edit/:id" => 'places#edit', :as => "edit_place"
 
-  resources :incidents
-  post '/incidents/filtering' => 'incidents#filtering', :as => 'incidents_filtering'
+  
+  
   
   root :to => 'welcome#index'
 end

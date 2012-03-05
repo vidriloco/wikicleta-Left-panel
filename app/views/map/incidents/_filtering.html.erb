@@ -2,7 +2,7 @@
 
 <h2><%= t('incidents.filtering.title') %></h2>
 
-<%= form_tag incidents_filtering_path, :remote => true do %>
+<%= form_tag filtering_map_incidents_path, :remote => true do %>
 	<div id="filtering-kind-list" class="group rounded-5">
 		
 		<%= check_box_tag "incident[type[theft]]" %>

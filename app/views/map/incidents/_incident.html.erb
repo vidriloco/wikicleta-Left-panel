@@ -9,5 +9,5 @@
 	<div class="lon hidden"><%= incident.coordinates.lon %></div>
 	<%= link_to t('incidents.index.list.item.details'), 'javascript:void(0);', :class => "itemdetails-toggle see-details" %>
 	
-	<%= render :partial => 'incidents/details/extended', :locals => { :incident => incident } %>
+	<%= render :partial => 'map/incidents/details/extended', :locals => { :incident => incident } %>
 </div>

@@ -15,7 +15,7 @@
 			<%= link_to t('actions.sessions.first_person.start').downcase, new_user_session_path %>
 		<% end %>
 		</p>
-		<%= form_for(@incident) do |f| %>
+		<%= form_for([:map, @incident]) do |f| %>
 		
 			<% unless @incident.errors.empty? %>
 				<h3 class="error-message"><%= t('actions.verify_fields_on_red') %></h3>
@@ -25,7 +25,7 @@
 			</div>
 			<div class="separator"></div>
 			<div class="actions to-right">
-				<%= link_to t('actions.cancel'), incidents_path %>
+				<%= link_to t('actions.cancel'), map_incidents_path %>
 				<%= f.submit t('actions.save'), :class => 'submit blue-button' %>
 			</div>
 		<% end %>

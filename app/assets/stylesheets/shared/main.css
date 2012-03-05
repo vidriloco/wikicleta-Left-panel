@@ -250,3 +250,11 @@ a:visited {
 .spacer {
 	height: 8px;
 }
+
+.field-counter {
+	text-align: right;
+	margin-right: 40px;
+	font-size: 14px;
+	font-style: italic;
+	color:#3D3D3D;
+}

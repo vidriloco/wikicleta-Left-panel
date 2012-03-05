@@ -1,5 +1,4 @@
-class IncidentsController < ActionController::Base
-  layout 'full_page_map'
+class Map::IncidentsController < BaseController
   
   def new
     @incident = Incident.new
@@ -10,7 +9,7 @@ class IncidentsController < ActionController::Base
     
     if @incident.save
       flash[:posted_incident] = @incident
-      redirect_to incidents_path, :notice => I18n.t('incidents.create.saved')
+      redirect_to map_incidents_path, :notice => I18n.t('incidents.create.saved')
     else
       render :new
     end

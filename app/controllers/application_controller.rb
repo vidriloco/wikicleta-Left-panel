@@ -11,16 +11,14 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  
+  protected
 
-    protected
-
-    def layout_by_resource
-      if devise_controller?
-        "access"
-      else
-        "application"
-      end
+  def layout_by_resource
+    if devise_controller?
+      "access"
+    else
+      "application"
     end
+  end
 end
   

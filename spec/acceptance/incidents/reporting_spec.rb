@@ -8,7 +8,7 @@ feature "Reporting bike incidents:" do
   end
   
   scenario "cannot add an incident report which lacks required fields", :js => true do
-    visit new_incident_path
+    visit new_map_incident_path
     click_on I18n.t('actions.save')
     
     page.should have_content I18n.t('actions.verify_fields_on_red')
@@ -16,8 +16,8 @@ feature "Reporting bike incidents:" do
   
   describe "anonymously" do
     
-    scenario "should be able to login from here so I can use my account to register the incident" do
-      visit new_incident_path
+    scenario "can see the main menu for adding an incident" do
+      visit new_map_incident_path
       
       page.should have_content I18n.t('incidents.new.title')
       page.should have_content I18n.t('incidents.new.kind.bike')
@@ -28,7 +28,7 @@ feature "Reporting bike incidents:" do
     end
     
     scenario "can add a stolen bike report", :js => true do
-      visit new_incident_path
+      visit new_map_incident_path
       
       page.should have_content I18n.t('incidents.new.title')
       page.should have_content I18n.t('incidents.new.kind.bike')
@@ -44,13 +44,13 @@ feature "Reporting bike incidents:" do
       
       click_on I18n.t('actions.save')
       
-      page.current_path.should == incidents_path
+      page.current_path.should == map_incidents_path
       page.should have_content I18n.t('incidents.create.saved')
     end
     
     scenario "can add a violent stolen bike report", :js => true do
       
-      visit new_incident_path
+      visit new_map_incident_path
       
       page.should have_content I18n.t('incidents.new.title')
       page.should have_content I18n.t('incidents.new.kind.bike')
@@ -65,12 +65,12 @@ feature "Reporting bike incidents:" do
       
       click_on I18n.t('actions.save')
       
-      page.current_path.should == incidents_path
+      page.current_path.should == map_incidents_path
       page.should have_content I18n.t('incidents.create.saved')
     end
     
     scenario "can add an accident report", :js => true do
-      visit new_incident_path
+      visit new_map_incident_path
       
       page.should have_content I18n.t('incidents.new.title')
       page.should have_content I18n.t('incidents.new.kind.bike')
@@ -84,12 +84,12 @@ feature "Reporting bike incidents:" do
       
       click_on I18n.t('actions.save')
       
-      page.current_path.should == incidents_path
+      page.current_path.should == map_incidents_path
       page.should have_content I18n.t('incidents.create.saved')
     end
     
     scenario "can add an regulation infraction report", :js => true do
-      visit new_incident_path
+      visit new_map_incident_path
       
       page.should have_content I18n.t('incidents.new.title')
       page.should have_content I18n.t('incidents.new.kind.bike')
@@ -103,7 +103,7 @@ feature "Reporting bike incidents:" do
       
       click_on I18n.t('actions.save')
       
-      page.current_path.should == incidents_path
+      page.current_path.should == map_incidents_path
       page.should have_content I18n.t('incidents.create.saved')
     end    
   end
@@ -117,7 +117,7 @@ feature "Reporting bike incidents:" do
     end
   
     scenario "can add a stolen bike report", :js => true do
-      visit new_incident_path
+      visit new_map_incident_path
       
       page.should have_content I18n.t('incidents.new.title')
       page.should have_content I18n.t('incidents.new.kind.bike')
@@ -133,13 +133,13 @@ feature "Reporting bike incidents:" do
       
       click_on I18n.t('actions.save')
       
-      page.current_path.should == incidents_path
+      page.current_path.should == map_incidents_path
       page.should have_content I18n.t('incidents.create.saved')
     end
     
     scenario "can add a violent stolen bike report", :js => true do
       
-      visit new_incident_path
+      visit new_map_incident_path
       
       page.should have_content I18n.t('incidents.new.title')
       page.should have_content I18n.t('incidents.new.kind.bike')
@@ -154,12 +154,12 @@ feature "Reporting bike incidents:" do
       
       click_on I18n.t('actions.save')
       
-      page.current_path.should == incidents_path
+      page.current_path.should == map_incidents_path
       page.should have_content I18n.t('incidents.create.saved')
     end
     
     scenario "can add an accident report", :js => true do
-      visit new_incident_path
+      visit new_map_incident_path
       
       page.should have_content I18n.t('incidents.new.title')
       page.should have_content I18n.t('incidents.new.kind.bike')
@@ -173,12 +173,12 @@ feature "Reporting bike incidents:" do
       
       click_on I18n.t('actions.save')
       
-      page.current_path.should == incidents_path
+      page.current_path.should == map_incidents_path
       page.should have_content I18n.t('incidents.create.saved')
     end
     
     scenario "can add an regulation infraction report", :js => true do
-      visit new_incident_path
+      visit new_map_incident_path
       
       page.should have_content I18n.t('incidents.new.title')
       page.should have_content I18n.t('incidents.new.kind.bike')
@@ -191,7 +191,7 @@ feature "Reporting bike incidents:" do
       
       click_on I18n.t('actions.save')
       
-      page.current_path.should == incidents_path
+      page.current_path.should == map_incidents_path
       page.should have_content I18n.t('incidents.create.saved')
     end
   
