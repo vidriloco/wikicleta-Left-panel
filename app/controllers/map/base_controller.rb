@@ -1,3 +1,3 @@
-class BaseController < ActionController::Base
+class Map::BaseController < ActionController::Base
   layout 'map'
 end

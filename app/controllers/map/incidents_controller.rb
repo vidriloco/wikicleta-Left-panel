@@ -1,4 +1,4 @@
-class Map::IncidentsController < BaseController
+class Map::IncidentsController < Map::BaseController
   
   def new
     @incident = Incident.new
