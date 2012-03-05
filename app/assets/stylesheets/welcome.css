@@ -2,7 +2,6 @@
  *= require_self
  *= require shared/main.css 
 */
-
 body, html {
 	font-family: calibri;
 }
