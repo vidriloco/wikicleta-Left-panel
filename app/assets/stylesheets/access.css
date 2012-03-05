@@ -30,11 +30,11 @@ body, html {
 }
 
 .board a:hover {
-	color:#3B5F30;
+	color:#3B5F30 !important;
 }
 
-.board a {
-	color: #DCDCDC;
+.board a, .board a:visited {
+	color: #B7DCA7;
 	font-weight: bold;
 }
 
@@ -44,19 +44,18 @@ body, html {
 
 .green input {
 	background-color:#85C975;
-}
-
-.green input {
 	border: 2px solid #90D081;
-	color:#6A9F67;
+	color: #C5FFBE !important;
 }
 
 .green input:hover {
-	color:#396F36;
+	color:white !important;
 }
 
 .actions {
-	margin-top: 15px;
+	margin-top: 10px;
+	text-align: right;
+	margin-bottom: 15px;
 }
 
 .actions a {

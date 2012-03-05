@@ -98,6 +98,7 @@ a:visited {
 
 .to-right {
 	float: right;
+	clear: both;
 }
 
 .inlined {
