@@ -1,0 +1,34 @@
+<h3>{{name}}</h3>
+
+<div id="controls-panel" class="actions to-right"></div>
+
+<div class="date">
+	<%= t('street_marks.show.updated_at') %>
+	<abbr class="timeago" title="{{ updated_at }}"></abbr>
+</div>
+
+<div class="separator"></div>
+
+<div id="bottom-panel"></div>
+
+<script type="text/x-handlebars-template" id="details-controls-template">
+	<%= link_to t('actions.close'), '#', :class => 'close' %>
+</script>
+
+<script type="text/x-handlebars-template" id="logged-in-controls-template">
+	<%= link_to t('actions.delete'), 'javascript:void(0);', :class => 'commit button red-button' %>
+	<%= link_to t('actions.modify'), 'javascript:void(0);', :class => 'commit button green-button' %>
+</script>
+
+<script type="text/x-handlebars-template" id="details-template">
+	<%= render 'ranked' %>
+</script>
+
+<script type="text/x-handlebars-template" id="ranking-template">
+	<%= render 'ranking' %>
+</script>
+
+<script type="text/x-handlebars-template" id="ranking-controls-template">
+	<%= link_to t('actions.cancel'), '#/{{model_id}}', :class => 'cancel' %>
+	<%= link_to t('street_marks.form.actions.save'), 'javascript:void(0);', :class => 'commit button green-button' %>
+</script>

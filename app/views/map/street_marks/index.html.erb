@@ -1,0 +1,28 @@
+<%= content_for :header do %>
+	<h1><%= t('street_marks.index.title') %><span class="type rounded-5"><%= t('street_marks.index.kind.bike') %></span></h1>
+	
+	<div class="actions">
+		<%= link_to t('street_marks.index.new'), '#new', :class => "new button blue", :id => 'new-mark' %>
+	</div>
+<% end %>
+
+<%= content_for :map_area do %>
+	<div id="submenu"></div>
+	
+	<script type="text/javascript">
+	    $(function() {
+	        Wikiando.initStreetMarks({streetMarks: <%= @street_marks.to_json.html_safe -%>});
+	    });
+	</script>
+	
+	<div id="main-panel" class="bottom-container rounded-top-5 shadow-light styled-form"></div>
+	<script type="text/x-handlebars-template" id="new-mark-form-template">
+		<%= render 'new' %>
+	</script>
+	<script type="text/x-handlebars-template" id="submenu-template">
+		<%= render 'submenu' %>
+	</script>
+	<script type="text/x-handlebars-template" id="street-mark-template">
+		<%= render 'show' %>
+	</script>
+<% end %>

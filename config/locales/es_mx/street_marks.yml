@@ -1,0 +1,28 @@
+es_MX:
+  activerecord:
+    models:
+      street_mark: "Incidente"
+    attributes:
+      street_mark: 
+
+  street_marks:
+    form:
+      actions:
+        save: "Guardar"
+        cancel: "Cancelar"
+      instructions:
+        title: "Traza el segmento de la calle"
+        name: "Nombre corto de la calle"
+    show:
+      updated_at: "última actualización "
+      instructions: "Responde todos los campos"
+      invite: "¿Has pasado en bici por aquí?"
+    index:
+      title: "Calles mapeadas"
+      new: "Nueva calle"
+      kind:
+        bike: "Bicicleta"
+      numbers:
+        total:
+          one: "1 calle mapeada"
+          other: "{{count}} calles mapeadas"

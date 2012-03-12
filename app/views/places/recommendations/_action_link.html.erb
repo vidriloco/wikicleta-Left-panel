@@ -1,17 +1,18 @@
+<!-- REFACTOR THIS !!! -->
 <% if user_signed_in? %>
 	<% if @place.owned_by?(current_user) %>
-		<%= button_to t('places.common_actions.recommending'), 'javascript:void(0);', :class => 'display-js-notification' %>
-		<% content_for(:notifications) do %>
-			<p class="hidden"><%= t('places.messages.error.only_owner_cannot_stop_recommending') %></p>
-		<% end %>
+		<%= button_to t('places.common_actions.recommending'), 'javascript:void(0);', :class => 'display-js-notification green-button button' %>
+		<script type="text/x-handlebars-template" id="message" class="hidden">
+			<p><%= t('places.messages.error.only_owner_cannot_stop_recommending') %></p>
+		</script>
 	<% elsif @place.recommended_by?(current_user) %>
-		<%= button_to t('places.common_actions.recommending'), places_recommendation_off_path(@place), :method => :put, :remote => true %>
+		<%= button_to t('places.common_actions.recommending'), places_recommendation_off_path(@place), :method => :put, :remote => true, :class => 'green-button button' %>
 	<% else %>
-		<%= button_to t('places.common_actions.recommend'), places_recommendation_on_path(@place), :method => :put, :remote => true %>
+		<%= button_to t('places.common_actions.recommend'), places_recommendation_on_path(@place), :method => :put, :remote => true, :class => 'green-button button' %>
 	<% end %>
 <% else %>
-	<%= button_to t('places.common_actions.recommend'), 'javascript:void(0);', :class => 'display-js-notification' %>
-	<% content_for(:notifications) do %>
-		<p class="hidden"><%= t('places.messages.error.login_required', :action => t('places.messages.error.complements.recommend')) %></p>
-	<% end %>
+	<%= button_to t('places.common_actions.recommend'), 'javascript:void(0);', :class => 'display-js-notification', :class => 'green-button button' %>
+	<script type="text/x-handlebars-template" id="message" class="hidden">
+		<p><%= t('places.messages.error.login_required', :action => t('places.messages.error.complements.recommend')) %></p>
+	</script>
 <% end %>

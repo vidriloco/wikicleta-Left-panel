@@ -39,6 +39,6 @@ survey:
       type: "SC"
       items:
         1:
-          human_value: "Son amables"
+          human_value: "Si"
         2:
-          human_value: "No lo son"
+          human_value: "No"

@@ -1,19 +1,26 @@
 
-<div id="side-box">
-	<p><%=t('places.views.new.approximate_address') %></p>
-	<p class="address"><%=t('places.views.new.instruction') %></div>
-	<div id="map-box">
-		<div style="width:100%; height:400px;" id="map" class="hide-address-on-load is-editable displays-points radio-3 shadowed-light"></div>
-	</div>
-</div>
+<%= content_for(:top_container) do %>
+	<div style="width:100%; height:300px; top:40px" id="map" class="is-editable displays-points radio-3 shadowed-light"></div>
+<% end %>
 
-<div id="main-box">
-	<h1><%=t('places.views.edit.title') %></h1>
-	
-	<%= semantic_form_for @place, :method => :put do |p| %>
-	
-		<%= render :partial => 'form', :locals => {:p => p} %>
-		<%= p.submit t('actions.update') %>
-	<% end %>
-	
-</div>
+<%= content_for :header do %>
+	<div class="mini-header size-of-300 shadow-light rounded-bottom-5">
+		<h1><%= t('places.views.index.title') %><span class="type rounded-5"><%= t('states.edit') %></span></h1>
+		<ul class="inlined actions-list">
+			<li><%= link_to "&larr; #{t('actions.return')}".html_safe, places_path, :class => 'plain' %></li>
+		</ul>
+	</div>
+<% end %>
+
+<p class="address selected-from-map"><%=t('places.views.new.instruction') %></p>
+
+<%= content_for :form_container do %>
+	<div class="simple-form rounded-top-5 shadow-light">
+		<%= form_for @place, :method => :put do |p| %>
+			<div class="styled-form">
+				<%= render :partial => 'form', :locals => {:p => p} %>
+			</div>
+			<%= p.submit t('actions.update'), :class => "button blue to-right" %>
+		<% end %>
+	</div>
+<% end %>

@@ -13,38 +13,31 @@ feature 'Commits: creation, modification and deletion of places' do
   
   scenario "creating a new place with valid data", :js => true do
     visit new_place_path
+      
+    page.should have_content I18n.t('places.views.new.instruction')
+    page.should have_content I18n.t('places.views.index.title')
+    page.should have_content I18n.t('states.new')
     
-    page.has_css?('#map-box').should be_true
-    
-    within('#side-box') do
-      page.should have_content I18n.t('places.views.new.approximate_address')
-      page.should have_content I18n.t('places.views.new.instruction')
-    end
-    
-    within('#main-box') do
-      page.should have_content I18n.t('places.views.new.title')
+    fill_in "place_name", :with => "Taller de Juvenal"
+    fill_in "place_description", :with => "Uno de los talleres de bicis mas completos localizado al sur de la ciudad. Tienen refacciones para todo tipo de bicis, venden accesorios a buen costo y el servicio es generalmente rápido."
+    fill_in "place_address", :with => "Delfin Madrigal #283 Col. Santo Domingo, Del. Coyoacán, D.F."
+    select I18n.t('categories.all.workshop'), :from => "place_category_id"
+    fill_in "place_twitter", :with => "juvenal"
 
-      fill_in "place_name", :with => "Taller de Juvenal"
-      fill_in "place_description", :with => "Uno de los talleres de bicis mas completos localizado al sur de la ciudad. Tienen refacciones para todo tipo de bicis, venden accesorios a buen costo y el servicio es generalmente rápido."
-      fill_in "place_address", :with => "Delfin Madrigal #283 Col. Santo Domingo, Del. Coyoacán, D.F."
-      select I18n.t('categories.all.workshop'), :from => "place_category_id"
-      fill_in "place_twitter", :with => "juvenal"
-  
-      simulate_click_on_map({:lat => 19.42007620847585, :lon => -99.25376930236814})
-      
-      page.should_not have_content I18n.t('places.views.new.instruction')
+    simulate_click_on_map({:lat => 19.42007620847585, :lon => -99.25376930236814})
+    
+    page.should_not have_content I18n.t('places.views.new.instruction')
 
-      page.find('#coordinates_lat').value.should == "19.42007620847585"
-      page.find('#coordinates_lon').value.should == "-99.25376930236814"
-      
-      click_on I18n.t('actions.save')
-      
-      current_path.should == place_path(Place.first)
-    end
+    page.find('#coordinates_lat').value.should == "19.42007620847585"
+    page.find('#coordinates_lon').value.should == "-99.25376930236814"
+    
+    click_on I18n.t('actions.save')
+    
+    current_path.should == place_path(Place.first)
     
   end
   
-  describe "considering I did not registered a place" do
+  describe "considering It was not me the one who registered an existant place" do
     
     before(:each) do
       user = Factory.build(:pipo)
@@ -73,7 +66,8 @@ feature 'Commits: creation, modification and deletion of places' do
       
       current_path.should == edit_place_path(@place)
       
-      page.should have_content I18n.t('places.views.edit.title')
+      page.should have_content I18n.t('places.views.index.title')
+      page.should have_content I18n.t('states.edit')
       
       fill_in "place_name", :with => "Goldtaquito"
       fill_in "place_description", :with => "Comida vegetariana, bonita, barata y bien ubicada"

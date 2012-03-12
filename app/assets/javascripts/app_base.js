@@ -1,4 +1,6 @@
 var mapWrap;
+var zoomForDetails = 16;
+var defaultZoom=13;
 
 $(document).ready(function() {
 	/* Map initialization BEGIN */  
@@ -20,11 +22,27 @@ $(document).ready(function() {
 		"domEditable" : ".is-editable",
 		"domAddress" : "p.address",
 		"pointsMode" : ".displays-points",
-		"domPoint" : "#coordinates",
-		"searchMode" : ".selectable-for-search",
-		"neDOM" : "#coordinates_ne",
-		"swDOM" : "#coordinates_sw"
+		"domPoint" : "#coordinates"
 	}
 
-	mapWrap = new MapWrapper(new google.maps.Map(document.getElementById("map"), mapDefaultOpts), mapInteractionOpts);
+	mapWrap = new Geo.Wrappers.Map(new google.maps.Map(document.getElementById("map"), mapDefaultOpts), mapInteractionOpts);
+	
+	if(!$.isBlank('#messages')) {
+		$("#submenu").hide();
+		$('#messages').fadeIn().delay(3000).fadeOut(2000);
+		$("#submenu").delay(5000).fadeIn(500);
+	}
+	
+	if(!$.isBlank('#notifications')) {
+		$("#submenu").hide();
+		$('#notifications').fadeIn().delay(3000).fadeOut(2000);
+		$("#submenu").delay(5000).fadeIn(500);
+	}
+	
+	if(!$.isBlank('#alerts')) {
+		$("#submenu").hide();
+		$('#alerts').fadeIn().delay(3000).fadeOut(2000);
+		$("#submenu").delay(5000).fadeIn(500);
+	}
+	
 });

@@ -30,7 +30,7 @@ module Place::Search
       
       if params[:map_enabled]
         polygon_given = self.make_polygon(params[:coordinates])
-        unless polygon_given.nil?
+        if polygon_given
           str_keys += " AND " unless str_keys.blank?
           str_keys += "ST_Within(places.coordinates, ST_GeomFromEWKT(E'#{polygon_given.as_hex_ewkb}'))"
         end

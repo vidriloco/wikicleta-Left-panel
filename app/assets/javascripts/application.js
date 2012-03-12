@@ -9,7 +9,21 @@
 //= require jquery-ui-min
 //= require underscore
 //= require backbone
+//= require backbone_rails_sync
+//= require backbone_datalink
+//= require backbone/wikiando
+//= require backbone.modelbinding
+//= require backbone.validation
 //= require easypaginate.min
 //= require jquery.charcounter
-//= require core/models/map.js
+//= require jquery.timeago
+//= require geo/base
+//= require underscore
+//= require handlebars
+
 //= require_tree .
+
+_.templateSettings = {
+    interpolate: /\{\{\=(.+?)\}\}/g,
+    evaluate: /\{\{(.+?)\}\}/g
+};

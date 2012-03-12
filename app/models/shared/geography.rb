@@ -2,7 +2,7 @@ module Shared::Geography
   module ClassMethods
     def make_polygon(coordinates)
       return nil if coordinates.nil?
-      return nil if coordinates[:sw].blank? || coordinates[:ne].blank?
+      return nil if (coordinates[:sw].blank? || coordinates[:ne].blank? || coordinates[:ne] == "{}" || coordinates[:sw] == "{}")
 
       lat_so, lon_so = coordinates[:sw].split(',').map { |n| n.to_f }
       lat_no, lon_no = coordinates[:ne].split(',').map { |n| n.to_f }

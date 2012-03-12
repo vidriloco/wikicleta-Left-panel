@@ -1,0 +1,16 @@
+<p class="instructions"><%= t('street_marks.show.instructions') %></p>
+
+<div class="polls">
+<% CatalogedQuestion.for_street_marks.each do |question_for_street_mark| %>
+	<div class="question">
+		<label><%= question_for_street_mark.content %></label>
+		<% hidden_field_tag "question", :value => question_for_street_mark.id %>
+		<div class="answers" >
+			<% question_for_street_mark.cataloged_answers.each do |answer_for_question| %>
+				<%= radio_button_tag "answer_option-#{question_for_street_mark.id}", answer_for_question.id, false %>
+				<span class="value"><%= answer_for_question.content %></span>
+			<% end %>
+		</div>
+	</div>
+<% end %>
+</div>

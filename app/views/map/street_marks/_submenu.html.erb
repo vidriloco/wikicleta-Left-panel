@@ -1,0 +1,9 @@
+<div class="options rounded-bottom-5 shadow-light">
+	<p class="street-count">
+		{{#equal count 1 }}
+		  <%= t('street_marks.index.numbers.total.one') %>
+		{{else}}
+			<%= t('street_marks.index.numbers.total.other') %>
+		{{/equal}}
+	</p>
+</div>

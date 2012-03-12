@@ -33,28 +33,15 @@ feature 'Places listing' do
       
         scenario "visiting the main places page" do
           visit places_path
-          within('#side-box') do
-            find_link I18n.t('places.views.index.search')
-          
-            page.has_css?('#lgd_in_not').should be_false
-            within('.lgd_in') do
-              find_link I18n.t('places.views.index.followed_by_me')
-              find_link I18n.t('places.views.index.shared_by_me')
-            end
-          end
+          find_link I18n.t('places.views.index.search')
           content_specs_with(@places)
-        
         end
       end
       
       scenario "I can see the new place registration page" do
         visit places_path
-        within('#main-box') do
-          click_link I18n.t('places.views.index.new')
-          
-          current_path.should == new_place_path
-        end
-        
+        click_link I18n.t('places.views.index.new')
+        current_path.should == new_place_path
       end
       
     end
@@ -75,13 +62,12 @@ feature 'Places listing' do
         
         scenario "visiting the main places page should show those places listed" do
           visit places_path
-          within('#side-box') do
-            find_link I18n.t('places.views.index.search')
           
-            page.has_css?('#lgd_in').should be_false
-            within('.lgd_in_not') do
-              find_link I18n.t('places.views.index.registration_invitation')
-            end
+          find_link I18n.t('places.views.index.search')
+          
+          page.has_css?('#lgd_in').should be_false
+          within('.lgd_in_not') do
+            find_link I18n.t('places.views.index.registration_invitation')
           end
         
           content_specs_with(@places)
@@ -90,13 +76,8 @@ feature 'Places listing' do
       end
       
       scenario "I get asked to log-in when attempting to register a new place" do
-        
-        within('#main-box') do
-          click_link I18n.t('places.views.index.new')
-          
-          current_path.should == new_user_session_path
-        end
-        
+        click_link I18n.t('places.views.index.new')
+        current_path.should == new_user_session_path
       end
       
       describe "having two places with categories 'restaurant' 'store'" do
@@ -112,16 +93,15 @@ feature 'Places listing' do
         end
         
         scenario "when filtering by those categories should only show two and ordered" do
-          within('#main-box') do
-            select I18n.t('places.views.index.all'), :from => "l-params"
+          
+          select I18n.t('places.views.index.all'), :from => "l-params"
 
-            find('.cats').uncheck('workshop')
-            find('.cats').uncheck('museum')
-            find('.cats').uncheck('cinema')
-            find('.cats').uncheck('transport_station')
-            page.evaluate_script("$('#l-places').children().length;").should == 2
-            places_with_ordering_spec(@categorized)
-          end
+          find('.cats').uncheck('workshop')
+          find('.cats').uncheck('museum')
+          find('.cats').uncheck('cinema')
+          find('.cats').uncheck('transport_station')
+          page.evaluate_script("$('#l-places').children().length;").should == 2
+          places_with_ordering_spec(@categorized)
         end
       end
       
@@ -139,11 +119,9 @@ feature 'Places listing' do
         end
       
         scenario "when filtering by those more recent should show the most recent first" do
-          within('#main-box') do
-            select I18n.t('places.views.index.recent'), :from => "l-params"
+          select I18n.t('places.views.index.recent'), :from => "l-params"
           
-            places_with_ordering_spec(@recent)
-          end
+          places_with_ordering_spec(@recent)
         end
       
       end
@@ -157,11 +135,9 @@ feature 'Places listing' do
         end
       
         scenario "visiting the main places page and show the most popular first" do
-          within('#main-box') do
-            select I18n.t('places.views.index.popular'), :from => "l-params"
-          
-            places_with_ordering_spec(@popular)
-          end
+          select I18n.t('places.views.index.popular'), :from => "l-params"
+        
+          places_with_ordering_spec(@popular)
         end
       end
       
@@ -174,11 +150,9 @@ feature 'Places listing' do
         end
       
         scenario "visiting the main places page and show the most accessible first" do
-          within('#main-box') do
-            select I18n.t('places.views.index.accessible'), :from => "l-params"
-          
-            places_with_ordering_spec(@accessible)
-          end
+          select I18n.t('places.views.index.accessible'), :from => "l-params"
+        
+          places_with_ordering_spec(@accessible)
         end
       end
     end
@@ -186,32 +160,28 @@ feature 'Places listing' do
   end
 end
 
-def content_specs_with(places)
-  page.has_css?('#map-box').should be_true
-  
-  within('#main-box') do
-    page.should have_content I18n.t('places.views.index.title')
+def content_specs_with(places)  
+  page.should have_content I18n.t('places.views.index.title')
 
-    find_link I18n.t('places.views.index.new')
+  find_link I18n.t('places.views.index.new')
 
-    within('.cats') do
-      find_field "workshop"
-      find_field "restaurant"
-      find_field "transport_station"
-      find_field "store"
-      find_field "museum"
-      find_field "cinema"
-    end
-    
-    page.has_css?('#l-params')
-    
-    places.each do |place|
-      within("#place-#{place.id}") do
-        place_view_spec(place)
-      end
-    end
-    
+  within('.cats') do
+    find_field "workshop"
+    find_field "restaurant"
+    find_field "transport_station"
+    find_field "store"
+    find_field "museum"
+    find_field "cinema"
   end
+  
+  page.has_css?('#l-params')
+  
+  places.each do |place|
+    within("#place-#{place.id}") do
+      place_view_spec(place)
+    end
+  end
+
 end
 
 def places_with_ordering_spec(places)

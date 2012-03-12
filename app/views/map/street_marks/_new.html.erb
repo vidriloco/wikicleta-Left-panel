@@ -1,0 +1,7 @@
+<h3><%= t('street_marks.form.instructions.title') %></h3>
+<%= text_field_tag 'name', nil, :placeholder => t('street_marks.form.instructions.name'), :id => 'name', :class=> 'inlined', :size => 35 %>
+
+<div class="actions inlined ml-20">
+	<%= link_to t('street_marks.form.actions.cancel'), '#', :class => "close" %>
+	<%= link_to t('street_marks.form.actions.save'), 'javascript:void(0);', :class => 'commit button green-button' %>
+</div>

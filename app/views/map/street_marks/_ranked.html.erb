@@ -1,0 +1,18 @@
+<div class="poll-results">
+	<div class="total">{{ totals }}</div>
+<% CatalogedQuestion.for_street_marks.each do |question_for_street_mark| %>
+	<div class="question">
+		<label><%= question_for_street_mark.content %></label>
+		<div class="answers" >
+			<% question_for_street_mark.cataloged_answers.each do |answer_for_question| %>
+				<span class="value {{count}}"><%= answer_for_question.content %></span>
+			<% end %>
+		</div>
+	</div>
+<% end %>
+</div>
+
+<div class="actions invite">
+	<p><%= t('street_marks.show.invite') %></p>
+	<%= link_to t('actions.evaluate'), '#/{{model_id}}/evaluate', :class => 'evaluate button green-button' %>
+</div>

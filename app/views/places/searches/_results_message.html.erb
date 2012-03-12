@@ -1,0 +1,9 @@
+<% if @search_mode %>
+	<%= content_for :messages do %>
+		<% if @places.empty? %>
+			<%= t('places.views.search.results.empty') %>
+		<% else %>
+			<%= @places.size == 1 ? t('places.views.search.results.some.one') : t('places.views.search.results.some.other', :count => @places.size) %>
+		<% end %>
+	<% end %>
+<% end %>

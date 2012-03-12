@@ -3,12 +3,13 @@ $(document).ready(function() {
 	var requestPlaces = function() {
 		var orderValue = $("#l-params").val();
 		var selectedCategories = [];
-		$(".cats").children("input:checked").each(function(index) {
-			if($(this).attr('class') == 'item') {
-		  	selectedCategories.push($(this).attr('id').split("-")[1]);
+
+		$(".cats").children('li').each(function(index) {
+			var item = $($(this).children("input:checked")[0]);
+			if(item.attr('class') == 'item') {
+		  	selectedCategories.push(item.attr('id').split("-")[1]);
 			}
 		});
-		
 		// Response is yielded at index.js.erb (listings#places)		
 		$.ajax({
 		  type: "GET",
@@ -33,7 +34,16 @@ $(document).ready(function() {
 	});
 
 	$('.display-js-notification').live('click', function() {
-		$('#notifications p').fadeIn(100).delay(4000).fadeOut(400);
+		$('#messages').html($('#message').html());
+		$('#messages').fadeIn(100).delay(4000).fadeOut(400);
 	});
+	
+	if($.isDefined('.selectable-for-search')) {
+		mapWrap.enableSearch("#coordinates_ne", "#coordinates_sw");
+	}
+
+	if($.isDefined('.search-box')) {
+		$('.search-box').slideToggle();
+	}
 
 });

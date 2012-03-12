@@ -19,15 +19,15 @@ es_MX:
           commenting: "comentar un lugar"
           evaluate: "evaluar un lugar"
     common_actions:
-      re_evaluate: "Cambiar calificación"
-      evaluate: "Calificar"
+      re_evaluate: "Cambiar opinión"
+      evaluate: "Opinar"
       recommend: "Recomendar"
       recommending: "Tú lo recomiendas"
       unfollow: "Dejar de Seguir"
       owning: "A cargo"
     custom_validations:
       coordinates_missing: 'No ha sido seleccionada ninguna ubicación en el mapa'
-      twitter_bad_format: "no debe llevar el símbolo @"
+      twitter_bad_format: "Cuenta de twitter no debe llevar el símbolo @"
     subviews:
       show:
         mobility_index:
@@ -44,7 +44,7 @@ es_MX:
               one: "ha calificado"
               other: "han calificado"
         announcements:
-          empty: "Por ahora, no hay anuncios en éste lugar"
+          empty: "Por ahora, no hay anuncios en este lugar"
           starts_in: "Empieza en "
           finishes_in: "Termina en "
           validations: 
@@ -57,7 +57,7 @@ es_MX:
         followers:
           empty: "Este lugar no tiene seguidores aún" 
         comments:
-          empty: "No hay comentarios para éste lugar aún"
+          empty: "No hay comentarios para este lugar aún"
           actions:
             confirm: "¿Eliminar este comentario?"
             delete: "Eliminar"
@@ -66,26 +66,41 @@ es_MX:
         title: "Resultados de la búsqueda"
         nothing_found: "No se encontraron lugares que coincidieran con:"
       search:
-        title: "Búsqueda de Lugares"
+        results: 
+          empty: "No se encontraron lugares que coincidan con tus parámetros de búsqueda"
+          some: 
+            one: "1 lugar encontrado"
+            other: "%{count} lugares encontrados"
+        form: 
+          description: "Lugares con estas palabras"
+          name: "Lugares con este nombre"
         suggestions:
-          select_map_area: "Ajusta el área de búsqueda geográfica acercando/alejando el mapa y arrastrándolo a la zona de interés"
+          select_map_area: "Búsqueda sobre el área visible del mapa"
         fields:
           within_categories: "Con las siguientes categorías:"
           consider_map_visible_area: "Considerar la ubicación geográfica del lugar"
       edit:
         title: "Modificar Lugar"
+      form:
+        description: "Descripción del lugar"
+        name: "Nombre"
+        address: "Su ubicación (opcional)"
+        twitter: "Cuenta de twitter del lugar (opcional)"
+        is_bike_friendly: "¿Es amigable con el ciclista?"
       show:
         new_comment: "Comentar"
         followers: "Seguidores"
         photos: "Fotos"
+        transports: "Transportes cercanos"
         announcements: "Anuncios"
         comments: "Comentarios"
+        evaluations: "Opiniones"
         how_to_arrive: "¿Cómo llegar?"
         edit: "Modificar"
       index: 
         title: "Lugares"
         new: "Agrega un lugar"
-        search: "Buscar lugares"
+        search: "Buscar"
         registration_invitation: "Registrate para compartir, seguir y reseñear lugares"
         followed_by_me: "Lugares que sigo"
         shared_by_me: "Lugares que compartí"
@@ -96,7 +111,7 @@ es_MX:
         accessible: "De fácil acceso"
       new:
         title: "Nuevo Lugar"
-        instruction: "Selecciona un punto en el mapa"
+        instruction: "Para empezar, selecciona un punto en el mapa"
         approximate_address: "Dirección aproximada"
         form:
           name_field: "Aquí va el nombre del lugar"

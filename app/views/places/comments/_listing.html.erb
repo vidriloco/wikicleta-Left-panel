@@ -1,15 +1,23 @@
 
 <% if user_signed_in? %>
-	<%= form_for places_comments_path(@place), :remote => true do |f| %>
-		<%= f.text_area :content, :id => "place_comment", :name => "place_comment[content]" %>
-		<%= f.submit t('actions.share') %>
-	<% end %>
+	
+		<%= form_for places_comments_path(@place), :remote => true do |f| %>
+			<div class="styled-form">
+				<%= f.text_area :content, :id => "place_comment", :name => "place_comment[content]", :rows => 2, :cols => 69 %>
+			</div>
+			<div class="actions">
+				<%= f.submit t('actions.share'), :class => "button green-button to-right" %>
+			</div>
+		<% end %>
+
 <% else %>
 	<p><%= t('places.messages.error.login_required', :action => t('places.messages.error.complements.commenting')) %></p>
 <% end %>
 
-<% if @place.place_comments.empty? %>
-	<h3><%= t('places.subviews.show.comments.empty') %></h3>
-<% else %>
-	<%= render :partial => 'places/comments/unit', :collection => @place.place_comments, :as => :comment %>
-<% end %>
+<div class="listing">
+	<% if @place.place_comments.empty? %>
+		<h3><%= t('places.subviews.show.comments.empty') %></h3>
+	<% else %>
+		<%= render :partial => 'places/comments/unit', :collection => @place.place_comments, :as => :comment %>
+	<% end %>
+</div>

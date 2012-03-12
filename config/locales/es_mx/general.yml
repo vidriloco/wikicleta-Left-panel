@@ -2,16 +2,22 @@ es_MX:
   app_name: "Wikiando"
   messages:
     save_failure: "no pudo guardar este %{element} debido a:"
+  states:
+    new: "Nuevo"
+    edit: "Cambiar"
   actions:
+    return: "Regresar"
     share: "Compartir"
     save: "Guardar"
     update: "Guardar cambios"
     cancel: "Cancelar"
     search: "Buscar"
     accept: "Aceptar"
+    search: "Buscar"
     back: "Atrás"
     close: "Cerrar"
     delete: "Eliminar"
+    evaluate: "Calificar"
     sessions: 
       first_person:
         start: "Inicia sesión"

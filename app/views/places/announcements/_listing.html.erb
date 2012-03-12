@@ -14,8 +14,10 @@
 	</div>
 <% end %>
 
-<% if @place.announcements.empty? %>
-	<h3><%= t('places.subviews.show.announcements.empty') %></h3>
-<% else %>
-	<%= render :partial => 'places/announcements/unit', :collection => @place.announcements, :as => :announcement %>
-<% end %>
+<div class="listing">
+	<% if @place.announcements.empty? %>
+		<h3><%= t('places.subviews.show.announcements.empty') %></h3>
+	<% else %>
+		<%= render :partial => 'places/announcements/unit', :collection => @place.announcements, :as => :announcement %>
+	<% end %>
+</div>

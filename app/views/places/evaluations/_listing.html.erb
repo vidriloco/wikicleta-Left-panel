@@ -1,29 +1,25 @@
-<div class="header">
-	<h3><%= t('places.subviews.show.evaluations.show.title') %></h3>
-	<%= @place.surveys.count %> 
-	<%= @place.surveys.count == 1 ? t('places.subviews.show.evaluations.show.count.one') : t('places.subviews.show.evaluations.show.count.other') %>
-	
+<div class="header actions">	
 	<% if user_signed_in? %>
 		<% if evaluation_survey=@place.evaluation_from(current_user) %>
-			<%= link_to t('places.common_actions.re_evaluate'), places_edit_evaluation_path(@place, evaluation_survey), :remote => true %>
+			<%= link_to t('places.common_actions.re_evaluate'), places_edit_evaluation_path(@place, evaluation_survey), :remote => true, :class => 'button blue' %>
 		<% else %>
-			<%= link_to t('places.common_actions.evaluate'), places_new_evaluation_path(@place), :remote => true %>
+			<%= link_to t('places.common_actions.evaluate'), places_new_evaluation_path(@place), :remote => true, :class => "button blue" %>
 		<% end %>
 	<% else %>
-		<%= link_to t('places.common_actions.evaluate'), 'javascript:void(0);', :class => 'display-js-notification' %>
+		<%= link_to t('places.common_actions.evaluate'), 'javascript:void(0);', :class => 'display-js-notification button blue' %>
 		
-		<% content_for(:notifications) do %>
-			<p class="hidden"><%= t('places.messages.error.login_required', :action => t('places.messages.error.complements.evaluate')) %></p>
-		<% end %>
+		<script type="text/x-handlebars-template" id="message" class="hidden">
+			<p><%= t('places.messages.error.login_required', :action => t('places.messages.error.complements.evaluate')) %></p>
+		</script>
 	<% end %>
 </div>
 
 
-<div class="evaluation" id="meta-survey-<%= @place.category.meta_survey.id %>">
+<div class="poll-results" id="meta-survey-<%= @place.category.meta_survey.id %>">
 	<% @place.category.meta_survey.meta_questions.each do |meta_question| %>
-		<div id="meta-question-<%= meta_question.id %>">
-			<span class="title"><%= meta_question.title %></span>
-			<div class="options">
+		<div id="meta-question-<%= meta_question.id %>" class="question">
+			<label><%= meta_question.title %></label>
+			<div class="answers">
 				<% meta_question.meta_answer_items.each do |meta_answer_item| %>
 					<span id="meta-answer-item-<%= meta_answer_item.id %>" class="value count-<%= @place.evaluation_count_for(meta_answer_item) %>">
 						<%= meta_answer_item.human_value %>
@@ -33,4 +29,5 @@
 		</div>
 	<% end %>
 </div>
+
 

@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :surveys
   
   has_many :incidents
+  has_many :street_marks
   
   devise :omniauthable, :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:login]
   attr_accessor :login

@@ -6,6 +6,10 @@ body, html {
 	font-family: calibri;
 }
 
+#notifications {
+	display: none !important;
+}
+
 .welcome h1, .welcome h3, p {
 	margin: 0px;
 	text-align: center;

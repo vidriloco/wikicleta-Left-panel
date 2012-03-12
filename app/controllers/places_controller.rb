@@ -1,5 +1,5 @@
 class PlacesController < ApplicationController
-  layout 'application'
+  layout 'places'
   
   before_filter :authenticate_user!, :except => [:index, :show]
 

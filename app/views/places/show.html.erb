@@ -1,60 +1,95 @@
+<%= content_for :header do %>
+	<div class="mini-header size-of-300 shadow-light rounded-bottom-5">
+		<h1><%= t('places.views.index.title') %></h1>
+		<ul class="inlined actions-list">
+			<li><%= link_to "&larr; #{t('actions.return')}".html_safe, places_path %></li>
+			<li><%= link_to t('places.views.index.search'), places_search_path, :class => "button orange" %></li>
+		</ul>
+	</div>
+<% end %>
+
 <div id="main-box">
-	<h1><%= @place.name %></h1>
 	
-	<p class="<%= "not-given-" unless @place.address.blank? %>address"><%= @place.address %></p>
+	<div class="general">
+		<h1><%= @place.name %> </h1>
+		<span class="contributor">
+			<b><%= t('connectives.by').downcase %> <%= @place.get_any_owner.username %></b>
+			<% if @place.owned_by?(current_user) %>
+				(<%= link_to t('places.views.show.edit'), edit_place_path(@place) %>)
+			<% end %>
+		</span>
+		<p class="<%= "not-given-" unless @place.address.blank? %>address"><%= @place.address %></p>
+		
+		<ul class="social rounded-5">
+			<li class="social-nets">
+				<% unless @place.twitter.blank? %>
+					<span class="twitter">@<%= link_to @place.twitter, "http://www.twitter.com/#{@place.twitter}", :target => "_blank" %></span>
+				<% end %>
+			</li>
+
+			<li class="recommend actions">
+				<%= render 'places/recommendations/action_link' %>	
+			</li>
+		</ul>
+		
+	</div>
 	
-	<div class="social-nets">
-		<% unless @place.twitter.blank? %>
-			<span class="twitter">@<%= @place.twitter %></span>
-		<% end %>
+	<p class="description"><%= @place.description %></p>
+
+	<div class="mobility rounded-5 shadow-lighter">
+		<ul>
+			<% if @place.is_bike_friendly? %>
+				<li><div class="bike"></div></li>
+			<% end %>
+			<li>
+				<a href="javascript:void(0);" class="last">
+					<span class='count'><%= 0 %></span>
+					<span class='saying'><%= t('places.views.show.transports') %></span>
+				</a>
+			</li>
+		</ul>
+		<%= link_to t('places.views.show.how_to_arrive') , '', :class => "main rounded-5" %>
 	</div>
 
-	<div class="recommend">
-		<%= render 'places/recommendations/action_link' %>	
-	</div>
-	
-	<%= t('connectives.by') %> <%= @place.get_any_owner.username %>
-	<% if @place.owned_by?(current_user) %>
-		<%= link_to t('places.views.show.edit'), edit_place_path(@place) %>
-	<% end %>
 
-	<span class="description"><%= @place.description %></span>
+	<div class="changing-content rounded-5 shadow-lighter">
+		<ul id="status-bar" class="rounded-top-5">
+		
+			<li class="evaluations">
+				<%= render 'places/evaluations/count' %>
+			</li>
+		
+			<li class="photos">
+				<a href="javascript:void(0);">
+					<span class='count'><%= @place.photos_count %></span>
+					<span class='saying'><%= t('places.views.show.photos') %></span>
+				</a>
+			</li>
+	
+			<li class="announcements">
+				<%= render 'places/announcements/count' %>
+			</li>
+	
+			<li class="comments">
+				<%= render 'places/comments/count' %>
+			</li>
+			
+			
+		</ul>
 
-	<div id="status-bar">
-	
-		<div class="photos">
-			<span class="count"><%= @place.photos_count %></span>
-			<span class="saying"><%= t('places.views.show.photos') %></span>
+		<div id="tabbed-content">
+			<% unless @place.category.meta_survey.nil? %>
+				<%= render 'places/evaluations/listing' %>
+			<% end %>
 		</div>
-	
-		<div class="announcements">
-			<%= render 'places/announcements/count' %>
-		</div>
-	
-		<div class="comments">
-			<%= render 'places/comments/count' %>
-		</div>
-	
-		<div class="mo-index">
-			<span class="name"><%= @place.mobility_kindness_index %></span>
-			<%= Place.human_attribute_name(:mobility_kindness_index) %>
-		</div>
-	
-		<%= link_to t('places.views.show.how_to_arrive') , '' %>
-	</div>
-
-	<div id="tabbed-content">
-		<% unless @place.category.meta_survey.nil? %>
-			<%= render 'places/evaluations/listing' %>
-		<% end %>
 	</div>
 </div>
 
-<div id="side-box">
-	<div id="map-box">
-		<div style="width:100%; height:400px;" id="map" class="displays-points radio-3 shadowed-light"></div>
-	</div>
+<div id="map-box">
+	<div style="width:220px; height:500px;" id="map" class="displays-points radio-3 rounded-5 shadow-lighter"></div>
 </div>
+
+
 
 <% unless @place.coordinates.nil? %>
 	<%= hidden_field_tag 'coordinates[lat]', @place.coordinates.lat %>

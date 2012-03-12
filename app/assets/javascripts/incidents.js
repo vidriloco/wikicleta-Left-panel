@@ -1,5 +1,3 @@
-var defaultZoom=13;
-
 var mapIncidents = function() {
 	mapWrap.resetMarkersList();
 	// Load all the incidents coordinates into the map
@@ -107,12 +105,6 @@ $(document).ready(function(){
 	});
 	
 	$('.status').hide().delay(1500).fadeIn(1500);
-	
-	if(!$.isBlank('#notifications')) {
-		$("#submenu").hide();
-		$('#notifications').fadeIn().delay(3000).fadeOut(2000);
-		$("#submenu").delay(5000).fadeIn(500);
-	} 
 	
 	$('#itemlist').draggable({cursor: 'move'});
 	$('#itemdetails').draggable({cursor: 'move'});

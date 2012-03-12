@@ -1,0 +1,67 @@
+.street-count {
+	color: white;
+	text-align: center;
+	margin: 0px;
+}
+
+.bottom-container {
+	display: none;
+	background-color: white;
+	padding: 10px 30px;
+	width: 440px;
+	left: 50%; margin-left: -250px;
+}
+
+.bottom-container h3 {
+	margin: 4px 0px 0px 0px;
+	text-align: center;
+}
+
+#main-panel {
+	width: 530px;
+	left: 50%; margin-left: -295px;
+}
+
+#main-panel h3 {
+	font-size: 24px;
+	text-align: left;
+}
+
+#main-panel .date {
+	font-size: 12px;
+	color: #383838;
+	font-style: italic;
+}
+
+#main-panel .date abbr {
+	border-bottom: none;
+}
+
+#main-panel .invite {
+	text-align: center;
+}
+
+#main-panel .invite a {
+	font-size: 14px;
+}
+
+#main-panel .invite p {
+	font-size: 16px;
+	margin-right: 20px;
+	font-weight: bold;
+	color: #D65920;
+	margin: 5px 10px 10px 0;
+}
+
+#controls-panel {
+	margin-top: -18px;
+}
+
+#controls-panel a {
+	font-size: 16px;
+}
+
+.actions a {
+	font-size: 13px;
+	margin-right: 10px;
+}

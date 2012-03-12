@@ -20,7 +20,7 @@ class Place < ActiveRecord::Base
   
   validates_presence_of :name, :description, :category
   validate :coordinates_are_set, :twitter_correct_format
-
+  
   def self.include_with(id, association)
     self.find(:first, :conditions => {:id => id}, :include => association)
   end
@@ -43,6 +43,10 @@ class Place < ActiveRecord::Base
     Survey.where({:user_id => user.id, :evaluable_id => self.id, :evaluable_type => self.class.to_s}).first
   end
   
+  def is_bike_friendly?
+    is_bike_friendly
+  end
+  
   def evaluation_count_for(meta_answer_item) 
     self.surveys.joins(:answers).where(
                                     :answers => 
@@ -54,7 +58,7 @@ class Place < ActiveRecord::Base
   private
   def twitter_correct_format
     return true if self.twitter.blank?
-    errors.add(:twitter, I18n.t('places.custom_validations.twitter_bad_format')) if !self.twitter.match(/@(\w+)/).nil?
+    errors.add(:base, I18n.t('places.custom_validations.twitter_bad_format')) if !self.twitter.match(/@(\w+)/).nil?
   end
   
 end

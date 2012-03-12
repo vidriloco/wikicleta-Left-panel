@@ -1,7 +1,7 @@
-<div id="comment-<%= comment.id %>">
+<div id="comment-<%= comment.id %>" class="comment">
 	<div class="image"></div>
-	<%= comment.user.username %>
-	<%= comment.content %>
+	<span class="user"><%= comment.user.username %>:</span>
+	<span class="content"><%= comment.content %></span>
 	
 	<% if !current_user.nil? && current_user.owns_comment?(comment) %>
 		<%= link_to t('places.subviews.show.comments.actions.delete'), places_delete_comment_path(@place, comment), 

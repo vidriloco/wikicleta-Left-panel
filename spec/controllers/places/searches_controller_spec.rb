@@ -19,7 +19,9 @@ describe Places::SearchesController do
     it "should render the main results template" do
       Place.should_receive(:find_by)
       post :execute_main
-      response.should render_template("main_results")
+      
+      assigns(:search_mode).should be(true)
+      response.should render_template("index")
     end
   
   end

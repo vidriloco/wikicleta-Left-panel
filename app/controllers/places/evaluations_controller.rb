@@ -9,6 +9,9 @@ class Places::EvaluationsController < ApplicationController
     end
   end
   
+  def show
+  end
+  
   def create
     @survey = Survey.from_hash(params[:survey].merge(:user => current_user, 
                                                      :evaluable => @place))

@@ -1,10 +1,17 @@
 <%= render :partial => 'shared/form_errors', :locals => {:message => "save_failure", :object => @place} %>
 
-<%= p.input :name, :label => false %>
-<%= p.input :description, :label => false %>
-<%= p.input :address, :label => false %>
-<%= p.input :category,  :as => :select, :collection => categories_for_select, :label => false %>
-<%= p.input :twitter %>
+
+<%= p.text_field :name, :placeholder => t('places.views.form.name') %>
+<%= p.select :category_id,  options_for_select(categories_for_select) %>
+
+<br/>
+<%= p.check_box :is_bike_friendly, :checked => @place.is_bike_friendly || false %>
+<label><%= I18n.t("places.views.form.is_bike_friendly") %></label>
+
+<%= p.text_area :description, :placeholder => t('places.views.form.description'), :rows => 3, :cols => 46 %>
+<%= p.text_area :address, :placeholder => t('places.views.form.address'), :rows => 2, :cols => 46 %>
+
+<%= p.text_field :twitter, :placeholder => t('places.views.form.twitter') %>
 
 <%= hidden_field_tag 'coordinates[lat]', @place.coordinates.nil? ? "" : @place.coordinates.lat %>
 <%= hidden_field_tag 'coordinates[lon]', @place.coordinates.nil? ? "" : @place.coordinates.lon %>

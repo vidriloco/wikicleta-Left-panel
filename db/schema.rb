@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120225073356) do
+ActiveRecord::Schema.define(:version => 20120311080330) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                             :default => "", :null => false
@@ -57,6 +57,21 @@ ActiveRecord::Schema.define(:version => 20120225073356) do
     t.integer  "category"
     t.string   "name"
     t.string   "details"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "cataloged_answers", :force => true do |t|
+    t.string   "content"
+    t.integer  "cataloged_question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "cataloged_questions", :force => true do |t|
+    t.string   "content"
+    t.integer  "order"
+    t.string   "model_klass"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -131,6 +146,7 @@ ActiveRecord::Schema.define(:version => 20120225073356) do
     t.string   "address"
     t.integer  "category_id"
     t.string   "twitter"
+    t.boolean  "is_bike_friendly"
     t.integer  "recommendations_count",                  :default => 0
     t.integer  "photos_count",                           :default => 0
     t.integer  "comments_count",                         :default => 0
@@ -138,6 +154,30 @@ ActiveRecord::Schema.define(:version => 20120225073356) do
     t.datetime "updated_at"
     t.point    "coordinates",             :limit => nil,                :srid => 4326
   end
+
+  create_table "question_answer_rank_counts", :force => true do |t|
+    t.integer  "total",               :default => 0
+    t.integer  "cataloged_answer_id"
+    t.integer  "ranked_count_id"
+    t.string   "ranked_count_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "question_answer_rank_counts", ["cataloged_answer_id", "ranked_count_id", "ranked_count_type"], :name => "question_answer_rank_counts_idx", :unique => true
+
+  create_table "question_answer_ranks", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "cataloged_answer_id"
+    t.integer  "cataloged_question_id"
+    t.integer  "open_number",           :default => 0
+    t.integer  "ranked_id"
+    t.string   "ranked_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "question_answer_ranks", ["user_id", "cataloged_question_id", "ranked_id", "ranked_type"], :name => "question_answer_ranks_idx", :unique => true
 
   create_table "questions", :force => true do |t|
     t.integer  "meta_question_id"
@@ -155,6 +195,14 @@ ActiveRecord::Schema.define(:version => 20120225073356) do
     t.boolean  "is_verified", :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "street_marks", :force => true do |t|
+    t.string      "name"
+    t.integer     "user_id"
+    t.datetime    "created_at"
+    t.datetime    "updated_at"
+    t.line_string "segment_path", :limit => nil, :srid => 4326
   end
 
   create_table "surveys", :force => true do |t|

@@ -1,8 +1,4 @@
-<span class="count"><%= @place.announcements.count %></span>
-<span class="saying">
-	<% if @place.announcements.count == 1 %>
-		<%= link_to t('places.views.show.announcements').singularize, places_announcements_path(@place), :remote => true %>
-	<% else %>
-		<%= link_to t('places.views.show.announcements'), places_announcements_path(@place), :remote => true %>
-	<% end %>
-</span>
+<a data-remote="true" href="<%= places_announcements_path(@place) %>">
+	<span class='count'><%= @place.announcements.count %></span>
+	<span class='saying'><%= @place.announcements.count == 1 ? t('places.views.show.announcements').singularize : t('places.views.show.announcements') %></span>
+</a>

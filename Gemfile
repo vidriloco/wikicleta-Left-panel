@@ -14,6 +14,7 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'twitter'
+gem 'rails-backbone'
 
 group :test do
 	gem 'capybara'

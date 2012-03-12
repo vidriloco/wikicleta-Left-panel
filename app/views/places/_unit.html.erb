@@ -1,15 +1,7 @@
-<div id="place-<%= place.id %>">
+<div id="place-<%= place.id %>" class="item rounded-5 inlined">
 	<div class="order-<%= place_counter %>"></div>
 	
 	<div class="image"></div>
-	<div class="details">
-		<span class="name"><%= link_to place.name, place_path(place) %></span>
-		<span class="address"><%= place.address %></span>
-	</div>
-	
-	<div class="mo-index">
-		<span class="name"><%= place.mobility_kindness_index %></span>
-		<%= Place.human_attribute_name(:mobility_kindness_index) %>
-	</div>
+	<p class="name rounded-10"><%= link_to place.name, place_path(place) %></p>
 	
 </div>

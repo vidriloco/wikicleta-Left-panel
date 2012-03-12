@@ -29,9 +29,10 @@ feature 'Individual description of places: ' do
         find_button I18n.t('places.common_actions.recommend')
         page.should have_content @taller_costumbre.description
       
-        page.should have_content I18n.t('connectives.by') 
+        page.should have_content I18n.t('connectives.by').downcase 
         page.should have_content @user.username
-      
+        find_link I18n.t('places.views.show.how_to_arrive')
+        
         within("#status-bar") do
       
           within(".photos") do
@@ -48,11 +49,6 @@ feature 'Individual description of places: ' do
             page.should have_content @taller_costumbre.comments_count
             page.should have_content I18n.t('places.views.show.comments')
           end
-        
-          page.should have_content @taller_costumbre.mobility_kindness_index
-          page.should have_content Place.human_attribute_name(:mobility_kindness_index)
-        
-          find_link I18n.t('places.views.show.how_to_arrive')
         end
       
         # this behavior is spec'ed in the evaluations acceptance places directory
@@ -62,9 +58,7 @@ feature 'Individual description of places: ' do
         #end
         
       end
-      
-      page.has_css?('#side-box').should be_true
-      
+            
     end
     
     describe "and someone changes it's address to an empty valued field it" do
@@ -75,11 +69,7 @@ feature 'Individual description of places: ' do
       
       it "should show Google's geolocated approximate address", :js => true do
         visit place_path(@taller_costumbre)
-        within('#main-box') do
-          page.should have_content "De La Virgen, Coyoacán, Mexico City, Distrito Federal, Mexico"
-        end
-        
-        page.has_css?('#side-box').should be_true
+        page.should have_content "De La Virgen, Coyoacán, Mexico City, Distrito Federal, Mexico"
       end
       
     end
@@ -91,12 +81,9 @@ feature 'Individual description of places: ' do
       
       it "should not show it" do
         visit place_path(@taller_costumbre)
-        within('#main-box') do
-          page.has_css?('.twitter').should be_false
-          page.should_not have_content "@"
-        end
         
-        page.has_css?('#side-box').should be_true
+        page.has_css?('.twitter').should be_false
+        page.should_not have_content "@"      
       end
     end    
     
