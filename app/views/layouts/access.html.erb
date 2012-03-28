@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ciudad-IO</title>
+  <title><%= t('app.name') %></title>
 
-  <%= stylesheet_link_tag    "access" %>
+  <%= stylesheet_link_tag    "full_page" %>
   <%= javascript_include_tag "application" %>
 	
   <%= csrf_meta_tags %>
 </head>
 <body>
+	
+	<div id="menu" class="shadow-light">
+		<%= render 'layouts/shared/logo' %>
+	</div>
 	
 	<div id="notifications">
 		<%= flash[:notice] || yield(:notifications) %>

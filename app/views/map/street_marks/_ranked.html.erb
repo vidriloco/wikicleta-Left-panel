@@ -1,18 +1,29 @@
 <div class="poll-results">
-	<div class="total">{{ totals }}</div>
-<% CatalogedQuestion.for_street_marks.each do |question_for_street_mark| %>
-	<div class="question">
-		<label><%= question_for_street_mark.content %></label>
-		<div class="answers" >
-			<% question_for_street_mark.cataloged_answers.each do |answer_for_question| %>
-				<span class="value {{count}}"><%= answer_for_question.content %></span>
-			<% end %>
+	<% StreetMarkRanking.aspects.each do |aspect| %>
+		<div class="question">
+			<label><%= t("street_mark_rankings.aspects.#{aspect}.title") %></label>
+			<div class="answers" >
+				<% StreetMarkRanking.aspects_options[aspect].each do |option| %>
+					<span class="value" id="<%= @street_mark_rankings["#{aspect}-#{option}"] %>"><%= t("street_mark_rankings.aspects.#{aspect}.options.#{option}") %></span>
+				<% end %>
+			</div>
 		</div>
-	</div>
-<% end %>
+	<% end %>
 </div>
 
-<div class="actions invite">
-	<p><%= t('street_marks.show.invite') %></p>
-	<%= link_to t('actions.evaluate'), '#/{{model_id}}/evaluate', :class => 'evaluate button green-button' %>
-</div>
+<script type="text/javascript">
+    $(function() {
+			_.each($('.question').children('.answers'), function(answer) {
+				var answers = {};
+				_.each($(answer).children('.value'), function(value) {
+					answers[value.id] = value;
+				});
+
+				if(_.size(answers) > 1) {
+					var highest = _.max(_.keys(answers));
+					$(answers[highest]).addClass('highest');
+				}
+			});
+			
+    });
+</script>

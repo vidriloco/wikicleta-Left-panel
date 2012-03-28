@@ -31,7 +31,7 @@ Wikiando.Views.StreetMarks.NewView = Backbone.View.extend({
 	},
 	
 	save: function() {
-		if(this.model.isValid()) {
+		if(this.model.isValid() && Wikiando.Session.user != null) {
 			var localView = this;
 			this.collection.create(this.model.toJSON(),
 			{

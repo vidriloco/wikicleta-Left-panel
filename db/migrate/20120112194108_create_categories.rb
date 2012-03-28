@@ -7,7 +7,7 @@ class CreateCategories < ActiveRecord::Migration
       t.timestamps
     end
     
-    add_index(:categories, :standard_name, :unique => true, :name => "standard_name_index")
+    add_index(:categories, :standard_name, :unique => true, :name => "standard_name_idx")
     
     require 'factory_girl_rails'
     Factory(:workshop)

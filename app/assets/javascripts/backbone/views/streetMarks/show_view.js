@@ -18,6 +18,7 @@ Wikiando.Views.StreetMarks.ShowView = Backbone.View.extend({
 		$('#submenu').empty();
 		
 		new Wikiando.Views.StreetMarks.ShowDetailsView({ model : this.model });
+		
 		return this;
 	},
 	
@@ -28,6 +29,10 @@ Wikiando.Views.StreetMarks.ShowView = Backbone.View.extend({
 	
 	pushEvaluationsView: function() {
 		new Wikiando.Views.StreetMarks.ShowEvaluationsView({ model : this.model });
+	}, 
+	
+	fetchRankingsSubView: function() {
+		$.get("/map/street_marks/"+this.model.id+'/rankings');
 	}
 	
 });

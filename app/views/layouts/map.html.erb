@@ -11,11 +11,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<script type="text/javascript">
+	    $(function() {
+	        Wikiando.setCurrentUser(<%= current_user.to_json.html_safe -%>);
+	    });
+	</script>
 	
 	<%= render 'layouts/shared/alerts_and_notifications' %>
 	
 	<div id="header">
-		<div class="menu"></div>
+		<div id="menu" class="shadow-light">
+			<%= render 'layouts/shared/logo' %>
+			<%= render 'layouts/shared/top_menu' %>
+		</div>
 		
 		<div class="mini-header shadow-light rounded-bottom-5 <%= yield(:classes_for_header) %>">
 			<%= yield :header %>

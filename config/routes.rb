@@ -67,6 +67,9 @@ Ciudadio::Application.routes.draw do
   
   namespace :map do
     resources :street_marks, :only => [:create, :index, :show]
+    post "street_marks/rankings" => "street_mark_rankings#create"
+    get "street_marks/:street_mark_id/rankings" => "street_marks#rankings"
+    
     resources :incidents, :except => [:edit, :update] do
       collection do 
         post :filtering
@@ -74,11 +77,15 @@ Ciudadio::Application.routes.draw do
     end
   end
 
-  get "/places/:id" => 'places#show', :as => "place"
-  get "/places/edit/:id" => 'places#edit', :as => "edit_place"
+  resources :bikes do
+    collection do 
+      get :search
+      get :popular
+    end
+  end
 
-  
-  
+  get "/places/:id" => 'places#show', :as => "place"
+  get "/places/edit/:id" => 'places#edit', :as => "edit_place"  
   
   root :to => 'welcome#index'
 end

@@ -1,5 +1,6 @@
 class StreetMark < ActiveRecord::Base
-  has_many :question_answer_ranks, :as => :ranked
+  has_many :street_mark_rankings
+  
   belongs_to :user
   
   validates_presence_of :segment_path, :name
@@ -13,7 +14,7 @@ class StreetMark < ActiveRecord::Base
   
   def as_json(options={})
     {
-      :segment_path => compact_json_segment_path,
+      :segment_path => segment_path_to_json,
       :name => name,
       :id => id,
       :created_at => created_at.to_time.iso8601,
@@ -22,7 +23,7 @@ class StreetMark < ActiveRecord::Base
   end
   
   private
-    def compact_json_segment_path
+    def segment_path_to_json
       segment_path.points.map do |point|
         {"Ua" => point.lat, "Va" => point.lon}
       end

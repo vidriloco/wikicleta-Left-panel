@@ -10,7 +10,7 @@ var StreetMark = Backbone.Model.extend({
 		name: {
 			required : true,
 			minLength: 1,
-			maxLength: 20
+			maxLength: 50
 		},
 		segment_path: function(value) {
       if(!value) {

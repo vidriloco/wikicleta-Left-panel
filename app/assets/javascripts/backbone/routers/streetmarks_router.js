@@ -27,6 +27,7 @@ Wikiando.Routers.StreetMarks = Backbone.Router.extend({
 		this.view = new Wikiando.Views.StreetMarks.ShowView({ model : model });
 		this.view.render();
 		this._loadLines([model], true);
+		this.view.fetchRankingsSubView();
 	},
 	
 	// renders the show view and pushes the evaluations subview

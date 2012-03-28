@@ -20,8 +20,11 @@
 	<%= link_to t('actions.modify'), 'javascript:void(0);', :class => 'commit button green-button' %>
 </script>
 
-<script type="text/x-handlebars-template" id="details-template">
-	<%= render 'ranked' %>
+<script type="text/x-handlebars-template" id="details-template-invite">
+	<div class="actions invite">
+		<p><%= t('street_marks.show.invite') %></p>
+		<%= link_to t('actions.evaluate'), "#/{{model_id}}/evaluate", :class => 'evaluate button green-button' %>
+	</div>
 </script>
 
 <script type="text/x-handlebars-template" id="ranking-template">
@@ -30,5 +33,4 @@
 
 <script type="text/x-handlebars-template" id="ranking-controls-template">
 	<%= link_to t('actions.cancel'), '#/{{model_id}}', :class => 'cancel' %>
-	<%= link_to t('street_marks.form.actions.save'), 'javascript:void(0);', :class => 'commit button green-button' %>
 </script>

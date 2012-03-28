@@ -1,0 +1,9 @@
+<p class="session">
+	<% if user_signed_in? %>
+		<%= link_to t('menu.profile'), new_user_session_path %>
+		<%= link_to t('menu.logout'), sign_up_path %>
+	<% else %>
+		<%= link_to t('menu.login'), new_user_session_path %>
+		<%= link_to t('menu.sign_up'), sign_up_path %>
+	<% end %>
+</p>

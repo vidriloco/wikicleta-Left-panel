@@ -4,7 +4,7 @@ Wikiando.Views.StreetMarks.ShowEvaluationsView = Backbone.View.extend({
 	controls : "#controls-panel",
 	
 	events: { 
-		'click a.commit': 'save'
+		'click a.rank': 'save'
 	},
 	
 	initialize: function() {
@@ -22,7 +22,29 @@ Wikiando.Views.StreetMarks.ShowEvaluationsView = Backbone.View.extend({
 	},
 	
 	save: function() {
-		alert('saved');
+		if(Wikiando.Session.user==null) {
+			return false;
+		}
+		
+		var fields = this._fieldsForRanking();
+		
+		if($('#questions-count').text() == _.size(fields)) {
+			var ranking = new StreetMarkRanking(_.extend(fields, { 
+				street_mark_id : this.model.id
+			}));
+			ranking.save();
+			window.location.hash = "/"+this.model.id;
+		} 
+	},
+	
+	_fieldsForRanking : function() {
+		var fields = {};
+		
+		_.each($('.answer:checked'), function(answer) { 
+			var attribute = $(answer).attr('name');
+			fields[attribute] = $(answer).val();
+		});
+		return fields;
 	}
 	
 });

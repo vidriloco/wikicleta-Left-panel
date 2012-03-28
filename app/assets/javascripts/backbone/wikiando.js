@@ -11,9 +11,15 @@ var Wikiando = {
     Controllers: {},
 		Collections: {},
 		Routers: {},
+		Session: {},
+		
     initStreetMarks: function(object) {
-        window.router = new Wikiando.Routers.StreetMarks(object);
-        Backbone.history.start();
-    }
+			window.router = new Wikiando.Routers.StreetMarks(object);
+			Backbone.history.start();
+    },
+		setCurrentUser: function(user) {
+			Wikiando.Session.user = user;
+			console.log(Wikiando.Session.user);
+		}
 };
 

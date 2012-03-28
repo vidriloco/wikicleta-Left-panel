@@ -15,5 +15,14 @@ describe Map::StreetMarksController do
       { :get => "/map/street_marks/1" }.should route_to(:action => "show", :controller => "map/street_marks", :id => "1")
     end
     
+    # rankings
+    it "matches /map/street_marks/rankings with controller :street_marks_rankings action #create" do
+      { :post => '/map/street_marks/rankings' }.should route_to(:action => "create", :controller => "map/street_mark_rankings")
+    end
+    
+    it "matches /map/street_marks/1/rankings with controller :street_marks action #show" do
+      { :get => '/map/street_marks/1/rankings' }.should route_to(:action => "rankings", :controller => "map/street_marks", :street_mark_id => "1")
+    end
+    
   end
 end

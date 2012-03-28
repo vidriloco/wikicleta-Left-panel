@@ -5,7 +5,7 @@ class DeviseCreateAdmins < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :admins, :email, :unique => true
+    add_index :admins, :email, :unique => true, :name => "admins_idx"
     
     Admin.create(:email => "admin@wikiando.com", :password => "wikiandar", :password_confirmation => "wikiandar")
   end

@@ -1,5 +1,20 @@
 es_MX:
-  app_name: "Wikiando"
+  app:
+    name: "Wikicleta"
+    moto: "La bici omnipresente"
+    sections:
+      map_incidents: 
+        title: "Reporte cletero"
+      bikes:
+        title: "Nuestras bicis"
+        subsections:
+          new: "Registra tu bici"
+          popular: "Las populares"
+          search: "Buscar"
+      map_street_marks: 
+        title: "Las calles"
+      places:
+        title: "Lugares"
   messages:
     save_failure: "no pudo guardar este %{element} debido a:"
   states:
@@ -40,6 +55,9 @@ es_MX:
     yes: "Si"
     no: "No"
   
+  menu:
+    login: "Iniciar"
+    sign_up: "Registrarse"
   questions:
     mobility:
       bike_parking: "¿Tiene estacionamiento para bicicletas?"

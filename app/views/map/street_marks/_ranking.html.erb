@@ -1,16 +1,20 @@
-<p class="instructions"><%= t('street_marks.show.instructions') %></p>
-
 <div class="polls">
-<% CatalogedQuestion.for_street_marks.each do |question_for_street_mark| %>
+		
+<div id="questions-count" class="hidden"><%= StreetMarkRanking.aspects.count %></div>
+<% StreetMarkRanking.aspects.each do |aspect| %>
 	<div class="question">
-		<label><%= question_for_street_mark.content %></label>
-		<% hidden_field_tag "question", :value => question_for_street_mark.id %>
+		<label><%= t("street_mark_rankings.aspects.#{aspect}.title") %></label>
 		<div class="answers" >
-			<% question_for_street_mark.cataloged_answers.each do |answer_for_question| %>
-				<%= radio_button_tag "answer_option-#{question_for_street_mark.id}", answer_for_question.id, false %>
-				<span class="value"><%= answer_for_question.content %></span>
+			<% StreetMarkRanking.aspects_options[aspect].each do |option| %>
+				<%= radio_button_tag StreetMarkRanking.aspect_field_for(aspect), option, false, :class => "answer" %>
+				<span class="value"><%= t("street_mark_rankings.aspects.#{aspect}.options.#{option}") %></span>
 			<% end %>
 		</div>
 	</div>
 <% end %>
+</div>
+
+<div class="to-right">
+	<span class="instructions hidden"><%= t('street_marks.show.instructions') %></span>
+	<%= link_to t('street_marks.form.actions.save'), 'javascript:void(0);', :class => 'rank button green-button' %>
 </div>

@@ -1,0 +1,27 @@
+es_MX:
+  street_mark_rankings:
+    aspects:
+      "1": 
+        title: "Flujo Vehicular"
+        options:
+          "1": "Rapido"
+          "2": "Lento"
+      "2": 
+        title: "Comodidad"
+        options:
+          "1": "Alta"
+          "2": "Baja"
+      "3": 
+        title: "Baches y Hoyos"
+        options:
+          "1": "Ninguno"
+          "2": "Pocos"
+          "3": "Muchos"
+      "4": 
+        title: "Altura"
+        options:
+          "1": "Normal"
+          "2": "Pesada"
+          
+        
+      
