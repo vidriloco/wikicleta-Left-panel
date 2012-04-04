@@ -8,10 +8,6 @@ class CreateCategories < ActiveRecord::Migration
     end
     
     add_index(:categories, :standard_name, :unique => true, :name => "standard_name_idx")
-    
-    require 'factory_girl_rails'
-    Factory(:workshop)
-    Factory(:restaurant)
   end
   
   def self.down

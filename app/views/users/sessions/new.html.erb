@@ -2,14 +2,11 @@
 	<h2><%=t "user_accounts.sessions.new.title" %></h2>
 	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 		<div class="styled-form green">
-		  <%= f.text_field :login, :placeholder => t('activerecord.attributes.user.login'), :size => 38 %>
-
-		  <%= f.password_field :password, :placeholder => t('activerecord.attributes.user.password') %>
+		  <%= f.text_field :login, :placeholder => t('activerecord.attributes.user.login'), :size => 32 %>
+		  <%= f.password_field :password, :placeholder => t('activerecord.attributes.user.password'), :size => 32 %>	  	
 		</div>
+		<%= f.submit t("user_accounts.sessions.new.start"), :class => 'button blue', :id => "login" %>
 		
-		<div class="actions">
-	  	<%= f.submit t("user_accounts.sessions.new.start"), :class => 'button blue' %>
-		</div>
 	<% end %>
 	<div class="separator"></div>
 	<ul>

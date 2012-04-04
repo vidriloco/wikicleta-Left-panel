@@ -1,0 +1,8 @@
+<div class="likes-count">
+	<div id="<%= bike.id %>" class="<%= bike.is_liked_by?(current_user) %> heart" original-title="<%= tooltip_for(bike) %>"></div>
+	<% if  bike.likes_count == 1 %>
+		<p class="likes rounded-5"><span class="count">1</span><%= t('bikes.views.show.likes.one') %></p>
+	<% else %>
+		<p class="likes rounded-5"><span class="count"><%=  bike.likes_count %></span><%= t('bikes.views.show.likes.some') %></p>
+	<% end %>
+</div>

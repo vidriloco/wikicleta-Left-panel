@@ -8,21 +8,37 @@ module ApplicationHelper
     return "field-with-errors" unless object.errors[field].empty? 
   end
   
-  def menu_section_for(section)
-    selected = controller.controller_name==section.to_s ? "selected" : ""
-    out=content_tag(:p, link_to(t("app.sections.#{section.to_s}.title"), eval("#{section.to_s}_path")), :class => selected)
+  def menu_section_for(section, namespace=nil)
+    namespace = "#{namespace}_" if namespace
+    p controller.controller_name
+    selected = controller.controller_name=="#{section}" ? "selected" : ""
+    out=content_tag(:p, link_to(t("app.sections.#{section}.title"), eval("#{namespace}#{section}_path")), :class => selected)
     unless selected.blank?
-      out += content_tag(:div, links_for_bikes, :class => "options") if section.eql?(:bikes)
+      out += content_tag(:div, self.send("links_for_#{section}"), :class => "options")
     end
     out
   end
   
   def links_for_bikes
-    class_selected = lambda do |action| 
-      {:class => "selected"} if action == controller.action_name
-    end    
-    out=  link_to(t('app.sections.bikes.subsections.new'), new_bike_path, class_selected.call("new"))
-    out+= link_to(t('app.sections.bikes.subsections.popular'), popular_bikes_path, class_selected.call("popular"))
-    out+= link_to(t('app.sections.bikes.subsections.search'), search_bikes_path, class_selected.call("search"))
+    out=  link_to(t('app.sections.bikes.subsections.new'), new_bike_path, current_action_matches?("new"))
+    out+= link_to(t('app.sections.bikes.subsections.popular'), popular_bikes_path, current_action_matches?("popular"))
+    #out+= link_to(t('app.sections.bikes.subsections.search'), search_bikes_path, class_selected.call("search"))
+    out+= link_to(t('app.sections.bikes.subsections.mine'), mine_bikes_path, current_action_matches?("mine")) if user_signed_in?
+    out
+  end
+  
+  def links_for_incidents  
+    out=  link_to(t('app.sections.incidents.subsections.new'), new_bike_path, current_action_matches?("new"))
+    out+= link_to(t('app.sections.incidents.subsections.accidents'), popular_bikes_path, current_action_matches?("popular"))
+    out+= link_to(t('app.sections.incidents.subsections.stolen'), mine_bikes_path, current_action_matches?("mine")) 
+    out+= link_to(t('app.sections.incidents.subsections.assaults'), mine_bikes_path, current_action_matches?("mine")) 
+    out+= link_to(t('app.sections.incidents.subsections.search'), mine_bikes_path, current_action_matches?("mine"))
+    
+    out
+  end
+  
+  private
+  def current_action_matches?(action)
+    {:class => "selected"} if action == controller.action_name
   end
 end

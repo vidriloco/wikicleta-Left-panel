@@ -1,0 +1,16 @@
+<div class="comments">
+	<h2><%= t('comments.views.index.title') %></h2>
+	
+	<% if user_signed_in? %>
+		<%= render :partial => 'comments/new', :locals => {:commentable => commentable} %>
+	<% else %>
+		<p class="required-login">
+			<%= t('comments.views.index.login_required') %> <br/>
+			<span class="link"><%= link_to t('actions.register_or_login'), new_user_session_path %></span>
+		</p>
+	<% end %>
+	
+	<div id="comments-listing">
+		<%= render commentable.comments.order %>
+	</div>
+</div>

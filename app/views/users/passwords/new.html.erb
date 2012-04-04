@@ -1,16 +1,15 @@
-<div class="sheet shadow-light">
-	<h2><%= t("user_accounts.forgot_password") %></h2>
+<div class="small-sheet">
+	<div class="styled-form shadow-light">
+		<%= link_to t('actions.back'), new_user_session_path, :class => 'back' %>
+		<h1><%= t("user_accounts.forgot_password") %></h1>
 
-	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-	  <%= devise_error_messages! %>
+		<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+		  <%= devise_error_messages! %>
 
-	  <div class="styled-form">
-	  	<%= f.email_field :email, :placeholder => t('activerecord.attributes.user.email') %>
-		</div>
+		  <%= f.email_field :email, :placeholder => t('activerecord.attributes.user.email') %>
 	
-	  <div class="to-right actions">
-			<%= link_to t('actions.back'), new_user_session_path %>
-			<%= f.submit t("user_accounts.passwords.reset_password"), :class => "button green-button" %>
-		</div>
-	<% end %>
+			<%= f.submit t("user_accounts.passwords.reset_password") %>
+		<% end %>
+	</div>
 </div>
+

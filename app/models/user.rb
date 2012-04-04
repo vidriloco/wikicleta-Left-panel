@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
   has_many :authorizations, :dependent => :destroy
+  has_many :bikes
+  has_many :user_like_bikes
+  has_many :comments
   
   has_many :recommendations
   has_many :places, :through => :recommendations
@@ -20,7 +23,12 @@ class User < ActiveRecord::Base
   
   def owns_comment?(comment)
     return false if comment.nil?
-    !self.place_comments.where("user_id = ?", self.id).empty?
+    comment.user == self
+  end
+  
+  def owns_bike?(bike)
+    return false if bike.nil?
+    bike.user == self
   end
   
   def self.find_for_database_authentication(warden_conditions)

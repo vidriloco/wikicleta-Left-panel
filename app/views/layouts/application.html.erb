@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ciudadio</title>
-	
-	<% if @map_enabled %>
-		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-	<% end %>
-  
+  <title><%= t('app.name') %></title>
+	  
 	<%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "bikes" %>
 	<%= yield(:javascripts) %>
@@ -14,34 +10,13 @@
 </head>
 <body>
 	
-<div id="main-bar" class="shadow-strong">
-	<%= render 'layouts/shared/top_menu' %>
-	<div class="separator"></div>
-	<h1><%= t('app.name') %></h1>
-	
-	<div class="menu">
-		<%= menu_section_for(:bikes) %>
-		<%= menu_section_for(:places) %>
-		<%= menu_section_for(:map_incidents) %>
-		<%= menu_section_for(:map_street_marks) %>
-	</div>
-</div>
+<%= render 'layouts/shared/left_bar' %>
 
 <div class="content-container">
-	<% if @map_enabled %>
-		<div style="width:100%; height:100%;" id="map" class="<%= yield(:classes_for_map) %> displays-points"></div>
-	<% end %>
 	
 	<%= yield :back_page %>
-	
-	<% if @map_enabled %>
-	<div id="dynamic-bar" class="shadow-light">
-		<%= yield :dynamic_bar %>
-		<div class="handle"></div>
-	</div>
-	<% end %>
 
-	<div id="content-bar">
+	<div id="content">
 		<%= yield %>
 	</div>
 </div>

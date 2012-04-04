@@ -4,7 +4,7 @@ require 'acceptance/acceptance_helper'
 feature "Reporting bike incidents:" do
   
   before(:each) do
-    @chain = Factory(:bike_item)
+    @chain = FactoryGirl.create(:bike_item)
   end
   
   scenario "cannot add an incident report which lacks required fields", :js => true do
@@ -112,7 +112,7 @@ feature "Reporting bike incidents:" do
   describe "being logged in" do
   
     before(:each) do
-      @user=Factory(:user)
+      @user=FactoryGirl.create(:user)
       login_with(@user)
     end
   

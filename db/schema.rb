@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120319210639) do
+ActiveRecord::Schema.define(:version => 20120403000018) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                             :default => "", :null => false
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20120319210639) do
     t.datetime "updated_at"
   end
 
-  add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
+  add_index "admins", ["email"], :name => "admins_idx", :unique => true
 
   create_table "announcements", :force => true do |t|
     t.string   "header"
@@ -53,10 +53,32 @@ ActiveRecord::Schema.define(:version => 20120319210639) do
     t.datetime "updated_at"
   end
 
+  create_table "bike_brands", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "bike_items", :force => true do |t|
     t.integer  "category"
     t.string   "name"
     t.string   "details"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bikes", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "kind"
+    t.integer  "bike_brand_id"
+    t.string   "frame_number"
+    t.integer  "user_id"
+    t.string   "main_photo_file_name"
+    t.string   "main_photo_content_type"
+    t.integer  "main_photo_file_size"
+    t.datetime "main_photo_updated_at"
+    t.integer  "likes_count",             :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -67,7 +89,20 @@ ActiveRecord::Schema.define(:version => 20120319210639) do
     t.datetime "updated_at"
   end
 
-  add_index "categories", ["standard_name"], :name => "standard_name_index", :unique => true
+  add_index "categories", ["standard_name"], :name => "standard_name_idx", :unique => true
+
+  create_table "comments", :force => true do |t|
+    t.text     "comment"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
+  add_index "comments", ["commentable_type"], :name => "index_comments_on_commentable_type"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "incidents", :force => true do |t|
     t.string   "description"
@@ -169,6 +204,8 @@ ActiveRecord::Schema.define(:version => 20120319210639) do
     t.datetime "updated_at"
   end
 
+  add_index "street_mark_rankings", ["street_mark_id", "user_id"], :name => "street_mark_rankings_idx", :unique => true
+
   create_table "street_marks", :force => true do |t|
     t.string      "name"
     t.integer     "user_id"
@@ -186,13 +223,22 @@ ActiveRecord::Schema.define(:version => 20120319210639) do
     t.datetime "updated_at"
   end
 
+  create_table "user_like_bikes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "bike_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_like_bikes", ["user_id", "bike_id"], :name => "uniqueness_likes_idx", :unique => true
+
   create_table "users", :force => true do |t|
-    t.string   "email",                                 :default => "", :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                         :default => 0
+    t.integer  "sign_in_count",          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"

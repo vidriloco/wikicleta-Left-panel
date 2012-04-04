@@ -2,11 +2,14 @@ require 'spec_helper'
 
 describe Place do
   
+  before(:each) do
+    @user = Factory(:pipo)
+  end
+  
   describe "When registering a new place" do
     
     before(:each) do
-      @user = Factory(:pipo)
-      @place = Place.new_with_owner(FactoryGirl.attributes_for(:popular_place, :category => Factory(:workshop)), @user)
+      @place = Place.new_with_owner(FactoryGirl.attributes_for(:popular_place, :category => FactoryGirl.create(:workshop)), @user)
       @place.save      
     end
     
@@ -27,12 +30,11 @@ describe Place do
   describe "having three places registered" do
     
     before(:each) do
-      @place_one = Factory(:popular_place, :category => Factory(:restaurant))
-      @place_two = Factory(:recent_place, :category => Factory(:cinema))
-      @place_three = Factory(:accessible_place, :category => Factory(:museum))
+      @place_one = FactoryGirl.create(:popular_place, :category => FactoryGirl.create(:restaurant))
+      @place_two = FactoryGirl.create(:recent_place, :category => FactoryGirl.create(:cinema))
+      @place_three = FactoryGirl.create(:accessible_place, :category => FactoryGirl.create(:museum))
       
-      @pipo = Factory(:pipo)
-      @pancho =  Factory(:pancho)
+      @pancho =  FactoryGirl.create(:pancho)
     end
     
     it "filtering by popular store should retrieve one record only" do
@@ -85,7 +87,7 @@ describe Place do
     describe "and place one has two add_recommenders" do
       
       before(:each) do
-        @place_one.add_recommender(@pipo)
+        @place_one.add_recommender(@user)
         @place_one.add_recommender(@pancho)
         @place_one.save
       end
@@ -98,19 +100,19 @@ describe Place do
     end
     
     it "should let me add a new owner to any of them" do
-      @place_two.add_recommender(@pipo, [:owner])
-      @place_two.owned_by?(@pipo).should be_true
+      @place_two.add_recommender(@user, [:owner])
+      @place_two.owned_by?(@user).should be_true
     end
     
     it "should let me add a new verified owner to any of them" do
-      @place_one.add_recommender(@pipo, [:owner, :verified])
-      @place_one.verified_owner_is?(@pipo).should be_true
+      @place_one.add_recommender(@user, [:owner, :verified])
+      @place_one.verified_owner_is?(@user).should be_true
     end
     
     describe "and place two has two recommenders" do
       
       before(:each) do
-        @place_two.add_recommender(@pipo)
+        @place_two.add_recommender(@user)
         @place_two.add_recommender(@pancho)
         @place_two.save
       end
@@ -121,13 +123,13 @@ describe Place do
       end
       
       it "should let me know if a user is a recommender or not" do
-        @place_one.recommended_by?(@pipo).should be_false
+        @place_one.recommended_by?(@user).should be_false
         @place_two.recommended_by?(@pancho).should be_true
       end
       
       it "should let me change the recommendation status for a user" do
-        @place_one.change_recommendation_status_for(@pipo, :on)
-        @place_one.recommended_by?(@pipo).should be_true
+        @place_one.change_recommendation_status_for(@user, :on)
+        @place_one.recommended_by?(@user).should be_true
         
         @place_two.change_recommendation_status_for(@pancho, :off)
         @place_two.recommended_by?(@pancho).should be_false
@@ -137,23 +139,23 @@ describe Place do
     
     it "should NOT allow Pipo to add an announcement to a place given he is not a verified owner" do
       announcement_hash = {:header => "An announcement", :message => "A message", :start_date => Time.now-5, :end_date => Time.now+5}
-      @place_one.add_announcement(@pipo, announcement_hash).should be_false
+      @place_one.add_announcement(@user, announcement_hash).should be_false
     end
     
     describe "given PIPO is now a verified owner of a place" do
       
       before(:each) do
-        @place_one.add_recommender(@pipo, [:owner, :verified])
+        @place_one.add_recommender(@user, [:owner, :verified])
       end
       
       it "should allow him to add an announcement to a place" do
         announcement_hash = {:header => "An announcement", :message => "A message", :start_date => Time.now-5, :end_date => Time.now+5}
-        @place_one.add_announcement(@pipo, announcement_hash).should be_true
+        @place_one.add_announcement(@user, announcement_hash).should be_true
       end
       
       it "should not save an announcement whose start and end dates are not correct" do
         announcement_hash = {:header => "An announcement", :message => "A message", :start_date => Time.now+50, :end_date => Time.now+5}
-        @place_one.add_announcement(@pipo, announcement_hash).should_not be_persisted
+        @place_one.add_announcement(@user, announcement_hash).should_not be_persisted
       end
       
       it "should correctly parse a pair of date hash values when adding an announcement" do
@@ -161,7 +163,7 @@ describe Place do
                  :end_date => {"year" => "2012", "month" => "7", "day" => "3", "hour" => "16", "minute" => "15"}}
         announcement_hash = {:header => "An announcement", :message => "A message"}.merge(dates)
 
-        announcement = @place_one.add_announcement(@pipo, announcement_hash)
+        announcement = @place_one.add_announcement(@user, announcement_hash)
         announcement.start_date.should == Time.local(2012, 1, 23, 5, 30)
         announcement.end_date.should == Time.local(2012, 7, 3, 16, 15)
       end
@@ -174,7 +176,7 @@ describe Place do
     end
     
     it "should let me add a comment to one of them" do
-      @place_one.add_comment(@pipo, "Nice comment")
+      @place_one.add_comment(@user, "Nice comment")
       @place_one.place_comments.size.should == 1
       @place_one.place_comments.first.content.should == "Nice comment"
     end

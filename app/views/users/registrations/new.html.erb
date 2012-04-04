@@ -1,35 +1,18 @@
+<div class="small-sheet">
+	<div class="styled-form shadow-light">
+		<%= link_to t('actions.back'), :back, :class => 'back' %>
+		<h1><%=t 'user_accounts.registrations.new.title' %></h1>
 
-<div class="sheet shadow-light">
-	<h2><%=t 'user_accounts.registrations.new.title' %></h2>
-
-	<%= form_for(resource, :as => resource_name, :url => account_create_path) do |f| %>
-	  <%= devise_error_messages! %>
+		<%= form_for(resource, :as => resource_name, :url => account_create_path) do |f| %>
+		  <%= devise_error_messages! %>
 		
-		<div class="styled-form">
-	  	<div>
-		  	<%= f.text_field :full_name, :placeholder => t('activerecord.attributes.user.full_name') %>
-			</div>
-
-		  <div>
-		  	<%= f.email_field :email, :placeholder => t('activerecord.attributes.user.email') %>
-			</div>
-
-		  <div>
-		  	<%= f.password_field :password, :placeholder => t('activerecord.attributes.user.password') %>
-			</div>
-
-		  <div>
-		  	<%= f.password_field :password_confirmation, :placeholder => t('activerecord.attributes.user.password_confirmation') %>
-			</div>
-
-		  <div>
-		  	<%= f.text_field :username, :placeholder => t('activerecord.attributes.user.username') %></div>
-			</div>
-	  <div>
-		
-		<div class="to-right actions">
-			<%= link_to t('actions.back'), root_path %>
-			<%= f.submit t('user_accounts.registrations.new.commit'), :class => "button green-button" %>
-		</div>
-	<% end %>
+		  <%= f.text_field :full_name, :placeholder => t('activerecord.attributes.user.full_name') %>
+			<%= f.email_field :email, :placeholder => t('activerecord.attributes.user.email') %>
+		  <%= f.password_field :password, :placeholder => t('activerecord.attributes.user.password') %>
+		  <%= f.password_field :password_confirmation, :placeholder => t('activerecord.attributes.user.password_confirmation') %>
+		  <%= f.text_field :username, :placeholder => t('activerecord.attributes.user.username') %>
+				
+			<%= f.submit t('user_accounts.registrations.new.commit'), :class => "button blue" %>
+		<% end %>
+	</div>
 </div>

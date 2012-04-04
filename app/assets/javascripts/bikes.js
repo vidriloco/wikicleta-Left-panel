@@ -1,12 +1,16 @@
-//= require jquery
-//= require jquery_ujs
-//= require jquery-ui-min
+//= require common/base
 //= require modernizr-transitions
 //= require jquery.masonry.min
-//= require geo/base
-//= require view_components/left.bar
+//= require view_components/counter.view
+//= require comments
+
 
 $(document).ready(function() {
+
+	var hashId = 'bike-'+window.location.hash.split("#")[1];
+	if ( $.isDefined("#"+hashId) ) {
+		document.getElementById(hashId).scrollIntoView();
+	}
 	
   $('#container').masonry({
     itemSelector : '.bike',
@@ -18,5 +22,37 @@ $(document).ready(function() {
 	    queue: false
 	  }
   });
+	
+	ViewComponents.Counter.forDomElement('#bike_description');
+	//$('.requires_login')
+	$('.heart').live('click', function() {
+		$('.tipsy').fadeOut();
+		if($(this).hasClass('requires_login')) {
+			return false;
+		}
+		var id = $(this).attr('id');
+		
+		var type = "POST";
+		if($(this).hasClass('strong')) {
+			type = "DELETE";
+		}
+		
+		$.ajax({
+		  type: type,
+		  url: "/bikes/"+id+"/like",
+		  data: { format : "js" }
+		});
+	});
+	
+	$('.heart').tipsy({gravity: 'n', live: true, fade: true, delayIn: 100, delayOut: 500 });
+	
+	if($.isDefined('.notice')) {
+		ViewComponents.Notification.append($('.notice'));
+	}
+
+
+	$('#submit-with-photo').click(function() {
+		ViewComponents.Notification.withContent("<p class='success'>Espera por favor, guardando bici ... </p>", 60000, true);
+	});
 	
 });

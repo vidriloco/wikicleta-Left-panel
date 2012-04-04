@@ -1,0 +1,30 @@
+<%= render 'shared/notice' %>
+
+<div id="bike-details" class="sheet shadow-light centered">
+	<%= link_to t('actions.back'), bikes_path %>
+	<h1><%= @bike.name %></h1>
+	<div class="owner">
+		<%= t('bikes.views.show.owned_by') %><%= link_to @bike.user.username, '#' %>
+	</div>
+	
+	<div id="<%= @bike.id %>" class="toolbox shadow-light">
+		<% if current_user && current_user.owns_bike?(@bike) %>
+			<%= link_to t('bikes.views.show.modify'), edit_bike_path(@bike), :class => 'styled-link' %>
+		<% end %>
+		<div class="status">
+			<%= render :partial => 'bikes/likes_count', :locals => {:bike => @bike } %>
+		</div>
+	</div>
+	<div style="clear:right;"></div>
+	<div class="description">
+		<%= @bike.description %>
+	</div>
+	
+	<div class="photo">
+		<%= image_tag @bike.main_photo.url(:big), :class => "main" %>
+	</div>
+</div>
+<div id="p1"></div>
+<div id="bike-comments" class="sheet shadow-light centered">
+	<%= render :partial => 'comments/index', :locals => { :commentable => @bike } %>
+</div>

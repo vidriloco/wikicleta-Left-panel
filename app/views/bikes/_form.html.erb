@@ -1,0 +1,26 @@
+<div class="centered">
+	<%= render :partial => 'shared/form_errors', :locals => {:message => t('bikes.views.errors.on_save'), :object => @bike} %>
+
+	<%= f.text_field :name, :placeholder => t('bikes.views.form.name'), :size => 40 %>
+	<%= f.text_field :frame_number, :placeholder => t('bikes.views.form.frame_number'), :size => 20 %>
+	<%= f.text_area :description, :placeholder => t('bikes.views.form.description'), :cols => 58, :rows => 2 %>
+	<div id="bike_description_count" class="field-counter"></div>
+	<div class="with-label">
+		<%= f.label :kind, t('bikes.views.form.kind') %>
+		<%= f.select :kind, options_for_select(Bike.humanized_categories_for(:types).invert, @bike.kind), :include_blank => true %>
+	</div>
+	<div class="with-label">
+		<%= f.label :bike_brand, t('bikes.views.form.brand') %>
+		<%= f.select :bike_brand_id, options_from_collection_for_select(BikeBrand.all, :id, :name, @bike.bike_brand_id), :include_blank => true %>
+	</div>
+	<br/>
+	
+	<% if note %>
+	<p class="note-message"><%= note %></p>
+	<% end %>
+	
+	<div class="with-label <%= "note" if note %>">
+		<%= f.label :kind, t('bikes.views.form.main_photo') %>
+		<%= f.file_field :main_photo %>
+	</div>
+</div>

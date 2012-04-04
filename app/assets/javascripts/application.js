@@ -4,21 +4,14 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-//= require jquery
-//= require jquery_ujs
-//= require jquery-ui-min
-//= require underscore
-//= require backbone
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/wikiando
 //= require backbone.modelbinding
 //= require backbone.validation
 //= require easypaginate.min
-//= require jquery.charcounter
 //= require jquery.timeago
 //= require geo/base
-//= require underscore
 //= require handlebars
 
 //= require_tree .

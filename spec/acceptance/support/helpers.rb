@@ -2,11 +2,11 @@ module HelperMethods
   
   def login_with(user, path=new_user_session_path)
     visit path
-    
     login_attr=user.is_a?(Admin) ? "email" : "login"
     fill_in "#{user.class.to_s.downcase}_#{login_attr}", :with => user.email
     fill_in "#{user.class.to_s.downcase}_password", :with => user.password
-    click_on I18n.t("user_accounts.sessions.new.start")
+
+    find('#login').click
   end
   
   def simulate_click_on_map(coordinates)

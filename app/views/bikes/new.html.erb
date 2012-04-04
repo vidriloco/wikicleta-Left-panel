@@ -1,0 +1,10 @@
+<div class="mid-sheet">
+	<div class="styled-form shadow-light">
+		<%= link_to t('actions.back'), bikes_path, :class => 'back' %>
+		<h1><%= t('bikes.views.new.title') %></h1>
+		<%= form_for @bike, :html => {:multipart => true} do |f| %>
+			<%= render :partial => 'form', :locals => {:f => f, :note => false} %>
+			<%= f.submit t('bikes.actions.save'), :id => 'submit-with-photo' %>
+		<% end %>
+	</div>
+</div>

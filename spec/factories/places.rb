@@ -10,7 +10,7 @@ FactoryGirl.define do
     p.twitter "accessibletwitter"
     # a una cuadra del metro chilpancingo
     p.coordinates Point.from_lon_lat(-99.171610, 19.405704, 4326)
-    p.category Factory.build(:restaurant)
+    p.category FactoryGirl.build(:restaurant)
     
   end
   
@@ -22,7 +22,7 @@ FactoryGirl.define do
     p.twitter "populartwitter"
     # a una cuadra del metro nativitas
     p.coordinates Point.from_lon_lat(-99.140496, 19.378269, 4326)
-    p.category Factory.build(:transport_station)
+    p.category FactoryGirl.build(:transport_station)
     
   end
   
@@ -34,7 +34,7 @@ FactoryGirl.define do
     p.twitter "recenttwitter"
     # la virgen y eje 3 ote
     p.coordinates Point.from_lon_lat(-99.113674, 19.320731, 4326)
-    p.category Factory.build(:workshop)
+    p.category FactoryGirl.build(:workshop)
     
   end
   

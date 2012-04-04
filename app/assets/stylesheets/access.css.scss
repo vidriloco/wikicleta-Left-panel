@@ -1,6 +1,6 @@
 /*
  *= require_self
- *= require shared/main.css 
+ *= require application.css
 */
 
 body, html {
@@ -15,22 +15,21 @@ body, html {
 
 /* Welcome page styles */
 
-.welcome { margin-top: 180px }
-
-.welcome p, .welcome h1 { 	
-	text-align: center;
-	margin: 0px;
-}
-
-.welcome p {
-	color: #0C8D0C;
-	font-style: italic;
-	font-size: 30px;
-}
-
-.welcome h1 {
-	color: #757575;
-	font-size: 80px;
+.welcome { 
+	margin-top: 180px
+	p, h1 {
+		text-align: center;
+		margin: 0px;
+	}
+	p {
+		color: #0C8D0C;
+		font-style: italic;
+		font-size: 30px;
+	}
+	h1 {
+		color: #757575;
+		font-size: 80px;
+	}
 }
 
 .routes {
@@ -59,64 +58,51 @@ body, html {
 	color: white;
 }
 
-.board h2 {
-	font-size: 30px;
-}
-
 .board {
 	color: #B7FFB4;
 	margin-top: 14%;
 	background-color:rgba(35,153,40,0.6);
 	border: 1px solid white;
 	padding: 10px 40px 10px 40px;
-	width: 350px;
+	width: 330px;
 	margin-left: auto;
 	margin-right: auto;
+	
+	h2 {
+		font-size: 30px;
+	}
+	
+	a:hover {
+		color:#3B5F30 !important;
+	}
+	
+	a, a:visited {
+		color: #B7DCA7;
+		font-weight: bold;
+	}
+	
+	.separator {
+		height:1px;
+		background-color:#94C09C;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+	
+	.button {
+		position: relative;
+		left: 240px;
+	}
 }
 
-.board a:hover {
-	color:#3B5F30 !important;
-}
-
-.board a, .board a:visited {
-	color: #B7DCA7;
-	font-weight: bold;
-}
-
-.styled-form {
-	margin-left: 10px;
-}
-
-.green input {
-	background-color:#85C975;
-	border: 2px solid #90D081;
-	color: #C5FFBE !important;
-}
-
-.green input:hover {
-	color:white !important;
-}
-
-.actions {
-	margin-top: 10px;
-	text-align: right;
-	margin-bottom: 15px;
-}
-
-.actions a {
-	margin-right: 20px;
-}
-
-.discrete-separator {
-	height:1px;
-	background-color:#94C09C;
-	margin-top: 20px;
-	margin-bottom: 20px;
-}
-
-.separator {
-	background-color:#74C07B;
-	margin-top: 60px;
+.green { 
+	input {
+		background-color:#85C975;
+		border: 2px solid #90D081;
+		color: #C5FFBE !important;
+	}
+	input: hover {
+		color:white !important;
+	}
 }
 
 ul {
@@ -162,12 +148,3 @@ ul li {
 	margin: 30px auto 0 auto;
 	width: 150px;
 }
-
-.sheet {
-	margin: 40px auto 0 auto;
-	width: 400px;
-	padding: 10px 30px 70px 30px;
-	background-color:white;
-}
-
-.sheet h2 { color: #2B761E }

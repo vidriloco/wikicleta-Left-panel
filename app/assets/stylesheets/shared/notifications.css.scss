@@ -1,0 +1,27 @@
+#notification {
+	position: absolute;
+	height: 30px;
+	left: 50%;
+	margin-left: -68px;
+	width: 350px;
+	top: 0px;
+	padding: 10px 10px 5px 10px;
+	background-color: black;
+
+	display: none;
+
+	p.success {
+		color: #B4E5A4;
+		font-weight: bold;
+		margin-top: 2px;
+		font-size: 14px;
+		text-align: center;
+	}
+}
+
+.blocking {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.5);
+}

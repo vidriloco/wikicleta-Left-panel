@@ -81,8 +81,13 @@ Ciudadio::Application.routes.draw do
     collection do 
       get :search
       get :popular
+      get :mine
     end
   end
+  post '/bikes/:id/like' => 'bikes/likes#create'
+  delete '/bikes/:id/like' => 'bikes/likes#destroy'
+
+  resources :comments, :only => [:create, :destroy]
 
   get "/places/:id" => 'places#show', :as => "place"
   get "/places/edit/:id" => 'places#edit', :as => "edit_place"  

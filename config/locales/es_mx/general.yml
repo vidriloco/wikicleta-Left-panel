@@ -1,17 +1,24 @@
 es_MX:
   app:
     name: "Wikicleta"
-    moto: "La bici omnipresente"
+    motto: "La bici omnipresente"
     sections:
-      map_incidents: 
+      incidents: 
         title: "Reporte cletero"
+        subsections:
+          stolen: "Robos"
+          assaults: "Asaltos"
+          accidents: "Accidentes"
+          search: "Buscar"
+          new: "Reporta un incidente"
       bikes:
         title: "Nuestras bicis"
         subsections:
-          new: "Registra tu bici"
-          popular: "Las populares"
+          new: "Agrega tu bici"
+          popular: "Las + populares"
           search: "Buscar"
-      map_street_marks: 
+          mine: "Tus bicis"
+      street_marks: 
         title: "Las calles"
       places:
         title: "Lugares"
@@ -21,6 +28,7 @@ es_MX:
     new: "Nuevo"
     edit: "Cambiar"
   actions:
+    register_or_login: "Registrarse o Iniciar Sesión"
     return: "Regresar"
     share: "Compartir"
     save: "Guardar"
@@ -56,8 +64,10 @@ es_MX:
     no: "No"
   
   menu:
-    login: "Iniciar"
+    login: "Entrar"
     sign_up: "Registrarse"
+    logout: "Salir"
+    profile: "Perfil"
   questions:
     mobility:
       bike_parking: "¿Tiene estacionamiento para bicicletas?"

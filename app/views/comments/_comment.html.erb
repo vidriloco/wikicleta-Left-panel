@@ -1,0 +1,15 @@
+<div id="com-<%= comment.id %>" class="comment">
+	<p class="body"><%= comment.comment %></p>
+	
+	<div class="image"></div>
+	<span class="user"><%= t('connectives.by') %> <%= comment.user.username %></span>
+	<span class="datetime"><%= distance_of_time_in_words_to_now(comment.created_at) %></span>
+	
+	<% if !current_user.nil? && current_user.owns_comment?(comment) %>
+	<div class="to-right">	
+		<%= link_to t('comments.actions.delete'), comment_path(comment), 
+			  :method => :delete, :remote => true, :confirm => t('comments.messages.delete.confirm'), :class => 'delete' %>		
+	</div>
+	<div style="clear: both;"></div>
+	<% end %>
+</div>

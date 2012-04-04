@@ -1,0 +1,16 @@
+es_MX:
+  comments:
+    views:
+      index:
+        title: "Comentarios"
+        login_required: "Es necesario estar registrado para poder comentar"
+    actions: 
+      comment: "Comentar"
+      cancel: "Descartar comentario"
+      delete: "Eliminar comentario"
+    messages:
+      added: "Comentario agregado"
+      deleted: "Comentario eliminado"
+      delete:
+        confirm: "¿Deseas eliminar este comentario?"
+      

@@ -16,6 +16,8 @@ gem 'omniauth-facebook'
 gem 'twitter'
 gem 'rails-backbone'
 gem 'redis-objects'
+gem 'paperclip'
+gem 'acts_as_commentable'
 
 group :test do
 	gem 'capybara'

@@ -1,39 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ciudadio</title>
+  <title><%= t('app.name') %></title>
 
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 
-  <%= stylesheet_link_tag    "full_map" %>
-  <%= javascript_include_tag "application" %>
-	<%= yield(:javascripts) %>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "map" %>
+	<%= yield :javascripts %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
 	<script type="text/javascript">
-	    $(function() {
-	        Wikiando.setCurrentUser(<%= current_user.to_json.html_safe -%>);
-	    });
+	    //$(function() {
+	    //    Wikiando.setCurrentUser(<%= current_user.to_json.html_safe if !current_user.nil? %>);
+	    //});
 	</script>
-	
-	<%= render 'layouts/shared/alerts_and_notifications' %>
-	
-	<div id="header">
-		<div id="menu" class="shadow-light">
-			<%= render 'layouts/shared/logo' %>
-			<%= render 'layouts/shared/top_menu' %>
+	<%= render 'layouts/shared/left_bar' %>
+
+	<div id="dynamic-bar" class="shadow-light">
+		<div class="container">
+			hola
+			<%= yield :dynamic_bar %>
 		</div>
-		
-		<div class="mini-header shadow-light rounded-bottom-5 <%= yield(:classes_for_header) %>">
-			<%= yield :header %>
-		</div>
-		
+		<div class="handle"></div>
 	</div>
 	
-	<%= yield :map_area %>
-
-	<div style="width:100%; height:100%; top: 40px" id="map" class="<%= yield(:classes_for_map) %> displays-points"></div>
-
+	<div style="width:100%; height:100%;" id="map" class="<%= yield :classes_for_map %> displays-points"></div>
+	
+	<div id="content">
+		<%= yield %>
+	</div>
 </body>
+
 </html>

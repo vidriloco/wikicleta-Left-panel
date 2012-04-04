@@ -1,0 +1,12 @@
+<div id="main-bar" class="shadow-strong">
+	<%= render 'layouts/shared/top_menu' %>
+	<div class="separator"></div>
+	<h1><%= t('app.name') %></h1>
+	<p class="motto"><%= t('app.motto') %></p>
+	<div class="menu">
+		<%= menu_section_for(:bikes) %>
+		<%= menu_section_for(:places) %>
+		<%= menu_section_for(:incidents, :map) %>
+		<%= menu_section_for(:street_marks, :map) %>
+	</div>
+</div>

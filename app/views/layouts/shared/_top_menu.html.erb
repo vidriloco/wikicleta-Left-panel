@@ -1,7 +1,7 @@
 <p class="session">
 	<% if user_signed_in? %>
-		<%= link_to t('menu.profile'), new_user_session_path %>
-		<%= link_to t('menu.logout'), sign_up_path %>
+		<%= link_to t('menu.profile'), settings_account_path %>
+		<%= link_to t('menu.logout'), destroy_user_session_path, :method => :delete %>
 	<% else %>
 		<%= link_to t('menu.login'), new_user_session_path %>
 		<%= link_to t('menu.sign_up'), sign_up_path %>

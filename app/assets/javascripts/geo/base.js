@@ -1,8 +1,4 @@
-$.extend({
-	isDefined: function(dom) {
-		return $(dom).length;
-	},
-	
+$.extend({	
 	rad: function(x) {
 		return x*Math.PI/180;
 	},
@@ -41,5 +37,5 @@ Geo = {
 
 //= require map_wrapper
 //= require polyline_wrapper
-//= require segment_wrapper
+//= require lightpolyline_wrapper
 //= require polyline_layer

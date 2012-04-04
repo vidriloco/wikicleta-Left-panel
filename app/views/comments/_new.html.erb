@@ -1,0 +1,14 @@
+<%= form_for Comment.new, :remote => true do |f| %>
+<div class="styled-form">
+	<%= f.text_area :comment, :cols => 80, :rows => 4 %>
+	<%= f.hidden_field :commentable_id, :value => commentable.id %>
+	<%= f.hidden_field :commentable_type, :value => commentable.class.to_s %>
+	<div id="comment_comment_count" class="field-counter to-left"></div>
+	<div class="actions to-right">
+		<%= link_to t('comments.actions.cancel'), 'javascript:void(0);', :class => 'clearer' %>
+		<%= f.submit t('comments.actions.comment') %>
+	</div>
+
+	<div style="clear: both;"></div>
+</div>
+<% end %>

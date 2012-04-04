@@ -1,0 +1,45 @@
+es_MX:
+  bikes:
+    categories:
+      types:
+        urban: "Urbana"
+        mountain: "Montaña"
+        fixie: "Fixie"
+        route: "Ruta"
+    actions:
+      save: "Registrar bici"
+      update: "Guardar cambios"
+      delete: "Eliminar"
+    messages:
+      saved: "¡Tu bici ha sido añadida a la Wikicleta!"
+      updated: "Los cambios a tu bici han sido guardados"
+      confirm_delete: "¿Estas seguro de querer eliminar esta bici?"
+      deleted: "Bici eliminada"
+    views:
+      errors:
+        on_save: "Chispas, Wikicleta no pudo registrar tu bici. Checa por favor los campos marcados en rojo"
+      form:
+        name: "Pónle un nombre"
+        description: "La descripción"
+        frame_number: "El número del cuadro"
+        kind: "Tipo"
+        brand: "Marca"
+        main_photo: "Foto"
+      edit:
+        title: "Modificar bici"
+        change_photo: "Por si quieres cambiar la foto actual de tu bici:"
+        destroy: "Eliminar a esta bici de Wikicleta "
+      new:
+        title: "Nueva bici"
+      show:
+        owned_by: "de "
+        modify: "Editar"
+        likes:
+          some: "chuleadas"
+          one: "chuleada"
+          do: "Haz click para chulear esta bici"
+          undo: "Haz click para des-chulear esta bici"
+          required_to_login: "Necesitas estar registrado para chulear una bici"
+        comments:
+          some: "comentarios"
+          one: "comentario"

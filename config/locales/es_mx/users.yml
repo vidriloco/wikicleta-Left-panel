@@ -20,7 +20,7 @@ es_MX:
       login: "Iniciar sesión con %{network}"
     forgot_password: "¿Olvidaste tu contraseña?"
     passwords:
-      reset_password: "Reestablecer contraseña"
+      reset_password: "Reestablecer"
     registrations:
       oauth:
         commit: "Completar"
