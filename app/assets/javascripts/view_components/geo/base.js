@@ -29,13 +29,3 @@ $.extend({
 	}
 	
 });
-
-Geo = {
-	Wrappers : {},
-	Layers : {}
-}
-
-//= require map_wrapper
-//= require polyline_wrapper
-//= require lightpolyline_wrapper
-//= require polyline_layer

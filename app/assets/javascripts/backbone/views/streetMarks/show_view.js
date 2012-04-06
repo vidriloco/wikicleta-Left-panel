@@ -1,4 +1,4 @@
-Wikiando.Views.StreetMarks.ShowView = Backbone.View.extend({
+Wikicleta.Views.StreetMarks.ShowView = Backbone.View.extend({
 	
 	el: "#main-panel",
 	
@@ -17,7 +17,7 @@ Wikiando.Views.StreetMarks.ShowView = Backbone.View.extend({
 		$(this.el).fadeIn();
 		$('#submenu').empty();
 		
-		new Wikiando.Views.StreetMarks.ShowDetailsView({ model : this.model });
+		new Wikicleta.Views.StreetMarks.ShowDetailsView({ model : this.model });
 		
 		return this;
 	},
@@ -28,7 +28,7 @@ Wikiando.Views.StreetMarks.ShowView = Backbone.View.extend({
 	},
 	
 	pushEvaluationsView: function() {
-		new Wikiando.Views.StreetMarks.ShowEvaluationsView({ model : this.model });
+		new Wikicleta.Views.StreetMarks.ShowEvaluationsView({ model : this.model });
 	}, 
 	
 	fetchRankingsSubView: function() {

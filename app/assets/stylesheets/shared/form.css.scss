@@ -136,7 +136,9 @@
 		width: 90%;
 		padding: 20px;
 		border: 1px solid #F4F2EF;
+		font-size: 13px;
 	}
+	
 	.note-message, .field-counter {
 		font-size: 14px;
 		font-style: italic;
@@ -195,4 +197,13 @@
 #error_explanation ul li {
 	font-size: 14px;
 	color: #6A6A6A;
+}
+
+.required-login {
+	a {
+		color: #404F80 !important;
+		font-weight: bold;
+	}
+	text-align: center;
+	font-size: 14px;
 }

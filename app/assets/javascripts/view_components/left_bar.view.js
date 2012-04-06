@@ -16,14 +16,13 @@ $.extend(ViewComponents, {
 				});
 				
 				$(this._handle()).click(function() {
-					var parent = $($(instance._handle()).parent());
-					var dynBarPosX = parent.offset().left;
 					
+					var dynBarPosX = instance._dinBarXPos();
 					if(instance.lastXPos == dynBarPosX) {
 						if(instance.colapsed) {
-							instance.expandFrom(dynBarPosX);
+							instance.expand();
 						} else {
-							instance.collapseFrom(dynBarPosX);
+							instance.collapse();
 						}
 						return true;
 					}
@@ -32,26 +31,47 @@ $.extend(ViewComponents, {
 					// relative to it's own width/2 and main bar width (when dragging)
 					if(dynBarPosX > dynBar/2-mainBar) {
 						// expand the bar
-						instance.expandFrom(dynBarPosX);
+						instance.expand();
 					} else {
 						// collapse the bar
-						instance.collapseFrom(dynBarPosX);
+						instance.collapse();
 					}
 
 				});
 				this.reset();
 			},
 			
-			expandFrom: function(dynBarXPos) {
-				var movement="+="+(this.widthForBar('dyn')/2-dynBarXPos);
+			expand: function() {
+				var movement="+="+(this.widthForBar('dyn')/2-this._dinBarXPos());
 				this._animateBarWith(movement);
 				this.colapsed = false;
 			},
 			
-			collapseFrom: function(dynBarXPos) {
-				var movement="+="+(this.widthForBar('main')-this.widthForBar('dyn')+20-dynBarXPos);
+			collapse: function() {
+				var movement="+="+(this.widthForBar('main')-this.widthForBar('dyn')+20-this._dinBarXPos());
 				this._animateBarWith(movement);
 				this.colapsed = true;
+			},
+			
+			setSectionSelected: function(section) {
+				$('.menu .options #incidents-'+section).addClass('selected');
+			},
+			
+			hide: function() {
+				$(this._dynamicBarDom()).hide();
+			},
+			
+			show: function() {
+				$(this._dynamicBarDom()).fadeIn();
+			},
+			
+			clearSelected: function() {
+				$('.menu .options a').removeClass('selected');
+			},
+			
+			_dinBarXPos: function() {
+				var parent = $($(this._handle()).parent());
+				return parent.offset().left;
 			},
 			
 			_animateBarWith:function(movement) {

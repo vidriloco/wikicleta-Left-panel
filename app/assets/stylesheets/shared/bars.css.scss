@@ -17,7 +17,7 @@
 	min-height: 100%;
 	width: 500px;
 	position: absolute;
-	background-color: #D8D8D8;
+	background-color: #646464;
 	clear: left;
 	.handle {
 		position: absolute;
@@ -30,9 +30,13 @@
 	}
 	
 	.container {
+		height: auto;
+		min-height: 100%;
+		width: 460px;
 		position: absolute;
 		float: left;
 		padding: 10px;
+		background-color: white;
 	}
 }
 

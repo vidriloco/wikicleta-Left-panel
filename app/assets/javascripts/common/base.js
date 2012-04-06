@@ -1,11 +1,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui-min
+//= require pathjs
 //= require jquery.tipsy
+//= require quickpager.jquery
 //= require view_components/notification.view
 //= require underscore
 //= require backbone
 
+// Following are some functions used over the application
 $.fn.clearForm = function() {
   return this.each(function() {
     var type = this.type, tag = this.tagName.toLowerCase();
@@ -23,5 +26,11 @@ $.fn.clearForm = function() {
 $.extend({
 	isDefined: function(dom) {
 		return $(dom).length;
+	},
+	currentSectionIs: function(dom) {
+		return $.isDefined("#section-"+dom);
+	},
+	visit: function(hashedUrl) {
+		window.location.hash=hashedUrl;
 	}
 })

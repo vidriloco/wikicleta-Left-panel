@@ -1,0 +1,6 @@
+<div id="count_incidents">
+	<%= partial_numbers_for(@incidents[Bike.category_for(:incidents, :theft)], :theft) %>
+	<%= partial_numbers_for(@incidents[Bike.category_for(:incidents, :accident)], :accident) %>
+	<%= partial_numbers_for(@incidents[Bike.category_for(:incidents, :assault)], :assault) %>
+	<%= partial_numbers_for(@incidents[Bike.category_for(:incidents, :regulation_infraction)], :regulation_infraction) %>
+</div>

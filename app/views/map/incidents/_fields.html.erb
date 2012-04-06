@@ -1,0 +1,47 @@
+<div class="field">
+	<%= f.label :kind, t('incidents.views.new.form.kind') %>
+	<%= f.select :kind, options_for_select(incidents_for_session_status, @incident.kind), {:include_blank => true} %>
+</div>
+
+<% if current_user_has_bikes_to_report? %>
+	<div class="field <%= incident_types_for([:theft, :assault, :accident]) %>">
+		<%= f.label :bike_id, t('incidents.views.new.form.bike') %>
+		<%= f.select :bike_id, options_from_collection_for_select(current_user.bikes, :id, :name, @incident.bike_id), {:include_blank => true} %>
+	</div>
+<% end %>
+
+<div class="field">
+	<%= f.label :date_and_time, Incident.human_attribute_name(:date_and_time) %><br/>
+	<%= f.datetime_select :date_and_time %>
+</div>
+
+<%= f.text_area :description, :cols => 48, :rows => 2, :placeholder => t('incidents.views.new.form.description') %>
+<div id="incident_description_count" class="field-counter"></div>
+
+
+<div class="field to-right <%= incident_types_for([:theft, :assault, :accident]) %>">
+	<div class="inlined">
+		<%= f.check_box :complaint_issued, :checked => @incident.complaint_issued || false %>
+	</div>
+	<%= f.label :complaint_issued, Incident.human_attribute_name(:complaint_issued), :class => 'inlined' %>
+</div>
+
+<% if current_user_has_bikes_to_report? %>
+<div class="field to-left <%= incident_types_for(:theft) %>">	
+	<%= f.label :lock_used, t('incidents.views.new.form.lock_used') %>
+	<%= f.select :lock_used, options_for_select(Bike.humanized_categories_for(:locks).invert, @incident.lock_used), {:include_blank => true} %>
+</div>
+<% end %>
+
+<div class="field to-left <%= incident_types_for([:accident, :assault, :regulation_infraction]) %>">
+	<%= f.text_field :vehicle_identifier, :size => 20, :placeholder => t('incidents.views.new.form.vehicle_identifier') %>
+</div>
+<div style="clear: both;"></div>
+
+<div class="note">
+	<%= f.label :coordinates, t('incidents.views.new.form.coordinates') %>
+</div>
+<%= hidden_field_tag "coordinates[lat]", @incident.coordinates.nil? ? "" : @incident.coordinates.lat %>
+<%= hidden_field_tag "coordinates[lon]", @incident.coordinates.nil? ? "" : @incident.coordinates.lon %>
+
+<div class="separator"></div>

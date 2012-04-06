@@ -1,4 +1,4 @@
-Wikiando.Views.StreetMarks.ShowEvaluationsView = Backbone.View.extend({
+Wikicleta.Views.StreetMarks.ShowEvaluationsView = Backbone.View.extend({
 	
 	el: "#bottom-panel",
 	controls : "#controls-panel",
@@ -22,7 +22,7 @@ Wikiando.Views.StreetMarks.ShowEvaluationsView = Backbone.View.extend({
 	},
 	
 	save: function() {
-		if(Wikiando.Session.user==null) {
+		if(Wikicleta.Session.user==null) {
 			return false;
 		}
 		

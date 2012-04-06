@@ -14,14 +14,13 @@
 <body>
 	<script type="text/javascript">
 	    //$(function() {
-	    //    Wikiando.setCurrentUser(<%= current_user.to_json.html_safe if !current_user.nil? %>);
+	    //    Wikicleta.setCurrentUser(<%= current_user.to_json.html_safe if !current_user.nil? %>);
 	    //});
 	</script>
 	<%= render 'layouts/shared/left_bar' %>
 
 	<div id="dynamic-bar" class="shadow-light">
 		<div class="container">
-			hola
 			<%= yield :dynamic_bar %>
 		</div>
 		<div class="handle"></div>
@@ -29,9 +28,7 @@
 	
 	<div style="width:100%; height:100%;" id="map" class="<%= yield :classes_for_map %> displays-points"></div>
 	
-	<div id="content">
-		<%= yield %>
-	</div>
+	<%= yield %>
 </body>
 
 </html>

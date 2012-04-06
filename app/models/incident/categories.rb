@@ -1,4 +1,4 @@
-module Incident::Kinds
+module Incident::Categories
   
   module ClassMethods
     def kinds
@@ -29,12 +29,13 @@ module Incident::Kinds
     Incident.humanized_kind_for(symbol_kind)
   end
   
-  def symbol_kind
-    Incident.kinds[kind]
-  end
   
   def is_of_kind?(kind)
     symbol_kind==kind
+  end
+  
+  def symbol_kind
+    Bike.category_symbol_for(:incidents, kind)
   end
   
   def theft_or_assault?

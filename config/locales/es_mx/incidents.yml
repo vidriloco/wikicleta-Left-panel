@@ -13,11 +13,8 @@ es_MX:
         vehicle_identifier: "Placa del vehículo"
         bike_description: "Descripción de la bici"
   incidents:
-    kinds:
-      theft: "Robo"
-      assault: "Robo armado o con violencia"
-      accident: "Accidente"
-      regulation_infraction: "Infracción al reglamento"
+    messages:
+      saved: "Incidente registrado. ¡Gracias!"
     filtering:
       title: "Filtrar por"
       map_search: "Filtrar dentro del área visible del mapa"
@@ -27,56 +24,57 @@ es_MX:
           last_month: "Último mes"
           last_year: "Último año"
           all: "Siempre"
-    index:
-      title: "Incidentes"
-      description: "En este mapa aparecen reportes de robos y accidentes en bici ocurridos en la zona metropolitana del valle de México"
-      new: "Nuevo Incidente"
-      search: "Filtrar"
-      empty: "No hay reportes de este tipo registrados"
-      kind:
-        bike: "Bicicleta"
-      numbers:
-        total:
-          one: "1 incidente"
-          other: "%{count} incidentes"
-        assault: 
-          one: "1 robo violento"
-          other: "%{count} robos violentos"
-        theft:
-          one: "1 robo"
-          other: "%{count} robos"
-        accident:
-          one: "1 accidente"
-          other: "%{count} accidentes"
-        regulation_infraction:
-          one: "1 infracción"
-          other: "%{count} infracciones"
-      list:
-        close: "Ocultar"
-        item:
-          complaint_issued:
-            yes: "Levanto denuncia"
-            no: "No levanto denuncia"
-          reporter:
-            anonymous: "por Anónimo" 
-            user: "por %{user}"
-          details: "Ver detalles"
-    destroy:
-      success: "El incidente ha sido eliminado"
-      confirm: "¿Deseas eliminar este incidente?"
-    create:
-      saved: "Incidente registrado. ¡Gracias!"
-    new:
-      title: "Incidente nuevo"
-      kind:
-        bike: "Bicicleta"
-      reporting: 
-        as: "Este incidente aparecerá reportado por %{account}"
-        anonymously: "Este será un incidente reportado de manera anónima."
-        invitation: "Para poder reportarlo usando tu cuenta de usuario"
-      form:
-        fields:
+    views:  
+      index:
+        search: "Filtrar"
+        empty: "No hay reportes de este tipo registrados"
+        numbers:
+          total:
+            one: "incidente"
+            other: "incidentes"
+          assault: 
+            one: "asalto"
+            other: "asaltos"
+          theft:
+            one: "robo"
+            other: "robos"
+          accident:
+            one: "accidente"
+            other: "accidentes"
+          regulation_infraction:
+            one: "infracción"
+            other: "infracciones"
+        listing:
+          assault: "Asaltos"
+          regulation_infraction: "Infracciones al reglamento"
+          accident: "Accidentes"
+          theft: "Robos"
+        list:
+          close: "Ocultar"
+          item:
+            complaint_issued:
+              yes: "Levanto denuncia"
+              no: "No levanto denuncia"
+            reporter:
+              anonymous: "por Anónimo" 
+              user: "por %{user}"
+            details: "Ver detalles"
+      destroy:
+        success: "El incidente ha sido eliminado"
+        confirm: "¿Deseas eliminar este incidente?"        
+      new:
+        title: "Incidente nuevo"
+        kind:
+          bike: "Bicicleta"
+        reporting: 
+          with_no_bikes: "Para poder reportar todo tipo de incidente necesitas tener una bici"
+          invitation: "para reportar otro tipo de incidentes"
+          anonymously: "Solo podrás reportar infracciones al reglamento de tránsito"
+        form:
+          bike: "Bici"
+          kind: "Tipo de Incidente"
+          lock_used: "Candado usado"
           description: "Escribe una breve descripción del incidente ..."
           bike_description: "Aquí va la descripción de la bici robada ..."
-          vehicle_identifier: "Placa del vehículo en mayúsculas (si aplica)"
+          vehicle_identifier: "Placa del vehículo (si aplica)"
           coordinates: "No olvides seleccionar en el mapa la ubicación del incidente"

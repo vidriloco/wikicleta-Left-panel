@@ -1,1 +1,3 @@
-var ViewComponents = {};
+var ViewComponents = {
+	Geo : {}
+};

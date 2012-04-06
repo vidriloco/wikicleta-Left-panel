@@ -6,7 +6,7 @@
 
 
 $(document).ready(function() {
-
+	// TODO: Make it work with pathjs
 	var hashId = 'bike-'+window.location.hash.split("#")[1];
 	if ( $.isDefined("#"+hashId) ) {
 		document.getElementById(hashId).scrollIntoView();

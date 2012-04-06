@@ -12,7 +12,7 @@ module ApplicationHelper
     namespace = "#{namespace}_" if namespace
     p controller.controller_name
     selected = controller.controller_name=="#{section}" ? "selected" : ""
-    out=content_tag(:p, link_to(t("app.sections.#{section}.title"), eval("#{namespace}#{section}_path")), :class => selected)
+    out=content_tag(:p, link_to(t("app.sections.#{section}.title"), eval("#{namespace}#{section}_path")+"#/"), :class => selected)
     unless selected.blank?
       out += content_tag(:div, self.send("links_for_#{section}"), :class => "options")
     end
@@ -28,11 +28,12 @@ module ApplicationHelper
   end
   
   def links_for_incidents  
-    out=  link_to(t('app.sections.incidents.subsections.new'), new_bike_path, current_action_matches?("new"))
-    out+= link_to(t('app.sections.incidents.subsections.accidents'), popular_bikes_path, current_action_matches?("popular"))
-    out+= link_to(t('app.sections.incidents.subsections.stolen'), mine_bikes_path, current_action_matches?("mine")) 
-    out+= link_to(t('app.sections.incidents.subsections.assaults'), mine_bikes_path, current_action_matches?("mine")) 
-    out+= link_to(t('app.sections.incidents.subsections.search'), mine_bikes_path, current_action_matches?("mine"))
+    out=  link_to(t('app.sections.incidents.subsections.new'), '#/new', :id => 'incidents-new')
+    out+= link_to(t('app.sections.incidents.subsections.accidents'), '#/accidents', :id => 'incidents-accidents')
+    out+= link_to(t('app.sections.incidents.subsections.stolen'), '#/thefts', :id => 'incidents-thefts') 
+    out+= link_to(t('app.sections.incidents.subsections.assaults'), '#/assaults', :id => 'incidents-assaults') 
+    out+= link_to(t('app.sections.incidents.subsections.regulation_infractions'), '#/regulation_infractions', :id => 'incidents-regulation_infractions') 
+    out+= link_to(t('app.sections.incidents.subsections.search'), '#/search', :id => 'incidents-search')
     
     out
   end

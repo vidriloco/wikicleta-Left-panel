@@ -1,4 +1,4 @@
-Wikiando.Views.StreetMarks.IndexView = Backbone.View.extend({
+Wikicleta.Views.StreetMarks.IndexView = Backbone.View.extend({
 	
 	el: "#submenu",
 	

@@ -59,14 +59,6 @@ ActiveRecord::Schema.define(:version => 20120403000018) do
     t.datetime "updated_at"
   end
 
-  create_table "bike_items", :force => true do |t|
-    t.integer  "category"
-    t.string   "name"
-    t.string   "details"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "bikes", :force => true do |t|
     t.string   "name"
     t.string   "description"
@@ -79,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20120403000018) do
     t.integer  "main_photo_file_size"
     t.datetime "main_photo_updated_at"
     t.integer  "likes_count",             :default => 0
+    t.integer  "share_status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -107,12 +100,12 @@ ActiveRecord::Schema.define(:version => 20120403000018) do
   create_table "incidents", :force => true do |t|
     t.string   "description"
     t.integer  "kind"
-    t.integer  "bike_item_id"
     t.boolean  "complaint_issued"
-    t.string   "bike_description"
+    t.integer  "lock_used"
     t.string   "vehicle_identifier"
     t.datetime "date_and_time"
     t.integer  "user_id"
+    t.integer  "bike_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.point    "coordinates",        :limit => nil, :srid => 4326

@@ -1,4 +1,4 @@
-Wikiando.Views.StreetMarks.ShowDetailsView = Backbone.View.extend({
+Wikicleta.Views.StreetMarks.ShowDetailsView = Backbone.View.extend({
 	
 	el: "#bottom-panel",
 	controls : "#controls-panel",

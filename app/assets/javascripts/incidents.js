@@ -31,9 +31,8 @@ var fetchFromItemListAndZoomToMap = function(id, kind) {
 }
 
 $(document).ready(function(){
-	
 	// map to zoom
-	mapWrap.placeViewportAt({zoom: defaultZoom});
+	map.placeViewportAt({zoom: defaultZoom});
 	mapIncidents();
 	
 	var id = $('#just-posted .id').text();

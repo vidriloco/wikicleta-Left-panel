@@ -6,7 +6,18 @@ es_MX:
         mountain: "Montaña"
         fixie: "Fixie"
         route: "Ruta"
+      locks:
+        none: "Ninguno"
+        chain: "Cadena"
+        cable: "Cable"
+        ulock: "U-Lock"
+      incidents:
+        theft: "Robo"
+        assault: "Robo armado o con violencia"
+        accident: "Accidente"
+        regulation_infraction: "Infracción al reglamento"
     actions:
+      register: "Registra tu bici"
       save: "Registrar bici"
       update: "Guardar cambios"
       delete: "Eliminar"

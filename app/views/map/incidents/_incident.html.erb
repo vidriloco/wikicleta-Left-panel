@@ -1,13 +1,20 @@
-<div id="<%= incident.id %>" class="item">
-	<div class="description"><%= incident.description %></div>
-	<div class="to-right">
-		<span class="time"><%= distance_of_time_in_words(incident.date_and_time, Time.now, true) %></span> 
-		<span class="reporter"><%= reporter_of(incident) %></span>
+<div class="<%= incident.symbol_kind.to_s.pluralize %>">
+	<div id="<%= incident.id %>" class="item rounded-5">
+		<div class="description"><%= incident.description %></div>
+	
+			<br/>
+		<div class="to-right">
+			<span class="time"><%= distance_of_time_in_words(incident.date_and_time, Time.now, true) %></span> 
+			<span class="reporter"><%= reporter_of(incident) %></span>
+		</div>
+	
+		<div style="clear: both;">
+		</div>
+	
+		<div class="lat hidden"><%= incident.coordinates.lat %></div>
+		<div class="lon hidden"><%= incident.coordinates.lon %></div>
+	
+	
+		<%= render :partial => 'map/incidents/details/extended', :locals => { :incident => incident } %>
 	</div>
-	
-	<div class="lat hidden"><%= incident.coordinates.lat %></div>
-	<div class="lon hidden"><%= incident.coordinates.lon %></div>
-	<%= link_to t('incidents.index.list.item.details'), 'javascript:void(0);', :class => "itemdetails-toggle see-details" %>
-	
-	<%= render :partial => 'map/incidents/details/extended', :locals => { :incident => incident } %>
 </div>

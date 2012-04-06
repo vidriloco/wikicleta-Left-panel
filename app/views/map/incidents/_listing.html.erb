@@ -1,27 +1,22 @@
-<div class="close-button"><%= t('actions.close') %></div>
-<div id="default-group" class="hidden"><%= Incident.kinds.values.first %></div>
-<div class="numbers">
-	<%= partial_numbers_for(@incidents, :theft, true) %>
-	<%= partial_numbers_for(@incidents, :accident, true) %>
-	<%= partial_numbers_for(@incidents, :assault, true) %>
-	<%= partial_numbers_for(@incidents, :regulation_infraction, true) %>
-</div>
-<br/>
-
-<% [:theft, :accident, :assault, :regulation_infraction].each do |kind| %>
-<div class="<%= kind %> kind-group">
-	<% unless @incidents[Incident.kind_for(kind)].nil? %>
-		<div class="paginated-<%= kind %>">
-			<%= render @incidents[Incident.kind_for(kind)] %>
+<div id="list_incidents">
+	<% Bike.category_list_for(:incidents).values.each do |kind| %>
+		<div class="<%= kind.to_s.pluralize %>">
+	
+			<div class="kind-group">
+				<h2><%= t("incidents.views.index.listing.#{kind}") %></h2>
+				
+				<% incidents_for_category = @incidents[Bike.category_for(:incidents, kind)] %>
+				
+				<div id="paginated-<%= kind.to_s.pluralize %>">
+					<% unless incidents_for_category.nil? %>
+						<%= render incidents_for_category %>
+					<% else %>
+						<p class="empty"><%= t("incidents.views.index.#{kind.to_s}.empty") %></p>
+					<% end %>
+				</div>
+				
+			</div>
+		
 		</div>
-		<script>
-			$( ".paginated-<%= kind %>" ).easyPaginate({
-				step: 4,
-				nextprev: false
-			});
-		</script>
-	<% else %>
-		<p class="empty"><%= t('incidents.index.empty') %></p>
 	<% end %>
 </div>
-<% end %>

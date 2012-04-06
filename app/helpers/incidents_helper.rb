@@ -1,49 +1,40 @@
 module IncidentsHelper
   
-  def total_numbers_for(count)
-    return t('incidents.index.numbers.total.one') if count == 1
-    t('incidents.index.numbers.total.other', :count => count)
+  def incident_types_for(incidents)
+    incidents = [incidents] if incidents.is_a?(Symbol)
+    with_incidents = incidents.each.inject("incident-selectable") do |collected,incident|
+      collected += " incident-#{Bike.category_for(:incidents, incident)}"
+      collected
+    end
   end
   
-  def incidents_collection(hash)
-    hash.delete(:total)
-    hash.values.flatten
+  def current_user_has_bikes_to_report?
+    return false unless user_signed_in?
+    !current_user.bikes.empty?
   end
   
-  def partial_numbers_for(ocurrences, kind, as_link=false)
-    text=status_numbers_for(ocurrences, kind)
-    result = as_link ? link_to(text, 'javascript:void(0);', :id => "#{kind}", :class => "group-toggle") : "<span class='#{kind}'>#{text}</span>"
+  def incidents_for_session_status
+    if current_user_has_bikes_to_report?
+      Bike.humanized_categories_for(:incidents).invert
+    else
+      Bike.humanized_categories_for(:incidents, :except => [:theft, :assault, :accident]).invert
+    end
+  end
+  
+  def partial_numbers_for(ocurrences, kind)
+    count = ocurrences == nil ? 0 : ocurrences.count
+    text = count == 1 ? t("incidents.views.index.numbers.#{kind}.one") : t("incidents.views.index.numbers.#{kind}.other")
+    result = "<a href='#/#{kind.to_s.pluralize}' class='group-toggle' id='#{kind}'>
+    <span class='number'>#{count}</span><span class='text'>#{text}</span>
+    </a>"    
     result.html_safe
   end
   
-  def status_numbers_for(hash, kind)
-    ocurrences = hash[Incident.kind_for(kind)]
-    count = ocurrences == nil ? 0 : ocurrences.size
-    count == 1 ? t("incidents.index.numbers.#{kind}.one") : t("incidents.index.numbers.#{kind}.other", :count => count)
-  end
-  
-  def incident_types_for(incidents)
-    incidents = [incidents] if incidents.is_a?(Symbol)
-    with_incidents = incidents.each.inject(String.new) do |collected,incident|
-      collected += " incident-#{Incident.kind_for(incident)}"
-      collected
-    end
-    "#{with_incidents} incident-selectable"
-  end
-    
-  def is_visible(incidents, object)
-    incidents = [incidents] if incidents.is_a?(Symbol)
-    incidents.each do |incident|
-      return if Incident.kind_for(incident) == object.kind
-    end
-    "hidden"
-  end 
-  
   def reporter_of(incident)
     if incident.user.nil?
-      t('incidents.index.list.item.reporter.anonymous')
+      t('incidents.views.index.list.item.reporter.anonymous')
     else
-      t('incidents.index.list.item.reporter.user', :user => incident.user.username)
+      t('incidents.views.index.list.item.reporter.user', :user => incident.user.username)
     end
   end
 end

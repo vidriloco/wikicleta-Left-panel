@@ -6,13 +6,10 @@
 //
 //= require backbone_rails_sync
 //= require backbone_datalink
-//= require backbone/wikiando
 //= require backbone.modelbinding
 //= require backbone.validation
 //= require easypaginate.min
 //= require jquery.timeago
-//= require geo/base
-//= require handlebars
 
 //= require_tree .
 

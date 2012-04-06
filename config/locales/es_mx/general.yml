@@ -9,6 +9,7 @@ es_MX:
           stolen: "Robos"
           assaults: "Asaltos"
           accidents: "Accidentes"
+          regulation_infractions: "Infracciones"
           search: "Buscar"
           new: "Reporta un incidente"
       bikes:
@@ -28,7 +29,7 @@ es_MX:
     new: "Nuevo"
     edit: "Cambiar"
   actions:
-    register_or_login: "Registrarse o Iniciar Sesión"
+    register_or_login: "Registrate o Inicia Sesión"
     return: "Regresar"
     share: "Compartir"
     save: "Guardar"

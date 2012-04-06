@@ -1,4 +1,4 @@
-Wikiando.Views.StreetMarks.NewView = Backbone.View.extend({
+Wikicleta.Views.StreetMarks.NewView = Backbone.View.extend({
 	el: "#main-panel",
 	
 	events: { 
@@ -31,7 +31,7 @@ Wikiando.Views.StreetMarks.NewView = Backbone.View.extend({
 	},
 	
 	save: function() {
-		if(this.model.isValid() && Wikiando.Session.user != null) {
+		if(this.model.isValid() && Wikicleta.Session.user != null) {
 			var localView = this;
 			this.collection.create(this.model.toJSON(),
 			{

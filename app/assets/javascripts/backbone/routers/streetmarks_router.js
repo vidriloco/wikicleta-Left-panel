@@ -1,6 +1,6 @@
-Wikiando.Routers.StreetMarks = Backbone.Router.extend({
+Wikicleta.Routers.StreetMarks = Backbone.Router.extend({
 	initialize: function(object) {
-		this.streetMarks = new Wikiando.Collections.StreetMarksCollection();
+		this.streetMarks = new Wikicleta.Collections.StreetMarksCollection();
 		this.streetMarks.reset(object.streetMarks);
 	},
 	
@@ -12,19 +12,19 @@ Wikiando.Routers.StreetMarks = Backbone.Router.extend({
 	},
 	
 	new: function() {
-		this.view = new Wikiando.Views.StreetMarks.NewView({ collection: this.streetMarks });
+		this.view = new Wikicleta.Views.StreetMarks.NewView({ collection: this.streetMarks });
 		this.view.render();
 	},
 	
 	index: function() {
-		this.view = new Wikiando.Views.StreetMarks.IndexView({ streetMarks : this.streetMarks });
+		this.view = new Wikicleta.Views.StreetMarks.IndexView({ streetMarks : this.streetMarks });
 		this.view.render();
 		this._loadLines(this.streetMarks);
 	},
 	
 	show: function(id) {
 		var model = this.streetMarks.get(id);
-		this.view = new Wikiando.Views.StreetMarks.ShowView({ model : model });
+		this.view = new Wikicleta.Views.StreetMarks.ShowView({ model : model });
 		this.view.render();
 		this._loadLines([model], true);
 		this.view.fetchRankingsSubView();
@@ -33,7 +33,7 @@ Wikiando.Routers.StreetMarks = Backbone.Router.extend({
 	// renders the show view and pushes the evaluations subview
 	evaluate: function(id) {
 		var model = this.streetMarks.get(id);
-		this.view = new Wikiando.Views.StreetMarks.ShowView({ model : model });
+		this.view = new Wikicleta.Views.StreetMarks.ShowView({ model : model });
 		this.view.render();
 		this.view.pushEvaluationsView();
 		this._loadLines([model], true);

@@ -5,10 +5,12 @@ module Bike::Categories
       self.send(selector)
     end
     
-    def humanized_categories_for(selector)
+    def humanized_categories_for(selector, opts={})
       items = self.send(selector)
-      items.keys.each.inject({}) do |collected, key| 
-        collected[key] = I18n.t("bikes.categories.#{selector.to_s}.#{items[key]}")
+      items.keys.each.inject({}) do |collected, key|
+        unless(opts[:except] && opts[:except].include?(items[key]))
+          collected[key] = humanized_category_for(selector, items[key])
+        end
         collected
       end
     end
@@ -17,8 +19,13 @@ module Bike::Categories
       self.send(selector).invert[name]
     end
     
+    def category_symbol_for(selector, identifier)
+      self.send(selector)[identifier]
+    end
+    
     def humanized_category_for(selector, identifier)
-      I18n.t("bikes.categories.types.#{self.send(selector)[identifier]}")
+      identifier = self.send(selector)[identifier] if identifier.is_a?(Integer)
+      I18n.t("bikes.categories.#{selector.to_s}.#{identifier}")
     end
     
     private
@@ -26,12 +33,12 @@ module Bike::Categories
       { 1 => :urban, 2 => :mountain, 3 => :route, 4 => :fixie}
     end
     
-    def incidents
-      { 1 => :theft, 2 => :assault, 3 => :accident, 4 => :regulation_infraction }
+    def locks
+      { 1 => :none, 2 => :chain, 3 => :cable, 4 => :ulock }
     end
     
-    def security
-      {}
+    def incidents
+      { 1 => :theft, 2 => :assault, 3 => :accident, 4 => :regulation_infraction }
     end
     
   end

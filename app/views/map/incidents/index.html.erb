@@ -1,24 +1,9 @@
+<div id="section-incidents"></div>
 
-<%= content_for :header do %>
-	<h1><%= t('incidents.index.title') %><span class="type rounded-5"><%= t('incidents.index.kind.bike') %></span></h1>
-	
-	<div class="actions">
-		<%= link_to t('incidents.index.new'), new_map_incident_path, :class => "button blue" %>
-	</div>
+<%= content_for :dynamic_bar do %>
+
 <% end %>
 
-<%= content_for :map_area do %>
-	<div id="submenu"><%= render 'submenu' %></div>
-	
-	<div id="itemlist" class="incidents rounded-5 shadow-strong"><%= render 'listing' %></div>
-	<div id="itemdetails" class="hidden rounded-5 shadow-light"></div>
-	
-	<div id="itemsfiltering" class="hidden rounded-bottom-5 shadow-light"><%= render 'filtering' %></div>
-	
-	<% if flash[:posted_incident] %>
-		<div id="just-posted" class="hidden">
-			<span class="kind"><%= flash[:posted_incident].symbol_kind %></span>
-			<span class="id"><%= flash[:posted_incident].id %></span>
-		</div>
-	<% end %>
-<% end %>
+<div id="origin" class="hidden">
+	<%= render 'new' %>
+</div>

@@ -34,7 +34,7 @@ var StreetMark = Backbone.Model.extend({
 });
 
 // Collection of street marks
-Wikiando.Collections.StreetMarksCollection = Backbone.Collection.extend({
+Wikicleta.Collections.StreetMarksCollection = Backbone.Collection.extend({
   model : StreetMark,
   url : "/map/street_marks"
 });
