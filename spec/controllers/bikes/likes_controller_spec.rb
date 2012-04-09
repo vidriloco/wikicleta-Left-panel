@@ -4,7 +4,7 @@ require 'spec_helper'
 describe Bikes::LikesController do   
   
   before(:each) do
-    @user = Factory(:user)
+    @user = FactoryGirl.create(:user)
     sign_in @user
     
     @bike = Bike.new

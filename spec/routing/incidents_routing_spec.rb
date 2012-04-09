@@ -20,7 +20,7 @@ describe Map::IncidentsController do
     end
     
     it "matches /map/incidents/filtering with controller :incidents action #post" do
-      { :post => "/map/incidents/filtering" }.should route_to(:action => "filtering", :controller => "map/incidents")
+      { :get => "/map/incidents/filtering" }.should route_to(:action => "filtering", :controller => "map/incidents")
     end
     
   end

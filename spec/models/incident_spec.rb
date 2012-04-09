@@ -26,9 +26,9 @@ describe Incident do
     before(:each) do
       @theft = FactoryGirl.create(:theft, :user => @reporter, :complaint_issued => false)
       @accident = FactoryGirl.create(:accident, :user => @reporter)
-      @assault = FactoryGirl.create(:assault, :user => @reporter, :date_and_time => Date.today-2.weeks)
-      @regulation_infraction = FactoryGirl.create(:regulation_infraction, :date_and_time => Date.today-1.month)
-      @old_incident = FactoryGirl.create(:assault, :user => @reporter, :date_and_time => Date.today-3.years)
+      @assault = FactoryGirl.create(:assault, :user => @reporter, :date => Date.today-2.weeks)
+      @regulation_infraction = FactoryGirl.create(:regulation_infraction, :date => Date.today-1.month)
+      @old_incident = FactoryGirl.create(:assault, :user => @reporter, :date => Date.today-3.years)
     end
     
     describe "fetching by date range" do
@@ -39,7 +39,7 @@ describe Incident do
           Incident.kind_for(:theft) => [@theft],
           :total => 2
         }
-        Incident.filtering_with(:range_date => Incident.date_filtering_option_for(:last_week)).should == hash
+        Incident.filtering_with(with_all_types.merge :range_date => Incident.date_filtering_option_for(:last_week)).should == hash
       end
     
       it "should retrieve all those incidents that happened during the last month" do
@@ -49,7 +49,7 @@ describe Incident do
           Incident.kind_for(:assault) => [@assault],
           :total => 3
         }
-        Incident.filtering_with(:range_date => Incident.date_filtering_option_for(:last_month)).should == hash
+        Incident.filtering_with(with_all_types.merge :range_date => Incident.date_filtering_option_for(:last_month)).should == hash
       end
     
       it "should retrieve only all those incidents that happened during the last year" do
@@ -60,7 +60,7 @@ describe Incident do
           Incident.kind_for(:regulation_infraction)=> [@regulation_infraction],
           :total => 4
         }
-        Incident.filtering_with(:range_date => Incident.date_filtering_option_for(:last_year)).should == hash
+        Incident.filtering_with(with_all_types.merge :range_date => Incident.date_filtering_option_for(:last_year)).should == hash
       end
     
       it "should retrieve all the incidents when asked to get all" do
@@ -71,7 +71,7 @@ describe Incident do
           Incident.kind_for(:regulation_infraction)=> [@regulation_infraction],
           :total => 5  
         }
-        Incident.filtering_with(:range_date => Incident.date_filtering_option_for(:all)).should == hash
+        Incident.filtering_with(with_all_types.merge :range_date => Incident.date_filtering_option_for(:all)).should == hash
       end
       
     end
@@ -104,7 +104,7 @@ describe Incident do
           Incident.kind_for(:theft) => [@theft],
           :total => 1  
         }
-        Incident.filtering_with(:complaint_issued => "false").should == hash
+        Incident.filtering_with(with_all_types.merge :complaint_issued => "false").should == hash
       end
       
       it "should retrieve four results when asking to bring those with issued complaint set to true" do
@@ -114,22 +114,20 @@ describe Incident do
           Incident.kind_for(:regulation_infraction)=> [@regulation_infraction],
           :total => 4  
         }
-        Incident.filtering_with(:complaint_issued => "true").should == hash
+        Incident.filtering_with(with_all_types.merge :complaint_issued => "true").should == hash
       end
       
     end
     
-    it "should retrieve all the results when no conditions are set" do
-      hash = { 
-        Incident.kind_for(:assault) => [@assault, @old_incident], 
-        Incident.kind_for(:accident) => [@accident], 
-        Incident.kind_for(:theft) => [@theft],
-        Incident.kind_for(:regulation_infraction)=> [@regulation_infraction],
-        :total => 5  
-      }
+    it "should retrieve an empty result set when no conditions set" do
+      hash = { :total => 0 }
       Incident.filtering_with.should == hash
       Incident.filtering_with(:nothing).should == hash
     end
   end
   
+end
+
+def with_all_types
+  {:type => {:assault => "1", :accident => "1", :theft => "1", :regulation_infraction => "1"}}
 end

@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+=begin
 FactoryGirl.define do
   
   factory :accessible_place, :class => Place do |p|
@@ -39,3 +39,4 @@ FactoryGirl.define do
   end
   
 end 
+=end

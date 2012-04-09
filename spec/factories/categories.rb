@@ -1,5 +1,5 @@
 # encoding: utf-8
-
+=begin 
 FactoryGirl.define do
   factory :workshop, :class => Category do |c|
     c.standard_name 'workshop'
@@ -25,3 +25,4 @@ FactoryGirl.define do
      c.standard_name 'transport_station'
    end
 end
+=end

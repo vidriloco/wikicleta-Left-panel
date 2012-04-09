@@ -1,10 +1,10 @@
 <div id="searching">
 	<div class="search styled-form clear-void">
-		<h1><%= t('incidents.filtering.title') %></h1>
+		<h1><%= t('incidents.views.filtering.title') %></h1>
 		
-		<%= form_tag filtering_map_incidents_path, :remote => true do %>
+		<%= form_tag filtering_map_incidents_path, :method => :get, :remote => true do %>
 			<div>
-				<label><%= t('incidents.filtering.kinds')%></label>
+				<label><%= t('incidents.views.filtering.kinds')%></label>
 				
 				<div class="group rounded-5">
 					<div>
@@ -29,19 +29,19 @@
 			<br/>
 	
 			<div>
-				<%= label_tag t('activerecord.attributes.incident.date_and_time') %>
+				<%= label_tag t('incidents.views.filtering.date_and_time') %>
 				<%= select_tag "incident[range_date]", options_for_select(Incident.humanized_date_filtering_options.invert) %>
 			</div>
 	
 			<div>
-				<label><%= t('incidents.filtering.complaint_issued') %></label>
+				<label><%= t('incidents.views.filtering.complaint_issued') %></label>
 				<%= select_tag "incident[complaint_issued]", 
 						options_for_select({t('common_answers')[true] => true, t('common_answers')[false] => false}),  
 						{:include_blank => true} %> 
 			</div>
 				
 			<div>
-				<label><%= t('incidents.filtering.map_search') %></label>
+				<label><%= t('incidents.views.filtering.map_search') %></label>
 				<%= check_box_tag "incident[map_enabled]" %>
 			</div>
 			<%= hidden_field_tag 'incident[coordinates[sw]]]', {}, :id => 'coordinates_sw' %>

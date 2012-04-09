@@ -35,7 +35,7 @@ class Incident < ActiveRecord::Base
   end
   
   def self.humanized_date_filtering_option_for(key)
-    I18n.t("incidents.filtering.fields.date")[date_filtering_options[key]]
+    I18n.t("incidents.views.filtering.fields.date")[date_filtering_options[key]]
   end
   
   def self.filtering_with(params={})
@@ -62,7 +62,7 @@ class Incident < ActiveRecord::Base
     
     if end_date=range_date_for(params[:range_date])
       query += " AND " unless query.blank?
-      query += " date >= :end_date"
+      query += " date > :end_date"
       values.merge!({ :end_date => end_date })
     end
     

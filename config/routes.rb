@@ -72,7 +72,7 @@ Ciudadio::Application.routes.draw do
     
     resources :incidents, :except => [:edit, :update] do
       collection do 
-        post :filtering
+        get :filtering
       end
     end
   end

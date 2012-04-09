@@ -176,7 +176,7 @@ feature "Listing and filtering bike incidents:" do
       click_link I18n.t('incidents.index.search')
       
       within("#itemsfiltering") do
-        select I18n.t('incidents.filtering.fields.date.all'), :from => "incident_range_date"
+        select I18n.t('incidents.views.filtering.fields.date.all'), :from => "incident_range_date"
         click_on I18n.t('actions.accept')
       end
       
@@ -192,13 +192,13 @@ feature "Listing and filtering bike incidents:" do
       click_link I18n.t('incidents.index.search')
       
       within("#itemsfiltering") do
-        page.should have_content I18n.t('incidents.filtering.title')
+        page.should have_content I18n.t('incidents.views.filtering.title')
         page.should have_content I18n.t('activerecord.attributes.incident.date_and_time')
         
         check "incident_type_theft"
         check "incident_type_regulation_infraction"
         check "incident_type_assault"
-        select I18n.t('incidents.filtering.fields.date.all'), :from => "incident_range_date"
+        select I18n.t('incidents.views.filtering.fields.date.all'), :from => "incident_range_date"
         click_on I18n.t('actions.accept')
       end
       
@@ -209,7 +209,7 @@ feature "Listing and filtering bike incidents:" do
       
       within("#itemsfiltering") do
         select I18n.t('common_answers')[false], :from => "incident_complaint_issued"
-        select I18n.t('incidents.filtering.fields.date.all'), :from => "incident_range_date"
+        select I18n.t('incidents.views.filtering.fields.date.all'), :from => "incident_range_date"
         
         click_on I18n.t('actions.accept')
       end
@@ -225,7 +225,7 @@ feature "Listing and filtering bike incidents:" do
         check "incident_type_theft"
         check "incident_type_assault"
         
-        select I18n.t('incidents.filtering.fields.date.last_week'), :from => "incident_range_date"
+        select I18n.t('incidents.views.filtering.fields.date.last_week'), :from => "incident_range_date"
         click_on I18n.t('actions.accept')
       end
       
@@ -251,7 +251,7 @@ feature "Listing and filtering bike incidents:" do
           check "incident_type_theft"
           check "incident_type_regulation_infraction"
           check "incident_type_assault"
-          select I18n.t('incidents.filtering.fields.date.all'), :from => "incident_range_date"
+          select I18n.t('incidents.views.filtering.fields.date.all'), :from => "incident_range_date"
           
           check "incident_map_enabled"
           click_on I18n.t('actions.accept')

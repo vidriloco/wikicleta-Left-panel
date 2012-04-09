@@ -20,17 +20,7 @@ es_MX:
       filtering_results: "Mostrando resultados de la búsqueda"
       confirm_delete: "¿Realmente deseas eliminar este incidente?"
       deleted: "Incidente eliminado"
-    filtering:
-      title: "Filtrar incidentes por"
-      complaint_issued: "Denuncia levantada"
-      map_search: "Aquellos dentro del área visible del mapa"
-      kinds: "Tipos"
-      fields:
-        date:
-          last_week: "Última semana"
-          last_month: "Último mes"
-          last_year: "Último año"
-          all: "Siempre"
+
     views:  
       index:
         empty: "No hay reportes de este tipo"
@@ -84,6 +74,18 @@ es_MX:
           anonymous: "usuario anónimo"
       edit:
         destroy: "Eliminar este incidente"
+      filtering:
+        title: "Filtrar incidentes por"
+        complaint_issued: "Denuncia levantada"
+        map_search: "Aquellos dentro del área visible del mapa"
+        date_and_time: "Por fecha"
+        kinds: "Tipos"
+        fields:
+          date:
+            last_week: "Última semana"
+            last_month: "Último mes"
+            last_year: "Último año"
+            all: "Siempre"
       new:
         title: "Incidente nuevo"
         kind:

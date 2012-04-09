@@ -79,7 +79,6 @@ describe Map::IncidentsController do
     
     before(:each) do
       @incident = FactoryGirl.create(:assault, :user => @user)
-      @incidents = {"total" => 0}
     end
     
     it "destroys the requested incident" do
@@ -87,16 +86,10 @@ describe Map::IncidentsController do
         delete :destroy, :id => @incident.id
       }.to change(Incident, :count).by(-1)
     end
-
-    it "fetches all the remaining incidents" do
-      delete :destroy, :id => @incident.id
-      
-      assigns(:incidents).should == @incidents
-    end
     
   end
   
-  describe "POST filtering" do
+  describe "GET filtering" do
     
     before(:each) do
       @incident = FactoryGirl.create(:assault, :user => @user)
@@ -104,7 +97,8 @@ describe Map::IncidentsController do
     end
     
     it "should receive the parameters for the search" do
-      post :filtering, :incident => {}
+      Incident.should_receive(:filtering_with) { @incidents }
+      get :filtering, :incident => {}
       
       assigns(:incidents).should == @incidents
     end
