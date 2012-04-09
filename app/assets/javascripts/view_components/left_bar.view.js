@@ -69,6 +69,16 @@ $.extend(ViewComponents, {
 				$('.menu .options a').removeClass('selected');
 			},
 			
+			_toggleVisualStatus: function() {
+				if(this.colapsed) {
+					$(this._dynamicBarDom()).removeClass('expanded');
+					$(this._dynamicBarDom()).addClass('collapsed');
+				} else {
+					$(this._dynamicBarDom()).removeClass('collapsed');
+					$(this._dynamicBarDom()).addClass('expanded');
+				}
+			},
+			
 			_dinBarXPos: function() {
 				var parent = $($(this._handle()).parent());
 				return parent.offset().left;
@@ -80,6 +90,7 @@ $.extend(ViewComponents, {
 				parent.animate({
 				    left: movement
 				  }, 700, function() {
+					instance._toggleVisualStatus();
 					instance._setLastXPosition();
 				});
 			},

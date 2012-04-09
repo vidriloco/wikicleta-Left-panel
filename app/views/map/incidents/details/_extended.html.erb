@@ -1,23 +1,65 @@
-<div class="incident-details hidden">
+<div id="<%= @incident.id %>" class="incident-style clear-void">
+	
+	<%= link_to t('actions.back_arrow').html_safe, hash_link_for(map_incidents_path, @incident.symbol_kind.to_s.pluralize), :class => 'back' %>
+	
+	<h2 class="<%= @incident.symbol_kind.to_s.pluralize %>"><%= t("incidents.views.index.listing.singular.#{@incident.symbol_kind}") %></h2>
+	<div class="clear"></div>
+	
+	<div class="incident-details">
+		<% if @incident.is_bike_related? %>
+			<div class="to-right see-bike-details rounded-5"><%= link_to t('incidents.views.show.bike_profile'), bike_path(@incident.bike) %></div>
+			
+			<%= info_for(@incident.bike) %>
+			
+			<div class="photo">
+				<%= image_tag @incident.bike.main_photo.url(:small), :class => "shadow-lighter" %>
+			</div>
+			
+		<% end %>
+		
+		<% if @incident.is_of_kind?(:regulation_infraction) %>
+			<span class="info">
+				<span class="aspect"><%= t('incidents.views.show.reporting.aspect') %> </span>
+				<span class="value"><b><%= @incident.user.nil? ? t('incidents.views.show.reporting.anonymous') : @incident.user.username %></b></span>
+			</span>
+		<% end %>
+		
+		<div class="description"><%= @incident.description %></div>
+		
+		<div class="lat hidden"><%= @incident.coordinates.lat %></div>
+		<div class="lon hidden"><%= @incident.coordinates.lon %></div>
+	
+		<% if @incident.is_of_kind?(:theft) %>
+				<span class="info">
+					<span class="aspect"><%= t('incidents.views.show.attacher_used') %> </span>
+					<span class="value"><%= Bike.humanized_category_for(:locks, @incident.lock_used) %></span>
+				</span>
+		<% elsif @incident.is_of_kind?(:accident) || @incident.is_of_kind?(:regulation_infraction) %>
+			<span class="info">
+				<span class="aspect"><%= t('incidents.views.show.vehicle_identifier') %> </span>
+				<span class="value"><%= @incident.vehicle_identifier || t('missing.fem') %></span>
+			</span>
+		<% end %>
+	
+	</div>
+	
 	<div class="separator"></div>
-	
-	<div class="lat hidden"><%= incident.coordinates.lat %></div>
-	<div class="lon hidden"><%= incident.coordinates.lon %></div>
-	
-	<% if incident.is_of_kind?(:theft) %>
-		<div class="extra-fields rounded-5">
-			<span><%= t('activerecord.attributes.incident.attacher_used') %>: </span>
-			<div class="value to-right"><%= false ? t('missing') : '---' %></div>
-			<br/>
-		</div>
-	<% elsif incident.is_of_kind?(:accident) || incident.is_of_kind?(:regulation_infraction) %>
-		<div class="extra-fields rounded-5">
-			<span><%= t('activerecord.attributes.incident.vehicle_identifier') %>: </span>
-			<div class="value to-right"><%= incident.vehicle_identifier || "---" %></div>
-		</div>
-	<% end %>
-	
-	<p class="complaint_issued">
-		<%= t('incidents.views.index.list.item.complaint_issued')[incident.complaint_issued] %>
+	<p class="to-right date-time">
+		<span class="info">
+			<span class="value"><%= I18n.localize(@incident.date, :format => :short) %></span>
+			<span class="mini">
+				<%= t('incidents.views.show.between', :start_hour => @incident.start_hour.strftime("%H:%M"), :final_hour => @incident.final_hour.strftime("%H:%M"))%>
+			</span>
 	</p>
+
+	<p class="complaint-issued to-left">
+		<%= t('incidents.views.index.list.item.complaint_issued')[@incident.complaint_issued] %>
+	</p>
+	<p class="clear"></p>
+		
+</div>
+<div class="alert-zone">
+	<p><%= t('incidents.views.edit.destroy')%></p>
+	<%= link_to t('incidents.actions.delete'), map_incident_path(@bike), :method => :delete, :remote => true, :class => "button red-button to-right", :confirm => t('incidents.messages.confirm_delete') %>
+	<div style="clear:both"></div>
 </div>

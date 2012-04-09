@@ -16,7 +16,7 @@
 	color: white;
 	
 	.number {
-		font-size: 35px;
+		font-size: 29px;
 	}
 	
 	.text {
@@ -29,31 +29,45 @@
 	color: #4BA741;
 }
 
-#floating {
-	position: fixed;
-	right: 50%;
-	bottom: 40px;
-	margin-right: -315px;
-	background-color: rgba(1,1,1,0.7);
-	padding: 0px 10px;
-}
-
-.kind-group {
-	padding: 5px;
+.incident-style {
+	padding: 20px 10px 10px 15px !important;
+	font-size: 12px;
 	
-	h2 {
-		text-align: right;
-		color: #3B7E29;
-		font-weight:bold;
-		margin-bottom: 20px;
-		margin-right: 10px;
+	.separator  {
+		margin-bottom: 20px !important;
+	}
+	
+	.frame {
+		color: #3A7C27;
+	}
+	
+	.brand {
+		font-style: italic;
+		color: #474747;
+	}
+	
+	.aspect {
+		margin-left: 10px;
+		color: #7D7D7D;
+		display: inline-block;
+	}
+
+	.aspect, .frame, .brand {
+		font-weight: bold;
+	}
+	
+	p.empty {
+		margin-top: 50%;
+		font-style: italic;
+		font-size: 18px;
+		text-align: center;
 	}
 	
 	.item {
-		font-size: 12px;
 		padding: 10px;
 		margin: 8px;
-		background-color: #EEEEEE;
+		background-color: #F6F6F6;
+		border: 1px solid #E6E6E6;
 		cursor: pointer;
 		
 		.time {
@@ -64,13 +78,180 @@
 			font-weight: bold;
 		}
 		
+		.description { font-size: 12px }
+		
 		.incident-details {
 			margin-top: 10px;
 		}
 	}
 	
 	.item:hover {
-		background-color: #E3E3E3;
+		border: 1px solid #DEDEDE;
+		background-color: #ECECEC;
 	}
 	
+	.complaint-issued {
+		text-align: center;
+		margin-bottom: 0px;
+		font-weight: bold;
+		color: #3A7C27;
+		font-size: 15px;
+	}
+	
+	.description {
+		margin: 8px;
+		font-size: 12px;
+	}
+	
+	h2 {
+		font-size: 25px;
+		text-align: right;
+		color: #3B7E29;
+		font-weight:bold;
+		margin: 0px 10px 25px 0px;
+		border-bottom: 1px solid #E6E6E6;
+	}
+	
+	.description, .complaint-issued {
+		font-size: 13px;
+	}
+	
+	.date-time {
+		margin-right: 10px;
+		font-weight: bold;
+		font-style: italic;
+		
+		.mini {
+			font-size: 11px;
+			color: #4E4E4E;
+		}
+	}
+}
+
+.incident-details {
+	padding: 20px 10px 10px 0px;
+	font-size: 13px;
+	
+	.photo {
+		text-align: center;
+		margin: 30px;
+	}
+	
+	.description {
+		padding: 10px;
+		color: #494949;
+		text-align: justify;
+	}
+	
+	.see-bike-details {
+		background-color: #B9B9B9;
+		padding: 2px 10px;
+		font-size: 12px;
+		font-weight: bold;
+		
+		a:hover {
+			color: #303830;
+		}
+		
+		a {
+			color: #EBEDEA;
+		}
+	}
+}
+
+$accidents: #CE2B28;
+$thefts: #3652AE;
+$assaults: #63A62C;
+$regulation_infractions: #F18706;
+
+h2.accidents {
+	color: $accidents;
+}
+
+h2.thefts {
+	color: $thefts;
+}
+
+h2.assaults {
+	color: $assaults;
+}
+
+h2.regulation_infractions {
+	color: $regulation_infractions;
+}
+
+#floating {
+	position: fixed;
+	right: 50%;
+	bottom: 40px;
+	margin-right: -315px;
+	background-color: rgba(1,1,1,0.7);
+	padding: 0px 10px;
+	
+	.regulation_infractions:hover {
+		color: $regulation_infractions;
+	}
+	
+	.regulation_infractions {
+		color: #F1C171;
+	}
+	
+	.thefts:hover {
+		color: $thefts;
+	}
+	
+	.thefts {
+		color: #93B7FB;
+	}
+	
+	.accidents:hover {
+		color: $accidents;
+	}
+	
+	.accidents {
+		color: #FFC6C3;
+	}
+	
+	.assaults:hover {
+		color: $assaults;
+	}
+	
+	.assaults {
+		color: #CCFFAC;
+	}
+}
+
+
+.search {
+	font-size: 12px;
+	margin-top: 60px;
+	
+	div {
+		input, label {
+			font-size: 14px;
+			display: inline-block;
+		}
+		
+		label {
+			width: 280px;
+			padding: 2px;
+		}
+	}
+
+	.group {
+		margin-top: 10px;
+		
+		padding: 10px;
+		
+		div {
+			
+			input {
+				margin-right: 10px;
+			}
+			
+			color: #424242;
+			font-weight: bold;
+			margin-left: 20px;
+		}
+	}
 }

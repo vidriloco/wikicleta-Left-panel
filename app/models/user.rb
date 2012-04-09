@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   attr_accessor :login
   attr_accessible :email, :password, :password_confirmation, :remember_me, :full_name, :username, :login, :bio, :personal_page
   validates_presence_of :username, :full_name
-  validates_uniqueness_of :username
+  validates_uniqueness_of :username, :email
   
   def owns_comment?(comment)
     return false if comment.nil?

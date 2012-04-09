@@ -1,7 +1,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui-min
-//= require pathjs
 //= require jquery.tipsy
 //= require quickpager.jquery
 //= require view_components/notification.view
@@ -32,5 +31,12 @@ $.extend({
 	},
 	visit: function(hashedUrl) {
 		window.location.hash=hashedUrl;
-	}
+	},
+	buildUrlFrom: function(section, id) {
+		if(id === undefined) {
+			return "#"+section;
+		}
+		return "#"+section+"/"+id;
+	},
+	assetsURL: 'http://127.0.0.1:3000/assets/'
 })

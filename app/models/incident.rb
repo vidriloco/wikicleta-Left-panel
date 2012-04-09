@@ -3,8 +3,12 @@ class Incident < ActiveRecord::Base
   include Categories
   
   belongs_to :user
+  belongs_to :bike
   
   validates_presence_of :coordinates, :kind, :description
+  validates_presence_of :lock_used, :if => :theft?
+  validates_presence_of :bike, :if => :accident_or_theft_or_assault?
+  validates_presence_of :user, :if => :accident_or_theft_or_assault?
   validates :vehicle_identifier, :format => /^[^-]([A-Z0-9\-]){3,}[^-]$/, :allow_blank => true, :if => :accident_or_regulation_infraction?
   
   attr_protected :user_id
@@ -46,6 +50,8 @@ class Incident < ActiveRecord::Base
       end
       
       query += "kind IN (#{kinds_selected.chop})"
+    else
+      query += "kind IS NULL"
     end
     
     unless params[:complaint_issued].blank?
@@ -56,7 +62,7 @@ class Incident < ActiveRecord::Base
     
     if end_date=range_date_for(params[:range_date])
       query += " AND " unless query.blank?
-      query += " date_and_time >= :end_date"
+      query += " date >= :end_date"
       values.merge!({ :end_date => end_date })
     end
     
@@ -83,6 +89,10 @@ class Incident < ActiveRecord::Base
   def owned_by_user?(passed_user)
     return false if passed_user.nil?
     user = passed_user
+  end
+  
+  def is_bike_related?
+    return !bike.nil?
   end
   
   def self.range_date_for(option)

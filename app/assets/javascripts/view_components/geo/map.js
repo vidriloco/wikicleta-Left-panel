@@ -69,6 +69,15 @@ ViewComponents.Geo.Map = function(gMap, opts, callback) {
 			this.placeViewportAt({ lat: latitude, lon: longitude });
 		},
 		
+		placeMapOn: function(opts) {
+			this.placeViewportAt(opts);
+			if(opts.iconName) {
+				this.setMarkerOnPosition(this.map.getCenter(), opts.iconName);
+			} else {
+				this.setMarkerOnPosition(this.map.getCenter());
+			}
+		},
+		
 		placeViewportAt: function(opts) {
 			if(("lat" in opts) && ("lon" in opts)) {
 				this.map.setCenter(new google.maps.LatLng(parseFloat(opts.lat), parseFloat(opts.lon)));
@@ -89,18 +98,18 @@ ViewComponents.Geo.Map = function(gMap, opts, callback) {
 			this.propagateClickEvent(new google.maps.LatLng(lat, lon));
 		},
 		
-		enableSearch: function(neDom, swDom) {
+		enableSearch: function(baseDom) {
 			var instance = this;
-			this.southWestDom = swDom;
-			this.northEastDom = neDom;
+			this.southWestDom = baseDom+"_sw";
+			this.northEastDom = baseDom+"_ne";
 			
-			google.maps.event.addListener(this.map, "drag", function(event) {
+			google.maps.event.addListener(this.map, "bounds_changed", function() {
 				instance.setSearchMapParams();
 				return true;
 			});
 			// will execute an action only the first time the map loads
-			google.maps.event.addListenerOnce(this.map, 'idle', function(){
-			  theWrapper.setSearchMapParams();
+			google.maps.event.addListenerOnce(this.map, 'drag', function(event){
+			  instance.setSearchMapParams();
 				return true; 
 			});
 		},
@@ -121,20 +130,19 @@ ViewComponents.Geo.Map = function(gMap, opts, callback) {
 			this.writeAddressOn(latLng);
 		},
 		
-		setMarkerOnPosition: function(latLng) {
+		setMarkerOnPosition: function(latLng, iconName) {
 			var marker = this.lastMarker;
 
 			if(marker != null) {
 				marker.setMap(null);
 			} 
-
-			var map = this.map;
 			
-			marker = new google.maps.Marker({
-			  position: latLng, 
-				map: map
-			});
+			var opts = { position: latLng, map: this.map };
+			if(iconName) {
+				opts = $.extend(opts, {icon: $.assetsURL+iconName+'.png'});
+			}
 			
+			marker = new google.maps.Marker(opts);
 			this.lastMarker = marker;
 		},
 		
@@ -159,13 +167,42 @@ ViewComponents.Geo.Map = function(gMap, opts, callback) {
 			}
 		},
 		
+		addCoordinatesAsMarkerToList: function(opts, callback) {
+			if(opts.lat=="" || opts.lon=="") {
+				return false;
+			}
+
+			var map = this.map;
+			var marker = new google.maps.Marker({
+				position: new google.maps.LatLng(opts.lat, opts.lon),
+				map: map,
+				icon: $.assetsURL+opts.iconName+'.png'
+			});
+
+			google.maps.event.addListener(marker, 'click', function() {
+				callback(opts.resourceUrl);
+			});
+			this.markerList.push(marker);
+		},
+
+		resetMarkersList: function() {
+			var markers = this.markerList;
+			if (markers) {
+				for (i in markers) {
+					markers[i].setMap(null);
+				}
+			}
+		},
+		
 		reset: function() {
+			this.resetMarkersList();
 			if(this.lastMarker != null) {
 				this.lastMarker.setMap(null);
 			}
 			this.lastMarker = null;
 			
 			this.setEditableTo(false);
+			this.placeViewportAt({zoom: defaultZoom });
 		},
 		
 		isEditable: function() {

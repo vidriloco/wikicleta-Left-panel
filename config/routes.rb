@@ -84,6 +84,10 @@ Ciudadio::Application.routes.draw do
       get :mine
     end
   end
+  
+  get '/welcome' => 'welcome#index'
+  get '/about' => 'welcome#about'
+  
   post '/bikes/:id/like' => 'bikes/likes#create'
   delete '/bikes/:id/like' => 'bikes/likes#destroy'
 

@@ -1,24 +1,28 @@
 .mid-sheet {
 	.styled-form {
 		background-color: white;
+		
+		h1 {
+			margin-bottom: 50px;
+		}
 	}
 	
-	.alert-zone, .styled-form {
+	.alert-zone, .styled-form, .menu {
 		width: 600px;
 	}
+}
+
+.alert-zone {
+	padding: 20px;
+	background-color: #F0CABF;
 	
-	.alert-zone {
-		padding: 20px;
-		background-color: #F0CABF;
-		
-		p {
-			color: #9C3F43;
-			padding: 0px;
-			margin: 0px;
-			font-weight: bold;
-			display: inline-block;
-			vertical-align: -5px;
-		}
+	p {
+		color: #9C3F43;
+		padding: 0px;
+		margin: 0px;
+		font-weight: bold;
+		display: inline-block;
+		vertical-align: -5px;
 	}
 }
 
@@ -32,16 +36,13 @@
 .styled-form {
 	margin: 0 auto 0 auto;
 	padding: 20px;
-	
-	a.back:hover {
-		text-decoration: underline !important
-	}
+	font-size: 12px;
 	
 	h1 {
 		color:#2C9941;
 		text-align: right;
-		margin-bottom: 50px;
 		border-bottom: 2px solid #F2F2F2;
+		margin-bottom: 30px;
 	}
 	
 	input:active, textarea:active, textarea:hover {
@@ -61,7 +62,7 @@
 	}
 	
 	input, textarea {
-		font-family: calibri;
+		font-family: calibri, sans-serif;
 	  -moz-border-radius: 4px;
 		-webkit-border-radius: 4px;
 	  border-radius: 4px;
@@ -168,6 +169,13 @@
 	}
 }
 
+.clear-void {
+	margin-top: 30px;
+	padding-top: 0px !important;
+	border-top: 1px solid #DEDEDE;
+	border-bottom: 1px solid #DEDEDE; 
+	background-color: #F9F9F9;
+}
 
 .field_with_errors label {
 	color: #99474C;
@@ -199,11 +207,26 @@
 	color: #6A6A6A;
 }
 
-.required-login {
+.required-login {	
 	a {
 		color: #404F80 !important;
 		font-weight: bold;
 	}
 	text-align: center;
-	font-size: 14px;
+	font-size: 12px;
 }
+
+.error {
+	display: none;
+	background-color: #EED9D3;
+	color: #EA5C61;
+	font-weight: bold;
+	font-size: 11px;
+	padding: 5px 5px 5px 10px;
+	
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+

@@ -9,8 +9,9 @@ module IncidentsHelper
   end
   
   def current_user_has_bikes_to_report?
-    return false unless user_signed_in?
-    !current_user.bikes.empty?
+    if user_signed_in?
+      !current_user.bikes.empty?
+    end
   end
   
   def incidents_for_session_status
@@ -24,10 +25,19 @@ module IncidentsHelper
   def partial_numbers_for(ocurrences, kind)
     count = ocurrences == nil ? 0 : ocurrences.count
     text = count == 1 ? t("incidents.views.index.numbers.#{kind}.one") : t("incidents.views.index.numbers.#{kind}.other")
-    result = "<a href='#/#{kind.to_s.pluralize}' class='group-toggle' id='#{kind}'>
+    result = "<a href='#{hash_link_for(map_incidents_path, kind.to_s.pluralize)}' class='group-toggle #{kind.to_s.pluralize}' id='#{kind}'>
     <span class='number'>#{count}</span><span class='text'>#{text}</span>
     </a>"    
     result.html_safe
+  end
+  
+  def info_for(bike)
+    "<div class='info to-left'>
+    <span class='aspect'>#{t('bikes.views.preview.frame_number')}</span>
+    <span class='frame'>#{bike.frame_number}</span>
+    <span class='aspect'>#{t('bikes.views.preview.brand')}</span>
+    <span class='brand'>#{bike.brand}</span>
+    </div><div class='clear'></div>".html_safe
   end
   
   def reporter_of(incident)

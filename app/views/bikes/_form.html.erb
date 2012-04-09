@@ -2,7 +2,9 @@
 	<%= render :partial => 'shared/form_errors', :locals => {:message => t('bikes.views.errors.on_save'), :object => @bike} %>
 
 	<%= f.text_field :name, :placeholder => t('bikes.views.form.name'), :size => 40 %>
+
 	<%= f.text_field :frame_number, :placeholder => t('bikes.views.form.frame_number'), :size => 20 %>
+	<div class="hidden frame_number_help"><%= t('bikes.views.form.help.frame_number') %></div>
 	<%= f.text_area :description, :placeholder => t('bikes.views.form.description'), :cols => 58, :rows => 2 %>
 	<div id="bike_description_count" class="field-counter"></div>
 	<div class="with-label">

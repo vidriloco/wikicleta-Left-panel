@@ -1,3 +1,73 @@
-// Place all the styles related to the settings controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+/*
+ *= require_self
+ *= require shared/form.css
+ *= require shared/bars.css
+ *= require shared/main.css
+ */
+
+.mid-sheet {
+	.menu {
+		border-top: 10px solid #51B03B;
+		background-color: #F3FFEE;
+		padding: 30px 20px 30px 20px;
+		margin-left: auto;
+		margin-right: auto;
+		.accounts-actions {
+			margin-left: 10px;
+			
+			a {
+				color: #2B3229;
+				font-weight: bold;
+				padding: 5px 10px;
+				font-size: 14px;
+				border-radius: 5px;
+				-moz-border-radius: 5px;
+				-webkit-border-radius: 5px;
+				margin-right: 20px;
+			}
+			
+			a:hover, a.selected {
+				background-color:#9EDB90;
+			}
+			
+			a.root {
+				margin-right: 40px;
+				background-color: #444444;
+				color: #D6F3D0;
+			}
+			
+			a.root:hover {
+				color: #46D23A;
+			}
+		}
+	}
+	
+	.name {
+		padding: 10px 8px;
+		background-color: #F2F1BD;
+		margin-bottom: 40px;
+		color: #505050;
+		font-weight: bold;
+		
+		a {
+			color: #5474B1;
+			font-weight: normal;
+		}
+		
+		a:hover {
+			text-decoration: underline;
+		}
+	}
+	
+	label { 
+		display: inline-block !important;
+		width: 200px;
+		margin-left: 30px;
+	}
+	input, textarea { display: inline-block !important }
+	
+	.actions {
+		margin-top: 10px;
+	}
+	
+}

@@ -6,18 +6,25 @@ es_MX:
       incident: 
         kind: "Tipo"
         description: "Descripción"
-        date_and_time: "Fecha y hora"
+        date: "Fecha"
         coordinates: "Ubicación"
-        attacher_used: "Equipo de seguridad usado"
+        attacher_used: "Equipo de seguridad utilizado"
         complaint_issued: "¿Denuncia levantada?"
         vehicle_identifier: "Placa del vehículo"
-        bike_description: "Descripción de la bici"
   incidents:
+    actions:
+      delete: "Eliminar"
     messages:
+      saving: "Guardando incidente ..."
       saved: "Incidente registrado. ¡Gracias!"
+      filtering_results: "Mostrando resultados de la búsqueda"
+      confirm_delete: "¿Realmente deseas eliminar este incidente?"
+      deleted: "Incidente eliminado"
     filtering:
-      title: "Filtrar por"
-      map_search: "Filtrar dentro del área visible del mapa"
+      title: "Filtrar incidentes por"
+      complaint_issued: "Denuncia levantada"
+      map_search: "Aquellos dentro del área visible del mapa"
+      kinds: "Tipos"
       fields:
         date:
           last_week: "Última semana"
@@ -26,8 +33,7 @@ es_MX:
           all: "Siempre"
     views:  
       index:
-        search: "Filtrar"
-        empty: "No hay reportes de este tipo registrados"
+        empty: "No hay reportes de este tipo"
         numbers:
           total:
             one: "incidente"
@@ -45,16 +51,22 @@ es_MX:
             one: "infracción"
             other: "infracciones"
         listing:
-          assault: "Asaltos"
-          regulation_infraction: "Infracciones al reglamento"
-          accident: "Accidentes"
-          theft: "Robos"
+          singular:
+            assault: "Asalto"
+            regulation_infraction: "Infracción al reglamento"
+            accident: "Accidente"
+            theft: "Robo"
+          plural:
+            assault: "Asaltos"
+            regulation_infraction: "Infracciones al reglamento"
+            accident: "Accidentes"
+            theft: "Robos"
         list:
           close: "Ocultar"
           item:
             complaint_issued:
-              yes: "Levanto denuncia"
-              no: "No levanto denuncia"
+              yes: "Si levantó denuncia"
+              no: "No levantó denuncia"
             reporter:
               anonymous: "por Anónimo" 
               user: "por %{user}"
@@ -62,6 +74,16 @@ es_MX:
       destroy:
         success: "El incidente ha sido eliminado"
         confirm: "¿Deseas eliminar este incidente?"        
+      show:
+        vehicle_identifier: "Placa del vehículo: "
+        attacher_used: "Equipo de seguridad utilizado: "
+        bike_profile: "Página de esta bici"
+        between: "entre %{start_hour} y %{final_hour} hrs"
+        reporting: 
+          aspect: "Reportado por:"
+          anonymous: "usuario anónimo"
+      edit:
+        destroy: "Eliminar este incidente"
       new:
         title: "Incidente nuevo"
         kind:
@@ -71,10 +93,17 @@ es_MX:
           invitation: "para reportar otro tipo de incidentes"
           anonymously: "Solo podrás reportar infracciones al reglamento de tránsito"
         form:
+          validations:
+            kind: "Debes seleccionar un tipo de incidente"
+            description: "No has escrito una descripción del incidente. Mínimo 60 caracteres"
+            vehicle_identifier: "Debes dar una placa válida"
+            range: "La primer hora debe ser más antigua que la segunda"
+            coordinates: "No has seleccionado una ubicación en el mapa"
           bike: "Bici"
           kind: "Tipo de Incidente"
           lock_used: "Candado usado"
           description: "Escribe una breve descripción del incidente ..."
-          bike_description: "Aquí va la descripción de la bici robada ..."
           vehicle_identifier: "Placa del vehículo (si aplica)"
           coordinates: "No olvides seleccionar en el mapa la ubicación del incidente"
+          range: "Entre las horas"
+          date: "Fecha"

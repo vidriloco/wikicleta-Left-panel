@@ -10,9 +10,8 @@ module ApplicationHelper
   
   def menu_section_for(section, namespace=nil)
     namespace = "#{namespace}_" if namespace
-    p controller.controller_name
     selected = controller.controller_name=="#{section}" ? "selected" : ""
-    out=content_tag(:p, link_to(t("app.sections.#{section}.title"), eval("#{namespace}#{section}_path")+"#/"), :class => selected)
+    out=content_tag(:p, link_to(t("app.sections.#{section}.title"), hash_link_for(eval("#{namespace}#{section}_path")), :class => selected))
     unless selected.blank?
       out += content_tag(:div, self.send("links_for_#{section}"), :class => "options")
     end
@@ -27,15 +26,37 @@ module ApplicationHelper
     out
   end
   
+  def links_for_welcome
+    out=  link_to(t('app.sections.welcome.subsections.main'), root_path, current_action_matches?("index"))
+    out+=  link_to(t('app.sections.welcome.subsections.about'), about_path, current_action_matches?("about"))
+  end
+  
   def links_for_incidents  
-    out=  link_to(t('app.sections.incidents.subsections.new'), '#/new', :id => 'incidents-new')
-    out+= link_to(t('app.sections.incidents.subsections.accidents'), '#/accidents', :id => 'incidents-accidents')
-    out+= link_to(t('app.sections.incidents.subsections.stolen'), '#/thefts', :id => 'incidents-thefts') 
-    out+= link_to(t('app.sections.incidents.subsections.assaults'), '#/assaults', :id => 'incidents-assaults') 
-    out+= link_to(t('app.sections.incidents.subsections.regulation_infractions'), '#/regulation_infractions', :id => 'incidents-regulation_infractions') 
-    out+= link_to(t('app.sections.incidents.subsections.search'), '#/search', :id => 'incidents-search')
+    out=  link_to(t('app.sections.incidents.subsections.new'), hash_link_for(map_incidents_path, 'new'), :id => 'incidents-new')
+    out+= link_to(t('app.sections.incidents.subsections.accidents'), hash_link_for(map_incidents_path, 'accidents'), :id => 'incidents-accidents')
+    out+= link_to(t('app.sections.incidents.subsections.stolen'), hash_link_for(map_incidents_path, 'thefts'), :id => 'incidents-thefts') 
+    out+= link_to(t('app.sections.incidents.subsections.assaults'), hash_link_for(map_incidents_path, 'assaults'), :id => 'incidents-assaults') 
+    out+= link_to(t('app.sections.incidents.subsections.regulation_infractions'), hash_link_for(map_incidents_path, 'regulation_infractions'), :id => 'incidents-regulation_infractions') 
+    out+= link_to(t('app.sections.incidents.subsections.search'), hash_link_for(map_incidents_path, 'search'), :id => 'incidents-search')
     
     out
+  end
+  
+  def hash_link_for(path, section=nil, resource=nil)
+    return path+"#" if section.nil? && resource.nil?
+    return path+"##{section}/#{resource}" unless resource.nil?
+    path+"##{section}"
+  end
+  
+  def shrink_text(text, max=65)
+    if text.length > max
+      until(text[max] == " ") do 
+        max -= 1
+      end
+      "#{text[0, max]} ..."
+    else
+      text
+    end
   end
   
   private

@@ -42,6 +42,7 @@ es_MX:
         start: "Entrar"
         sign_up: "Registrate"
     settings:
+      main_page: "Pagina Principal"
       title: "Preferencias"
       account: "Cuenta"
       access: "Acceso"

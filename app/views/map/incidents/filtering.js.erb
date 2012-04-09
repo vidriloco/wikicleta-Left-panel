@@ -1,5 +1,6 @@
-$('#submenu').html("<%= escape_javascript(render 'submenu') %>");
-$('#itemlist').html("<%= escape_javascript(render 'listing') %>");
-$('#itemsfiltering .close-button').click();
+$('#count_incidents').remove();
+$('#origin').append("<%= escape_javascript render 'numbers' %>");
+$('#list_incidents').remove();
+$('#origin').append("<%= escape_javascript render 'listing' %>");
 
-mapIncidents();
+$.visit('#');

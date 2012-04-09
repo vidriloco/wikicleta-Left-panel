@@ -2,29 +2,33 @@ require 'spec_helper'
 
 describe Incident do
   
+  before(:each) do
+    @reporter = FactoryGirl.create(:pipo)
+  end
+  
   it "should not let me save an accident with a malformed vehicle identifier" do
-    incident = Factory.build(:accident, :vehicle_identifier => ".O3P-!DED")
+    incident = FactoryGirl.build(:accident, :vehicle_identifier => ".O3P-!DED")
     incident.save.should be_false
   end
   
-  it "should not let me save an infraction report" do
-    incident = Factory.build(:regulation_infraction, :vehicle_identifier => "-O3P-DED-")
+  it "should not let me save an infraction report with a malformed vehicle identifier" do
+    incident = FactoryGirl.build(:regulation_infraction, :vehicle_identifier => "-O3P-DED-")
     incident.save.should be_false
   end
   
   it "should let me save a theft report" do
-    incident = Factory.build(:theft, :vehicle_identifier => "-O3P-DED-")
+    incident = FactoryGirl.build(:theft, :vehicle_identifier => "O3P-DED", :user => @reporter)
     incident.save.should be_true
   end
   
   describe "having some incidents registered" do
     
     before(:each) do
-      @accident = Factory(:accident, :user => @reporter)
-      @theft = Factory(:theft, :user => @reporter, :complaint_issued => false)
-      @assault = Factory(:assault, :date_and_time => Date.today-2.weeks)
-      @regulation_infraction = Factory(:regulation_infraction, :date_and_time => Date.today-1.month)
-      @old_incident = Factory(:assault, :date_and_time => Date.today-3.years)
+      @theft = FactoryGirl.create(:theft, :user => @reporter, :complaint_issued => false)
+      @accident = FactoryGirl.create(:accident, :user => @reporter)
+      @assault = FactoryGirl.create(:assault, :user => @reporter, :date_and_time => Date.today-2.weeks)
+      @regulation_infraction = FactoryGirl.create(:regulation_infraction, :date_and_time => Date.today-1.month)
+      @old_incident = FactoryGirl.create(:assault, :user => @reporter, :date_and_time => Date.today-3.years)
     end
     
     describe "fetching by date range" do

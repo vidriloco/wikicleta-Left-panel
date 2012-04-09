@@ -1,4 +1,12 @@
 es_MX:
+  activerecord:
+    models:
+      bike: "Bicicleta"
+    attributes:
+      incident: 
+        name: "Nombre"
+        brand: "Marca"
+        frame_number: "Número de cuadro"
   bikes:
     categories:
       types:
@@ -36,6 +44,12 @@ es_MX:
         kind: "Tipo"
         brand: "Marca"
         main_photo: "Foto"
+        help:
+          frame_number: "Este número generalmente está en el cuadro o pedales de tu bici. Es útil tenerlo para poder encontrar más fácilmente bicicletas que han sido robadas."
+      index:
+        empty: 
+          message: "No hay bicis registradas todavía"
+          invite: "¡Agrega la tuya!"
       edit:
         title: "Modificar bici"
         change_photo: "Por si quieres cambiar la foto actual de tu bici:"
@@ -54,3 +68,6 @@ es_MX:
         comments:
           some: "comentarios"
           one: "comentario"
+      preview:
+        frame_number: "No."
+        brand: "Marca:"

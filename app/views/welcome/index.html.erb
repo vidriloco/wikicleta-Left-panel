@@ -1,10 +1,13 @@
-<div class="welcome">
-	<h1><span class="grey-beam">Wiki</span><span class="green-beam">cleta</span></h1>	
-	<p><%= t('app.moto') %></p>
+<div class="board centered shadow-lighter rounded-5">
+	<h1>En este primer beta de <span class="name">Wikicleta</span> puedes:</h1>
+</div>
+<br/>
+<div class="board blue centered shadow-lighter rounded-5">
+	<h2><%= link_to "Presentar tu bici en comunidad y conocer otras bicis", bikes_path %></h2>
 </div>
 
-<ul class="routes">
-	<li><%= link_to t('app.sections.incidents'), map_incidents_path, :class => 'section rounded-5 shadow-light' %></li>
-	<li><%= link_to t('app.sections.bikebook'), bikes_path, :class => 'section rounded-5 shadow-light' %></li>
-	<li><%= link_to t('app.sections.street_mark'), map_street_marks_path, :class => 'section rounded-5 shadow-light' %></li>
-</ul>
+<div class="board orange centered shadow-lighter rounded-5">
+	<h2><%= link_to "Reportar algún incidente que te haya ocurrido con tu bici", map_incidents_path %></h2>
+</div>
+
+<p class="future">¡Mucho más por venir!</p>

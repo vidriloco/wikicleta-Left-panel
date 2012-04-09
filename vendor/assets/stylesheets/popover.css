@@ -1,0 +1,83 @@
+/**
+ * jQuery.popover example stylesheet.
+ * By Davey IJzermans
+ * http://daveyyzermans.nl
+ * 
+ * License: public domain
+ */
+
+.popover {
+	font-family: 'Helvetica Neue', 'Helvetica', Arial;
+	position: absolute;
+	top: 0; left: 0;
+	max-height: 240px;
+	width: 220px;
+	display: none;
+	-webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+	-webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+}
+.popover.wider {
+	width: 340px;
+}
+.popover.large {
+	width: 470px;
+	max-height: 350px;
+}
+.popover .arrow, .popover .top-arrow {
+	position: absolute;
+	top: 0; left: 50%;
+	margin: -10px 0 0 -3px;
+	width: 0; height: 0;
+	border-top: 5px solid transparent;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid #121212;
+}
+.popover .bottom-arrow {
+	top: 100%; left: 50%;
+	margin: 0 0 0 -3px;
+	border-top: 5px solid #121212;
+	border-bottom: 5px solid transparent;
+}
+.popover .left-arrow {
+	top: 50%; left: -10px;
+	margin: -3px 0 0;
+	border-right: 5px solid #121212;
+	border-bottom: 5px solid transparent;
+}
+.popover .right-arrow {
+	top: 50%; left: 100%;
+	margin: -3px 0 0;
+	border-left: 5px solid #121212;
+	border-bottom: 5px solid transparent;
+}
+.popover .wrap {
+	background: white;
+	border: 3px solid #121212;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+.popover .title {
+	background-color: #F9F9F9;
+	border-bottom: 1px solid #D7D7D7;
+	color: black;
+	padding: 8px;
+	font-size: 14px;
+	font-weight: bold;
+	padding-left: 20px;
+}
+.popover .content {
+	padding: 15px;
+	max-height: 175px;
+	overflow: auto;
+	line-height: 1.3em;
+	font-size: 12px;
+}
+.popover.large .content {
+	max-height: 285px;
+}

@@ -33,16 +33,6 @@ ActiveRecord::Schema.define(:version => 20120403000018) do
     t.datetime "updated_at"
   end
 
-  create_table "answers", :force => true do |t|
-    t.integer  "meta_answer_option_id"
-    t.integer  "meta_answer_item_id"
-    t.integer  "survey_id"
-    t.string   "open_value"
-    t.integer  "question_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
     t.string   "uid"
@@ -76,14 +66,6 @@ ActiveRecord::Schema.define(:version => 20120403000018) do
     t.datetime "updated_at"
   end
 
-  create_table "categories", :force => true do |t|
-    t.string   "standard_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "categories", ["standard_name"], :name => "standard_name_idx", :unique => true
-
   create_table "comments", :force => true do |t|
     t.text     "comment"
     t.integer  "commentable_id"
@@ -103,45 +85,14 @@ ActiveRecord::Schema.define(:version => 20120403000018) do
     t.boolean  "complaint_issued"
     t.integer  "lock_used"
     t.string   "vehicle_identifier"
-    t.datetime "date_and_time"
+    t.date     "date"
+    t.time     "start_hour"
+    t.time     "final_hour"
     t.integer  "user_id"
     t.integer  "bike_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.point    "coordinates",        :limit => nil, :srid => 4326
-  end
-
-  create_table "meta_answer_items", :force => true do |t|
-    t.integer  "meta_question_id"
-    t.string   "human_value"
-    t.string   "identifier"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "meta_answer_options", :force => true do |t|
-    t.integer  "meta_question_id"
-    t.string   "human_value"
-    t.string   "identifier"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "meta_questions", :force => true do |t|
-    t.integer  "meta_survey_id"
-    t.string   "title"
-    t.string   "instruction"
-    t.string   "order_identifier"
-    t.string   "type_of"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "meta_surveys", :force => true do |t|
-    t.string   "name"
-    t.integer  "category_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "place_comments", :force => true do |t|
@@ -166,15 +117,6 @@ ActiveRecord::Schema.define(:version => 20120403000018) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.point    "coordinates",             :limit => nil,                :srid => 4326
-  end
-
-  create_table "questions", :force => true do |t|
-    t.integer  "meta_question_id"
-    t.integer  "survey_id"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "recommendations", :force => true do |t|
@@ -205,15 +147,6 @@ ActiveRecord::Schema.define(:version => 20120403000018) do
     t.datetime    "created_at"
     t.datetime    "updated_at"
     t.line_string "segment_path", :limit => nil, :srid => 4326
-  end
-
-  create_table "surveys", :force => true do |t|
-    t.integer  "meta_survey_id"
-    t.integer  "evaluable_id"
-    t.string   "evaluable_type"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "user_like_bikes", :force => true do |t|

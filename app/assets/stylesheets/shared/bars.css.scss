@@ -17,8 +17,8 @@
 	min-height: 100%;
 	width: 500px;
 	position: absolute;
-	background-color: #646464;
 	clear: left;
+	
 	.handle {
 		position: absolute;
 		right: 0px;
@@ -32,12 +32,19 @@
 	.container {
 		height: auto;
 		min-height: 100%;
-		width: 460px;
+		width: 480px;
 		position: absolute;
 		float: left;
-		padding: 10px;
-		background-color: white;
+		background: url('/assets/noise.png');
 	}
+}
+
+.expanded {
+	background: url('/assets/noise.png');
+}
+
+.collapsed {
+	background-color: #646464;
 }
 
 #main-bar {
@@ -47,11 +54,13 @@
 	background-color: #585858;
 	
 	h1 {
+		a { color: #E7E7E7; }
 		text-align: center;		
-		font-size: 45px;
-		color: #E7E7E7;
+		font-size: 70px;
+		
 		text-shadow: 0px 1px 2px #555;
 		margin-bottom: 5px;
+		font-family: 'Yanone Kaffeesatz', sans-serif;
 	}
 	
 	.motto {
@@ -60,6 +69,7 @@
 		color: #5FB848;
 		margin-top: 0px;
 		margin-bottom: 80px;
+		font-family: Calibri, 'Trebuchet MS'
 	}
 	
 	.session {
@@ -70,7 +80,7 @@
 		}
 		a {
 			margin: 0 20px 0 20px;
-			font-size: 15px;
+			font-size: 13px;
 			font-weight: bold;
 			color: #AAEC94;
 		}
@@ -85,7 +95,7 @@
 		display: block;
 		text-align: right;
 		margin-bottom: 10px;
-
+		font-size: 14px;
 
 		a:hover {
 			color: #FFFFFF 
@@ -102,7 +112,7 @@
 		}
 		
 		div.options {
-			font-size: 14px;
+			font-size: 12px;
 			padding: 10px;
 			border-bottom: 1px solid #232323;
 			

@@ -3,7 +3,7 @@
 //= require jquery.masonry.min
 //= require view_components/counter.view
 //= require comments
-
+//= require jquery.popover
 
 $(document).ready(function() {
 	// TODO: Make it work with pathjs
@@ -50,9 +50,12 @@ $(document).ready(function() {
 		ViewComponents.Notification.append($('.notice'));
 	}
 
-
+	if($.isDefined('#bike_frame_number')) {
+		$('#bike_frame_number').popover({ content: $('.frame_number_help').text(), title: 'Ayuda', position: 'right' });
+	}
+	
 	$('#submit-with-photo').click(function() {
-		ViewComponents.Notification.withContent("<p class='success'>Espera por favor, guardando bici ... </p>", 60000, true);
+		ViewComponents.Notification.put("<p class='success'>Espera por favor, guardando bici ... </p>", {delay: 60000, blocking: true});
 	});
 	
 });

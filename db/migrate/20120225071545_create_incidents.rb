@@ -8,7 +8,9 @@ class CreateIncidents < ActiveRecord::Migration
       
       t.string :vehicle_identifier
       t.point :coordinates, :srid => 4326, :with_z => false 
-      t.datetime :date_and_time
+      t.date :date
+      t.time :start_hour
+      t.time :final_hour
       t.integer :user_id
       t.integer :bike_id
       t.timestamps

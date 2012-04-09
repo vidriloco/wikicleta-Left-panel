@@ -8,7 +8,6 @@
 //= require backbone_datalink
 //= require backbone.modelbinding
 //= require backbone.validation
-//= require easypaginate.min
 //= require jquery.timeago
 
 //= require_tree .

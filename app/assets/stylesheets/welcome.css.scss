@@ -1,0 +1,63 @@
+/*
+ *= require_self
+ *= require shared/bars.css
+ *= require shared/main.css
+ */
+
+
+.board {
+	padding: 10px;
+	width: 700px;
+	background-color: rgba(1,1,1,0.6);
+	border: 1px solid white;
+	color: white;
+	text-align: center;
+	text-shadow: 1px 1px 0px #0E0F0D;
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+	margin-top: 40px;
+	font-size: 21px;
+	
+	a { color: white !important }
+	
+	ul {
+		margin-left: 30px;
+		text-align: left;
+		
+		li { 
+			display: block;
+			margin-bottom: 10px;
+		}
+		
+	}
+	
+	.separator {
+		background-color: #7D7D7D;
+	}
+}
+
+.green {
+	color: #6FC95D
+}
+
+.techie {
+	color: #DD972D
+}
+
+.blue_ {
+	color: #4770A6;
+}
+
+p.future {
+	padding-top: 50px;
+}
+
+p.contact, p.future {
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+	font-size: 30px;
+	color: black;
+	text-align: center;
+}
+
+p.contact {
+	padding-top: 30px;
+}

@@ -4,8 +4,6 @@
 */
 
 body, html {
-	background: url('/assets/crosses.png');
-	font-family: calibri;
 	font-size: 15px;
 }
 
@@ -79,6 +77,7 @@ body, html {
 	a, a:visited {
 		color: #B7DCA7;
 		font-weight: bold;
+		font-size: 12px;
 	}
 	
 	.separator {

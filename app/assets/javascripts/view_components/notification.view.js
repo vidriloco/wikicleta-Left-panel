@@ -7,28 +7,33 @@ $.extend(ViewComponents, {
 			},
 			
 			contents: "<div id='notification' class='rounded-bottom-5 shadow-lighter'>$content$</div>",
-	
-			append: function(dom, delay) {
-				this.detach();
-				this._replace_contents("");
-				dom.appendTo(this._rootDom());
-				this._apply_effects(delay);
-			},
-			// makes visible a layer wich blocks the main content from user interaction
-			// replaces with a simple content string
-			withContent : function(content, delay, blocking) {
-				this.detach();
-				if (blocking != undefined && blocking) {
-					this._block_content();
-				}
-				this._replace_contents(content);
-				this._apply_effects(delay);
-			},
 			
 			detach : function() {
 				if($.isDefined(this._rootDom())) {
 					$(this._rootDom()).remove();
 				}
+			},
+			
+			append: function(domElement) {
+				this.put("");
+				domElement.appendTo($(this._rootDom()));
+			},
+			
+			put: function(content, opts) {
+				this.detach();
+				
+				this._replace_contents(content);
+				
+				if (opts) {
+					if(opts.blocking != undefined && opts.blocking) {
+						this._block_content();
+					}
+					
+					if(opts.delay != undefined) {
+						this._apply_effects(opts.delay);
+					}
+				}
+				this._apply_effects();
 			},
 			
 			_block_content : function() {
@@ -44,7 +49,7 @@ $.extend(ViewComponents, {
 				if(delay === undefined) {
 					delay = 4000;
 				}
-				$(this._rootDom()).slideToggle(300).delay(delay).slideToggle();
+				$(this._rootDom()).slideToggle(300).delay(delay).slideToggle(300);
 			}
 		}
 });

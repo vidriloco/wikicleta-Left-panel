@@ -15,8 +15,8 @@ describe Map::IncidentsController do
       { :post => "/map/incidents" }.should route_to(:action => "create", :controller => "map/incidents")
     end
     
-    it "matches /map/incidents with controller :incidents action #index" do
-      { :get => "/map/incidents" }.should route_to(:action => "index", :controller => "map/incidents")
+    it "matches /map/incidents/1 with controller :incidents action #index" do
+      { :get => "/map/incidents/1" }.should route_to(:action => "show", :controller => "map/incidents", :id => "1")
     end
     
     it "matches /map/incidents/filtering with controller :incidents action #post" do

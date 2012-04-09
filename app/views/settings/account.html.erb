@@ -1,21 +1,27 @@
-<%= render 'shared_actions' %>
+<%= content_for :menu do %>
+	<%= render :partial => 'shared_actions', :locals => {:menu => {:account => 'selected'}} %>
+<% end %>
 
 <%= form_for(@user, :url => settings_changed_path(@user), :html => { :method => :put }) do |f| %>
 	
-	<div><%= f.label :full_name %><br />
-  <%= f.text_field :full_name %></div>
+	<%= f.label :full_name %>
+  <%= f.text_field :full_name %>
 
-	<div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
-	
-	<div><%= f.label :username %><br />
-  <%= f.text_field :username %></div>
-	
-	<div><%= f.label :share_location %>
-  <%= f.check_box :share_location %></div><br/>
+	<%= f.label :email %>
+  <%= f.email_field :email %>
 
-	<%= f.submit t("user_accounts.settings.save") %>
+	<%= f.label :username %>
+  <%= f.text_field :username %>
+
+	<% if :done == true %>
+		<%= f.label :share_location %>
+  	<%= f.check_box :share_location %>
+	<% end %>
+	
+	<div class="actions to-right">
+		<%= link_to t("user_accounts.settings.sections.account.deactivate"), account_deactivate_path, 
+			:confirm => t("user_accounts.settings.sections.account.deactivate_confirmation"), :method => :delete, :class=>"inlined" %>
+		<%= f.submit t('user_accounts.settings.save'), :class => 'submit blue button' %>
+	</div>
+	<div class="clear"></div>
 <% end %>
-
-<%= link_to t("user_accounts.settings.sections.account.deactivate"), account_deactivate_path, 
-	:confirm => t("user_accounts.settings.sections.account.deactivate_confirmation"), :method => :delete %>

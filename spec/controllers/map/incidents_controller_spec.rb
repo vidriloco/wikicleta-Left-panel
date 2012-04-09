@@ -3,27 +3,22 @@ require 'spec_helper'
 
 describe Map::IncidentsController do    
   
+  before(:each) do
+    @user = FactoryGirl.create(:pipo)
+  end
+  
   def valid_params
-    Factory.attributes_for(:assault).inject({}){|memo,(k,v)| memo[k.to_s] = v.to_s; memo}
+    { 'valid' => 'params' }
   end
   
   def coordinates
     {"lat" => "19.45", "lon" => "-99.23"}
   end
   
-  describe "GET new" do
-    
-    it "should assign a new incident to @incident" do
-      get :new
-      assigns(:incident).should be_a_new(Incident)
-    end
-    
-  end
-  
   describe "POST create" do
     
     before(:each) do
-      @incident = Factory.create(:assault)
+      @incident = FactoryGirl.create(:assault, :user => @user)
     end
     
     it "should assign incident and apply geometry" do
@@ -36,7 +31,7 @@ describe Map::IncidentsController do
     describe "with logged-in user" do
       
       before(:each) do
-        @user = Factory(:user)
+        @user = FactoryGirl.create(:user)
         sign_in @user
       end
       
@@ -46,47 +41,36 @@ describe Map::IncidentsController do
       end
       
     end
-  
-    describe "with valid parameters" do
-  
-      before(:each) do
-        @incident.stub(:save).and_return(true)
-      end
-
-      it "redirects to the newly created incident" do
-        Incident.stub(:new) { @incident }
-        @incident.stub(:apply_geo)
-  
-        post :create
-        response.should redirect_to(map_incidents_path)
-      end
-      
-    end
-  
-    describe "with invalid parameters" do
-
-      before(:each) do
-        @incident.stub(:save).and_return(false)
-      end
-
-      it "renders action 'new'" do
-        Incident.stub(:new) { @incident }
-        post :create, :incident => {}, :coordinates => {}
-        response.should render_template("new")
-      end
-
-    end
   end
   
   describe "GET index" do
     
-    before(:each) do
-      @incident = Factory.create(:assault)
+    context "html rendering" do
+      
+      before(:each) do
+        @incident = Incident.new
+      end
+            
+      it "assigns new instance" do
+        Incident.should_receive(:new).and_return(@incident)
+        get :index
+        assigns(:incident).should == @incident
+      end
+      
     end
     
-    it "should assign the incident ocurrence" do
-      get :index
-      assigns(:incidents).should == {@incident.kind => [@incident], "total" => 1}
+    context "js rendering" do
+      
+      before(:each) do
+        @incidents = {}
+      end
+      
+      it "assigns grouped incidents" do
+        Incident.should_receive(:categorized_by_kinds).and_return(@incidents)
+        get :index, :format => :js
+        assigns(:incidents).should == @incidents
+      end
+      
     end
     
   end
@@ -94,7 +78,7 @@ describe Map::IncidentsController do
   describe "DELETE destroy" do
     
     before(:each) do
-      @incident = Factory.create(:assault)
+      @incident = FactoryGirl.create(:assault, :user => @user)
       @incidents = {"total" => 0}
     end
     
@@ -115,7 +99,7 @@ describe Map::IncidentsController do
   describe "POST filtering" do
     
     before(:each) do
-      @incident = Factory.create(:assault)
+      @incident = FactoryGirl.create(:assault, :user => @user)
       @incidents = {@incident.kind => [@incident], "total" => 1}
     end
     
@@ -123,6 +107,20 @@ describe Map::IncidentsController do
       post :filtering, :incident => {}
       
       assigns(:incidents).should == @incidents
+    end
+    
+  end
+  
+  describe "GET show" do
+    
+    before(:each) do
+      @incident = FactoryGirl.create(:assault, :user => @user)
+    end
+    
+    it "should assign the requested incident" do
+      Incident.should_receive(:find).with("1") { @incident }
+      get :show, :id => "1"
+      assigns(:incident).should == @incident
     end
     
   end

@@ -3,6 +3,11 @@ es_MX:
     name: "Wikicleta"
     motto: "La bici omnipresente"
     sections:
+      welcome: 
+        title: "Wikicleta"
+        subsections:
+          main: "Inicio"
+          about: "Acerca de"
       incidents: 
         title: "Reporte cletero"
         subsections:
@@ -13,7 +18,7 @@ es_MX:
           search: "Buscar"
           new: "Reporta un incidente"
       bikes:
-        title: "Nuestras bicis"
+        title: "Las bicis"
         subsections:
           new: "Agrega tu bici"
           popular: "Las + populares"
@@ -39,6 +44,7 @@ es_MX:
     accept: "Aceptar"
     search: "Buscar"
     back: "Atrás"
+    back_arrow: "&larr; Atrás"
     close: "Cerrar"
     delete: "Eliminar"
     evaluate: "Calificar"
@@ -57,9 +63,12 @@ es_MX:
       masc: "Nuevo"
   connectives:
     by: "Por"
+    and: "y"
   
-  missing: "No proporcionado"
-  
+  missing:
+    masc: "No proporcionado"
+    fem: "No proporcionada"
+    
   common_answers:
     yes: "Si"
     no: "No"

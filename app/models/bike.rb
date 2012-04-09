@@ -3,7 +3,7 @@ class Bike < ActiveRecord::Base
   include Likes
   acts_as_commentable
   
-  has_attached_file :main_photo, :styles => { :medium => "250", :big => "800" }
+  has_attached_file :main_photo, :styles => { :medium => "250", :big => "800", :small => "300x250" }
   
   has_many :user_like_bikes, :dependent => :destroy
   #has_many :tweaks
@@ -13,7 +13,6 @@ class Bike < ActiveRecord::Base
   belongs_to :user
   
   validates_presence_of :name, :kind, :bike_brand, :user
-  validates_uniqueness_of :name
   
   scope :most_popular, order('likes_count DESC')
   scope :all_from_user, lambda { |user| where("user_id = ?", user.id) } 

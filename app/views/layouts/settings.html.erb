@@ -3,8 +3,8 @@
 <head>
   <title><%= t('app.name') %></title>
 	  
-	<%= stylesheet_link_tag    "welcome" %>
-  <%= javascript_include_tag "common/base" %>
+	<%= stylesheet_link_tag    "settings" %>
+  <%= javascript_include_tag "bikes" %>
 	<%= yield(:javascripts) %>
   <%= csrf_meta_tags %>
 </head>
@@ -17,7 +17,15 @@
 	<%= yield :back_page %>
 
 	<div id="content">
-		<%= yield %>
+		<div class="mid-sheet settings">
+			<div class="menu shadow-lighter">
+				<%= yield :menu %>
+			</div>
+			<div class="styled-form shadow-light">
+				<br/>
+				<%= yield %>
+			</div>
+		</div>
 	</div>
 </div>
 

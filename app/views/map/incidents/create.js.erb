@@ -1,10 +1,5 @@
 <% if @incident.persisted? %>
 	ViewComponents.LeftBar.collapse();
-	ViewComponents.Notification.withContent("<p class='notice success'><%= t('incidents.messages.saved') %></p>");
-	
-	var reset = function() {
-		// send to index page
-		$.visit('#/');
-	}
-	setTimeout('reset();', 3000);
+	ViewComponents.Notification.put("<p class='notice success'><%= t('incidents.messages.saved') %></p>", {delay: 300});
+	$.visit('#');
 <% end %>

@@ -2,3 +2,8 @@ $('#count_incidents').remove();
 $('#origin').append("<%= escape_javascript render 'numbers' %>");
 $('#list_incidents').remove();
 $('#origin').append("<%= escape_javascript render 'listing' %>");
+
+<% if @filtering %>
+	ViewComponents.Notification.put("<p class='notice success'><%= t('incidents.messages.filtering_results') %></p>");
+	$.visit('#results');
+<% end %>

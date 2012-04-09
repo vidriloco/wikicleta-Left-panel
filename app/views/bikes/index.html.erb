@@ -5,8 +5,15 @@
 <% end %>
 
 <div id="container" class="masonry">
-	<% @bikes.each do |bike| %>
-		<%= render bike %>
+	<% if @bikes.empty? %>
+		
+		<h1 class="empty"><%= t('bikes.views.index.empty.message') %></h1>
+		<p class="empty"><%= link_to t('bikes.views.index.empty.invite'), new_bike_path %></p>
+		
+	<% else %>
+		<% @bikes.each do |bike| %>
+			<%= render bike %>
+		<% end %>
 	<% end %>
 </div>
 

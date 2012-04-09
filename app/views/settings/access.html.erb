@@ -1,30 +1,33 @@
-<%= render 'shared_actions' %>
+<%= content_for :menu do %>
+	<%= render :partial => 'shared_actions', :locals => {:menu => {:access => 'selected'}} %>
+<% end %>
 
-<p>
-	<span><%= t('user_accounts.settings.sections.access.reset_password') %></span>
-	<%= form_for(@user, :url => user_password_path, :html => { :method => :post }) do |f| %>
+<span><%= t('user_accounts.settings.sections.access.reset_password') %></span>
+<%= form_for(@user, :url => user_password_path, :html => { :method => :post }) do |f| %>
+  <%= f.hidden_field :email, :value => @user.email %>
+  <div class="to-right"><%= f.submit t('user_accounts.settings.sections.access.reset'), :class => 'button red-button' %></div>
+	<div class="clear"></div>
+<% end %>
+<br/>
+<% unless @user.authorizations.empty? %>
+	<span class="note"><%= t('user_accounts.settings.sections.access.external_reset') %></span>
+<% end %>
 
-	  <%= f.hidden_field :email, :value => @user.email %></div>
-
-	  <div><%= f.submit t('user_accounts.settings.sections.access.reset') %></div>
-	<% end %>
-	<br/>
-	<% unless @user.authorizations.empty? %>
-		<span class="note"><%= t('user_accounts.settings.sections.access.external_reset') %></span>
-	<% end %>
-</p>
-
-
+<div class="separator"></div>
+<br/>
 <%= form_for(@user, :url => settings_changed_path(@user), :html => { :method => :put }) do |f| %>
 		
-	<div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+	<%= f.label :password %>
+  <%= f.password_field :password %>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %>
 	
-	<div><label for="password"><%=t('user_accounts.settings.sections.access.current_password') %></label><br />
-  <%= password_field_tag :current_password %></div>
-	
-	<%= f.submit t("user_accounts.settings.save") %>
+	<label><%= t('user_accounts.settings.sections.access.current_password') %></label>
+  <%= password_field_tag :current_password %>
+	<br/>
+	<div class="actions to-right">
+		<%= f.submit t("user_accounts.settings.save") %>
+	</div>
+	<div class="clear"></div>
 <% end %>

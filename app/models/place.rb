@@ -14,10 +14,7 @@ class Place < ActiveRecord::Base
   
   has_many :place_comments
   has_many :commenters, :through => :place_comments, :source => :user
-  
-  belongs_to :category
-  has_many :surveys, :as => :evaluable
-  
+    
   validates_presence_of :name, :description, :category
   validate :coordinates_are_set, :twitter_correct_format
   

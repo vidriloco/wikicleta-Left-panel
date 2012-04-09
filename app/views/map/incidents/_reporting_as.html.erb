@@ -1,10 +1,10 @@
 <% unless user_signed_in? %>
 	<%= t('incidents.views.new.reporting.anonymously') %><br/>
 	<span class="link"><%= link_to t('actions.register_or_login'), new_user_session_path %></span>
-	<%= t('incidents.views.new.reporting.invitation') %>
+	<%= t('incidents.views.new.reporting.invitation') %><br/>
 <% end %>
 
-<% unless current_user_has_bikes_to_report? %>
+<% if current_user_has_bikes_to_report? %>
 	<%= t('incidents.views.new.reporting.with_no_bikes') %><br/>
 	<span class="link"><%= link_to t('bikes.actions.register'), new_bike_path %></span>
 <% end %>
