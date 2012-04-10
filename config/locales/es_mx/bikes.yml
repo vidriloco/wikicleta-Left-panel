@@ -14,6 +14,8 @@ es_MX:
         mountain: "Montaña"
         fixie: "Fixie"
         route: "Ruta"
+        tandem: "Tandem"
+        other: "Otra"
       locks:
         none: "Ninguno"
         chain: "Cadena"

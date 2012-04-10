@@ -45,6 +45,7 @@ $(document).ready(function() {
 	});
 	
 	$('.heart').tipsy({gravity: 'n', live: true, fade: true, delayIn: 100, delayOut: 500 });
+	$('.contact').tipsy({gravity: 's', live: true, fade: true, delayIn: 100, delayOut: 500 });
 	
 	if($.isDefined('.notice')) {
 		ViewComponents.Notification.append($('.notice'));

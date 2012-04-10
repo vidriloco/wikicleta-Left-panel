@@ -4,7 +4,7 @@
 	<%= link_to t('actions.back_arrow').html_safe, bikes_path, :class => 'back' %>
 	<h1><%= @bike.name %></h1>
 	<div class="owner">
-		<%= t('bikes.views.show.owned_by') %><%= link_to @bike.user.username, '#' %>
+		<%= t('bikes.views.show.owned_by') %><%= contact_for(@bike) %>
 	</div>
 	
 	<div id="<%= @bike.id %>" class="toolbox shadow-light">

@@ -18,19 +18,31 @@ module Incident::Categories
     Bike.category_symbol_for(:incidents, kind)
   end
   
-  def theft_or_assault?
-    theft? || symbol_kind.eql?(:assault)
+  def theft?
+    is_of_kind?(:theft)
   end
   
-  def theft?
-    symbol_kind.eql?(:theft)
+  def assault?
+    is_of_kind?(:assault)
+  end
+  
+  def accident?
+    is_of_kind?(:accident)
+  end
+  
+  def regulation_infraction?
+    is_of_kind?(:regulation_infraction)
+  end
+  
+  def theft_or_assault?
+    theft? || assault?
   end
   
   def accident_or_regulation_infraction?
-    symbol_kind.eql?(:regulation_infraction) || symbol_kind.eql?(:accident)
+    regulation_infraction? || accident?
   end
   
   def accident_or_theft_or_assault?
-    theft_or_assault? || symbol_kind.eql?(:assault)
+    theft_or_assault? || accident?
   end
 end

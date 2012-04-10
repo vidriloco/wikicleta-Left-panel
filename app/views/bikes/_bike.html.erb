@@ -3,7 +3,7 @@
 		<h2><%= link_to bike.name, bike_path(bike) %></h2>
 		<p class="brand"><%= bike.brand %></p>
 		<div class="owner">
-			<%= t('bikes.views.show.owned_by') %><%= link_to bike.owner, '#' %>
+			<%= t('bikes.views.show.owned_by') %><%= contact_for(bike) %>
 		</div>
 		<div class="photo"><%= image_tag bike.main_photo.url(:medium), :class => "main" %></div>
 	</div>

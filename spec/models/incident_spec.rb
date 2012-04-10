@@ -31,6 +31,22 @@ describe Incident do
       @old_incident = FactoryGirl.create(:assault, :user => @reporter, :date => Date.today-3.years)
     end
     
+    it "should reply true for a theft when asking if it is" do
+      @theft.should be_a_theft
+    end
+    
+    it "should reply true for an accident when asking if it is" do
+      @accident.should be_an_accident
+    end
+    
+    it "should reply true for a assault when asking if it is" do
+      @assault.should be_an_assault
+    end
+    
+    it "should reply true for a theft when asking if it is" do
+      @regulation_infraction.should be_a_regulation_infraction
+    end
+    
     describe "fetching by date range" do
     
       it "should retrieve all those incidents that happened during the last week" do

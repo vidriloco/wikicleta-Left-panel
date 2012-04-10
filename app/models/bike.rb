@@ -1,6 +1,7 @@
 class Bike < ActiveRecord::Base
   include Categories
   include Likes
+  
   acts_as_commentable
   
   has_attached_file :main_photo, :styles => { :medium => "250", :big => "800", :small => "300x250" }
@@ -9,6 +10,7 @@ class Bike < ActiveRecord::Base
   #has_many :tweaks
   #has_many :borrows
   #has_many :usage_days
+  #mileage
   belongs_to :bike_brand
   belongs_to :user
   
@@ -25,6 +27,11 @@ class Bike < ActiveRecord::Base
   def owner
     return if user.nil?
     user.username
+  end
+  
+  def contact
+    return "---" if(user.nil? || user.email.blank?)
+    user.email
   end
   
   def self.new_with_owner(params, owner)

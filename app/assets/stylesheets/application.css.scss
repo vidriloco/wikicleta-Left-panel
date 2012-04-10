@@ -1,8 +1,8 @@
 /*
  *= require_self
+ *= require shared/main.css
  *= require shared/form.css
  *= require shared/bars.css
- *= require shared/main.css
  *= require shared/notifications.css
  *= require shared/comments.css
  *= require tipsy.css
@@ -158,7 +158,7 @@
 		margin-right: 45px;
 		color: #B6F3A7;
 		font-weight: bold;
-		font-size: 13px;
+		font-size: 12px;
 		padding-right: 10px;
 	}
 	
@@ -170,7 +170,7 @@
 		
 		p {
 			color: #FFA09A;
-			font-size: 15px;
+			font-size: 14px;
 			display: inline-block;
 			margin: 0px;
 			padding: 5px;

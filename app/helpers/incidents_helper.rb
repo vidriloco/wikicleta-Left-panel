@@ -22,6 +22,13 @@ module IncidentsHelper
     end
   end
   
+  def humanized_dates_for_filter
+    Incident.date_filtering_options.keys.each.inject({}) do |collected, key| 
+      collected[key] = I18n.t("incidents.views.filtering.fields.date")[Incident.date_filtering_options[key]]
+      collected
+    end
+  end
+  
   def partial_numbers_for(ocurrences, kind)
     count = ocurrences == nil ? 0 : ocurrences.count
     text = count == 1 ? t("incidents.views.index.numbers.#{kind}.one") : t("incidents.views.index.numbers.#{kind}.other")

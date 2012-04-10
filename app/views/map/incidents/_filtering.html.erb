@@ -30,7 +30,7 @@
 	
 			<div>
 				<%= label_tag t('incidents.views.filtering.date_and_time') %>
-				<%= select_tag "incident[range_date]", options_for_select(Incident.humanized_date_filtering_options.invert) %>
+				<%= select_tag "incident[range_date]", options_for_select(humanized_dates_for_filter.invert) %>
 			</div>
 	
 			<div>

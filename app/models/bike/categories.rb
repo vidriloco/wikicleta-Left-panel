@@ -30,7 +30,7 @@ module Bike::Categories
     
     private
     def types
-      { 1 => :urban, 2 => :mountain, 3 => :route, 4 => :fixie}
+      { 1 => :urban, 2 => :mountain, 3 => :route, 4 => :fixie, 5 => :tandem, 6 => :other}
     end
     
     def locks

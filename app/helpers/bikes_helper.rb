@@ -8,5 +8,9 @@ module BikesHelper
       t('bikes.views.show.likes.required_to_login')
     end
   end
+  
+  def contact_for(bike)
+    link_to(bike.owner, 'javascript:void(0);', 'original-title' => bike.contact, :class => 'contact')
+  end
 
 end

@@ -9,7 +9,16 @@ describe Bike do
   describe "Having a bike registered" do
     
     before(:each) do
-      @bike = FactoryGirl.create(:bike, :user => FactoryGirl.create(:pancho))
+      @bike_owner = FactoryGirl.create(:pancho)
+      @bike = FactoryGirl.create(:bike, :user => @bike_owner)
+    end
+    
+    it "should tell me it's brand name" do
+      @bike.brand.should == @bike.bike_brand.name
+    end
+    
+    it "should tell me who it's is owner" do
+      @bike.owner.should == @bike.user.username
     end
     
     it "should let me like it" do
@@ -22,7 +31,7 @@ describe Bike do
       user_like_bike.bike.should == @bike
     end
 
-    describe "with a like from me" do
+    describe "and already liked by myself" do
       
       before(:each) do
         @bike.register_like_from(@user)
@@ -52,5 +61,45 @@ describe Bike do
         user_like_bike.should be_nil
       end
     end
+    
+    describe "for any given category" do
+              
+      it "should reply with a hash when asked to retrieve it's list" do
+        Bike.category_list_for(:types).should be_a(Hash)
+      end
+      
+      it "should retrieve the value for the symbol tandem" do
+        Bike.category_for(:types, :tandem).should == 5
+      end
+        
+      it "should retrieve the category symbol associated to an identifier" do
+        Bike.category_symbol_for(:types, 5).should == :tandem
+      end
+      
+      it "should retrieve the humanized version associated to a symbol" do
+        Bike.humanized_category_for(:types, :mountain).should == I18n.t("bikes.categories.types.mountain")
+      end
+      
+      it "should retrieve a list of humanized version of it's associated symbols" do
+        hash = { 
+          1 => I18n.t("bikes.categories.locks.none"),
+          2 => I18n.t("bikes.categories.locks.chain"),
+          3 => I18n.t("bikes.categories.locks.cable"),
+          4 => I18n.t("bikes.categories.locks.ulock")
+        }
+        
+        Bike.humanized_categories_for(:locks).should == hash 
+      end
+      
+      it "should retrieve a list of the humanized versions of the symbols I specify" do
+        hash = { 
+          1 => I18n.t("bikes.categories.locks.none"),
+          2 => I18n.t("bikes.categories.locks.chain")
+        }
+        
+        Bike.humanized_categories_for(:locks, :except => [:cable, :ulock]).should == hash
+      end
+    end
+    
   end
 end
