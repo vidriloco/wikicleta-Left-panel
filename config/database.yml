@@ -40,7 +40,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: wikiando_production
+  database: wikicleta
   pool: 5
   username: froyo
   password: helado
