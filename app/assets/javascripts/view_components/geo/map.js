@@ -93,7 +93,10 @@ ViewComponents.Geo.Map = function(gMap, opts, callback) {
 			this.setSearchMapParams();
 		},
 
-		simulatePinPoint: function(lat, lon) {
+		simulatePinPoint: function(lat, lon, zoom) {
+			if(zoom != undefined) {
+				this.placeViewportAt({zoom : zoom});
+			}
 			// this blocks mimics what method writePointToDom does
 			this.propagateClickEvent(new google.maps.LatLng(lat, lon));
 		},

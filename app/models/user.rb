@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   has_many :authorizations, :dependent => :destroy
-  has_many :bikes
-  has_many :user_like_bikes
-  has_many :comments
+  has_many :bikes, :dependent => :destroy
+  has_many :user_like_bikes, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
   
   has_many :recommendations
   has_many :places, :through => :recommendations
@@ -11,14 +11,14 @@ class User < ActiveRecord::Base
   has_many :places_commented, :through => :place_comments
   has_many :surveys
   
-  has_many :incidents
+  has_many :incidents, :dependent => :destroy
   has_many :street_marks
   has_many :street_mark_rankings
   
   devise :omniauthable, :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:login]
   attr_accessor :login
   attr_accessible :email, :password, :password_confirmation, :remember_me, :full_name, :username, :login, :bio, :personal_page
-  validates_presence_of :username, :full_name
+  validates_presence_of :username, :full_name, :email
   validates_uniqueness_of :username, :email
   
   def owns_comment?(comment)
@@ -48,10 +48,18 @@ class User < ActiveRecord::Base
     end
   end
   
-  def add_authorization(session)
+  def add_authorization(session, attempt_save=false)
     generated_password = Devise.friendly_token.first(8)
     self.password, self.password_confirmation = [generated_password]*2
-    self.authorizations.build(session)
+    authorization=self.authorizations.build(session)
+    authorization.save if attempt_save
+    authorization
+  end
+  
+  def authorization_from(auth)
+    authorizations=self.authorizations.where('provider = :provider', { :provider => auth })
+    return nil if authorizations.empty?
+    authorizations.first
   end
   
   def check_parameters_and_password(hash)

@@ -2,6 +2,7 @@
  *= require_self
  *= require shared/bars.css
  *= require shared/main.css
+ *= require shared/notifications.css
  */
 
 
@@ -13,7 +14,7 @@
 	color: white;
 	text-align: center;
 	text-shadow: 1px 1px 0px #0E0F0D;
-	margin-top: 40px;
+	margin-top: 70px;
 		
 	a { color: white !important }
 	

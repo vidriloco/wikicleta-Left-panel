@@ -50,13 +50,28 @@ es_MX:
       save: "Guardar"
       successful_save: "Tus preferencias han sido guardadas"
       unsuccessful_save: "No ha sido posible guardar tus preferencias"
+      
+      authorizations:
+        title: "Redes Sociales"
+        new: "Añadir"
+        add:
+          success: 'Has habilitado el acceso vía %{social_network}'
+          failure: 'Tu cuenta de %{social_network} ya fué registrada'
+        delete:
+          action: "Eliminar"
+          success: "Tu cuenta de %{social_network} ha sido dada de baja"
+          
+        umount: 'Eliminar'
+        messages:
+          confirmation: "¿Realmente deseas eliminar este método de acceso? Ya no podrás acceder con el."
       sections:
         account:
           deactivate: "Desactivar mi cuenta"
           deactivate_confirmation: "¿Realmente deseas desactivar tu cuenta?"
         access:
-          external_reset: "Si accedes a Wikicleta a través de Facebook o Twitter, no es necesario que reestablezcas tu contraseña para seguir haciéndolo"
-          reset_password: "Si has olvidado tu contraseña, puedes reestablecerla a través de un link que podemos enviar a tu correo para hacerlo"
+          social_networks: "Wikicleta por ahora soporta dos redes sociales; puedes acceder usando cualquiera."
+          recover_password: "Si has olvidado tu contraseña, Wikicleta puede enviarte una nueva a tu correo"
+          reset_password: "Si deseas cambiar tu contraseña, aqui es donde puedes hacerlo. Si te registraste usando tu cuenta de usuario de alguna red social, entonces necesitarás reestablecer tu contraseña"
           current_password: "Contraseña Actual"
           reset: "Reestablecer"
         profile:

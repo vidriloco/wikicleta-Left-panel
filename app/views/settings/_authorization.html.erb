@@ -1,0 +1,12 @@
+<div class="account">
+	<div class="provider"><%= auth %></div>
+	<div class="status">
+		<% authorization_for_user = @user.authorization_from(auth) %>
+		<% if authorization_for_user %>
+			<%= link_to t('user_accounts.settings.authorizations.umount'), users_auth_path(authorization_for_user), 
+			:method => :delete, :confirm => t('user_accounts.settings.authorizations.messages.confirmation') %>
+		<% else %>
+			<%= link_to t('user_accounts.settings.authorizations.new'), user_omniauth_authorize_path(auth) %>
+		<% end %>
+	</div>
+</div>

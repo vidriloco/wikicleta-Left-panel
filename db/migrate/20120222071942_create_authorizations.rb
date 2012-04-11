@@ -8,5 +8,8 @@ class CreateAuthorizations < ActiveRecord::Migration
       t.string :token
       t.timestamps
     end
+    
+    add_index(:authorizations, [:provider, :uid], :unique => true, :name => "authorizations_provider_uid_idx")
+    add_index(:authorizations, [:provider, :user_id], :unique => true, :name => "authorizations_provider_user_id_idx")
   end
 end

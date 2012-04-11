@@ -2,6 +2,7 @@ es_MX:
   app:
     name: "Wikicleta"
     motto: "La bici omnipresente"
+    firm: "El equipo detrás de Wikicleta"
     sections:
       welcome: 
         title: "Wikicleta"
@@ -30,6 +31,7 @@ es_MX:
         title: "Lugares"
   messages:
     save_failure: "no pudo guardar este %{element} debido a:"
+    error: "Ups! Un error"
   states:
     new: "Nuevo"
     edit: "Cambiar"

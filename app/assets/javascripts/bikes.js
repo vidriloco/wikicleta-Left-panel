@@ -46,10 +46,6 @@ $(document).ready(function() {
 	
 	$('.heart').tipsy({gravity: 'n', live: true, fade: true, delayIn: 100, delayOut: 500 });
 	$('.contact').tipsy({gravity: 's', live: true, fade: true, delayIn: 100, delayOut: 500 });
-	
-	if($.isDefined('.notice')) {
-		ViewComponents.Notification.append($('.notice'));
-	}
 
 	if($.isDefined('#bike_frame_number')) {
 		$('#bike_frame_number').popover({ content: $('.frame_number_help').text(), title: 'Ayuda', position: 'right' });

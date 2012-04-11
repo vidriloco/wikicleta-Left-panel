@@ -4,13 +4,14 @@
   <title><%= t('app.name') %></title>
 	  
 	<%= stylesheet_link_tag    "settings" %>
-  <%= javascript_include_tag "bikes" %>
+  <%= javascript_include_tag "common/base" %>
 	<%= yield(:javascripts) %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 	
 <%= render 'layouts/shared/left_bar' %>
+<%= render 'shared/notice' %>
 
 <div class="content-container">
 	

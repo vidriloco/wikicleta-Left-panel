@@ -64,6 +64,7 @@ Spork.prefork do
   
   Capybara.run_server = true
   Capybara.server_port = 9887
+  
 end
 
 Spork.each_run do

@@ -10,13 +10,17 @@
 
 	display: none;
 
-	p.success {
-		color: #B4E5A4;
+	p.notice { color: #B4E5A4 }
+	
+	p.alert { color: #E57C7F }
+	
+	p.top-message {
 		font-weight: bold;
 		margin-top: 2px;
-		font-size: 14px;
+		font-size: 13px;
 		text-align: center;
 	}
+
 }
 
 .blocking {

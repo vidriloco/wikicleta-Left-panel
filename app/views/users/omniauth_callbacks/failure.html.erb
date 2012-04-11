@@ -1,3 +1,9 @@
-<h3><%= t('devise.omniauth_callbacks.failure') %><h3>
+<div class="small-sheet">
+	<div class="styled-form shadow-light">
+		<%= link_to t('actions.back'), new_user_session_path %>
+		
+		<h1><%= t('messages.error') %></h1>
+		<p><%= t('devise.omniauth_callbacks.failure') %><p>
 	
-<%= link_to t('actions.back'), new_user_session_path %>
+	</div>
+</div>

@@ -4,7 +4,7 @@
 	<%= t('incidents.views.new.reporting.invitation') %><br/>
 <% end %>
 
-<% if current_user_has_bikes_to_report? %>
+<% if !current_user_has_bikes_to_report? %>
 	<%= t('incidents.views.new.reporting.with_no_bikes') %><br/>
 	<span class="link"><%= link_to t('bikes.actions.register'), new_bike_path %></span>
 <% end %>

@@ -20,6 +20,7 @@ Ciudadio::Application.routes.draw do
     namespace :users do
       post '/auth/create', :to => "omniauth_callbacks#create", :as => :auth_sign_up
       delete '/auth/cancel', :to => "omniauth_callbacks#cancel", :as => :cancel_auth_sign_up
+      delete '/auth/:id', :to => 'omniauth_callbacks#destroy', :as => :auth
     end
     
     post "/account/create", :to => "devise/registrations#create"
@@ -36,7 +37,8 @@ Ciudadio::Application.routes.draw do
     get "profile", :via => :get
     put "changed", :via => :put
   end
-  
+
+=begin  
   get '/places/' => 'places#index'
   post "/places/" => "places#create"
   put "/places/:id" => "places#update"
@@ -64,7 +66,8 @@ Ciudadio::Application.routes.draw do
     get ":place_id/evaluations/edit/:id" => "evaluations#edit", :as => "edit_evaluation"
     get ":place_id/evaluations" => "evaluations#show"
   end
-  
+=end
+
   namespace :map do
     resources :street_marks, :only => [:create, :index, :show]
     post "street_marks/rankings" => "street_mark_rankings#create"
@@ -93,8 +96,8 @@ Ciudadio::Application.routes.draw do
 
   resources :comments, :only => [:create, :destroy]
 
-  get "/places/:id" => 'places#show', :as => "place"
-  get "/places/edit/:id" => 'places#edit', :as => "edit_place"  
+#  get "/places/:id" => 'places#show', :as => "place"
+#  get "/places/edit/:id" => 'places#edit', :as => "edit_place"  
   
   root :to => 'welcome#index'
 end

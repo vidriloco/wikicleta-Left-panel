@@ -3,12 +3,28 @@ class Authorization < ActiveRecord::Base
   
   validates_presence_of :uid, :provider, :token
   
+  before_save :is_uid_and_provider_unique?, :is_user_and_provider_unique?
+  
+  def self.supported
+    [:twitter, :facebook]
+  end
+  
   def self.find_from_hash(hash)
     find_by_provider_and_uid(hash['provider'], hash['uid'])
   end
   
-  def capital_provider
+  def provider_name
     provider.capitalize
+  end
+  
+  private
+  
+  def is_uid_and_provider_unique?
+    Authorization.find_by_provider_and_uid(provider, uid).nil?
+  end
+  
+  def is_user_and_provider_unique?
+    Authorization.find_by_provider_and_user_id(provider, user_id).nil?
   end
     
 end

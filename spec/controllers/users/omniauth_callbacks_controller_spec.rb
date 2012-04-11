@@ -10,14 +10,14 @@ describe Users::OmniauthCallbacksController do
   describe "GET twitter" do
     
     before(:each) do
-      @user = Factory.create(:user)
+      @user = FactoryGirl.create(:user)
     end
     
     describe "after successful authorization from remote end" do
       
       before(:each) do
         request.env["omniauth.auth"] = mock_valid_auth_for(:twitter)
-        Authorization.stub(:find_by_provider_and_uid) { Factory(:authorization, :user_id => @user.id) }
+        Authorization.stub(:find_by_provider_and_uid) { FactoryGirl.create(:authorization, :user_id => @user.id) }
       end
       
       describe "if already registered" do
@@ -68,14 +68,14 @@ describe Users::OmniauthCallbacksController do
   describe "GET facebook" do
     
     before(:each) do
-      @user = Factory.create(:user)
+      @user = FactoryGirl.create(:user)
     end
     
     describe "after successful authorization from remote end" do
       
       before(:each) do
         request.env["omniauth.auth"] = mock_valid_auth_for(:facebook)
-        Authorization.stub(:find_by_provider_and_uid) { Factory(:authorization, :user_id => @user.id) }
+        Authorization.stub(:find_by_provider_and_uid) { FactoryGirl.create(:authorization, :user_id => @user.id) }
       end
       
       describe "if already registered" do
@@ -125,7 +125,7 @@ describe Users::OmniauthCallbacksController do
   describe "POST create" do
     
     before(:each) do
-      @user = Factory.stub(:someone)
+      @user = FactoryGirl.stub(:someone)
     end
     
     describe "with valid parameters" do
@@ -138,18 +138,17 @@ describe Users::OmniauthCallbacksController do
       
       it "should change the count of authorizations for a user" do
         expect {
-          post :create, :user => Factory.attributes_for(:someone)
+          post :create, :user => FactoryGirl.attributes_for(:someone)
         }.to change(Authorization, :count).by(1)
       end
       
-      it "should assign user to @user and persist it" do
-        post :create, :user => Factory.attributes_for(:someone)
+      it "should assign user to @user" do
+        post :create, :user => FactoryGirl.attributes_for(:someone)
         assigns(:user).should be_a(User)
-        @user.should be_persisted
       end
       
       it "should respond with a redirect" do
-        post :create, :user => Factory.attributes_for(:someone)
+        post :create, :user => FactoryGirl.attributes_for(:someone)
         response.should be_redirect
       end
       
@@ -194,6 +193,43 @@ describe Users::OmniauthCallbacksController do
           response.should render_template("facebook")
         end
       end
+    end
+    
+  end
+  
+  describe "If logged in" do
+    
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+      sign_in @user
+    end
+    
+    describe "with an authorization enabled" do
+
+      before(:each) do        
+        @authorization = FactoryGirl.create(:authorization, :user => @user)
+      end
+
+      it "can be deleted" do
+        Authorization.should_receive(:find).with("1") { @authorization }
+        delete :destroy, :id => "1"
+        @authorization.should be_destroyed
+      end
+
+    end
+
+    it "should add facebook" do
+      lambda {
+        request.env["omniauth.auth"] = mock_valid_auth_for(:facebook)
+        get :facebook
+      }.should change(Authorization, :count).by(1)
+    end
+    
+    it "should add twitter" do
+      lambda {
+        request.env["omniauth.auth"] = mock_valid_auth_for(:twitter)
+        get :twitter
+      }.should change(Authorization, :count).by(1)
     end
     
   end

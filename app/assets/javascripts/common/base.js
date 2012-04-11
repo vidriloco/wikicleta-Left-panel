@@ -38,5 +38,14 @@ $.extend({
 		}
 		return "#"+section+"/"+id;
 	},
+	// For google maps icons
 	assetsURL: 'http://127.0.0.1:3000/assets/'
-})
+});
+
+$(document).ready(function() {
+	
+	if($.isDefined('.top-message')) {
+		ViewComponents.Notification.append($('.top-message'));
+	}
+	
+});

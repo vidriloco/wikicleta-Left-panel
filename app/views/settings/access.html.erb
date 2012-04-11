@@ -2,19 +2,29 @@
 	<%= render :partial => 'shared_actions', :locals => {:menu => {:access => 'selected'}} %>
 <% end %>
 
-<span><%= t('user_accounts.settings.sections.access.reset_password') %></span>
+<p class="centered-text"><%= t('user_accounts.settings.sections.access.recover_password') %></p>
 <%= form_for(@user, :url => user_password_path, :html => { :method => :post }) do |f| %>
   <%= f.hidden_field :email, :value => @user.email %>
-  <div class="to-right"><%= f.submit t('user_accounts.settings.sections.access.reset'), :class => 'button red-button' %></div>
-	<div class="clear"></div>
+  <div class="centered-text"><%= f.submit t('user_accounts.settings.sections.access.reset'), :class => 'button red-button' %></div>
 <% end %>
 <br/>
-<% unless @user.authorizations.empty? %>
-	<span class="note"><%= t('user_accounts.settings.sections.access.external_reset') %></span>
-<% end %>
+<div class="separator"></div>
+
+<div class="authorizations">
+	<h2><%= t('user_accounts.settings.authorizations.title') %></h2>
+	<p class="centered-text"><%= t('user_accounts.settings.sections.access.social_networks') %></p>
+	
+	<div class="list">
+		<% Authorization.supported.each do |auth| %>
+			<%= render :partial => 'authorization', :locals => { :auth => auth } %>
+		<% end %>
+	</div>
+	
+</div>
 
 <div class="separator"></div>
 <br/>
+<p class="centered-text"><%= t('user_accounts.settings.sections.access.reset_password') %></p>
 <%= form_for(@user, :url => settings_changed_path(@user), :html => { :method => :put }) do |f| %>
 		
 	<%= f.label :password %>

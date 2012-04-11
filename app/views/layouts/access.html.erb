@@ -11,11 +11,12 @@
 <body>
 	
 <%= render 'layouts/shared/left_bar' %>
+<%= render 'shared/notice' %>
 
 <div class="content-container">
-
+	
 	<%= yield :back_page %>
-
+	
 	<div id="content">
 		<%= yield %>
 	</div>

@@ -3,13 +3,14 @@
  *= require shared/form.css
  *= require shared/bars.css
  *= require shared/main.css
+ *= require shared/notifications.css
  */
 
 .mid-sheet {
 	.menu {
 		border-top: 10px solid #51B03B;
 		background-color: #F3FFEE;
-		padding: 30px 20px 30px 20px;
+		padding: 70px 20px 30px 20px;
 		margin-left: auto;
 		margin-right: auto;
 		.accounts-actions {
@@ -56,6 +57,46 @@
 		
 		a:hover {
 			text-decoration: underline;
+		}
+	}
+	
+	.authorizations {
+		padding: 10px;
+		margin-bottom: 30px;
+		
+		a { text-decoration: none !important }
+		
+		.list {
+			margin-top: 30px;
+			margin-bottom: 20px;
+			
+			.account:hover {
+				background-color: #D0E1FB;
+			}
+			
+			.account {
+				font-weight: bold;
+				background-color: #E0F1FB;
+				padding: 10px;
+				margin: 5px;
+				
+
+				
+				div { display: inline-block }
+				
+				.status {
+					text-align: right;
+					a {
+						color: #1A253E;
+					}
+				}
+				
+				.provider {
+					text-transform: uppercase;
+					width: 400px;
+					text-align: center;
+				}
+			}
 		}
 	}
 	

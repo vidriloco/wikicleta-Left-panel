@@ -1,111 +1,69 @@
 #encoding: utf-8
 require 'acceptance/acceptance_helper'
 
-feature "Reporting bike incidents:" do
-  
-  before(:each) do
-    @chain = FactoryGirl.create(:bike_item)
-  end
-  
-  scenario "cannot add an incident report which lacks required fields", :js => true do
-    visit new_map_incident_path
-    click_on I18n.t('actions.save')
-    
-    page.should have_content I18n.t('actions.verify_fields_on_red')
-  end
+feature "Reporting bike incidents:", :js => true do  
   
   describe "anonymously" do
     
-    scenario "can see the main menu for adding an incident" do
-      visit new_map_incident_path
+    scenario "sees a notification message due reporting as anonymous" do
+      visit map_incidents_path
       
-      page.should have_content I18n.t('incidents.new.title')
-      page.should have_content I18n.t('incidents.new.kind.bike')
-      page.should have_content I18n.t('incidents.new.reporting.anonymously')
+      click_link I18n.t('app.sections.incidents.subsections.new')
+      sleep 3
       
-      page.should have_content I18n.t('incidents.new.reporting.invitation')
-      find_link I18n.t('actions.sessions.first_person.start').downcase
+      page.should have_content I18n.t('incidents.views.new.reporting.anonymously')
+      page.should have_content I18n.t('actions.register_or_login')
+      page.should have_content I18n.t('incidents.views.new.reporting.invitation')
     end
     
-    scenario "can add a stolen bike report", :js => true do
-      visit new_map_incident_path
+    scenario "can add a regulation infraction report" do
+      visit map_incidents_path
       
-      page.should have_content I18n.t('incidents.new.title')
-      page.should have_content I18n.t('incidents.new.kind.bike')
-      page.should have_content I18n.t('incidents.new.reporting.anonymously')
+      click_link I18n.t('app.sections.incidents.subsections.new')
+      sleep 3
       
-      fill_in "incident_description", :with => "My bike was sucked by a black hole"
-      select Incident.humanized_kind_for(:theft), :from => "incident_kind"
-      check "incident_complaint_issued"
-      select @chain.name, :from => "incident_bike_item_id"
-      fill_in "incident_bike_description", :with => "My blue giant bike"
-      
-      simulate_click_on_map({:lat => 19.4000762084, :lon => -99.265484})
+      page.should have_content I18n.t('incidents.views.new.title')
       
       click_on I18n.t('actions.save')
       
-      page.current_path.should == map_incidents_path
-      page.should have_content I18n.t('incidents.create.saved')
-    end
-    
-    scenario "can add a violent stolen bike report", :js => true do
-      
-      visit new_map_incident_path
-      
-      page.should have_content I18n.t('incidents.new.title')
-      page.should have_content I18n.t('incidents.new.kind.bike')
-      page.should have_content I18n.t('incidents.new.reporting.anonymously')
-      
-      fill_in "incident_description", :with => "My bike was taken away from me by a guy with a knife"
-      select Incident.humanized_kind_for(:assault), :from => "incident_kind"
-      check "incident_complaint_issued"
-      
-      fill_in "incident_bike_description", :with => "My blue giant bike"
-      simulate_click_on_map({:lat => 19.4000762084, :lon => -99.265484})
+      page.should have_content I18n.t('incidents.views.new.form.validations.kind')
+      select Bike.humanized_category_for(:incidents, :regulation_infraction), :from => "incident_kind"
       
       click_on I18n.t('actions.save')
       
-      page.current_path.should == map_incidents_path
-      page.should have_content I18n.t('incidents.create.saved')
-    end
-    
-    scenario "can add an accident report", :js => true do
-      visit new_map_incident_path
+      page.should have_content I18n.t('incidents.views.new.form.validations.range')
+      select "13", :from => "incident_start_hour_4i"
+      select "15", :from => "incident_final_hour_4i"
       
-      page.should have_content I18n.t('incidents.new.title')
-      page.should have_content I18n.t('incidents.new.kind.bike')
-      page.should have_content I18n.t('incidents.new.reporting.anonymously')
+      click_on I18n.t('actions.save')
       
-      fill_in "incident_description", :with => "My bike wheel was broken by a car"
-      select Incident.humanized_kind_for(:accident), :from => "incident_kind"
+      page.should have_content I18n.t('incidents.views.new.form.validations.description')
+      fill_in "incident_description", :with => "My bike wheel was broken by a car"*3
+      
       uncheck "incident_complaint_issued"
       
-      simulate_click_on_map({:lat => 19.1300062084, :lon => -99.245484})
-      
       click_on I18n.t('actions.save')
       
-      page.current_path.should == map_incidents_path
-      page.should have_content I18n.t('incidents.create.saved')
-    end
-    
-    scenario "can add an regulation infraction report", :js => true do
-      visit new_map_incident_path
-      
-      page.should have_content I18n.t('incidents.new.title')
-      page.should have_content I18n.t('incidents.new.kind.bike')
-      page.should have_content I18n.t('incidents.new.reporting.anonymously')
-      
-      fill_in "incident_description", :with => "My bike wheel was broken by a car"
-      select Incident.humanized_kind_for(:regulation_infraction), :from => "incident_kind"
-      uncheck "incident_complaint_issued"
-      
+      page.should have_content I18n.t('incidents.views.new.form.validations.coordinates')
       simulate_click_on_map({:lat => 19.2000762084, :lon => -99.265484})
       
       click_on I18n.t('actions.save')
+      page.should have_content I18n.t('incidents.messages.saved')
+      page.current_url.should == hash_link_for(map_incidents_path)
       
-      page.current_path.should == map_incidents_path
-      page.should have_content I18n.t('incidents.create.saved')
     end    
+    
+    scenario "cannot select other types of incidents" do
+      visit map_incidents_path
+      
+      click_link I18n.t('app.sections.incidents.subsections.new')
+      sleep 3
+      page.should_not have_xpath select_option_for('incident_kind', Bike.humanized_category_for(:incidents, :accident))
+      page.should_not have_xpath select_option_for('incident_kind', Bike.humanized_category_for(:incidents, :assault))
+      page.should_not have_xpath select_option_for('incident_kind', Bike.humanized_category_for(:incidents, :theft))
+
+    end
+    
   end
   
   
@@ -116,85 +74,53 @@ feature "Reporting bike incidents:" do
       login_with(@user)
     end
   
-    scenario "can add a stolen bike report", :js => true do
-      visit new_map_incident_path
+    describe "with a bike registered" do
       
-      page.should have_content I18n.t('incidents.new.title')
-      page.should have_content I18n.t('incidents.new.kind.bike')
-      page.should have_content I18n.t('incidents.new.reporting.as', :account => @user.username)
+      before(:each) do
+        FactoryGirl.create(:bike, :user => @user)
+      end
       
-      fill_in "incident_description", :with => "My bike was sucked by a black hole"
-      select Incident.humanized_kind_for(:theft), :from => "incident_kind"
-      check "incident_complaint_issued"
-      select @chain.name, :from => "incident_bike_item_id"
-      fill_in "incident_bike_description", :with => "My bike was blue and fast"
+      scenario "should have all the other options" do
+        visit map_incidents_path
+
+        click_link I18n.t('app.sections.incidents.subsections.new')
+        sleep 3
+        
+        page.should have_xpath select_option_for('incident_kind', Bike.humanized_category_for(:incidents, :assault))
+        page.should have_xpath select_option_for('incident_kind', Bike.humanized_category_for(:incidents, :theft))
+        page.should have_xpath select_option_for('incident_kind', Bike.humanized_category_for(:incidents, :regulation_infraction))
+        page.should have_xpath select_option_for('incident_kind', Bike.humanized_category_for(:incidents, :accident))
+      end
       
-      simulate_click_on_map({:lat => 19.4000762084, :lon => -99.265484})
-      
-      click_on I18n.t('actions.save')
-      
-      page.current_path.should == map_incidents_path
-      page.should have_content I18n.t('incidents.create.saved')
     end
     
-    scenario "can add a violent stolen bike report", :js => true do
+    scenario "sees a notification message due reporting with no bikes" do
+      visit map_incidents_path
       
-      visit new_map_incident_path
+      click_link I18n.t('app.sections.incidents.subsections.new')
+      sleep 3
       
-      page.should have_content I18n.t('incidents.new.title')
-      page.should have_content I18n.t('incidents.new.kind.bike')
-      page.should have_content I18n.t('incidents.new.reporting.as', :account => @user.username)
+      page.should have_content I18n.t('incidents.views.new.reporting.with_no_bikes')
+      page.should have_content I18n.t('bikes.actions.register')
+    end
+  
+    scenario "cannot select other types of incidents" do
+      visit map_incidents_path
       
-      fill_in "incident_description", :with => "My bike was taken away from me by a guy with a knife"
-      select Incident.humanized_kind_for(:assault), :from => "incident_kind"
-      check "incident_complaint_issued"
-      fill_in "incident_bike_description", :with => "My bike was blue and fast"
+      click_link I18n.t('app.sections.incidents.subsections.new')
+      sleep 3
       
-      simulate_click_on_map({:lat => 19.4000762084, :lon => -99.265484})
-      
-      click_on I18n.t('actions.save')
-      
-      page.current_path.should == map_incidents_path
-      page.should have_content I18n.t('incidents.create.saved')
+      page.should_not have_xpath select_option_for('incident_kind', Bike.humanized_category_for(:incidents, :accident))
+      page.should_not have_xpath select_option_for('incident_kind', Bike.humanized_category_for(:incidents, :assault))
+      page.should_not have_xpath select_option_for('incident_kind', Bike.humanized_category_for(:incidents, :theft))
+
     end
     
-    scenario "can add an accident report", :js => true do
-      visit new_map_incident_path
-      
-      page.should have_content I18n.t('incidents.new.title')
-      page.should have_content I18n.t('incidents.new.kind.bike')
-      page.should have_content I18n.t('incidents.new.reporting.as', :account => @user.username)
-      
-      fill_in "incident_description", :with => "My bike wheel was broken by a car"
-      select Incident.humanized_kind_for(:accident), :from => "incident_kind"
-      uncheck "incident_complaint_issued"
-      
-      simulate_click_on_map({:lat => 19.1300062084, :lon => -99.245484})
-      
-      click_on I18n.t('actions.save')
-      
-      page.current_path.should == map_incidents_path
-      page.should have_content I18n.t('incidents.create.saved')
-    end
-    
-    scenario "can add an regulation infraction report", :js => true do
-      visit new_map_incident_path
-      
-      page.should have_content I18n.t('incidents.new.title')
-      page.should have_content I18n.t('incidents.new.kind.bike')
-      page.should have_content I18n.t('incidents.new.reporting.as', :account => @user.username)
-      
-      fill_in "incident_description", :with => "My bike wheel was broken by a car"
-      select Incident.humanized_kind_for(:regulation_infraction), :from => "incident_kind"
-      uncheck "incident_complaint_issued"
-      simulate_click_on_map({:lat => 19.2000762084, :lon => -99.265484})
-      
-      click_on I18n.t('actions.save')
-      
-      page.current_path.should == map_incidents_path
-      page.should have_content I18n.t('incidents.create.saved')
-    end
   
   end
   
+end
+
+def select_option_for(id, category_humanized)
+  "//select[@id = '#{id}']/option[normalize-space(text()) = '#{category_humanized}']"
 end

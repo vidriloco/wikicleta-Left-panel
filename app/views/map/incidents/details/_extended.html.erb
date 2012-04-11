@@ -12,7 +12,9 @@
 			<%= info_for(@incident.bike) %>
 			
 			<div class="photo">
-				<%= image_tag @incident.bike.main_photo.url(:small), :class => "shadow-lighter" %>
+				<% unless @incident.bike.main_photo.nil? %>
+					<%= image_tag @incident.bike.main_photo.url(:small), :class => "shadow-lighter" %>
+				<% end %>
 			</div>
 			
 		<% end %>
@@ -58,8 +60,12 @@
 	<p class="clear"></p>
 		
 </div>
-<div class="alert-zone">
-	<p><%= t('incidents.views.edit.destroy')%></p>
-	<%= link_to t('incidents.actions.delete'), map_incident_path(@bike), :method => :delete, :remote => true, :class => "button red-button to-right", :confirm => t('incidents.messages.confirm_delete') %>
+
+<% if @incident.owned_by_user?(current_user) %>
+	<div class="alert-zone">
+		<p><%= t('incidents.views.edit.destroy') %></p>
+		<%= link_to t('incidents.actions.delete'), map_incident_path(@bike), 
+		:method => :delete, :remote => true, :class => "button red-button to-right", :confirm => t('incidents.messages.confirm_delete') %>
 	<div style="clear:both"></div>
-</div>
+	</div>
+<% end %>

@@ -1,6 +1,6 @@
 <div class="small-sheet">
 	<div class="styled-form shadow-light">
-		<%= link_to t('actions.back'), :back, :class => 'back' %>
+		<%= link_to t('actions.back'), new_user_session_path, :class => 'back' %>
 		<h1><%=t 'user_accounts.registrations.new.title' %></h1>
 
 		<%= form_for(resource, :as => resource_name, :url => account_create_path) do |f| %>
