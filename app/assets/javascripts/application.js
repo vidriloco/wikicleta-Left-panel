@@ -4,15 +4,11 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-//= require backbone_rails_sync
-//= require backbone_datalink
-//= require backbone.modelbinding
-//= require backbone.validation
-//= require jquery.timeago
+//= require common/base
 
-//= require_tree .
+// Handlebars no-conflict with jQuery
 
-_.templateSettings = {
-    interpolate: /\{\{\=(.+?)\}\}/g,
-    evaluate: /\{\{(.+?)\}\}/g
-};
+//_.templateSettings = {
+//    interpolate: /\{\{\=(.+?)\}\}/g,
+//    evaluate: /\{\{(.+?)\}\}/g
+//};

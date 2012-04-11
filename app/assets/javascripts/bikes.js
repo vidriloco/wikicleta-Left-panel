@@ -52,7 +52,7 @@ $(document).ready(function() {
 	}
 	
 	$('#submit-with-photo').click(function() {
-		ViewComponents.Notification.put("<p class='success'>Espera por favor, guardando bici ... </p>", {delay: 60000, blocking: true});
+		ViewComponents.Notification.put("<p class='notice top-message'>Espera por favor, guardando bici ... </p>", {delay: 60000, blocking: true});
 	});
 	
 });

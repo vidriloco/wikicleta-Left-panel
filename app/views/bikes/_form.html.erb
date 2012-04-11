@@ -13,7 +13,7 @@
 	</div>
 	<div class="with-label">
 		<%= f.label :bike_brand, t('bikes.views.form.brand') %>
-		<%= f.select :bike_brand_id, options_from_collection_for_select(BikeBrand.all, :id, :name, @bike.bike_brand_id), :include_blank => true %>
+		<%= f.select :bike_brand_id, options_from_collection_for_select(BikeBrand.ordered, :id, :name, @bike.bike_brand_id), :include_blank => true %>
 	</div>
 	<br/>
 	

@@ -1,0 +1,15 @@
+DEFAULTS: &DEFAULTS
+  username: vidriloco
+  api_key: ecd0d0ca89092f8299f4d8178ab823bb
+
+development:
+  <<: *DEFAULTS
+  container: dev_bikes
+
+test:
+  <<: *DEFAULTS
+  container: test_bikes
+
+production:
+  <<: *DEFAULTS
+  container: bikes

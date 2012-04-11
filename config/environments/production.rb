@@ -42,8 +42,10 @@ Ciudadio::Application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
 
-  # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w(welcome.css access.css full_map.css places.css.scss)
+  # Precompile additional Javascript files (excluding application.js)
+  config.assets.precompile += %w(bikes.js map.js)
+  # Precompile additional CSS files (excluding application.css)
+  config.assets.precompile += %w(welcome.css access.css settings.css)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false

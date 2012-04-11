@@ -4,7 +4,12 @@ class Bike < ActiveRecord::Base
   
   acts_as_commentable
   
-  has_attached_file :main_photo, :styles => { :medium => "250", :big => "800", :small => "300x250" }
+  has_attached_file :main_photo, 
+                    :styles => { :medium => "250", :big => "800", :small => "300x250" },
+                    :storage => :cloud_files,
+                    :container => "wikicleta",
+                    :cloudfiles_credentials => "#{Rails.root}/config/rackspace_cloudfiles.yml",
+                    :ssl => true
   
   has_many :user_like_bikes, :dependent => :destroy
   #has_many :tweaks
@@ -16,6 +21,9 @@ class Bike < ActiveRecord::Base
   
   validates_presence_of :name, :kind, :bike_brand, :user
   
+  validates_attachment_presence     :main_photo
+  validates_attachment_content_type :main_photo, :content_type => %r{image/.*}
+                                    
   scope :most_popular, order('likes_count DESC')
   scope :all_from_user, lambda { |user| where("user_id = ?", user.id) } 
   

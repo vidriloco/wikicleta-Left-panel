@@ -41,7 +41,7 @@ es_MX:
         on_save: "Chispas, Wikicleta no pudo registrar tu bici. Checa por favor los campos marcados en rojo"
       form:
         name: "Pónle un nombre"
-        description: "La descripción"
+        description: "¿Que es tu bici para ti?"
         frame_number: "El número del cuadro"
         kind: "Tipo"
         brand: "Marca"

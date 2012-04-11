@@ -19,6 +19,10 @@ gem 'redis-objects'
 gem 'paperclip'
 gem 'acts_as_commentable'
 
+gem 'cocaine' #a dependency that paperclilp didn't pick up yet
+gem 'cloudfiles', '>= 1.4.15'
+gem 'paperclip-cloudfiles', '2.3.8.3', :require => 'paperclip'
+
 group :test do
 	gem 'capybara'
   gem 'database_cleaner'

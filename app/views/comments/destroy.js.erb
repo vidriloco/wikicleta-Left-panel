@@ -1,4 +1,4 @@
 <% if @comment.destroyed? %>
 	$("#com-<%= @comment.id %>").fadeOut(200).delay(200).remove();
-	ViewComponents.Notification.put("<p class='success'><%= t('comments.messages.deleted') %></p>");
+	ViewComponents.Notification.put("<p class='notice top-message'><%= t('comments.messages.deleted') %></p>");
 <% end %>

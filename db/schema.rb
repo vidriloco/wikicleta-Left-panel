@@ -43,6 +43,9 @@ ActiveRecord::Schema.define(:version => 20120403000018) do
     t.datetime "updated_at"
   end
 
+  add_index "authorizations", ["provider", "uid"], :name => "authorizations_provider_uid_idx", :unique => true
+  add_index "authorizations", ["provider", "user_id"], :name => "authorizations_provider_user_id_idx", :unique => true
+
   create_table "bike_brands", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"

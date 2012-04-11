@@ -3,5 +3,5 @@ $('#comments-listing').prepend("<%= escape_javascript(render :partial => 'commen
 	$('.clearer').trigger('click');
 	$('#comment_comment').trigger('keyup');
 	//$('#com-<%= @comment.id %>').effect("highlight", {}, 3000);
-	ViewComponents.Notification.put("<p class='success'><%= t('comments.messages.added') %></p>");
+	ViewComponents.Notification.put("<p class='notice top-message'><%= t('comments.messages.added') %></p>");
 <% end %>
