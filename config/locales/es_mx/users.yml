@@ -13,7 +13,6 @@ es_MX:
         login: "Nombre de Usuario o Correo"
         personal_page: "Página personal"
         bio: "Bio"
-        share_location: "Compartir ubicación"
         reset_password_token: "El token para reestablecer contraseña"
   user_accounts:
     omniauth:

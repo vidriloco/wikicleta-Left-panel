@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :authorization do |u|
-    u.uid "1"
-    u.provider "twitter"
-    u.token "tkn"
+    u.sequence(:uid) { |n| "#{n}" }
+    u.sequence(:provider) { |n| "twitter #{n}" }
+    u.sequence(:token) { |n| "token #{n}" }
   end
 end

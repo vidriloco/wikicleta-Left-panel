@@ -76,11 +76,13 @@ feature "Bike registration:" do
         select I18n.t("bikes.categories.types.urban"), :from => "bike_kind"
         select "Dahon", :from => "bike_bike_brand_id"
         fill_in 'bike_description', :with => "White dahon bike, super light and foldable"
+        
+        page.attach_file('bike_main_photo', Rails.root+'spec/resources/bike.jpg')
       
         click_on I18n.t('bikes.actions.save')
       
         page.current_path.should == bike_path(Bike.last.id)
-      
+        
         page.should have_content "Hashi"
         page.should have_content "White dahon bike, super light and foldable"
         

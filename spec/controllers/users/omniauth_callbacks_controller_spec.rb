@@ -4,20 +4,18 @@ require 'spec_helper'
 describe Users::OmniauthCallbacksController do
   
   before(:each) do
+    @user = FactoryGirl.create(:pipo)
     request.env["devise.mapping"] = Devise.mappings[:user] 
   end
   
   describe "GET twitter" do
     
-    before(:each) do
-      @user = FactoryGirl.create(:user)
-    end
     
     describe "after successful authorization from remote end" do
       
       before(:each) do
         request.env["omniauth.auth"] = mock_valid_auth_for(:twitter)
-        Authorization.stub(:find_by_provider_and_uid) { FactoryGirl.create(:authorization, :user_id => @user.id) }
+        Authorization.stub(:find_by_provider_and_uid) { FactoryGirl.create(:authorization, :user => @user) }
       end
       
       describe "if already registered" do
@@ -67,18 +65,17 @@ describe Users::OmniauthCallbacksController do
   
   describe "GET facebook" do
     
-    before(:each) do
-      @user = FactoryGirl.create(:user)
-    end
-    
     describe "after successful authorization from remote end" do
       
       before(:each) do
         request.env["omniauth.auth"] = mock_valid_auth_for(:facebook)
-        Authorization.stub(:find_by_provider_and_uid) { FactoryGirl.create(:authorization, :user_id => @user.id) }
       end
       
       describe "if already registered" do
+        
+        before(:each) do
+          Authorization.stub!(:find_from_hash) { FactoryGirl.create(:authorization, :user => @user) }
+        end
         
         it "should respond with a redirect" do
           get :facebook
@@ -90,7 +87,7 @@ describe Users::OmniauthCallbacksController do
       describe "if not registered yet" do
         
         before(:each) do
-          Authorization.stub!(:find_by_provider_and_uid) { nil }
+          Authorization.stub!(:find_from_hash) { nil }
         end
         
         it "should assign the user to @user" do
@@ -123,10 +120,6 @@ describe Users::OmniauthCallbacksController do
   end
   
   describe "POST create" do
-    
-    before(:each) do
-      @user = FactoryGirl.stub(:someone)
-    end
     
     describe "with valid parameters" do
       
@@ -200,7 +193,6 @@ describe Users::OmniauthCallbacksController do
   describe "If logged in" do
     
     before(:each) do
-      @user = FactoryGirl.create(:user)
       sign_in @user
     end
     

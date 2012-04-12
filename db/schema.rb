@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20120319210639) do
     t.integer  "sharing_mode"
     t.boolean  "is_available"
     t.float    "sharing_fee"
+    t.float    "weight"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.point    "coordinates",             :limit => nil,                :srid => 4326
@@ -179,7 +180,6 @@ ActiveRecord::Schema.define(:version => 20120319210639) do
     t.string   "username"
     t.text     "bio"
     t.string   "personal_page"
-    t.boolean  "share_location"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

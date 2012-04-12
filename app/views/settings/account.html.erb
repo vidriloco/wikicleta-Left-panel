@@ -12,11 +12,6 @@
 
 	<%= f.label :username %>
   <%= f.text_field :username %>
-
-	<% if :done == true %>
-		<%= f.label :share_location %>
-  	<%= f.check_box :share_location %>
-	<% end %>
 	
 	<div class="actions to-right">
 		<%= link_to t("user_accounts.settings.sections.account.deactivate"), account_deactivate_path, 

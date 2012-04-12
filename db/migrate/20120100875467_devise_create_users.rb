@@ -19,9 +19,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :full_name
       t.string :username
       t.text :bio
-      t.string :personal_page
-      
-      t.boolean :share_location
+      t.string :personal_page      
       
       t.timestamps
     end

@@ -35,9 +35,7 @@ feature 'User accounts settings' do
       fill_in User.human_attribute_name(:full_name), :with => "Pepe Brincolin"
       fill_in User.human_attribute_name(:email), :with => "brinc@lin.com"
       fill_in User.human_attribute_name(:username), :with => "brincolin"
-      
-      #check User.human_attribute_name(:share_location)
-      
+            
       click_on I18n.t("user_accounts.settings.save")
       
       current_path.should == settings_account_path

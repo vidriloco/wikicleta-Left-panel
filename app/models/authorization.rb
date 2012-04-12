@@ -20,11 +20,11 @@ class Authorization < ActiveRecord::Base
   private
   
   def is_uid_and_provider_unique?
-    Authorization.find_by_provider_and_uid(provider, uid).nil?
+    Authorization.find(:first, :conditions => {:provider => provider, :uid => uid } ).nil?
   end
   
   def is_user_and_provider_unique?
-    Authorization.find_by_provider_and_user_id(provider, user_id).nil?
+    Authorization.find(:first, :conditions => {:provider => provider, :user_id => user_id } ).nil?
   end
     
 end
