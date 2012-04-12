@@ -46,7 +46,8 @@ Ciudadio::Application.configure do
   config.assets.precompile += %w(bikes.js map.js)
   # Precompile additional CSS files (excluding application.css)
   config.assets.precompile += %w(welcome.css access.css settings.css)
-
+  config.serve_static_assets = true
+  
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 

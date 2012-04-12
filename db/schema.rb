@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120403000018) do
+ActiveRecord::Schema.define(:version => 20120319210639) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                             :default => "", :null => false
@@ -63,10 +63,13 @@ ActiveRecord::Schema.define(:version => 20120403000018) do
     t.string   "main_photo_content_type"
     t.integer  "main_photo_file_size"
     t.datetime "main_photo_updated_at"
-    t.integer  "likes_count",             :default => 0
-    t.integer  "share_status"
+    t.integer  "likes_count",                            :default => 0
+    t.integer  "sharing_mode"
+    t.boolean  "is_available"
+    t.float    "sharing_fee"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.point    "coordinates",             :limit => nil,                :srid => 4326
   end
 
   create_table "comments", :force => true do |t|

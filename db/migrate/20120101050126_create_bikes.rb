@@ -14,7 +14,12 @@ class CreateBikes < ActiveRecord::Migration
       t.datetime    :main_photo_updated_at
       
       t.integer     :likes_count, :default => 0
-      t.integer     :share_status
+      
+      t.integer     :sharing_mode
+      t.boolean     :is_available
+      t.float       :sharing_fee
+      t.point       :coordinates, :srid => 4326, :with_z => false
+      
       t.timestamps
     end
   end
