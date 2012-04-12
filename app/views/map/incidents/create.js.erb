@@ -1,5 +1,5 @@
 <% if @incident.persisted? %>
 	ViewComponents.LeftBar.collapse();
-	ViewComponents.Notification.put("<p class='notice success'><%= t('incidents.messages.saved') %></p>", {delay: 300});
+	ViewComponents.Notification.put("<p class='notice top-message'><%= t('incidents.messages.saved') %></p>", {delay: 300});
 	$.visit('#');
 <% end %>

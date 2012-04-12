@@ -1,6 +1,6 @@
 <% if @incident.destroyed? %>
 	ViewComponents.LeftBar.collapse();
-	ViewComponents.Notification.put("<p class='notice success'><%= t('incidents.messages.deleted') %></p>", {delay: 1000});
+	ViewComponents.Notification.put("<p class='notice top-message'><%= t('incidents.messages.deleted') %></p>", {delay: 1000});
 	$.visit('#');
 <% end %>
 
