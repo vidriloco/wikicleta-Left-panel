@@ -1,5 +1,5 @@
 <div class="field">
-	<p id="incident_kind_msj" class="error"><%= t('incidents.views.new.form.validations.kind') %></p>
+	<p id="incident_kind_not_empty" class="error"><%= t('incidents.views.new.form.validations.kind') %></p>
 	<%= f.label :kind, t('incidents.views.new.form.kind') %>
 	<%= f.select :kind, options_for_select(incidents_for_session_status, @incident.kind), {:include_blank => true} %>
 </div>
@@ -17,14 +17,14 @@
 </div>
 
 <div class="field">
-	<p id="incident_start_hour_msj" class="error"><%= t('incidents.views.new.form.validations.range') %></p>
+	<p id="incident_start_hour_before_than" class="error"><%= t('incidents.views.new.form.validations.range') %></p>
 	
 	<label><%= t('incidents.views.new.form.range') %></label>
 	<%= f.time_select :start_hour %>&nbsp;<label><%= t('connectives.and') %></label>&nbsp;<%= f.time_select :final_hour %>
 </div>
 
 <div class="field">
-	<p id="incident_description_msj" class="error"><%= t('incidents.views.new.form.validations.description') %></p>
+	<p id="incident_description_min" class="error"><%= t('incidents.views.new.form.validations.description') %></p>
 	<%= f.text_area :description, :cols => 55, :rows => 2, :placeholder => t('incidents.views.new.form.description') %>
 	<div id="incident_description_count" class="field-counter"></div>
 </div>
@@ -44,14 +44,13 @@
 <% end %>
 
 <div class="field to-left <%= incident_types_for([:accident, :assault, :regulation_infraction]) %>">
-	<p id="incident_vehicle_identifier_msj" class="error"><%= t('incidents.views.new.form.validations.vehicle_identifier') %></p>
+	<p id="incident_vehicle_identifier_regexp" class="error"><%= t('incidents.views.new.form.validations.vehicle_identifier') %></p>
 	<%= f.text_field :vehicle_identifier, :size => 20, :placeholder => t('incidents.views.new.form.vehicle_identifier') %>
 </div>
 <div style="clear: both;"></div>
 
-<div class="field note required">
-	<p id="coordinates_lat_msj" class="error"><%= t('incidents.views.new.form.validations.coordinates') %></p>
-	<%= f.label :coordinates, t('incidents.views.new.form.coordinates') %>
+<div class="field required">
+	<p id="coordinates_lat_both" class="error"><%= t('incidents.views.new.form.validations.coordinates') %></p>	
 </div>
 <%= hidden_field_tag "coordinates[lat]", @incident.coordinates.nil? ? "" : @incident.coordinates.lat %>
 <%= hidden_field_tag "coordinates[lon]", @incident.coordinates.nil? ? "" : @incident.coordinates.lon %>

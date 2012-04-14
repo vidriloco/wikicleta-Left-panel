@@ -7,7 +7,7 @@ class Bike < ActiveRecord::Base
   has_attached_file :main_photo, 
                     :styles => { :medium => "250", :big => "800", :small => "300x250" },
                     :storage => :cloud_files,
-                    :container => "wikicleta",
+                    :container => (Rails.env == "production") ? "wikicleta" : "wikicleta_other",
                     :cloudfiles_credentials => "#{Rails.root}/config/rackspace_cloudfiles.yml",
                     :ssl => true
   
@@ -19,6 +19,7 @@ class Bike < ActiveRecord::Base
   belongs_to :bike_brand
   belongs_to :user
   
+  before_post_process :randomize_file_name
   validates_presence_of :name, :kind, :bike_brand, :user
   
   validates_attachment_presence     :main_photo
@@ -26,6 +27,12 @@ class Bike < ActiveRecord::Base
                                     
   scope :most_popular, order('likes_count DESC')
   scope :all_from_user, lambda { |user| where("user_id = ?", user.id) } 
+  
+  def randomize_file_name
+    return if main_photo_file_name.nil?
+    extension = File.extname(main_photo_file_name).downcase
+    self.main_photo.instance_write(:file_name, "#{SecureRandom.hex(16)}#{extension}")
+  end
   
   def brand
     return if bike_brand.nil?

@@ -3,7 +3,7 @@
 $.extend(ViewComponents, {
     ValidForm: {
 			
-			set: function(dom, rules) {
+			set: function(dom, rules, callback) {
 				this.domElement = dom;
 				this.validationRules = rules;
 				var instance = this;
@@ -12,28 +12,66 @@ $.extend(ViewComponents, {
 					for(var idx in instance.validationRules) {
 						var hash = instance.validationRules[idx];
 						if(!instance.validate(hash)) {
+							if(hash.overrideWhen != undefined && hash.overrideWhen) {
+								return true;
+							}
 							instance.markError(hash.id);
 							return false;
 						}
+					}
+					
+					if(callback != undefined) {
+						callback();
 					}
 					return true;
 				})
 			},
 			
 			validate: function(hash) {
-				switch(hash.condition) {
-					case 'before_than':
-				  	return this.validateTime(hash.respect, hash.id, hash.special);
-					case 'min':
-				  	return this.validateMin(hash.value, hash.id);
-					case 'regexp':
-						return this.validateWithRegexp(hash.regexp, hash.id);
-						break;
-					case 'not_empty':
-						return this.validateMin(0, hash.id);
-					case 'both':
-						return this.validateBothNotEmpty(hash.anotherId, hash.id)
+				this.rule = hash.condition;
+				if(hash.type != undefined && hash.type=="file") {
+					switch(hash.condition) {
+						case 'max':
+							return this.validateFileSize('max', hash.value, hash.id);
+						case 'regexp':
+							return this.validateFileWithRegexp(hash.regexp, hash.id);
+						case 'not_empty':
+							return this.validateMin(0, hash.id);
+					}
+				} else {
+					switch(hash.condition) {
+						case 'before_than':
+					  	return this.validateTime(hash.respect, hash.id, hash.special);
+						case 'min':
+					  	return this.validateMin(hash.value, hash.id);
+						case 'regexp':
+							return this.validateWithRegexp(hash.regexp, hash.id);
+						case 'not_empty':
+							return this.validateMin(0, hash.id);
+						case 'both':
+							return this.validateBothNotEmpty(hash.anotherId, hash.id)
+					}
 				}
+			},
+			
+			validateFileSize: function(range, value, partialDom) {
+				return true;
+			},
+			
+			validateFileWithRegexp : function(regexp, partialDom) {
+				var dom = this.domElement+" "+partialDom;
+
+				var fullPath = $(dom).val();
+				if (fullPath) {
+			    var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+	        var filename = fullPath.substring(startIndex);
+	        if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+	                filename = filename.substring(1);
+	        }
+	        return filename.match(regexp);
+				}
+				
+				return false;
 			},
 			
 			validateMin: function(value, partialDom) {
@@ -71,7 +109,8 @@ $.extend(ViewComponents, {
 			},
 			
 			markError: function(id) {
-				$(this.domElement+" "+id+'_msj').fadeIn(200).delay(5000).fadeOut(400);
+				var domForError=this.domElement+" "+id+'_'+this.rule;
+				$(domForError).fadeIn(200).delay(5000).fadeOut(400);
 			}
 			
 		}

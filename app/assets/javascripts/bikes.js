@@ -2,6 +2,7 @@
 //= require modernizr-transitions
 //= require jquery.masonry.min
 //= require view_components/counter.view
+//= require view_components/form.validator
 //= require comments
 //= require jquery.popover
 
@@ -44,15 +45,24 @@ $(document).ready(function() {
 		});
 	});
 	
+	// Validation for new and edit bike form
+	var validateFields = [
+		{id: '#bike_name', condition: 'not_empty' },
+		{id: '#bike_description', condition: 'not_empty' },
+		{id: '#bike_kind', condition: 'not_empty' },
+		{id: '#bike_bike_brand_id', condition: 'not_empty' },
+		{id: '#bike_main_photo', condition: 'not_empty', type: 'file', overrideWhen: $.isDefined('.edit-bike') },
+		{id: '#bike_main_photo', condition: 'regexp', regexp: /^[\w\s\-\.]+\.(gif|png|jpeg|jpg)$/, type: 'file' }];
+			
+	ViewComponents.ValidForm.set('.bike-upload', validateFields, function() {
+			ViewComponents.Notification.put("<p class='notice top-message'>Espera por favor, guardando bici ... </p>", {delay: 60000, blocking: true});
+	});
+	
+	// tipsy hovers
 	$('.heart').tipsy({gravity: 'n', live: true, fade: true, delayIn: 100, delayOut: 500 });
 	$('.contact').tipsy({gravity: 's', live: true, fade: true, delayIn: 100, delayOut: 500 });
 
 	if($.isDefined('#bike_frame_number')) {
 		$('#bike_frame_number').popover({ content: $('.frame_number_help').text(), title: 'Ayuda', position: 'right' });
-	}
-	
-	$('#submit-with-photo').click(function() {
-		ViewComponents.Notification.put("<p class='notice top-message'>Espera por favor, guardando bici ... </p>", {delay: 60000, blocking: true});
-	});
-	
+	}	
 });

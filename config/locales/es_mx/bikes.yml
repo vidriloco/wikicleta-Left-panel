@@ -46,6 +46,17 @@ es_MX:
         kind: "Tipo"
         brand: "Marca"
         main_photo: "Foto"
+        validations:
+          file: "El archivo no debe ser mayor a 2 MB, debe ser un archivo de imagen y el nombre sin caracteres raros"
+          name: "Pónle un nombre a tu bici"
+          description: "Te falta escribir algo sobre tu bici o su descripción"
+          kind: "Te falta seleccionar un tipo de bici"
+          bike_brand: "Te falta especificar la marca"
+          file_name: "Es necesario que subas una foto de tu bici"
+          file_name_format: "El nombre del archivo contiene caracteres no permitidos"
+          file_size: "El archivo es muy grande"
+        notes:
+          file_size: "Por favor, sube fotos de tamaño menor a 2 Mb"
         help:
           frame_number: "Este número generalmente está en el cuadro o pedales de tu bici. Es útil tenerlo para poder encontrar más fácilmente bicicletas que han sido robadas."
       index:

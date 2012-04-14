@@ -2,7 +2,7 @@
 	<div class="styled-form shadow-light">
 		<%= link_to t('actions.back'), bike_path(@bike), :class => 'back' %>
 		<h1><%= t('bikes.views.edit.title') %></h1>
-		<%= form_for @bike, :method => :put, :html => {:multipart => true} do |f| %>
+		<%= form_for @bike, :method => :put, :html => {:multipart => true, :class => 'bike-upload edit-bike'} do |f| %>
 			<%= render :partial => 'form', :locals => {:f => f, :note => t('bikes.views.edit.change_photo') } %>
 			<%= f.submit t('bikes.actions.update'), :id => 'submit-with-photo' %>
 		<% end %>

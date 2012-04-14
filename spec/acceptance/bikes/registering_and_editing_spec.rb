@@ -68,17 +68,36 @@ feature "Bike registration:" do
         
       end
     
-      scenario "I can register a new bike" do
+      scenario "I can register a new bike", :js => true do
         visit new_bike_path
       
+        click_on I18n.t('bikes.actions.save')
+        page.should have_content I18n.t('bikes.views.form.validations.name')
         fill_in 'bike_name', :with => "Hashi"
+        
         fill_in 'bike_frame_number', :with => "9F2393DA"
+        
+        click_on I18n.t('bikes.actions.save')
+        page.should have_content I18n.t('bikes.views.form.validations.kind')
         select I18n.t("bikes.categories.types.urban"), :from => "bike_kind"
+        
+        click_on I18n.t('bikes.actions.save')
+        page.should have_content I18n.t('bikes.views.form.validations.bike_brand')
         select "Dahon", :from => "bike_bike_brand_id"
+        
+        click_on I18n.t('bikes.actions.save')
+        page.should have_content I18n.t('bikes.views.form.validations.description')
         fill_in 'bike_description', :with => "White dahon bike, super light and foldable"
         
+        click_on I18n.t('bikes.actions.save')
+        page.should have_content I18n.t('bikes.views.form.validations.file_name')
+        
+        page.attach_file('bike_main_photo', Rails.root+'spec/resources/bike&.jpg')
+        click_on I18n.t('bikes.actions.save')
+        page.should have_content I18n.t('bikes.views.form.validations.file_name_format')
+        
         page.attach_file('bike_main_photo', Rails.root+'spec/resources/bike.jpg')
-      
+        
         click_on I18n.t('bikes.actions.save')
       
         page.current_path.should == bike_path(Bike.last.id)
@@ -98,19 +117,28 @@ feature "Bike registration:" do
         page.should have_content I18n.t('bikes.views.errors.on_save')
       end
     
-      describe "having registered a bike" do
+      describe "having registered a bike", :js => true do
     
         before(:each) do
           @bike=FactoryGirl.create(:bike, :user => @user)
         end
     
-        scenario "I can modify it thereafter" do
+        scenario "I can modify it thereafter without needing to upload a new photo" do
           visit bike_path(@bike)
           click_on I18n.t('bikes.views.show.modify')
           page.current_path.should == edit_bike_path(@bike)
         
+          fill_in "bike_name", :with => ""
+          click_on I18n.t('bikes.actions.update')
+          page.should have_content I18n.t('bikes.views.form.validations.name')
           fill_in 'bike_name', :with => "Diamante"
+          
+          fill_in 'bike_description', :with => ""
+          click_on I18n.t('bikes.actions.update')
+          
+          page.should have_content I18n.t('bikes.views.form.validations.description')
           fill_in 'bike_description', :with => "White bike, super light and foldable"
+          
           click_on I18n.t('bikes.actions.update')
           page.current_path.should == bike_path(Bike.last.id)
         
@@ -120,7 +148,30 @@ feature "Bike registration:" do
           page.should have_content I18n.t('bikes.messages.updated')
         end
         
-        scenario "I can delete it", :js => true do
+        scenario "I can modify it thereafter and add a photo only if the file is valid" do
+          visit bike_path(@bike)
+          click_on I18n.t('bikes.views.show.modify')
+          page.current_path.should == edit_bike_path(@bike)
+        
+          fill_in 'bike_name', :with => "Diamante"
+          fill_in 'bike_description', :with => "White bike, super light and foldable"
+
+          page.attach_file('bike_main_photo', Rails.root+'spec/resources/bike&.jpg')
+          click_on I18n.t('bikes.actions.update')
+          page.should have_content I18n.t('bikes.views.form.validations.file_name_format')
+
+          page.attach_file('bike_main_photo', Rails.root+'spec/resources/bike.jpg')
+          click_on I18n.t('bikes.actions.update')
+          
+          page.current_path.should == bike_path(Bike.last.id)
+        
+          page.should have_content "Diamante"
+          page.should have_content "White bike, super light and foldable"
+          
+          page.should have_content I18n.t('bikes.messages.updated')
+        end
+        
+        scenario "I can delete it" do
           visit edit_bike_path(@bike)
           click_on I18n.t('bikes.actions.delete')
           

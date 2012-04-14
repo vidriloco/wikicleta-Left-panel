@@ -171,13 +171,6 @@
 		margin-top: 30px;
 	}
 	
-	.note {	
-		width: 90%;
-		padding: 20px;
-		border: 1px solid #F4F2EF;
-		font-size: 13px;
-	}
-	
 	.note-message, .field-counter {
 		font-size: 14px;
 		font-style: italic;
@@ -263,13 +256,18 @@
 	display: none;
 	background-color: #EED9D3;
 	color: #EA5C61;
-	font-weight: bold;
-	font-size: 11px;
-	padding: 5px 5px 5px 10px;
-	
+}
+
+.note, .error {
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
+	font-weight: bold;
+	font-size: 11px;
+	padding: 5px 10px 5px 10px;
 }
 
-
+.note {	
+	background-color: #CFEEC8;
+	color: #408039;
+}
