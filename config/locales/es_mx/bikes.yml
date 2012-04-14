@@ -42,7 +42,7 @@ es_MX:
       deleted: "Bici eliminada"
     views:
       errors:
-        on_save: "Chispas, Wikicleta no pudo registrar tu bici. Checa por favor los campos marcados en rojo"
+        on_save: "Chispas, Wikicleta no ha podido registrar tu bici"
       form:
         name: "Pónle un nombre"
         description: "¿Que es tu bici para ti?"
@@ -51,14 +51,13 @@ es_MX:
         brand: "Marca"
         main_photo: "Foto"
         validations:
-          file: "El archivo no debe ser mayor a 2 MB, debe ser un archivo de imagen y el nombre sin caracteres raros"
           name: "Pónle un nombre a tu bici"
           description: "Te falta escribir algo sobre tu bici o su descripción"
           kind: "Te falta seleccionar un tipo de bici"
           bike_brand: "Te falta especificar la marca"
           file_name: "Es necesario que subas una foto de tu bici"
           file_name_format: "El archivo que estas subiendo no es una imagen"
-          file_size: "El archivo es muy grande"
+          file_size: "El tamaño del archivo no debe ser mayor a 2 Mb"
         notes:
           file_size: "Por favor, sube fotos de tamaño menor a 2 Mb"
         help:

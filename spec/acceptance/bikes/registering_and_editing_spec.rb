@@ -107,6 +107,24 @@ feature "Bike registration:" do
         
         page.should have_content I18n.t('bikes.messages.saved')
       end
+      
+      scenario "It cannot register a new bike if it's photo size is bigger than 2 Mb" do
+        visit new_bike_path
+      
+        fill_in 'bike_name', :with => "Hashi"
+        fill_in 'bike_frame_number', :with => "9F2393DA"
+        
+        select I18n.t("bikes.categories.types.urban"), :from => "bike_kind"
+        
+        select "Dahon", :from => "bike_bike_brand_id"
+        
+        fill_in 'bike_description', :with => "White dahon bike, super light and foldable"
+        
+        page.attach_file('bike_main_photo', Rails.root+'spec/resources/big_bike.jpg')
+        click_on I18n.t('bikes.actions.save')
+        
+        page.should have_content I18n.t('bikes.views.form.validations.file_size')
+      end
     
       scenario "I cannot register a new bike if fields to be answered are missing" do
         visit new_bike_path

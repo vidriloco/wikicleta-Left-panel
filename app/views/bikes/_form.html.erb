@@ -1,5 +1,5 @@
 <div class="centered">
-	<%= render :partial => 'shared/form_errors', :locals => {:message => t('bikes.views.errors.on_save'), :object => @bike} %>
+	<%= render :partial => 'shared/form_errors', :locals => {:message => t('bikes.views.errors.on_save'), :object => @bike } %>
 	
 	<div class="field">
 		<p id="bike_name_not_empty" class="error"><%= t('bikes.views.form.validations.name') %></p>
@@ -13,7 +13,7 @@
 	
 	<div class="field">
 		<p id="bike_description_not_empty" class="error"><%= t('bikes.views.form.validations.description') %></p>
-		<%= f.text_area :description, :placeholder => t('bikes.views.form.description'), :cols => 58, :rows => 2 %>
+		<%= f.text_area :description, :placeholder => t('bikes.views.form.description'), :cols => 64, :rows => 2 %>
 		<div id="bike_description_count" class="field-counter"></div>
 	</div>
 	
@@ -33,7 +33,7 @@
 	<% if note %>
 	<p class="note-message"><%= note %></p>
 	<% end %>
-	
+
 	<div class="field with-label">
 		<p id="bike_main_photo_max" class="error"><%= t('bikes.views.form.validations.file_size') %></p>
 		<p id="bike_main_photo_regexp" class="error"><%= t('bikes.views.form.validations.file_name_format') %></p>

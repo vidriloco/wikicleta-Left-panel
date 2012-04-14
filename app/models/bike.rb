@@ -24,7 +24,9 @@ class Bike < ActiveRecord::Base
   
   validates_attachment_presence     :main_photo
   validates_attachment_content_type :main_photo, :content_type => %r{image/.*}
-                                    
+  
+  before_validation :validate_attachment_size
+  
   scope :most_popular, order('likes_count DESC')
   scope :all_from_user, lambda { |user| where("user_id = ?", user.id) } 
   
@@ -56,5 +58,14 @@ class Bike < ActiveRecord::Base
   def update_attributes_with_owner(params, owner)
     return self.update_attributes(params) if self.user = owner
     false
+  end
+  
+  private
+  
+  def validate_attachment_size
+    return if main_photo_file_size.nil?
+    if main_photo_file_size > 2.megabytes
+      self.errors.add(:base, I18n.t('bikes.views.form.validations.file_size'))
+    end
   end
 end

@@ -45,7 +45,7 @@
 
 <div class="field to-left <%= incident_types_for([:accident, :assault, :regulation_infraction]) %>">
 	<p id="incident_vehicle_identifier_regexp" class="error"><%= t('incidents.views.new.form.validations.vehicle_identifier') %></p>
-	<%= f.text_field :vehicle_identifier, :size => 20, :placeholder => t('incidents.views.new.form.vehicle_identifier') %>
+	<%= f.text_field :vehicle_identifier, :size => 30, :placeholder => t('incidents.views.new.form.vehicle_identifier') %>
 </div>
 <div style="clear: both;"></div>
 
