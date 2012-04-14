@@ -52,7 +52,7 @@ $(document).ready(function() {
 		{id: '#bike_kind', condition: 'not_empty' },
 		{id: '#bike_bike_brand_id', condition: 'not_empty' },
 		{id: '#bike_main_photo', condition: 'not_empty', type: 'file', overrideWhen: $.isDefined('.edit-bike') },
-		{id: '#bike_main_photo', condition: 'regexp', regexp: /^[\w\s\-\.]+\.(gif|png|jpeg|jpg)$/, type: 'file' }];
+		{id: '#bike_main_photo', condition: 'regexp', regexp: /^.*\.(gif|png|jpeg|jpg)$/i, type: 'file' }];
 			
 	ViewComponents.ValidForm.set('.bike-upload', validateFields, function() {
 			ViewComponents.Notification.put("<p class='notice top-message'>Espera por favor, guardando bici ... </p>", {delay: 60000, blocking: true});

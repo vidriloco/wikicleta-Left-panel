@@ -92,7 +92,7 @@ feature "Bike registration:" do
         click_on I18n.t('bikes.actions.save')
         page.should have_content I18n.t('bikes.views.form.validations.file_name')
         
-        page.attach_file('bike_main_photo', Rails.root+'spec/resources/bike&.jpg')
+        page.attach_file('bike_main_photo', Rails.root+'spec/resources/bike.zip')
         click_on I18n.t('bikes.actions.save')
         page.should have_content I18n.t('bikes.views.form.validations.file_name_format')
         
@@ -156,7 +156,7 @@ feature "Bike registration:" do
           fill_in 'bike_name', :with => "Diamante"
           fill_in 'bike_description', :with => "White bike, super light and foldable"
 
-          page.attach_file('bike_main_photo', Rails.root+'spec/resources/bike&.jpg')
+          page.attach_file('bike_main_photo', Rails.root+'spec/resources/bike.zip')
           click_on I18n.t('bikes.actions.update')
           page.should have_content I18n.t('bikes.views.form.validations.file_name_format')
 
