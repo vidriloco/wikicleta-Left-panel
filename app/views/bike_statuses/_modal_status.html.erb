@@ -1,0 +1,14 @@
+<div id="<%= status %>-modal" class="reveal-modal modalview-bar-relative-centered">
+	<a class="close-reveal-modal">&#215;</a>
+	<h2><%= t("bike_statuses.views.modal.#{status}.title") %></h2>
+	
+	<% if bike_status.persisted? %>
+		<%= form_for [bike, bike_status], :method => :put, :remote => true do |f| %>
+			<%= render :partial => "bike_statuses/#{status}_form", :locals => {:bike => bike, :f => f, :status => bike_status} %>
+		<% end %>
+	<% else %>
+		<%= form_for [bike, BikeStatus.new], :remote => true do |f| %>
+			<%= render :partial => "bike_statuses/#{status}_form", :locals => {:bike => bike, :f => f, :status => bike_status} %>
+		<% end %>
+	<% end %>
+</div>

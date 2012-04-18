@@ -4,8 +4,10 @@
  *= require shared/form.css
  *= require shared/bars.css
  *= require shared/notifications.css
+ *= require shared/icons.css
  *= require shared/comments.css
  *= require tipsy.css
+ *= require reveal.css
  *= require incidents.css
  *= require popover.css
 */
@@ -55,9 +57,23 @@
 		color: #404040;
 	}
 	
-	.status {
-		height: 20px;
+	ul.social-status {
+		margin: 0px;
 		
+		li { 
+			margin: 0px 5px 0px 0px !important;
+			text-transform: uppercase;
+			font-size: 10px;
+			padding: 0px !important;
+			
+			a {
+				font-weight: 500 !important;
+			}
+		}
+	}
+	
+	.status {
+		height: 20px;	
 		p {
 			a:hover {
 				text-decoration: underline;
@@ -66,11 +82,10 @@
 				color: black;
 			}
 			
-			vertical-align: 6px;
+			padding-top: 10px !important;
 			font-size: 12px;
 			display: inline-block;
 			margin: 0px;
-			margin-right: 15px;
 
 			.count {
 				padding: 2px;
@@ -94,10 +109,79 @@
 	}
 }
 
-#bike-comments {
-	width: 860px;
-	background-color: #E7E7E7;
+.bike-details, .bike-statuses, .bike-comments, .bike-description {
+	width: 680px;
 	padding: 20px;
+	padding-bottom: 10px;
+	background-color: white;
+	
+	.edit:hover {
+		background-color: #40A23E;
+		
+		a {
+			text-decoration: none !important;
+		}
+	}
+	
+	.edit {
+		margin: 0px;
+		font-size: 11px;
+		font-style: normal; 
+		background-color: #80B677;
+		display: inline-block;
+		padding: 2px 5px;
+		vertical-align: 5px;
+		
+		a {
+			font-weight: bold;
+			color: white;
+		}
+	 }
+}
+
+.bike-description {
+	background-color: #1A1A1A;
+	padding-bottom: 20px;
+	color: white;
+	font-size: 13px;
+	
+	.main {
+		text-align: center;
+		display: inline-block;
+		width: 76%;
+	}
+	
+	.status {
+		width: auto;
+		font-size: 14px;
+		background-color: #131313;
+		padding: 5px 15px 5px 10px;
+		display: inline-block;
+		
+		p {
+			padding: 0px;
+			margin: 0px;
+		}
+		
+		p.likes {
+			color: #FFA6A3;
+			.count {
+				padding-right: 5px;
+			}
+		}
+		
+		.heart {
+			margin-right: 10px;
+		}
+		
+		* {
+			display: inline-block !important;
+		}
+	}
+}
+
+.bike-comments {
+	background-color: #E7E7E7;
 	
 	h2 {
 		text-align: center;
@@ -145,41 +229,41 @@
 	border: 1px solid #8C8C8C;
 }
 
-#bike-details {
-	width: 860px;
-	background-color: white;
-	padding: 20px;
+.bike-photos {
+	width: 720px;
+	height: 370px;
 	
-	a.styled-link {
-		vertical-align: 6px;
-		margin-left: 25px;
-		margin-right: 45px;
-		color: #B6F3A7;
+	.info {
+		display: none;
+		position: relative;
+		top: -200px;
+		right: -170px;
+		width: 50%;
+		text-align: center;
+		background-color: rgba(255,255,255, 0.7);
+		padding: 7px;
+		color: #3E3E3E;
 		font-weight: bold;
-		font-size: 12px;
-		padding-right: 10px;
-	}
-	
-	.status {
-		height: 100%;
-		text-align:right;
-		display: inline-block;
-		background-color: #101010;
+		font-size: 13px;
+		border: 1px solid white;
 		
-		p {
-			color: #FFA09A;
-			font-size: 14px;
-			display: inline-block;
-			margin: 0px;
-			padding: 5px;
-			margin-right: 5px;
-			
-			.count {
-				padding: 2px;
-				font-weight: bold;
-			}
+		span {
+			margin-right: 15px;
+		}
+		
+		.brand {
+			text-transform: uppercase;
+		}
+		
+		a {
+			margin-left: 27px;
+			color: #3B8C39;
 		}
 	}
+}
+
+.bike-details {
+	padding-top: 10px;
 	
 	a:hover {
 		text-decoration: underline !important;
@@ -191,27 +275,63 @@
 	
 	h1 {
 		text-align: right;
-		color: #5C5C5C;
+		color: #2A2A2A;
 		margin-bottom: 5px;
 		margin-top: 0px;
 	}
 	
-	.photo {
-		text-align: center;	
-		margin: 20px auto 0 auto;
-	}
-	
-	.description {
-		margin-top: 20px;
-		font-size: 17px;
-		font-style: italic;
-		color: #6B6B6B;
-		text-align: center
-	}
-	
 	.owner {
-		border-bottom: 1px solid #E9E9E9;
 		text-align: right;
+	}
+}
+
+.bike-statuses {
+	
+	h2 {
+		padding: 0px;
+		margin: -10px 0px 10px 0px;
+	}
+	
+	.item {
+		padding: 10px;
+		padding-right: 0px;
+		font-size: 11px;
+		display: inline-block;
+		margin-right: 5px;
+		
+		.content {
+			margin-top: 10px;
+		}
+		
+		.concept {
+			background-color: #A9A9A9;
+			color: white;
+			font-weight: bold;
+			padding: 2px 8px;
+			margin-right: 15px;
+			margin-left: 0px !important;
+		}
+		
+		* { margin-right: 10px; }
+	}
+	
+	.statuses {
+		text-align: center;
+		margin-bottom: 13px;
+		
+		.on {
+			border: 2px solid #5BA347 !important;
+			
+			.concept {
+				background-color: #5BA347;
+			}
+		}
+		
+		.item {
+			border: 2px solid #DDDDDD;
+			text-align: center;
+		}
+		
 	}
 }
 
@@ -246,32 +366,6 @@
 		display: none !important;
 	}
 }
-
-.toolbox {
-	margin-top: 30px;
-	position: relative;
-	background: url('/assets/bar.png');
-	height: 31px;
-	float: right; 
-	right: -23px;
-	width: 265px;
-	
-	border-top-right-radius: 0px;
-	border-bottom-right-radius: 0px;
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
-	
-	-moz-border-top-right-radius: 0px;
-	-moz-border-bottom-right-radius: 0px;
-	-moz-border-top-left-radius: 5px;
-	-moz-border-bottom-left-radius: 5px;
-
-	-webkit-border-top-right-radius: 0px;
-	-webkit-border-bottom-right-radius: 0px;
-	-webkit-border-top-left-radius: 5px;
-	-webkit-border-bottom-left-radius: 5px;
-}
-
 
 .owner a {
 	color: #515151;

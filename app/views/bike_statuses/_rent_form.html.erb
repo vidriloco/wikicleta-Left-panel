@@ -1,0 +1,14 @@
+<div class="styled-form">
+	
+	<%= f.select :availability, boolean_options_for_select(status.availability), {}, :class => 'bike_statuses_availability' %>
+	
+	<%= f.hidden_field :concept, :value => Bike.category_for(:statuses, :rent) %>
+	
+	<div class="dependent-fields <%= "hidden" unless status.availability %>">
+		<h3><%= t('bike_statuses.views.form.rent_disclaimer') %></h3>
+		<%= currency_field_for(f, :hour_cost, status.hour_cost, t('bike_statuses.views.form.hour_cost')) %>
+		<%= currency_field_for(f, :day_cost, status.day_cost, t('bike_statuses.views.form.day_cost')) %>
+		<%= currency_field_for(f, :month_cost, status.month_cost, t('bike_statuses.views.form.month_cost')) %>
+	</div>
+	<%= f.submit t('actions.save') %>
+</div>

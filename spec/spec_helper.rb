@@ -51,10 +51,11 @@ Spork.prefork do
       DatabaseCleaner.clean
     end
     
-    Capybara.javascript_driver = :selenium
-    Capybara.register_driver :selenium do |app|
-      Capybara::Selenium::Driver.new(app, :browser => :firefox)
-    end
+    Capybara.javascript_driver = :webkit
+    #Capybara.javascript_driver = :selenium
+    #Capybara.register_driver :selenium do |app|
+    #  Capybara::Selenium::Driver.new(app, :browser => :firefox)
+    #end
     Capybara.ignore_hidden_elements = false
     
     # For Spork

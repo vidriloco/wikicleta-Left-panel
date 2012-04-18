@@ -75,6 +75,10 @@ es_MX:
     yes: "Si"
     no: "No"
   
+  currency:
+    symbol:
+      mexico: "MXN"
+  
   menu:
     login: "Entrar"
     sign_up: "Registrarse"

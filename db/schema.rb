@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120319210639) do
+ActiveRecord::Schema.define(:version => 20120415183857) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                             :default => "", :null => false
@@ -52,6 +52,21 @@ ActiveRecord::Schema.define(:version => 20120319210639) do
     t.datetime "updated_at"
   end
 
+  create_table "bike_statuses", :force => true do |t|
+    t.integer  "concept",      :default => 0
+    t.boolean  "availability", :default => false
+    t.integer  "bike_id"
+    t.boolean  "only_friends", :default => true
+    t.float    "hour_cost"
+    t.float    "day_cost"
+    t.float    "month_cost"
+    t.float    "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bike_statuses", ["bike_id", "concept"], :name => "bike_statuses_idx", :unique => true
+
   create_table "bikes", :force => true do |t|
     t.string   "name"
     t.string   "description"
@@ -59,15 +74,12 @@ ActiveRecord::Schema.define(:version => 20120319210639) do
     t.integer  "bike_brand_id"
     t.string   "frame_number"
     t.integer  "user_id"
+    t.float    "weight"
     t.string   "main_photo_file_name"
     t.string   "main_photo_content_type"
     t.integer  "main_photo_file_size"
     t.datetime "main_photo_updated_at"
     t.integer  "likes_count",                            :default => 0
-    t.integer  "sharing_mode"
-    t.boolean  "is_available"
-    t.float    "sharing_fee"
-    t.float    "weight"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.point    "coordinates",             :limit => nil,                :srid => 4326

@@ -9,6 +9,10 @@ es_MX:
         frame_number: "Número de cuadro"
   bikes:
     categories:
+      statuses:
+        share: "Préstamo"
+        rent: "Renta"
+        sell: "Venta"  
       types:
         urban: "Urbana"
         mountain: "Montaña"
@@ -19,6 +23,7 @@ es_MX:
         children: "Para niños"
         bmx: "BMX"
         unicycle: "Monociclo" 
+        foldable: "Plegable"
         other: "Otra"
       locks:
         none: "Ninguno"
@@ -38,7 +43,7 @@ es_MX:
     messages:
       saved: "¡Tu bici ha sido añadida a la Wikicleta!"
       updated: "Los cambios a tu bici han sido guardados"
-      confirm_delete: "¿Estas seguro de querer eliminar esta bici?"
+      confirm_delete: "¿Estás seguro de querer eliminar esta bici?"
       deleted: "Bici eliminada"
     views:
       errors:
@@ -73,8 +78,11 @@ es_MX:
       new:
         title: "Nueva bici"
       show:
+        photos: 
+          show: "Ver fotos"
+          add: "Añadir fotos"
         owned_by: "de "
-        modify: "Editar"
+        modify: "Modificar bici"
         likes:
           some: "chuleadas"
           one: "chuleada"

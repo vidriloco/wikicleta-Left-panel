@@ -1,0 +1,31 @@
+<div id="<%= status %>-box" class="item rounded-5 <%= "on" if bike_status.is_available? %>">
+	<span class="concept rounded-10"><%= Bike.humanized_category_for(:statuses, status) %></span>
+	<% if current_user_owns_bike?(bike) %>
+		<%= link_to '', 'javascript:void(0);', :class => "reveals-#{status} edit-glyph" %>
+	<% end %>
+	
+	<div class="content">
+		<% unless bike_status.is_available? %>
+			<%= t('bike_statuses.views.index.status.not_available') %>
+		<% else %>
+			<% if status == :share %>
+				<%= t('bike_statuses.views.index.share.only_friends')[bike_status.only_friends] %>
+			<% elsif status == :rent %>
+				<% if bike_status.hour_cost.nil? && bike_status.day_cost.nil? && bike_status.month_cost.nil? %>
+					<%= t('bike_statuses.views.index.rent.costs_not_set') %>
+				<% else %>	
+					<%= cost_for_bike_rent(:hour_cost, bike_status) %>
+					<%= cost_for_bike_rent(:day_cost, bike_status) %>
+					<%= cost_for_bike_rent(:month_cost, bike_status) %>
+				<% end %>
+			<% elsif status == :sell %>
+				<% if bike_status.price.nil? %>
+					<%= t('bike_statuses.views.index.sell.price_not_set') %>
+				<% else %>
+					<%= bike_price(bike_status) %>
+				<% end %>
+			<% end %>
+		<% end %>
+	</div>
+
+</div>

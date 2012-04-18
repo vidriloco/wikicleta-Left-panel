@@ -59,6 +59,18 @@ module ApplicationHelper
     end
   end
   
+  def boolean_options_for_select(selected)
+    selected = selected ? "1" : "0"
+    options_for_select({ t('common_answers')[true] => 1, t('common_answers')[false] => 0}, selected)
+  end
+  
+  def currency_field_for(f, attribute, value, placeholder)
+    out = "<span class='prefix'>$</span>" 
+		out += f.text_field(attribute, :value => value, :placeholder => placeholder, :class => "inlined")
+		out += "<span class='postfix'>#{t('currency.symbol.mexico')}</span><br/>"
+		out.html_safe
+  end
+  
   private
   def current_action_matches?(action)
     {:class => "selected"} if action == controller.action_name

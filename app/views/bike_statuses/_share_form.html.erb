@@ -1,0 +1,9 @@
+<div class="styled-form">	
+		<%= f.select :availability, boolean_options_for_select(status.availability), {}, :class => 'bike_statuses_availability' %>
+		<%= f.hidden_field :concept, :value => Bike.category_for(:statuses, :share) %>
+		<div class="dependent-fields <%= "hidden" unless status.availability %>">
+			<%= f.check_box :only_friends, :class => 'inlined' %>
+			<%= f.label :only_friends, t('bike_statuses.views.form.share.only_friends'), :class => 'postfix postfix-min' %>
+		</div>
+	<%= f.submit t('actions.save') %>
+</div>

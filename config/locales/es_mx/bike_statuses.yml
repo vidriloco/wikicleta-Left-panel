@@ -1,0 +1,42 @@
+es_MX:
+  bike_statuses:
+    messages:
+      update:
+        success: "Cambios a %{status} guardados"
+    views:
+      preview:
+        available:
+          yes: "Disponible"
+          false: "No disponible"
+      form:
+        rent_disclaimer: "Solo llena el costo para los periodos que quieras rentar tu bici"
+        price: "Precio"
+        hour_cost: "Costo por hora"
+        day_cost: "Costo diario"
+        month_cost: "Costo mensual"
+        share:
+          enable: "Si, quiero prestar esta bici"
+          only_friends: "Solo a amigos"
+      index:
+        title: "La bici social"
+        modify: "Cambiar"
+        status:
+          not_available: "No disponible"
+        sell:
+          price_not_set: "Sin precio establecido. Preguntar"
+        rent:
+          hour_cost: "Costo por hora"
+          day_cost: "Costo por día"
+          month_cost: "Costo por mes"
+          costs_not_set: "Aún no hay costos establecidos"
+        share:
+          only_friends: 
+            yes: "Disponible sólo para cuates"
+            false: "Disponible para todos"
+      modal:
+        share:
+          title: "¿Prestas tu bici?"
+        rent:
+          title: "¿Rentas tu bici?"
+        sell:
+          title: "¿Vendes tu bici?"

@@ -31,7 +31,7 @@ group :test do
   gem 'gherkin'
   gem 'autotest'
 	gem 'delorean'
-	# gem 'capybara-webkit'
+	gem 'capybara-webkit'
   gem 'ZenTest', "~> 4.4.2"
 	# macos
 	gem 'autotest-fsevent'

@@ -124,7 +124,7 @@ a.back {
 }
 
 .inlined {
-	display: inline-block;
+	display: inline-block !important;
 }
 
 .separator {
@@ -317,3 +317,7 @@ ul li, ul li * { display: inline-block }
 .simplePagerContainer ul li.currentPage a{color:#999999;cursor:default;}
 .simplePagerContainer ul li:first-child a{border-left-width:1px;-webkit-border-radius:3px 0 0 3px;-moz-border-radius:3px 0 0 3px;border-radius:3px 0 0 3px;}
 .simplePagerContainer ul li:last-child a{-webkit-border-radius:0 3px 3px 0;-moz-border-radius:0 3px 3px 0;border-radius:0 3px 3px 0;}
+
+.modalview-bar-relative-centered {
+	margin-left: -150px !important;
+}

@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require jquery-ui-min
 //= require jquery.tipsy
+//= require jquery.reveal
 //= require quickpager.jquery
 //= require view_components/notification.view
 //= require underscore

@@ -118,6 +118,24 @@
 		display: inline-block;
 	}
 	
+	.prefix {
+		margin-right: 10px !important;
+	}
+	
+	.postfix {
+		margin-left: 10px !important;
+	}
+	
+	.postfix-min {
+		margin-left: 5px !important;
+	}
+	
+	.postfix, .prefix {
+		font-weight: bold;
+		display: inline-block;
+		color: #6A6A6A;
+	}
+	
 	input[type=submit] { 
 		padding: 5px !important;
 		margin-top: 30px !important;

@@ -150,13 +150,23 @@ describe BikesController do
     
     before(:each) do
       @bike = Bike.new
+      @statuses = {}
     end
     
-    it "should fetch a bike and make it available to the view" do
+    it "should fetch a bike and assign it to bike" do
       Bike.should_receive(:find).with("1") { @bike }
       get :show, :id => "1"
     
       assigns(:bike).should == @bike
+      response.should be_successful
+    end
+    
+    it "should fetch a bike statuses and assign them to statuses" do
+      Bike.stub(:find) { @bike }
+      BikeStatus.should_receive(:find_all_for_bike) { @statuses }
+      get :show, :id => "1"
+      
+      assigns(:statuses).should == @statuses
       response.should be_successful
     end
   

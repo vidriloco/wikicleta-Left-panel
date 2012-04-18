@@ -1,0 +1,11 @@
+<div class="statuses">
+	
+	<div id="statuses-listing">
+		<% Bike.category_list_for(:statuses).values.each do |status| %>
+			<%= render :partial => 'bike_statuses/box_status', :locals => { :status => status, :bike => @bike, :bike_status => @statuses[status] } %>
+			<%= render :partial => 'bike_statuses/modal_status', :locals => { :status => status, :bike => @bike, :bike_status => @statuses[status] } %>	
+		<% end %>
+	</div>
+</div>
+
+     

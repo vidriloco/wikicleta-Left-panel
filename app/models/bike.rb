@@ -5,13 +5,14 @@ class Bike < ActiveRecord::Base
   acts_as_commentable
   
   has_attached_file :main_photo, 
-                    :styles => { :medium => "250", :big => "800", :small => "300x250" },
-                    :storage => :cloud_files,
-                    :container => (Rails.env == "production") ? "wikicleta" : "wikicleta_other",
-                    :cloudfiles_credentials => "#{Rails.root}/config/rackspace_cloudfiles.yml",
-                    :ssl => true
+                    :styles => { :medium => "250", :big => "720x370#", :small => "300x250#" }#,
+#                    :storage => :cloud_files,
+#                    :container => (Rails.env == "production") ? "wikicleta" : "wikicleta_other",
+#                    :cloudfiles_credentials => "#{Rails.root}/config/rackspace_cloudfiles.yml",
+#                    :ssl => true
   
   has_many :user_like_bikes, :dependent => :destroy
+  has_many :bike_statuses, :dependent => :destroy
   #has_many :tweaks
   #has_many :borrows
   #has_many :usage_days

@@ -1,28 +1,37 @@
-<div id="bike-details" class="sheet shadow-light centered">
-	<%= link_to t('actions.back_arrow').html_safe, bikes_path, :class => 'back' %>
-	<h1><%= @bike.name %></h1>
-	<div class="owner">
-		<%= t('bikes.views.show.owned_by') %><%= contact_for(@bike) %>
+<div id="<%= @bike.id %>">
+	<div class="bike-details shadow-light centered">
+		<%= link_to t('actions.back_arrow').html_safe, bikes_path, :class => 'back' %>
+		<div class="to-right">
+			<h1 class="inlined"><%= @bike.name %></h1>
+			<% if current_user_owns_bike?(@bike) %>
+				<p class="edit rounded-10"><%= link_to t('bikes.views.show.modify'), edit_bike_path(@bike) %></p>
+			<% end %>
+		</div>
+		<div class="clear"></div>
+		<div class="owner">
+			<%= t('bikes.views.show.owned_by') %><%= contact_for(@bike) %>
+		</div>
+	</div>
+
+	<div class="bike-photos shadow-light centered">
+		<%= image_tag @bike.main_photo.url(:big) %>
+		<div class="info shadow-light rounded-10"><%= details_for(@bike) %></div>
 	</div>
 	
-	<div id="<%= @bike.id %>" class="toolbox shadow-light">
-		<% if current_user && current_user.owns_bike?(@bike) %>
-			<%= link_to t('bikes.views.show.modify'), edit_bike_path(@bike), :class => 'styled-link' %>
-		<% end %>
-		<div class="status">
+	<div class="bike-description shadow-light centered">
+		<p class="main">
+			<%= @bike.description %>
+		</p>
+		<div class="status rounded-10">
 			<%= render :partial => 'bikes/likes_count', :locals => {:bike => @bike } %>
 		</div>
 	</div>
-	<div style="clear:right;"></div>
-	<div class="description">
-		<%= @bike.description %>
-	</div>
 	
-	<div class="photo">
-		<%= image_tag @bike.main_photo.url(:big), :class => "main" %>
+	<div class="bike-statuses shadow-light centered">
+		<%= render :partial => 'bike_statuses/index', :locals => { :bike => @bike } %>
 	</div>
-</div>
-<div id="p1"></div>
-<div id="bike-comments" class="sheet shadow-light centered">
-	<%= render :partial => 'comments/index', :locals => { :commentable => @bike } %>
+
+	<div class="bike-comments sheet shadow-light centered">
+		<%= render :partial => 'comments/index', :locals => { :commentable => @bike } %>
+	</div>
 </div>

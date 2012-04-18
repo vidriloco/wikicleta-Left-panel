@@ -29,8 +29,12 @@ module Bike::Categories
     end
     
     private
+    def statuses
+      { 1 => :share, 2 => :rent, 3 => :sell }
+    end
+    
     def types
-      { 1 => :urban, 2 => :mountain, 3 => :route, 4 => :fixie, 5 => :tandem, 6 => :cargo, 7 => :children, 8 => :bmx, 9 => :unicycle, 10 => :other}
+      { 1 => :urban, 2 => :mountain, 3 => :route, 4 => :fixie, 5 => :tandem, 6 => :cargo, 7 => :children, 8 => :bmx, 9 => :unicycle, 10 => :foldable, 11 => :other}
     end
     
     def locks

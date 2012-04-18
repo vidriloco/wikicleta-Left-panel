@@ -86,14 +86,15 @@ Ciudadio::Application.routes.draw do
       get :popular
       get :mine
     end
+    
+    resources :bike_statuses, :controller => 'bikes/statuses', :only => [:create, :update]
   end
+  post    '/bikes/:id/like' => 'bikes/likes#create'
+  delete  '/bikes/:id/like' => 'bikes/likes#destroy'
   
   get '/welcome' => 'welcome#index'
   get '/about' => 'welcome#about'
   
-  post '/bikes/:id/like' => 'bikes/likes#create'
-  delete '/bikes/:id/like' => 'bikes/likes#destroy'
-
   resources :comments, :only => [:create, :destroy]
 
 #  get "/places/:id" => 'places#show', :as => "place"
