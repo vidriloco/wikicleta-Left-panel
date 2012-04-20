@@ -1,0 +1,80 @@
+// Place all the styles related to the pictures controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.reveals-picture-manager {
+	display: inline-block;
+	width: 26px;
+	height: 20px;
+	background: url(/assets/camera.png);
+	position: relative;
+	left: 50px;
+	top: 4px;
+}
+
+#picture-manager-modal {
+	
+	#container {
+		padding: 0px;
+		margin: 15px 0px 0px 0px;
+		display: block !important;
+		height: auto !important;
+		
+		.actions {
+			text-align: center;
+			width: 500px;
+			a {
+				font-size: 12px;
+				margin-right: 10px;
+			}
+
+		}
+	}
+	
+	#filelist {
+		padding: 20px;
+		padding-bottom: 0px;
+		width: 500px;
+		
+		a {
+			width: 60px;
+			display: inline-block;
+		}
+		
+		a.delete-file {
+			color: #B43535;
+		}
+		
+		a.uploading {
+			color: #4F81C4;
+		}
+		
+		a.completed {
+			font-weight: bold;
+			color: #68B64F;
+		}
+	}
+	
+	h2 {
+		margin: 5px;
+	}
+	
+	.file {
+		display: block;
+		font-size: 12px;
+		margin-top: 4px;
+		.name {
+			display: inline-block;
+			font-weight: bold;
+			width: 300px;
+		}
+		.size {
+			font-style: italic;
+		}
+		
+		.error {
+			display: inline-block;
+			color: #932828;
+		}
+	}
+}

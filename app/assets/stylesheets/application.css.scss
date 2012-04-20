@@ -10,6 +10,8 @@
  *= require reveal.css
  *= require incidents.css
  *= require popover.css
+ *= require colorbox.css
+ *= require pictures.css
 */
 
 #container {
@@ -109,12 +111,7 @@
 	}
 }
 
-.bike-details, .bike-statuses, .bike-comments, .bike-description {
-	width: 680px;
-	padding: 20px;
-	padding-bottom: 10px;
-	background-color: white;
-	
+.bike-details, .bike-statuses, .bike-comments, .bike-description, .bike-photos {
 	.edit:hover {
 		background-color: #40A23E;
 		
@@ -134,9 +131,16 @@
 		
 		a {
 			font-weight: bold;
-			color: white;
+			color: white !important;
 		}
-	 }
+	}
+}
+
+.bike-details, .bike-statuses, .bike-comments, .bike-description {
+	width: 680px;
+	padding: 20px;
+	padding-bottom: 10px;
+	background-color: white;
 }
 
 .bike-description {
@@ -232,6 +236,7 @@
 .bike-photos {
 	width: 720px;
 	height: 370px;
+	background-color: #5D5D5D;
 	
 	.info {
 		display: none;
@@ -241,14 +246,17 @@
 		width: 50%;
 		text-align: center;
 		background-color: rgba(255,255,255, 0.7);
-		padding: 7px;
 		color: #3E3E3E;
 		font-weight: bold;
 		font-size: 13px;
 		border: 1px solid white;
 		
-		span {
+		p {
 			margin-right: 15px;
+			display: inline-block;
+			a {
+				margin-left: 14px;
+			}
 		}
 		
 		.brand {
@@ -256,8 +264,8 @@
 		}
 		
 		a {
-			margin-left: 27px;
-			color: #3B8C39;
+			margin-left: 15px;
+			color: #4A8237;
 		}
 	}
 }

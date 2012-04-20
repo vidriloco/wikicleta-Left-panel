@@ -14,7 +14,12 @@
 	</div>
 
 	<div class="bike-photos shadow-light centered">
-		<%= image_tag @bike.main_photo.url(:big) %>
+		<%= render 'pictures/index' %>
+		<% if @bike.front_picture.nil? %>
+			<%= image_tag 'no_bike.png' %>
+		<% else %>
+			<%= image_tag @bike.front_picture.image.preview.url %>
+		<% end %>
 		<div class="info shadow-light rounded-10"><%= details_for(@bike) %></div>
 	</div>
 	
@@ -35,3 +40,4 @@
 		<%= render :partial => 'comments/index', :locals => { :commentable => @bike } %>
 	</div>
 </div>
+

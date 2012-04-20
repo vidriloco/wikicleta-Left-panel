@@ -5,6 +5,7 @@
 //= require view_components/form.validator
 //= require comments
 //= require jquery.popover
+//= require pictures
 
 $(document).ready(function() {
 	// TODO: Make it work with pathjs
@@ -50,9 +51,7 @@ $(document).ready(function() {
 		{id: '#bike_name', condition: 'not_empty' },
 		{id: '#bike_description', condition: 'not_empty' },
 		{id: '#bike_kind', condition: 'not_empty' },
-		{id: '#bike_bike_brand_id', condition: 'not_empty' },
-		{id: '#bike_main_photo', condition: 'not_empty', type: 'file', overrideWhen: $.isDefined('.edit-bike') },
-		{id: '#bike_main_photo', condition: 'regexp', regexp: /^.*\.(gif|png|jpeg|jpg)$/i, type: 'file' }];
+		{id: '#bike_bike_brand_id', condition: 'not_empty' }];
 			
 	ViewComponents.ValidForm.set('.bike-upload', validateFields, function() {
 			ViewComponents.Notification.put("<p class='notice top-message'>Espera por favor, guardando bici ... </p>", {delay: 80000, blocking: true});
@@ -71,6 +70,11 @@ $(document).ready(function() {
 	$('.reveals-sell').live('click', function(e) {
 		e.preventDefault();
 		$('#sell-modal').reveal();
+	});
+	
+	$('.reveals-picture-manager').live('click', function(e) {
+		e.preventDefault();
+		$('#picture-manager-modal').reveal();
 	});
 	
 	$('.bike_statuses_availability').live('change', function() {

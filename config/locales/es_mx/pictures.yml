@@ -1,0 +1,7 @@
+es_MX:
+  pictures:
+    manager:
+      title: "Fotos de esta bici"
+      files:
+        select: "Seleccionar"
+        upload: "Subir"

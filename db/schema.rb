@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120415183857) do
+ActiveRecord::Schema.define(:version => 20120419042815) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                             :default => "", :null => false
     t.string   "encrypted_password", :limit => 128, :default => "", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
   end
 
   add_index "admins", ["email"], :name => "admins_idx", :unique => true
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(:version => 20120415183857) do
     t.datetime "end_date"
     t.integer  "place_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "authorizations", :force => true do |t|
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(:version => 20120415183857) do
     t.integer  "user_id"
     t.string   "secret"
     t.string   "token"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "authorizations", ["provider", "uid"], :name => "authorizations_provider_uid_idx", :unique => true
@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(:version => 20120415183857) do
 
   create_table "bike_brands", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "bike_statuses", :force => true do |t|
@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(:version => 20120415183857) do
     t.float    "day_cost"
     t.float    "month_cost"
     t.float    "price"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   add_index "bike_statuses", ["bike_id", "concept"], :name => "bike_statuses_idx", :unique => true
@@ -75,14 +75,11 @@ ActiveRecord::Schema.define(:version => 20120415183857) do
     t.string   "frame_number"
     t.integer  "user_id"
     t.float    "weight"
-    t.string   "main_photo_file_name"
-    t.string   "main_photo_content_type"
-    t.integer  "main_photo_file_size"
-    t.datetime "main_photo_updated_at"
-    t.integer  "likes_count",                            :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.point    "coordinates",             :limit => nil,                :srid => 4326
+    t.integer  "likes_count",                  :default => 0
+    t.integer  "main_picture"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.point    "coordinates",   :limit => nil,                                :srid => 4326
   end
 
   create_table "comments", :force => true do |t|
@@ -90,8 +87,8 @@ ActiveRecord::Schema.define(:version => 20120415183857) do
     t.integer  "commentable_id"
     t.string   "commentable_type"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
@@ -109,17 +106,27 @@ ActiveRecord::Schema.define(:version => 20120415183857) do
     t.time     "final_hour"
     t.integer  "user_id"
     t.integer  "bike_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.point    "coordinates",        :limit => nil, :srid => 4326
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+    t.point    "coordinates",        :limit => nil,                 :srid => 4326
+  end
+
+  create_table "pictures", :force => true do |t|
+    t.string   "name"
+    t.string   "caption"
+    t.string   "image"
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "place_comments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "place_id"
     t.string   "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "places", :force => true do |t|
@@ -133,9 +140,9 @@ ActiveRecord::Schema.define(:version => 20120415183857) do
     t.integer  "recommendations_count",                  :default => 0
     t.integer  "photos_count",                           :default => 0
     t.integer  "comments_count",                         :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.point    "coordinates",             :limit => nil,                :srid => 4326
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
+    t.point    "coordinates",             :limit => nil,                                :srid => 4326
   end
 
   create_table "recommendations", :force => true do |t|
@@ -143,8 +150,8 @@ ActiveRecord::Schema.define(:version => 20120415183857) do
     t.integer  "place_id"
     t.boolean  "is_owner",    :default => false
     t.boolean  "is_verified", :default => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "street_mark_rankings", :force => true do |t|
@@ -154,8 +161,8 @@ ActiveRecord::Schema.define(:version => 20120415183857) do
     t.integer  "aspect_2"
     t.integer  "aspect_3"
     t.integer  "aspect_4"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   add_index "street_mark_rankings", ["street_mark_id", "user_id"], :name => "street_mark_rankings_idx", :unique => true
@@ -163,16 +170,16 @@ ActiveRecord::Schema.define(:version => 20120415183857) do
   create_table "street_marks", :force => true do |t|
     t.string      "name"
     t.integer     "user_id"
-    t.datetime    "created_at"
-    t.datetime    "updated_at"
-    t.line_string "segment_path", :limit => nil, :srid => 4326
+    t.datetime    "created_at",                  :null => false
+    t.datetime    "updated_at",                  :null => false
+    t.line_string "segment_path", :limit => nil,                 :srid => 4326
   end
 
   create_table "user_like_bikes", :force => true do |t|
     t.integer  "user_id"
     t.integer  "bike_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "user_like_bikes", ["user_id", "bike_id"], :name => "uniqueness_likes_idx", :unique => true
@@ -192,8 +199,8 @@ ActiveRecord::Schema.define(:version => 20120415183857) do
     t.string   "username"
     t.text     "bio"
     t.string   "personal_page"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

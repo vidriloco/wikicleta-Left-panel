@@ -5,7 +5,13 @@
 		<div class="owner">
 			<%= t('bikes.views.show.owned_by') %><%= contact_for(bike) %><% sharing_for(bike) %>
 		</div>
-		<div class="photo"><%= image_tag bike.main_photo.url(:medium), :class => "main" %></div>
+		<div class="photo">
+			<% if bike.front_picture.nil? %>
+				<%= link_to image_tag('thumb_no_bike.png'), bike_path(bike) %>
+			<% else %>
+				<%= link_to image_tag(bike.front_picture.image.thumb.url), bike_path(bike) %>
+			<% end %>
+		</div>
 	</div>
 	<div class="status">
 		<p class="to-left">

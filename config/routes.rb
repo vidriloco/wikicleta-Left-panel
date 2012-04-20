@@ -87,6 +87,8 @@ Ciudadio::Application.routes.draw do
       get :mine
     end
     
+    resources :pictures, :only => [:index, :create, :destroy]
+    
     resources :bike_statuses, :controller => 'bikes/statuses', :only => [:create, :update]
   end
   post    '/bikes/:id/like' => 'bikes/likes#create'
@@ -96,7 +98,8 @@ Ciudadio::Application.routes.draw do
   get '/about' => 'welcome#about'
   
   resources :comments, :only => [:create, :destroy]
-
+  
+  
 #  get "/places/:id" => 'places#show', :as => "place"
 #  get "/places/edit/:id" => 'places#edit', :as => "edit_place"  
   

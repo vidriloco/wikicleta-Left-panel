@@ -8,16 +8,10 @@ class CreateBikes < ActiveRecord::Migration
       t.string      :frame_number
       t.integer     :user_id
       t.float       :weight
-      
-      t.string      :main_photo_file_name
-      t.string      :main_photo_content_type
-      t.integer     :main_photo_file_size
-      t.datetime    :main_photo_updated_at
-      
-      t.integer     :likes_count, :default => 0
-      
       t.point       :coordinates, :srid => 4326, :with_z => false
       
+      t.integer     :likes_count, :default => 0
+      t.integer     :main_picture
       t.timestamps
     end
   end

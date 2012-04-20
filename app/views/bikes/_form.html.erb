@@ -28,20 +28,4 @@
 		<%= f.label :bike_brand, t('bikes.views.form.brand') %>
 		<%= f.select :bike_brand_id, options_from_collection_for_select(BikeBrand.ordered, :id, :name, @bike.bike_brand_id), :include_blank => true %>
 	</div>
-	<br/>
-	
-	<% if note %>
-	<p class="note-message"><%= note %></p>
-	<% end %>
-
-	
-	<div class="field with-label">
-		<p class="note"><%= t('bikes.views.form.notes.file_size') %></p>
-		
-		<p id="bike_main_photo_max" class="error"><%= t('bikes.views.form.validations.file_size') %></p>
-		<p id="bike_main_photo_regexp" class="error"><%= t('bikes.views.form.validations.file_name_format') %></p>
-		<p id="bike_main_photo_not_empty" class="error"><%= t('bikes.views.form.validations.file_name') %></p>
-		<%= f.label :main_photo, t('bikes.views.form.main_photo') %>
-		<%= f.file_field :main_photo %>
-	</div>
 </div>

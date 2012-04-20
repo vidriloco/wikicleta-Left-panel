@@ -28,8 +28,10 @@ module BikesHelper
   end
   
   def details_for(bike)
-    photos_link = link_to(t('bikes.views.show.photos.show'), 'javascript:void(0);')
-    "<span class='kind'>#{Bike.humanized_category_for(:types, Bike.first.kind)}</span><span class='brand'>#{bike.brand}</span>#{photos_link}".html_safe
+    out = "<p class='kind'>#{Bike.humanized_category_for(:types, bike.kind)}</p><p class='brand'>#{bike.brand}</p>"
+    out += link_to(t('bikes.views.show.photos.show'), 'javascript:void(0);', :class => 'open-gallery') unless bike.pictures.empty?
+    out += link_to("", 'javascript:void(0);', :class => 'reveals-picture-manager') if user_signed_in?
+    out.html_safe
   end
 
   def current_user_owns_bike?(bike)
