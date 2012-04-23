@@ -5,9 +5,32 @@
 //= require view_components/form.validator
 //= require comments
 //= require jquery.popover
-//= require pictures
+
+// For pictures
+//= require common/pictures_base
+//= require sections/pictures
 
 $(document).ready(function() {
+	
+	if($.currentSectionIs('bikes'))  {
+		
+		var BikesRouter = Backbone.Router.extend({
+
+			routes: {
+				".*"													: "index",
+				"management/uploads"					: "manageUploads",
+				"management/uploaded"					: "manageUploaded"
+			},
+			
+			index: 						Sections.Pictures.index,
+			manageUploads: 		Sections.Pictures.manageUploads,
+			manageUploaded:   Sections.Pictures.manageUploaded
+		});
+		window.router = new BikesRouter();
+		Backbone.history.start({pushState : false});
+	}
+	
+	
 	// TODO: Make it work with pathjs
 	var hashId = 'bike-'+window.location.hash.split("#")[1];
 	if ( $.isDefined("#"+hashId) ) {
@@ -50,12 +73,9 @@ $(document).ready(function() {
 	var validateFields = [
 		{id: '#bike_name', condition: 'not_empty' },
 		{id: '#bike_description', condition: 'not_empty' },
+		{id: "#bike_weight", condition: "regexp", regexp: /^\d{1,2}(\.*\d+)?$/ },
 		{id: '#bike_kind', condition: 'not_empty' },
 		{id: '#bike_bike_brand_id', condition: 'not_empty' }];
-			
-	ViewComponents.ValidForm.set('.bike-upload', validateFields, function() {
-			ViewComponents.Notification.put("<p class='notice top-message'>Espera por favor, guardando bici ... </p>", {delay: 80000, blocking: true});
-	});
 	
 	$('.reveals-share').live('click', function(e) {
 		e.preventDefault();
@@ -70,11 +90,6 @@ $(document).ready(function() {
 	$('.reveals-sell').live('click', function(e) {
 		e.preventDefault();
 		$('#sell-modal').reveal();
-	});
-	
-	$('.reveals-picture-manager').live('click', function(e) {
-		e.preventDefault();
-		$('#picture-manager-modal').reveal();
 	});
 	
 	$('.bike_statuses_availability').live('change', function() {

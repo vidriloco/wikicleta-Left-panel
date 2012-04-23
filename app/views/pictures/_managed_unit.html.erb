@@ -1,0 +1,21 @@
+<div id="picture-<%= picture.id %>" class="editable-picture">
+	<%= image_tag picture.image.mini_thumb.url, :class => "centered" %>
+	
+	<p class="edit-me" data-url="<%= change_caption_picture_path(picture) %>"><%= picture.caption.blank? ? t('pictures.manager.picture.without_caption') : picture.caption %></p>
+	
+	<div class="option rounded-5 centered">
+		<div>
+			<% if picture.main_picture? %>
+				<span class="main"><%= t('pictures.manager.picture.is_main') %></span>
+			<% else %>
+				<%= link_to t('pictures.manager.actions.set_main'), set_main_picture_path(picture), :method => :put, :remote => true, :class => "set-as-main-picture" %>
+			<% end %>
+			<%= link_to t('pictures.manager.actions.delete'), "javascript:void(0);", :class => "triggers-confirmation" %>
+		</div>
+		<div class="confirmation">			
+			<span class="message"><%= t('pictures.manager.messages.delete.confirm')%></span>
+			<%= link_to t('common_answers')[true], picture_path(picture), :remote => true, :method => :delete, :class => "accepts" %>
+			<%= link_to t('common_answers')[false], 'javascript:void(0);', :class => "declines" %>
+		</div>
+	</div>
+</div>

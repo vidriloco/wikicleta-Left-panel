@@ -58,11 +58,13 @@ feature "Bike likes and details:" do
       sleep 5
       comment_id = Comment.first.id
       page.should have_content "Una bici muy divertida y ligera"
-      within("#com-#{comment_id}") do
-        click_on I18n.t('comments.actions.delete')
-      end
       
-      page.driver.browser.switch_to.alert.accept
+      accept_confirmation_for do 
+        within("#com-#{comment_id}") do
+          click_on I18n.t('comments.actions.delete')
+        end
+      end
+            
       page.should_not have_content "Una bici muy divertida y ligera"
     end
     

@@ -1,0 +1,27 @@
+<div id="picture-manager-modal" class="reveal-modal modalview-bar-relative-centered">
+	<a class="close-reveal-modal">&#215;</a>
+	<h2><%= t("pictures.manager.title") %></h2>
+	<div id="menu"></div>
+	<div class="clear"></div>
+	<div class="separator"></div>
+
+	<div id="container"></div>
+	
+	<div id="origin" class="hidden">
+		<%= render 'pictures/sections' %>
+		<%= render 'pictures/uploads' %>
+		<%= render :partial => 'pictures/uploaded', :locals => {:pictures => bike.pictures} %>
+		
+		<script>
+				// Misbehaving Gallery
+				// TODO: Make it work from external js file as common	
+				var gallery = $('a[rel=gallery]').colorbox({ transition: 'elastic', maxWidth: "1300px", maxHeight: "700px" });
+			
+				$('a.open-gallery').click(function(e) {
+					e.preventDefault();
+					gallery.eq(0).click();
+					gallery.resize();
+				});
+		</script>
+	</div>
+</div>

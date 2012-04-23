@@ -1,7 +1,29 @@
 es_MX:
   pictures:
     manager:
-      title: "Fotos de esta bici"
+      title: "Añadir o quitar fotos"
+      instruction: "Selecciona una o más fotos para añadir"
+      no_pictures: "No has subido fotos todavía"
+      messages:
+        loading: "Subiendo fotos"
+        deleting: "Eliminando foto"
+        updated:
+          main_picture: "La foto principal ha cambiado"
+        delete:
+          confirm: "¿Eliminar esta foto?"
+          success: "Foto eliminada"
+          main_picture: "Esta bici ya no tiene foto principal. No olvides asignarle una."
+      actions:
+        success: "Las fotos seleccionadas fueron guardadas"
+        delete: "Eliminar"
+        set_main: "Establecer como foto principal"
+      sections:
+        uploads: "Añadir +"
+        uploaded: "Fotos de esta bici"
       files:
         select: "Seleccionar"
         upload: "Subir"
+      picture:
+        without_caption: "Haz click aquí para cambiar el pie de foto"
+        is_main: "Esta foto es la principal"
+      

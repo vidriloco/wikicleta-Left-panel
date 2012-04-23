@@ -6,9 +6,13 @@
 		<%= f.text_field :name, :placeholder => t('bikes.views.form.name'), :size => 40 %>
 	</div>
 	
-	<div class="field">
+	<p id="bike_weight_regexp" class="error"><%= t('bikes.views.form.validations.weight') %></p>
+	<div class="field inlined">
 		<%= f.text_field :frame_number, :placeholder => t('bikes.views.form.frame_number'), :size => 20 %>
 		<div class="hidden frame_number_help"><%= t('bikes.views.form.help.frame_number') %></div>
+	</div>
+	<div class="field inlined">
+		<%= f.text_field :weight, :placeholder => t('bikes.views.form.weight'), :size => 10 %>
 	</div>
 	
 	<div class="field">

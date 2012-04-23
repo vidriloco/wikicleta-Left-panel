@@ -3,7 +3,9 @@
 //= require jquery-ui-min
 //= require jquery.tipsy
 //= require jquery.reveal
+//= require jquery.editable.min
 //= require quickpager.jquery
+//= require view_components/blocking.view
 //= require view_components/notification.view
 //= require underscore
 //= require backbone
@@ -31,7 +33,8 @@ $.extend({
 		return $.isDefined("#section-"+dom);
 	},
 	visit: function(hashedUrl) {
-		window.location.hash=hashedUrl;
+		window.location.hash = hashedUrl;
+		//window.router.navigate(hashedUrl);
 	},
 	buildUrlFrom: function(section, id) {
 		if(id === undefined) {

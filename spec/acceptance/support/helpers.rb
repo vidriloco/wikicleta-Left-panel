@@ -28,6 +28,11 @@ module HelperMethods
     path+"##{section}"
   end
   
+  def accept_confirmation_for
+    page.evaluate_script('window.confirm = function() { return true; }')
+    yield if block_given?
+  end
+  
   def mock_omniauth_for(provider)
     if provider.eql?(:twitter)
       OmniAuth.config.mock_auth[provider] = {

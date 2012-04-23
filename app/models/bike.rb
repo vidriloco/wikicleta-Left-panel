@@ -7,7 +7,7 @@ class Bike < ActiveRecord::Base
   has_many :user_like_bikes, :dependent => :destroy
   has_many :bike_statuses, :dependent => :destroy
   has_many :pictures, :as => :imageable, :dependent => :destroy
-  
+
   #has_many :tweaks
   #has_many :borrows
   #has_many :usage_days
@@ -50,13 +50,6 @@ class Bike < ActiveRecord::Base
   def update_attributes_with_owner(params, owner)
     return self.update_attributes(params) if self.user = owner
     false
-  end
-  
-  private
-  def randomize_file_name
-    return if main_photo_file_name.nil?
-    extension = File.extname(main_photo_file_name).downcase
-    self.main_photo.instance_write(:file_name, "#{SecureRandom.hex(16)}#{extension}")
   end
   
 end

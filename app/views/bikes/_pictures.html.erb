@@ -1,0 +1,7 @@
+<%= render :partial => 'pictures/index', :locals => { :bike => bike } %>
+<% if bike.front_picture.nil? %>
+	<%= image_tag 'no_bike.png', :class => "main-picture" %>
+<% else %>
+	<%= image_tag bike.front_picture.image.preview.url, :class => "main-picture" %>
+<% end %>
+<div class="info shadow-light rounded-10"><%= details_for(bike) %></div>

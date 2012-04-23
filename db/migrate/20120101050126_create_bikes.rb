@@ -9,9 +9,10 @@ class CreateBikes < ActiveRecord::Migration
       t.integer     :user_id
       t.float       :weight
       t.point       :coordinates, :srid => 4326, :with_z => false
+      t.integer     :main_picture
+      t.string      :model
       
       t.integer     :likes_count, :default => 0
-      t.integer     :main_picture
       t.timestamps
     end
   end

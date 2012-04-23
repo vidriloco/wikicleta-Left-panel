@@ -26,7 +26,7 @@
         #cboxLoadedContent{background:#000; padding:1px;}
         #cboxLoadingGraphic{background:url(/assets/loading.gif) no-repeat center center;}
         #cboxLoadingOverlay{background:#000;}
-        #cboxTitle{position:absolute; top:-22px; left:0; color:#000; margin-bottom: 5px; font-size: 13px; }
+        #cboxTitle{position:absolute; top:-22px; left:0; color:#000; margin-bottom: 5px; font-size: 14px; font-weight: 600 }
         #cboxCurrent{position:absolute; top:-22px; right:205px; text-indent:-9999px;}
         #cboxSlideshow, #cboxPrevious, #cboxNext, #cboxClose{text-indent:-9999px; width:20px; height:20px; position:absolute; top:-20px; background:url(/assets/controls.png) no-repeat 0 0;}
         #cboxPrevious{background-position:0px 0px; right:44px;}

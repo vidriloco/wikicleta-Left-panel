@@ -75,8 +75,8 @@ ActiveRecord::Schema.define(:version => 20120419042815) do
     t.string   "frame_number"
     t.integer  "user_id"
     t.float    "weight"
-    t.integer  "likes_count",                  :default => 0
     t.integer  "main_picture"
+    t.integer  "likes_count",                  :default => 0
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
     t.point    "coordinates",   :limit => nil,                                :srid => 4326
@@ -112,7 +112,6 @@ ActiveRecord::Schema.define(:version => 20120419042815) do
   end
 
   create_table "pictures", :force => true do |t|
-    t.string   "name"
     t.string   "caption"
     t.string   "image"
     t.integer  "imageable_id"

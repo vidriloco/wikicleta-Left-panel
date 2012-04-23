@@ -1,0 +1,3 @@
+$('.imageable-photos').empty();
+$('.imageable-photos').append('<%= escape_javascript(render :partial => "#{@picture.imageable.class.to_s.downcase.pluralize}/pictures", :locals => {:bike => @picture.imageable}) %>');
+$('.imageable-photos').append('<%= escape_javascript(render :partial => "pictures/management_panel", :locals => {:bike => @picture.imageable}) %>');

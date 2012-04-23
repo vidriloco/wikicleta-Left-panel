@@ -50,7 +50,12 @@ class BikesController < ApplicationController
   end
 
   def show
-    @statuses = BikeStatus.find_all_for_bike(params[:id])
+    respond_to do |format|
+      format.js
+      format.html do
+        @statuses = BikeStatus.find_all_for_bike(params[:id])
+      end
+    end
   end
 
   private

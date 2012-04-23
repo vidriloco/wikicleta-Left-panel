@@ -37,7 +37,7 @@ $.extend(ViewComponents, {
 			},
 			
 			_block_content : function() {
-				$('body').append("<div class='blocking'></div>");
+				// TODO when needed
 			},
 			
 			_replace_contents : function(content) {

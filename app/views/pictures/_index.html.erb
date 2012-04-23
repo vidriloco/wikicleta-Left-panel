@@ -1,23 +1,7 @@
 <div class="hidden">
 	<div class="gallery">
-		<% @bike.pictures.each do |picture| %>
-			<a class="picture" href="<%= picture.image.url %>" title="<%= picture.caption %>"></a>
+		<% bike.pictures.each do |picture| %>
+			<a rel="gallery" href="<%= picture.image.url %>" title="<%= picture.caption %>"></a>
 		<% end %>
 	</div>
-</div>
-
-<div id="picture-manager-modal" class="reveal-modal modalview-bar-relative-centered">
-	<a class="close-reveal-modal">&#215;</a>
-	<h2><%= t("pictures.manager.title") %></h2>
-	<div class="separator"></div>
-	<div id="container">
-		<div id="token" class="hidden"><%= form_authenticity_token %></div>
-		<div id="url" class="hidden"><%= bike_pictures_path(@bike) %></div>
-		<div class="actions">
-			<a id="pickfiles" href="#"><%= t('pictures.manager.files.select') %></a>
-			<a id="uploadfiles" href="#" class="blue button"><%= t('pictures.manager.files.upload') %></a>
-		</div>
-		<div id="filelist"></div>
-	</div>
-	
 </div>

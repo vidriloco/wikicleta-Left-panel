@@ -89,15 +89,15 @@ feature "Bike registration:" do
         page.should have_content I18n.t('bikes.views.form.validations.description')
         fill_in 'bike_description', :with => "White dahon bike, super light and foldable"
         
+        fill_in 'bike_weight', :with => "8e"
         click_on I18n.t('bikes.actions.save')
-        page.should have_content I18n.t('bikes.views.form.validations.file_name')
+        page.should have_content I18n.t('bikes.views.form.validations.weight')
         
-        page.attach_file('bike_main_photo', Rails.root+'spec/resources/bike.zip')
+        fill_in 'bike_weight', :with => "8."
         click_on I18n.t('bikes.actions.save')
-        page.should have_content I18n.t('bikes.views.form.validations.file_name_format')
+        page.should have_content I18n.t('bikes.views.form.validations.weight')
         
-        page.attach_file('bike_main_photo', Rails.root+'spec/resources/bike.jpg')
-        
+        fill_in 'bike_weight', :with => "8.5"
         click_on I18n.t('bikes.actions.save')
       
         page.current_path.should == bike_path(Bike.last.id)
@@ -106,24 +106,6 @@ feature "Bike registration:" do
         page.should have_content "White dahon bike, super light and foldable"
         
         page.should have_content I18n.t('bikes.messages.saved')
-      end
-      
-      scenario "It cannot register a new bike if it's photo size is bigger than 2 Mb" do
-        visit new_bike_path
-      
-        fill_in 'bike_name', :with => "Hashi"
-        fill_in 'bike_frame_number', :with => "9F2393DA"
-        
-        select I18n.t("bikes.categories.types.urban"), :from => "bike_kind"
-        
-        select "Dahon", :from => "bike_bike_brand_id"
-        
-        fill_in 'bike_description', :with => "White dahon bike, super light and foldable"
-        
-        page.attach_file('bike_main_photo', Rails.root+'spec/resources/big_bike.jpg')
-        click_on I18n.t('bikes.actions.save')
-        
-        page.should have_content I18n.t('bikes.views.form.validations.file_size')
       end
     
       scenario "I cannot register a new bike if fields to be answered are missing" do
@@ -141,7 +123,7 @@ feature "Bike registration:" do
           @bike=FactoryGirl.create(:bike, :user => @user)
         end
     
-        scenario "I can modify it thereafter without needing to upload a new photo" do
+        scenario "I can modify it" do
           visit bike_path(@bike)
           click_on I18n.t('bikes.views.show.modify')
           page.current_path.should == edit_bike_path(@bike)
@@ -157,28 +139,15 @@ feature "Bike registration:" do
           page.should have_content I18n.t('bikes.views.form.validations.description')
           fill_in 'bike_description', :with => "White bike, super light and foldable"
           
+          fill_in 'bike_weight', :with => "11e"
           click_on I18n.t('bikes.actions.update')
-          page.current_path.should == bike_path(Bike.last.id)
-        
-          page.should have_content "Diamante"
-          page.should have_content "White bike, super light and foldable"
-          
-          page.should have_content I18n.t('bikes.messages.updated')
-        end
-        
-        scenario "I can modify it thereafter and add a photo only if the file is valid" do
-          visit bike_path(@bike)
-          click_on I18n.t('bikes.views.show.modify')
-          page.current_path.should == edit_bike_path(@bike)
-        
-          fill_in 'bike_name', :with => "Diamante"
-          fill_in 'bike_description', :with => "White bike, super light and foldable"
+          page.should have_content I18n.t('bikes.views.form.validations.weight')
 
-          page.attach_file('bike_main_photo', Rails.root+'spec/resources/bike.zip')
+          fill_in 'bike_weight', :with => "11."
           click_on I18n.t('bikes.actions.update')
-          page.should have_content I18n.t('bikes.views.form.validations.file_name_format')
+          page.should have_content I18n.t('bikes.views.form.validations.weight')
 
-          page.attach_file('bike_main_photo', Rails.root+'spec/resources/bike.jpg')
+          fill_in 'bike_weight', :with => "11.5"
           click_on I18n.t('bikes.actions.update')
           
           page.current_path.should == bike_path(Bike.last.id)
@@ -191,9 +160,11 @@ feature "Bike registration:" do
         
         scenario "I can delete it" do
           visit edit_bike_path(@bike)
-          click_on I18n.t('bikes.actions.delete')
           
-          page.driver.browser.switch_to.alert.accept
+          accept_confirmation_for do 
+            click_on I18n.t('bikes.actions.delete')
+          end
+          
           page.should have_content I18n.t('bikes.messages.deleted')
         end
       end

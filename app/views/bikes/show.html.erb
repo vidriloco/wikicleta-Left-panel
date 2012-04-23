@@ -1,43 +1,45 @@
-<div id="<%= @bike.id %>">
-	<div class="bike-details shadow-light centered">
-		<%= link_to t('actions.back_arrow').html_safe, bikes_path, :class => 'back' %>
-		<div class="to-right">
-			<h1 class="inlined"><%= @bike.name %></h1>
-			<% if current_user_owns_bike?(@bike) %>
-				<p class="edit rounded-10"><%= link_to t('bikes.views.show.modify'), edit_bike_path(@bike) %></p>
-			<% end %>
+<div id="section-bikes">
+	<div id="<%= @bike.id %>">
+		<div class="bike-details shadow-light centered">
+			<%= link_to t('actions.back_arrow').html_safe, bikes_path, :class => 'back' %>
+			<div class="to-right">
+				<h1 class="inlined"><%= @bike.name %></h1>
+				<% if current_user_owns_bike?(@bike) %>
+					<p class="edit rounded-10"><%= link_to t('bikes.views.show.modify'), edit_bike_path(@bike) %></p>
+				<% end %>
+			</div>
+			<div class="clear"></div>
+			<div class="owner">
+				<%= t('bikes.views.show.owned_by') %><%= contact_for(@bike) %>
+			</div>
 		</div>
-		<div class="clear"></div>
-		<div class="owner">
-			<%= t('bikes.views.show.owned_by') %><%= contact_for(@bike) %>
+
+		<div class="bike-photos imageable-photos shadow-light centered">
+			<%= render :partial => "bikes/pictures", :locals => {:bike => @bike } %>
+			<%= render :partial => "pictures/management_panel", :locals => {:bike => @bike} %>
+		</div>
+	
+		<div class="bike-description shadow-light centered">
+			<p class="main">
+				<%= @bike.description %>
+			</p>
+			<div class="status rounded-10">
+				<%= render :partial => 'bikes/likes_count', :locals => {:bike => @bike } %>
+			</div>
+		</div>
+	
+		<div class="bike-statuses shadow-light centered">
+			<%= render :partial => 'bike_statuses/index', :locals => { :bike => @bike } %>
+		</div>
+
+		<div class="bike-comments sheet shadow-light centered">
+			<%= render :partial => 'comments/index', :locals => { :commentable => @bike } %>
 		</div>
 	</div>
 
-	<div class="bike-photos shadow-light centered">
-		<%= render 'pictures/index' %>
-		<% if @bike.front_picture.nil? %>
-			<%= image_tag 'no_bike.png' %>
-		<% else %>
-			<%= image_tag @bike.front_picture.image.preview.url %>
-		<% end %>
-		<div class="info shadow-light rounded-10"><%= details_for(@bike) %></div>
-	</div>
-	
-	<div class="bike-description shadow-light centered">
-		<p class="main">
-			<%= @bike.description %>
-		</p>
-		<div class="status rounded-10">
-			<%= render :partial => 'bikes/likes_count', :locals => {:bike => @bike } %>
-		</div>
-	</div>
-	
-	<div class="bike-statuses shadow-light centered">
-		<%= render :partial => 'bike_statuses/index', :locals => { :bike => @bike } %>
-	</div>
-
-	<div class="bike-comments sheet shadow-light centered">
-		<%= render :partial => 'comments/index', :locals => { :commentable => @bike } %>
+	<div class="hidden">
+		<div id="url"><%= bike_pictures_path(@bike) %></div>
+		<div id="url-reload"><%= bike_path(@bike) %></div>
+		<div id="token"><%= form_authenticity_token %></div>
 	</div>
 </div>
-

@@ -16,7 +16,6 @@ gem 'omniauth-facebook'
 gem 'twitter'
 gem 'rails-backbone'
 gem 'redis-objects'
-gem 'paperclip'
 gem 'acts_as_commentable'
 
 gem 'carrierwave', '0.6.2'

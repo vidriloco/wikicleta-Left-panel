@@ -63,6 +63,8 @@ es_MX:
     new: 
       fem: "Nueva"
       masc: "Nuevo"
+  indicators:
+    saving: "Guardando ..."
   connectives:
     by: "Por"
     and: "y"

@@ -1,23 +1,50 @@
 class PicturesController < ApplicationController
   
-  def index
-
-  end
+  before_filter :find_picture, :only => [:destroy, :set_main, :change_caption]
 
   def create
     @picture = Picture.new_from(params)
     
     if @picture.save
-      render json: {:success => true, :src => @picture.image.url(:thumb)}
+      render :json => {:success => true}
     else 
       render :json => [{:error => "custom_failure"}], :status => 304
     end
   end
 
   def destroy
-    @picture = Picture.find(params[:id])
     @picture.destroy
-    render :json => true
+    
+    respond_to do |format|
+      format.js { render :action => 'update' }
+    end
+  end
+  
+  def set_main
+    @picture.become_main_picture
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def change_caption
+    @picture.update_attribute(:caption, params[:value])
+    
+    respond_to do |format|
+      format.js { render :action => 'update' }
+    end
+  end
+  
+  def update
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  private
+  def find_picture
+    @picture = Picture.find(params[:id])
   end
     
 end

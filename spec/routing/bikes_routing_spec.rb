@@ -21,5 +21,9 @@ describe "Bikes routing" do
   it "matches /bikes/1/bike_statuses/2 with controller action #update on bikes/statuses" do
     { :put => "/bikes/1/bike_statuses/2" }.should route_to(:action => "update", :controller => "bikes/statuses", :bike_id => "1", :id => "2")
   end
+  
+  it "matches /bikes/1/pictures with controller action #create on pictures" do
+    { :post => "/bikes/1/pictures" }.should route_to(:action => "create", :controller => "pictures", :bike_id => "1")
+  end
 
 end

@@ -55,14 +55,13 @@ es_MX:
         kind: "Tipo"
         brand: "Marca"
         main_photo: "Foto"
+        weight: "Peso (kg)"
         validations:
           name: "Pónle un nombre a tu bici"
           description: "Te falta escribir algo sobre tu bici o su descripción"
           kind: "Te falta seleccionar un tipo de bici"
           bike_brand: "Te falta especificar la marca"
-          file_name: "Es necesario que subas una foto de tu bici"
-          file_name_format: "El archivo que estas subiendo no es una imagen"
-          file_size: "El tamaño del archivo no debe ser mayor a 2 Mb"
+          weight: "El peso es en Kg, sólo se aceptan valores númericos"
         notes:
           file_size: "Por favor, sube fotos de tamaño menor a 2 Mb"
         help:

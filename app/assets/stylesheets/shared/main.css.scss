@@ -321,3 +321,34 @@ ul li, ul li * { display: inline-block }
 .modalview-bar-relative-centered {
 	margin-left: -150px !important;
 }
+
+p.empty {
+	margin-top: 10%;
+	font-style: italic;
+	font-size: 18px;
+	text-align: center;
+}
+
+.loading {
+	margin-top: 40px;
+	border: 2px solid #5E7ECF;
+	padding: 0px 8px !important;
+	width: 160px;
+	font-style: normal;
+	text-align: center;
+	
+	.spinner {
+		height: 30px;
+		width: 30px;
+		margin-left: 4px;
+		background: url(/assets/spinner.gif);
+	}
+	
+	p {
+		padding: 5px 0px 5px 10px !important;
+		font-size: 13px;
+		font-weight: bold;
+		vertical-align: 10px;
+		color: #2B3B63;
+	}
+}

@@ -1,0 +1,15 @@
+<div class="uploaded">
+	<div id="pictures">
+		<% if pictures.empty? %>
+			<p class="empty"><%= t("pictures.manager.no_pictures") %></p>
+		<% else %>
+			<% pictures.each do |picture| %>
+				<%= render :partial => 'pictures/managed_unit', :locals => { :picture => picture } %>
+			<% end %>
+		<% end %>
+	</div>
+	<div class="loading rounded-5 shadow-light centered hidden">
+		<div class="spinner inlined"></div>
+		<p class="inlined"><%= t('pictures.manager.messages.deleting') %></p>
+	</div>
+</div>

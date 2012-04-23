@@ -87,10 +87,17 @@ Ciudadio::Application.routes.draw do
       get :mine
     end
     
-    resources :pictures, :only => [:index, :create, :destroy]
-    
+    resources :pictures, :only => [:create]
     resources :bike_statuses, :controller => 'bikes/statuses', :only => [:create, :update]
   end
+  
+  resources :pictures, :only => [:destroy] do
+    member do
+      put :set_main
+      put :change_caption
+    end
+  end
+  
   post    '/bikes/:id/like' => 'bikes/likes#create'
   delete  '/bikes/:id/like' => 'bikes/likes#destroy'
   

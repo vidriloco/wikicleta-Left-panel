@@ -8,7 +8,7 @@
 	height: 20px;
 	background: url(/assets/camera.png);
 	position: relative;
-	left: 50px;
+	left: 35px;
 	top: 4px;
 }
 
@@ -28,6 +28,120 @@
 				margin-right: 10px;
 			}
 
+		}	
+		
+		.uploaded {
+			width: 520px;
+			
+			.editable-picture {
+				img {
+					display: block;
+				}		
+				
+				p {
+					padding: 0px;
+					margin-top: 8px;
+					margin-bottom: 20px;
+					font-style: italic;
+					text-align: center;
+					font-size: 12px;
+				}		
+				
+				.option:hover {
+					background-color: #D7D7D7;
+				}
+				
+				.option {
+					padding: 5px 10px;
+					background-color: #DCDCDC;
+					font-size: 13px;
+					font-weight: bold;
+					text-align: center;
+					width: 80%;
+					
+					a {
+						color: #365FB6;
+						margin-right: 20px;
+					}
+					
+					a:hover {
+						text-decoration: underline;
+					}
+					
+					span.main {
+						margin-right: 20px;
+					}
+					
+					.confirmation {
+						display: none;
+						a {
+							margin-right: 15px;
+						}
+						
+						span.message {
+							color: #C55955;
+							margin-right: 40px;
+						}
+						
+						a.accepts {
+							color: #2A7120;
+						}
+						
+						a.declines {
+							color: #061205;
+						}
+					}
+				}
+				
+				
+				.deleted {
+					padding: 20px;
+					background-color: #696969;
+					font-weight: bold;
+					font-size: 14px;
+					text-align: center;
+					color: white;
+					
+					p {
+						color: #A0D67E;
+						font-size: 13px;
+						font-weight: 400;
+						
+					}
+					
+				}
+			}
+			
+			.simplePagerNav {
+				display: block;
+				font-size: 14px;
+				padding: 2px;
+			}
+		}
+	}
+	
+	.sections {
+		a {
+			font-size: 12px;
+			font-weight: bold;
+			color: #666666;
+			padding: 2px 10px;
+			margin-bottom: 5px;
+		}
+		
+		a.selected, a:hover {
+			background-color: #8CBF78;
+			border-radius: 8px;
+			-moz-border-radius: 8px;
+			-webkit-border-radius: 8px;
+		}
+		
+		a.selected {
+			color: white;
+		}
+		
+		a:hover {
+			color: #585855;
 		}
 	}
 	
