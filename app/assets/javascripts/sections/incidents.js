@@ -11,7 +11,7 @@ $('.item').live('click', function() {
 
 function IncidentsSection()
 {
-	var map = new MapFactory(this);
+	var map = null;
 	
 	// Private members
 	var attachableDom = '#dynamic-bar .container';
@@ -45,6 +45,7 @@ function IncidentsSection()
 	var loadMainView = function() {
 		$(attachableDom).empty();
 		ViewComponents.LeftBar.clearSelected();
+		map = new MapFactory();
 	}
 	
 	var loadIncidentsOnMap = function(items) {
