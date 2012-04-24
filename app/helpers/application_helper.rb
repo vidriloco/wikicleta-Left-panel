@@ -26,6 +26,11 @@ module ApplicationHelper
     out
   end
   
+  def links_for_streets
+    out=  link_to(t('app.sections.streets.subsections.parking'), root_path, current_action_matches?("parking"))
+    out+=  link_to(t('app.sections.streets.subsections.bike_share'), about_path, current_action_matches?("bikeshare"))
+  end
+  
   def links_for_welcome
     out=  link_to(t('app.sections.welcome.subsections.main'), root_path, current_action_matches?("index"))
     out+=  link_to(t('app.sections.welcome.subsections.about'), about_path, current_action_matches?("about"))

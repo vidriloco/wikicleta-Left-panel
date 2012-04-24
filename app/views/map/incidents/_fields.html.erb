@@ -7,7 +7,7 @@
 <% if current_user_has_bikes_to_report? %>
 	<div class="field <%= incident_types_for([:theft, :assault, :accident]) %>">
 		<%= f.label :bike_id, t('incidents.views.new.form.bike') %>
-		<%= f.select :bike_id, options_from_collection_for_select(current_user.bikes, :id, :name, @incident.bike_id) %>
+		<%= f.select :bike_id, options_from_collection_for_select(current_user.bikes, :id, :name, @incident.bike_id), {:include_blank => true} %>
 	</div>
 <% end %>
 

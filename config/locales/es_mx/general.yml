@@ -18,6 +18,11 @@ es_MX:
           regulation_infractions: "Infracciones"
           search: "Buscar"
           new: "Reporta un incidente"
+      streets:
+        title: "Las calles"
+        subsections:
+          parking: "Biciestacionamientos"
+          bike_share: "Préstamo de bicis"
       bikes:
         title: "Las bicis"
         subsections:

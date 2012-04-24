@@ -69,6 +69,7 @@ Ciudadio::Application.routes.draw do
 =end
 
   namespace :map do
+    resources :streets, :only => [:index]
     resources :street_marks, :only => [:create, :index, :show]
     post "street_marks/rankings" => "street_mark_rankings#create"
     get "street_marks/:street_mark_id/rankings" => "street_marks#rankings"

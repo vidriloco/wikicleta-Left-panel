@@ -12,8 +12,12 @@
 			<%= info_for(@incident.bike) %>
 			
 			<div class="photo">
-				<% unless @incident.bike.main_photo.nil? %>
-					<%= image_tag @incident.bike.main_photo.url(:small), :class => "shadow-lighter" %>
+				<% unless @incident.bike.front_picture.nil? %>
+					<%= image_tag @incident.bike.front_picture.image.mini_thumb.url, :class => "shadow-lighter image" %>
+					<div class="centered links">
+						<%= link_to t('pictures.state.show'), 'javascript:void(0);', :class => 'trigger-show hidden' %>
+						<%= link_to t('pictures.state.hide'), 'javascript:void(0);', :class => 'trigger-hide' %>
+					</div>
 				<% end %>
 			</div>
 			

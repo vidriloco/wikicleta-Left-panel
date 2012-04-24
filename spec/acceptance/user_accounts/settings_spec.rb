@@ -50,8 +50,10 @@ feature 'User accounts settings' do
     scenario "should let me deactivate my account", :js => true do
       visit settings_account_path
       
-      click_link I18n.t("user_accounts.settings.sections.account.deactivate")
-      page.driver.browser.switch_to.alert.accept 
+      accept_confirmation_for do
+        click_link I18n.t("user_accounts.settings.sections.account.deactivate")
+      end
+      
       login_with(@user)
       current_path.should == user_session_path
     end
@@ -114,44 +116,6 @@ feature 'User accounts settings' do
       
       find_field(User.human_attribute_name(:bio)).value.should == "Soy una persona multimodal. Bici + Transporte público"
       find_field(User.human_attribute_name(:personal_page)).value.should == "chorochido.blogspot.com"
-    end
-    
-    describe "member password recovery" do
-    # As a member who forgot my password
-    # I want to recover my site access easily
-    #
-      attr_accessor :current_email_address
-
-      specify "email recovery of a new password" do
-        member = make_activated_member
-        original_password = member.password
-        visit dashboard_path
-        click_on "Forgot your password?"
-        fill_in "Email", :with => member.email
-        click_on "Send me reset password instructions"
-
-        self.current_email_address = member.email
-        # EmailSpec::EmailViewer::save_and_open_all_raw_emails
-        unread_emails_for(member.email).should be_present
-        open_email member.email, :with_subject => "Reset password instructions"
-        click_first_link_in_email
-        page.should have_content("Your password is")
-        new_password = page.find('#member_password').text
-
-        #the password should have changed
-        new_password.should_not == original_password
-
-        # and I should be signed in
-        visit dashboard_path
-        should_not_see_member_login
-        should_see_member_dashboard
-
-        #and I should be able to log in with the new password
-        log_out
-        member_log_in_as(member.email, new_password)
-        should_not_see_member_login
-        should_see_member_dashboard
-      end
     end
     
     scenario "it should let me add and remove social network accounts"

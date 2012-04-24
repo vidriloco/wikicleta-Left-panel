@@ -77,6 +77,8 @@ $(document).ready(function() {
 		{id: '#bike_kind', condition: 'not_empty' },
 		{id: '#bike_bike_brand_id', condition: 'not_empty' }];
 	
+	ViewComponents.ValidForm.set('.bike-upload', validateFields);
+	
 	$('.reveals-share').live('click', function(e) {
 		e.preventDefault();
 		$('#share-modal').reveal();

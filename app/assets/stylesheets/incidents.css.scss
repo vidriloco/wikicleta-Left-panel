@@ -132,6 +132,26 @@
 	.photo {
 		text-align: center;
 		margin: 30px;
+		
+		.links {
+			a {
+				color: white;
+				font-weight: bold;
+				background-color: #3D3D3D !important;
+				padding: 5px 8px;
+				border-radius: 5px;
+				-moz-border-radius: 5px;
+				-webkit-border-radius: 5px;
+			}
+			
+			a:hover {
+				color: #81C775;
+			}
+			
+			font-size: 11px !important;
+			margin-top: 10px;
+			
+		}
 	}
 	
 	.description {

@@ -10,16 +10,16 @@ describe Authorization do
   describe "having an authorization strategy registered" do
     
     before(:each) do
-      @auth = FactoryGirl.create(:authorization, :user => @user)
+      @auth = FactoryGirl.create(:authorization, :user => @user, :provider => "twitter", :uid => "3242192")
     end
     
-    it "shouldn't save the same strategy-account twice" do
-      second_auth = FactoryGirl.build(:authorization)
+    it "shouldn't let me register a new strategy from the same provider" do
+      second_auth = FactoryGirl.build(:authorization, :provider => "twitter", :user => @user)
       second_auth.save.should be_false
     end
     
-    it "shouldn't save a new strategy for a user with a the same strategy already registered" do
-      second_auth = FactoryGirl.build(:authorization, :user => @user, :uid => "3242192")
+    it "shouldn't let me register a strategy registered associated to an already registered uid" do
+      second_auth = FactoryGirl.build(:authorization, :uid => "3242192", :provider => "twitter")
       second_auth.save.should be_false
     end
     

@@ -10,7 +10,7 @@ module HelperMethods
   end
   
   def simulate_click_on_map(coordinates)
-    page.execute_script("section.map.simulatePinPoint(#{coordinates[:lat]},#{coordinates[:lon]});")
+    page.execute_script("section.getMap().simulatePinPoint(#{coordinates[:lat]},#{coordinates[:lon]});")
   end
   
   def place_view_spec(place)

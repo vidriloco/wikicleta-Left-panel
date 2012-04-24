@@ -29,8 +29,10 @@ feature "For the incidents listed " do
       page.current_url.should == hash_link_for(map_incidents_path, "accidents/#{@accident.id}")
       
       page.should have_content I18n.t('incidents.views.edit.destroy')
-      click_link I18n.t('incidents.actions.delete')
-      page.driver.browser.switch_to.alert.accept
+
+      accept_confirmation_for do
+        click_link I18n.t('incidents.actions.delete')
+      end
       
       find_link I18n.t('incidents.views.index.numbers.accident.other')
     end

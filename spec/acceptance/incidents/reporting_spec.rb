@@ -115,8 +115,6 @@ feature "Reporting bike incidents:", :js => true do
       page.should_not have_xpath select_option_for('incident_kind', Bike.humanized_category_for(:incidents, :theft))
 
     end
-    
-  
   end
   
 end

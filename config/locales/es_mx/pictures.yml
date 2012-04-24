@@ -1,5 +1,8 @@
 es_MX:
   pictures:
+    state:
+      show: "Mostrar foto"
+      hide: "Ocultar foto"
     manager:
       title: "Añadir o quitar fotos"
       instruction: "Selecciona una o más fotos para añadir"

@@ -65,6 +65,7 @@ es_MX:
         success: "El incidente ha sido eliminado"
         confirm: "¿Deseas eliminar este incidente?"        
       show:
+        number_not_given: "---"
         vehicle_identifier: "Placa del vehículo: "
         attacher_used: "Equipo de seguridad utilizado: "
         bike_profile: "Página de esta bici"

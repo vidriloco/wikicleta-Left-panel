@@ -1,4 +1,3 @@
 var Sections = {
-	Incidents : {},
 	Pictures : {}
 };

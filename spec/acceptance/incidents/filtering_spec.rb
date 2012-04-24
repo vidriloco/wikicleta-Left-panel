@@ -74,7 +74,7 @@ feature "Filtering bike incidents:" do
       check "incident_map_enabled"
       select I18n.t('common_answers')[true], :from => "incident_complaint_issued"
       
-      page.execute_script('section.map.simulatePinPointSearch({lat: 19.1000, lon: -99.0000, zoom: 15});')
+      page.execute_script('section.getMap().simulatePinPointSearch({lat: 19.1000, lon: -99.0000, zoom: 15});')
       
       within('.search') do
         click_on I18n.t('actions.accept')

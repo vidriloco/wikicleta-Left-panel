@@ -41,7 +41,7 @@ module IncidentsHelper
   def info_for(bike)
     "<div class='info to-left'>
     <span class='aspect'>#{t('bikes.views.preview.frame_number')}</span>
-    <span class='frame'>#{bike.frame_number}</span>
+    <span class='frame'>#{bike.frame_number.blank? ? t('incidents.views.show.number_not_given') : bike.frame_number}</span>
     <span class='aspect'>#{t('bikes.views.preview.brand')}</span>
     <span class='brand'>#{bike.brand}</span>
     </div><div class='clear'></div>".html_safe

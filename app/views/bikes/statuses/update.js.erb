@@ -1,4 +1,4 @@
 $('#<%= @bike_status.status %>-modal .close-reveal-modal').click();
 $('#<%= @bike_status.status %>-box').replaceWith("<%= escape_javascript render(:partial => 'bike_statuses/box_status', :locals => { :status => @bike_status.status, :bike => @bike_status.bike, :bike_status => @bike_status }) %>");
 $('#<%= @bike_status.status %>-modal').replaceWith("<%= escape_javascript render(:partial => 'bike_statuses/modal_status', :locals => { :status => @bike_status.status, :bike => @bike_status.bike, :bike_status => @bike_status }) %>");
-ViewComponents.Notification.put("<p class='notice top-message'><%= escape_javascript t('bike_statuses.messages.update.success', :status => @bike_status.humanized_status) %></p>", {delay: 300});
+ViewComponents.Notification.put("<p class='notice top-message'><%= escape_javascript t('bike_statuses.messages.update.success', :status => @bike_status.humanized_status) %></p>");
