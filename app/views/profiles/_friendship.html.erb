@@ -1,0 +1,15 @@
+<div class="username inlined">
+	<%= friendship.opposite_of(@user).username %>
+</div>
+
+<%= link_to t('user_profiles.views.friendships.remove'), friendship_path(friendship), :method => :delete %>
+
+<%= form_for friendship, :method => :put, :html => {:class => "inlined"} do |f| %>
+	<%= f.hidden_field :confirmed, :value => true %>
+	<%= f.submit t('user_profiles.views.friendships.accept'), :class => "accept" %>
+<% end %>
+
+<%= form_for friendship, :method => :put, :html => {:class => "inlined"} do |f| %>
+	<%= f.hidden_field :confirmed, :value => true %>
+	<%= f.submit t('user_profiles.views.friendships.reject'), :class => "reject" %>
+<% end %>

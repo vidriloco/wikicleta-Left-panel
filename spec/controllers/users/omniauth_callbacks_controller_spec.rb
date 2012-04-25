@@ -160,12 +160,12 @@ describe Users::OmniauthCallbacksController do
         end
       
         it "should assign user to @user" do
-          post :create, :user => {}
+          post :create, :user => {:username => 'someone'}
           assigns(:user).should be_a(User)
         end
       
         it "should render the provider action" do
-          post :create, :user => {}
+          post :create, :user => {:username => 'someone'}
           response.should render_template("twitter")
         end
       end
@@ -177,12 +177,12 @@ describe Users::OmniauthCallbacksController do
         end
       
         it "should assign user to @user" do
-          post :create, :user => {}
+          post :create, :user => {:username => 'someone'}
           assigns(:user).should be_a(User)
         end
         
         it "should render the provider action" do
-          post :create, :user => {}
+          post :create, :user => {:username => 'someone'}
           response.should render_template("facebook")
         end
       end

@@ -2,12 +2,7 @@
 	<%= render :partial => 'shared_actions', :locals => {:menu => {:access => 'selected'}} %>
 <% end %>
 
-<p class="centered-text"><%= t('user_accounts.settings.sections.access.recover_password') %></p>
-<%= form_for(@user, :url => user_password_path, :html => { :method => :post }) do |f| %>
-  <%= f.hidden_field :email, :value => @user.email %>
-  <div class="centered-text"><%= f.submit t('user_accounts.settings.sections.access.reset'), :class => 'button red-button' %></div>
-<% end %>
-<br/>
+<%= render 'password_reset' %>
 <div class="separator"></div>
 
 <div class="authorizations">
@@ -25,6 +20,10 @@
 <div class="separator"></div>
 <br/>
 <p class="centered-text"><%= t('user_accounts.settings.sections.access.reset_password') %></p>
+<% if @user.externally_registered %>
+	<p class="centered-text emph-small centered"><%= t('user_accounts.settings.sections.access.change_password_for_external_registration') %></p>
+<% end %>
+<br/>
 <%= form_for(@user, :url => settings_changed_path(@user), :html => { :method => :put }) do |f| %>
 		
 	<%= f.label :password %>

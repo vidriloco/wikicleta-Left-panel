@@ -20,6 +20,7 @@ class PicturesController < ApplicationController
     end
   end
   
+  # TODO: Merge into update method
   def set_main
     @picture.become_main_picture
     
@@ -28,6 +29,7 @@ class PicturesController < ApplicationController
     end
   end
   
+  # TODO: Merge into update method
   def change_caption
     @picture.update_attribute(:caption, params[:value])
     

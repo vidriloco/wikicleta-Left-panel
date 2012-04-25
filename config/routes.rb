@@ -92,6 +92,8 @@ Ciudadio::Application.routes.draw do
     resources :bike_statuses, :controller => 'bikes/statuses', :only => [:create, :update]
   end
   
+  resources :friendships, :only => [:create, :destroy]
+  
   resources :pictures, :only => [:destroy] do
     member do
       put :set_main
@@ -107,7 +109,8 @@ Ciudadio::Application.routes.draw do
   
   resources :comments, :only => [:create, :destroy]
   
-  
+  get '/profile/:username' => 'profiles#index', :as => "user_profile"
+  get '/profile/:username/friends' => 'profiles#friends', :as => "friends_of_user_profile"
 #  get "/places/:id" => 'places#show', :as => "place"
 #  get "/places/edit/:id" => 'places#edit', :as => "edit_place"  
   

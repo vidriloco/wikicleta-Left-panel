@@ -1,0 +1,18 @@
+<div class="left inlined">
+	<%= render :partial => 'profiles/menu', :locals => { :section => section } %>
+
+	<div class="social-nets shadow-light">
+		<h3><%= t('user_profiles.menu.social_nets.title') %></h3>
+	
+		<% if @user.authorizations.empty? %>
+			<p class="centered-text none"><i><%= @user.username %></i> <%= t('user_profiles.views.social_nets.none') %></p>
+		<% else %>
+			<% @user.authorizations.each do |authorization| %>
+				<%= authorization_details_for(authorization) %>
+			<% end %>
+		<% end %>
+	
+	</div>
+	
+	<%= link_to t('actions.back'), bikes_path, :class => 'back shadow-light' %>
+</div>

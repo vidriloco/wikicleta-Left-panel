@@ -8,12 +8,25 @@
 
 <%= form_for(@user, :url => settings_changed_path(@user), :html => { :method => :put }) do |f| %>
 
-	<%= f.label :bio %>
-  <%= f.text_area :bio, :rows => 5, :cols => 30 %>
-
-	<%= f.label :personal_page %>
-  <%= f.text_field :personal_page %>
-	<br/>
+	<div class="field">
+		<%= f.label :bio %>
+  	<%= f.text_area :bio, :rows => 5, :cols => 30 %>
+	</div>
+	
+	<div class="field">
+		<%= f.label :personal_page %>
+  	<%= f.text_field :personal_page %>
+	</div>
+	
+	<div class="field">
+		<%= f.label :email_visible %>
+		<%= f.check_box :email_visible %>
+	</div>
+	
+	<div class="field">
+		<%= f.label :started_cycling_date %>
+		<%= f.date_select :started_cycling_date %>
+	</div>
 	<div class="actions to-right">
 		<%= f.submit t("user_accounts.settings.save") %>
 	</div>

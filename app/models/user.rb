@@ -15,11 +15,16 @@ class User < ActiveRecord::Base
   has_many :street_marks
   has_many :street_mark_rankings
   
+  has_many :friendships
+  has_many :friends, :through => :friendships
+  
   devise :omniauthable, :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:login]
   attr_accessor :login
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :full_name, :username, :login, :bio, :personal_page
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :full_name, :username, :login, :bio, :personal_page, :externally_registered, :email_visible, :started_cycling_date
   validates_presence_of :username, :full_name
   validates_uniqueness_of :username
+  
+  before_validation :validate_format_of_username
   
   def owns_comment?(comment)
     return false if comment.nil?
@@ -29,6 +34,22 @@ class User < ActiveRecord::Base
   def owns_bike?(bike)
     return false if bike.nil?
     bike.user == self
+  end
+  
+  def is_seller?
+    false
+  end
+  
+  def email_visible?
+    email_visible
+  end
+  
+  def friendship_with(user=nil)
+    Friendship.where('user_id = :me OR friend_id = :friend OR user_id = :friend OR user_id = :me', {:me => self.id, :friend => user.id}).first
+  end
+  
+  def all_friendships
+    Friendship.where('user_id = :me OR friend_id = :me', {:me => self.id})
   end
   
   def self.find_for_database_authentication(warden_conditions)
@@ -67,4 +88,7 @@ class User < ActiveRecord::Base
     true
   end
 
+  def validate_format_of_username
+    errors.add(:username, I18n.t('user_accounts.validations.invalid_username')) if self.username.match(/^\w{5,}$/).nil?
+  end
 end

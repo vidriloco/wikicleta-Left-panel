@@ -1,0 +1,253 @@
+/*
+ *= require_self
+ *= require shared/form.css
+ *= require shared/bars.css
+ *= require shared/main.css
+ *= require shared/notifications.css
+ */
+
+.profile-box, .profile-decorator {
+	width: 750px;
+	padding: 0px 20px;
+}
+
+.profile-decorator {
+	background-color: #2E5C29;
+	height: 8px;
+}
+
+.profile-box {
+	padding: 20px;
+	padding-bottom: 10px;
+	background-color: white;
+	
+	h1 {
+		padding: 0px;
+		margin: 0px;
+		font-size: 25px;
+	}
+	
+	p {
+		padding: 0px;
+		margin: 0px;
+		font-size: 14px;
+	}
+	
+	p.fullname {
+		font-style: italic;
+	}
+	
+	p.cycling-start-date {
+		font-size: 11px;
+	}
+	
+	.names {
+		margin-bottom: 15px;
+	}
+	
+	.personal-extras {
+		width: 75%;
+		margin-top: 5px;
+		
+		p {
+			text-align: right;
+			font-size: 13px;
+		}
+		
+		.email {
+			font-weight: bold;
+			color: #5F5F5F;
+		}
+		
+		.webpage {
+			margin-top: 10px;
+			font-style: italic;
+			a {
+				color: #53AB3C;
+			}
+		}
+	}
+	
+	#user-info {
+		
+	}
+}
+
+.profile-sections-container {
+	width: 790px;
+	
+	h3 {
+		font-size: 17px;
+		text-align: center;
+	}
+	
+	.right, .left {
+		vertical-align:top
+	}
+	
+	.right {
+		
+		width: 545px;
+		margin-top: 5px;
+		display: inline-block;
+		
+		.panel {
+			background-color: white;
+			margin-top: 10px;
+			padding: 10px;
+			font-size: 14px;
+			
+			.button {
+				border: 2px solid white;
+			}
+			
+
+			
+			.friend-request {
+				background-color: #EBEBEB;
+				padding: 7px;
+				
+				.accept, .reject {
+					border: none;
+					border-radius: 10px;
+					-moz-border-radius: 10px;
+					-webkit-border-radius: 10px;
+					padding: 3px 4px;
+					font-weight: bold;
+					font-size: 10px;
+					cursor:pointer;
+					margin-right: 8px;
+				}
+
+				.accept {
+					background-color: #64B253;
+					color: #BFF5A5;
+				}
+
+				.reject {
+					background-color: #B25045;
+					color: #F6C5BC;
+				}
+
+				.username {
+					font-weight: bold;
+					width: 230px;
+				}
+			}
+		}
+		
+		.bike-photo {
+			display: inline-block;
+			margin: 10px;
+			background-color: rgba(90,160,59, 0.8);
+			
+			span.name {
+				color: black;
+				position: fixed;
+				font-size: 13px;
+				font-weight: bold;
+				margin-left: 75px;
+				margin-top: 20px;	
+				background-color: rgba(255,255,255,0.7);
+				padding: 2px 15px;
+				border-radius: 10px;
+				-moz-border-radius: 10px;
+				-webkit-border-radius: 10px;
+			}
+		}
+	}
+	
+	.left {
+		width: 230px;
+		margin-right: 10px;
+		
+		.back:hover {
+			text-decoration: none !important;
+			color: #50B142;
+		}
+		
+		.back {
+			display: block;
+			padding: 5px 10px;
+			background-color: rgba(0,0,0,0.8);
+			font-weight: bold;
+			margin-top: 20px;
+			color: white;
+		}
+		
+		.social-nets, .menu {
+			margin-top: 10px;
+		}
+		
+		.social-nets {
+			padding: 0.5px 10px 0.5px 10px;	
+			padding-bottom: 15px;
+			background-color: #FFF6D4;
+			color: #333333;
+
+			.twitter, .facebook {
+				width: 32px;
+				height: 32px;
+				margin-left: 10px;
+			}
+			
+			.none {
+				font-size: 12px;
+			}
+
+			span {
+				margin-left: 10px;
+				vertical-align: 12px;
+				font-size: 12px;
+			}
+
+			.twitter {
+				background: url(/assets/twitter.png);
+			}
+
+			.facebook {
+				background: url(/assets/facebook.png);
+			}
+		}
+
+		.menu {
+			font-size: 13px;
+			background-color: #FFFFFF;
+			
+			ul {
+				margin-left: 0px !important;
+				background-color: #E9E9E9;
+				
+				li.main-option {
+					a {
+						color: #2B2B2B;
+					}
+					border-bottom: 1px solid #D8D8D8;
+					
+				}
+				
+				li:hover {
+					background-color: #EEFFEB;
+				}
+				
+				li {
+					background-color: white;
+					display: block;
+					font-size: 15px;
+					font-weight: bold;
+					padding-left: 10px;
+					
+					a {
+						color: #646666;
+						padding: 10px 0px 10px 0px;
+					}
+
+					a:hover, a.selected {
+						color: #369739;
+					}
+
+				}
+			}
+		}
+	}
+}

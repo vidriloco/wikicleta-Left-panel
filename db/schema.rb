@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120419042815) do
+ActiveRecord::Schema.define(:version => 20120424234045) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                             :default => "", :null => false
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20120419042815) do
     t.integer  "user_id"
     t.float    "weight"
     t.integer  "main_picture"
+    t.string   "model"
     t.integer  "likes_count",                  :default => 0
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
@@ -94,6 +95,16 @@ ActiveRecord::Schema.define(:version => 20120419042815) do
   add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
   add_index "comments", ["commentable_type"], :name => "index_comments_on_commentable_type"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
+  create_table "friendships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.boolean  "confirmed"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "friendships", ["friend_id", "user_id"], :name => "friendships_idx", :unique => true
 
   create_table "incidents", :force => true do |t|
     t.string   "description"
@@ -184,8 +195,8 @@ ActiveRecord::Schema.define(:version => 20120419042815) do
   add_index "user_like_bikes", ["user_id", "bike_id"], :name => "uniqueness_likes_idx", :unique => true
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -198,8 +209,12 @@ ActiveRecord::Schema.define(:version => 20120419042815) do
     t.string   "username"
     t.text     "bio"
     t.string   "personal_page"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.date     "started_cycling_date"
+    t.boolean  "email_visible"
+    t.boolean  "externally_registered",  :default => false
+    t.boolean  "seller_account"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

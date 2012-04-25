@@ -16,7 +16,12 @@ describe User do
   end
   
   it "should reject a hash with invalid password" do
-    @user.check_parameters_and_password({"password" => "bicibici", "password_confirmation" => "bicibici", "current_password" => "bicibici"}).should be_false
+    @user.check_parameters_and_password({"password" => "bicibici", "password_confirmation" => "bicibici", "current_password" => "carcarcar"}).should be_false
+  end
+  
+  it "should reject a username with spaces" do
+    user = FactoryGirl.build(:pipo, :username => "spaced username")
+    user.save.should be_false
   end
   
 end

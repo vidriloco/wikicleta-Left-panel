@@ -13,13 +13,18 @@ es_MX:
         login: "Nombre de Usuario o Correo"
         personal_page: "Página personal"
         bio: "Bio"
+        started_cycling_date: "Fecha en la que sacaste la bici"
+        email_visible: "¿Mostrar mi correo en mi perfil?"
         reset_password_token: "El token para reestablecer contraseña"
   user_accounts:
+    validations:
+      invalid_username: "debe ser alfanumérico y tener más de 5 letras"
     omniauth:
       login: "Iniciar sesión con %{network}"
     forgot_password: "¿Olvidaste tu contraseña?"
     passwords:
       reset_password: "Reestablecer"
+      set_password: "Establecer"
     registrations:
       oauth:
         commit: "Completar"
@@ -41,11 +46,11 @@ es_MX:
         start: "Entrar"
         sign_up: "Registrate"
     settings:
-      main_page: "Pagina Principal"
+      main_page: "Volver a mi perfil"
       title: "Preferencias"
       account: "Cuenta"
       access: "Acceso"
-      profile: "Perfil"
+      profile: "Info en mi perfil"
       save: "Guardar"
       successful_save: "Tus preferencias han sido guardadas"
       unsuccessful_save: "No ha sido posible guardar tus preferencias"
@@ -68,10 +73,11 @@ es_MX:
           deactivate: "Desactivar mi cuenta"
           deactivate_confirmation: "¿Realmente deseas desactivar tu cuenta?"
         access:
-          social_networks: "Wikicleta por ahora soporta dos redes sociales; puedes acceder usando cualquiera."
+          set_password_for_external_registration: "Actualmente usas Twitter o Facebook para entrar a Wikicleta, no deberías necesitar establecer una contraseña. Aún así, puedes hacerlo en el botón siguiente"
+          social_networks: "Wikicleta por ahora permite el acceso mediante dos redes sociales:"
           recover_password: "Si has olvidado tu contraseña, Wikicleta puede enviarte una nueva a tu correo"
-          reset_password: "Si deseas cambiar tu contraseña, aqui es donde puedes hacerlo. Si te registraste usando tu cuenta de usuario de alguna red social, entonces necesitarás reestablecer tu contraseña"
+          reset_password: "Si deseas cambiar tu contraseña, aqui es donde puedes hacerlo."
+          change_password_for_external_registration: "No tienes una contraseña que cambiar si te registraste usando Twitter o Facebook"
           current_password: "Contraseña Actual"
-          reset: "Reestablecer"
         profile:
           change_name: "Cambiar nombre"

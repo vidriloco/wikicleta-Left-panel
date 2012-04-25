@@ -1,5 +1,5 @@
 <div class="accounts-actions">
-	<%= link_to t('user_accounts.settings.main_page'), root_path, :class => 'root' %>
+	<%= link_to t('user_accounts.settings.main_page'), user_profile_path(current_user.username), :class => 'root' %>
 	<%= link_to t('user_accounts.settings.account'), settings_account_path, :class => menu[:account] %>
 	<%= link_to t('user_accounts.settings.access'), settings_access_path, :class => menu[:access] %>
 	<%= link_to t('user_accounts.settings.profile'), settings_profile_path, :class => menu[:profile] %>

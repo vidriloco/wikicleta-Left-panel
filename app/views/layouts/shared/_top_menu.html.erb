@@ -1,6 +1,6 @@
 <p class="session">
 	<% if user_signed_in? %>
-		<%= link_to t('menu.profile'), settings_account_path %>
+		<%= link_to t('menu.profile'), user_profile_path(current_user.username) %>
 		<%= link_to t('menu.logout'), destroy_user_session_path, :method => :delete %>
 	<% else %>
 		<%= link_to t('menu.login'), new_user_session_path %>

@@ -90,9 +90,9 @@ feature 'User accounts settings' do
         
         page.should have_content I18n.t('user_accounts.settings.sections.access.recover_password')
         
-        click_on I18n.t('user_accounts.settings.sections.access.reset')
+        #click_on I18n.t('user_accounts.settings.sections.access.reset')
         
-        page.should have_content I18n.t('devise.passwords.send_instructions')
+        #page.should have_content I18n.t('devise.passwords.send_instructions')
       end
     end
     

@@ -10,7 +10,8 @@ module BikesHelper
   end
   
   def contact_for(bike)
-    link_to(bike.owner, 'javascript:void(0);', 'original-title' => bike.contact, :class => 'contact')
+    link_to(bike.owner, user_profile_path(bike.owner), :class => 'contact')
+    #link_to(bike.owner, 'javascript:void(0);', 'original-title' => bike.contact, :class => 'contact')
   end
   
   def sharing_for(bike)
@@ -29,6 +30,7 @@ module BikesHelper
   
   def details_for(bike)
     out = "<p class='kind'>#{Bike.humanized_category_for(:types, bike.kind)}</p><p class='brand'>#{bike.brand}</p>"
+    out += "<p class='weight'>#{bike.weight} kgs</p>" unless bike.weight.nil?
     out += link_to(t('bikes.views.show.photos.show'), 'javascript:void(0);', :class => 'open-gallery') unless bike.pictures.empty?
     out += link_to("", '#management/uploads', :class => 'reveals-picture-manager') if current_user_owns_bike?(bike)
     out.html_safe

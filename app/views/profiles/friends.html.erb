@@ -1,0 +1,25 @@
+<div class="profile-decorator shadow-light centered"></div>
+
+<%= render 'profiles/user_details' %>
+
+<div class="profile-sections-container centered">
+	<%= render :partial => 'left_panel', :locals => {:section => {:friends => "selected" }} %>
+	
+	<div class="right">
+		<div class="panel shadow-light">
+			<%= render 'profiles/friendships_menu' %>
+			
+			<% if @user.all_friendships.empty? %>
+				<p class="centered-text"><i><%= @user.username %></i><%= t('user_profiles.views.friendships.none') %></p>
+			<% else %>
+				<% friendships=@user.all_friendships.group_by(&:confirmed) %>
+				
+				<h3><%= t('user_profiles.views.friendships.invitation_requests') %></h3>
+				<%= render :partial => 'friendship', :collection => friendships[nil] %>
+				
+				<h3><%= t('user_profiles.views.friendships.friends') %></h3>
+				<%= render :partial => 'friendship', :collection => friendships[true] %>
+			<% end %>
+		</div>
+	</div>
+</div>

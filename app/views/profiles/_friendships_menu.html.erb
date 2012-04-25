@@ -1,0 +1,15 @@
+<% if user_signed_in? && current_user != @user %>
+	<div class="actions to-right">
+			<% if (friendship=current_user.friendship_with(@user)) && friendship.reciprocal? %>
+				<%= button_to t('user_profiles.views.friendships.remove'), friendship_path(friendship), :method => :delete, :class => "button red" %>
+			<% elsif friendship && !friendship.reciprocal? %>
+				<%= button_to t('user_profiles.views.friendships.awaiting_confirmation'), friendship_path(friendship), :method => :delete, :class => "button orange" %>
+			<% else %>
+				<%= button_to t('user_profiles.views.friendships.add'), friendships_path(:friend_id => @user.id), :class => "button blue" %>
+			<% end %>
+	</div>
+	<div class="clear"></div>
+	<br/>
+	<div class="separator"></div>
+	<br/>
+<% end %>

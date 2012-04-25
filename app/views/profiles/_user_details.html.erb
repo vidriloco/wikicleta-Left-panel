@@ -1,0 +1,23 @@
+<div class="profile-box shadow-light centered">
+	<div class="names inlined">
+		<h1><%= @user.username %></h1>
+		<% unless @user.full_name.blank? %>
+			<p class="fullname"><%= @user.full_name %></p>		
+		<% end %>
+		<% unless 1 == 1 %>
+			<br/>
+			<p class="cycling-start-date"><%= t('user_profiles.views.user_info.cycling_since') %><br/><%= l(@user.started_cycling_date, :format => :long) %></p>
+		<% end %>
+	</div>
+	
+	<div class="personal-extras to-right">
+		<p><%= @user.bio %></p>
+		<% if @user.email_visible? %>
+			<p class="email"><%= @user.email %></p>
+		<% end %>
+		<% unless @user.personal_page.blank? %>
+			<p class="webpage"><%= link_to @user.personal_page, "http://#{@user.personal_page}", :target => "_blank" %></p>
+		<% end %>
+	</div>
+	<div class="clear"></div>
+</div>

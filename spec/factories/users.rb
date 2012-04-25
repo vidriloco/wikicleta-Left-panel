@@ -7,6 +7,8 @@ FactoryGirl.define do
     u.email "pepe@example.com"
     u.full_name "Francisco Opa"
     u.username "pepito"
+    u.personal_page "www.pepito.mx"
+    u.bio "Buen usuario, amigable y comprometido con la bici"
   end
   
   factory :pipo, :class => "User" do |u|
@@ -14,7 +16,7 @@ FactoryGirl.define do
     u.password_confirmation "passwd"
     u.email "pipo@example.com"
     u.full_name "Pipo Olin"
-    u.username "pipo"
+    u.username "pipopipo"
   end
   
   factory :pancho, :class => "User" do |u|

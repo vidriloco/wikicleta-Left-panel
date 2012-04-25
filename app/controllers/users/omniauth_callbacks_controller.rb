@@ -20,7 +20,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
   
   def create
-    @user = User.new(params[:user])
+    @user = User.new(params[:user].merge!(:externally_registered => true))
     auth=@user.add_authorization(session["devise.oauth_data"])
     
     if @user.save

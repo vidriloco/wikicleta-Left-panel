@@ -1,0 +1,34 @@
+es_MX:
+  user_profiles:
+    menu:
+      settings: "Preferencias"
+      bikes: "Sus bicis"
+      friends: "Sus amigos"
+      social_nets: 
+        title: "Redes sociales"
+    messages:
+      friendships:
+        added_and_reciprocal: "Tú y %{friend} son amigos en Wikicleta"
+        added_and_pending: "Enviamos una solicitud de amistad a %{friend}"
+        unsuccessful_remove: "No fue posible enviar solicitud de amistad"
+        removed: "%{user} y %{friend} han dejado de ser amigos"
+    views:
+      social_nets:
+        none: "no ha registrado redes sociales"
+      user_info:
+        cycling_since: "Usando la bici desde:"
+      bikes:
+        none: " no tiene bicis registradas aún"
+      friendships:
+        none: " no tiene amigos todavia"
+        add: "Añadir como amig@"
+        awaiting_confirmation: "En espera de confirmación"
+        remove: "Eliminar como amig@"
+        accept: "Aceptar como amig@"
+        reject: "Rechazar como amig@"
+        invitation_requests: "Solicitudes de Amistad"
+        
+        
+        
+
+        

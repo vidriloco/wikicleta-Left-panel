@@ -18,12 +18,18 @@ feature 'User accounts registration' do
       fill_in "user_password", :with => "mysecret"
       fill_in "user_password_confirmation", :with => "mysecret"
       
+      fill_in "user_username", :with => "pepito bad"
+      click_on I18n.t("user_accounts.registrations.new.commit")
+      
+      page.should have_content I18n.t('user_accounts.validations.invalid_username')
+      
       fill_in "user_username", :with => "pepito"
+      fill_in "user_password", :with => "mysecret"
+      fill_in "user_password_confirmation", :with => "mysecret"
       
       click_on I18n.t("user_accounts.registrations.new.commit")
       
       current_path.should == root_path
-      
     end
     
     scenario "I cannot register if I do not provide the required data in the registration form" do
@@ -76,7 +82,7 @@ feature 'User accounts registration' do
         
           fill_in "user_email", :with => "mymail@example.com"
           click_on I18n.t('user_accounts.registrations.oauth.commit')
-        
+          
           page.current_path.should == root_path
           page.should have_content I18n.t("devise.omniauth_callbacks.success", :kind => "Twitter")
         end
@@ -93,7 +99,7 @@ feature 'User accounts registration' do
         describe "having previously logged-in with my twitter account" do
         
           before(:each) do
-            FactoryGirl.create(:authorization, :uid => "12345", :provider => "twitter", :secret => "secr", :user_id => FactoryGirl.create(:user))
+            FactoryGirl.create(:authorization, :uid => "12345", :provider => "twitter", :secret => "secr", :user_id => FactoryGirl.create(:user, :externally_registered => true))
             mock_omniauth_user_for(:twitter)
           end
         
@@ -105,6 +111,18 @@ feature 'User accounts registration' do
             page.should have_content I18n.t("devise.omniauth_callbacks.success", :kind => "Twitter")
           end
         
+          scenario "In the settings section I should not see the option for changing my password" do
+            visit new_user_session_path
+            click_on "twitter_sign_in"
+            
+            click_on I18n.t('menu.profile')
+            click_on I18n.t('user_profiles.menu.settings')
+            click_on I18n.t('user_accounts.settings.access')
+            
+            page.should have_content I18n.t('user_accounts.settings.sections.access.change_password_for_external_registration')
+            page.should have_content I18n.t('user_accounts.settings.sections.access.set_password_for_external_registration')
+            #find_button I18n.t('user_accounts.passwords.set_password')
+          end
         end
       end
       
@@ -124,9 +142,13 @@ feature 'User accounts registration' do
           
           page.current_path.should == users_auth_sign_up_path
         
+          fill_in "user_username", :with => "vidriloco ee"
+          click_on I18n.t('user_accounts.registrations.oauth.commit')
+          page.should have_content I18n.t('user_accounts.validations.invalid_username')
+        
           fill_in "user_username", :with => "vidriloco"
           click_on I18n.t('user_accounts.registrations.oauth.commit')
-        
+          
           page.current_path.should == root_path
           page.should have_content I18n.t("devise.omniauth_callbacks.success", :kind => "Facebook")
         end
@@ -144,7 +166,7 @@ feature 'User accounts registration' do
         describe "having previously logged-in with my facebook account" do
         
           before(:each) do
-            FactoryGirl.create(:authorization, :uid => "12345", :provider => "facebook", :secret => "secr", :user_id => FactoryGirl.create(:user))
+            FactoryGirl.create(:authorization, :uid => "12345", :provider => "facebook", :secret => "secr", :user_id => FactoryGirl.create(:user, :externally_registered => true))
             mock_omniauth_user_for(:facebook)
           end
         
@@ -154,6 +176,19 @@ feature 'User accounts registration' do
 
             page.current_path.should == root_path
             page.should have_content I18n.t("devise.omniauth_callbacks.success", :kind => "Facebook")
+          end
+          
+          scenario "In the settings section I should not see the option for changing my password" do
+            visit new_user_session_path
+            click_on "facebook_sign_in"
+            
+            click_on I18n.t('menu.profile')
+            click_on I18n.t('user_profiles.menu.settings')
+            click_on I18n.t('user_accounts.settings.access')
+            
+            page.should have_content I18n.t('user_accounts.settings.sections.access.change_password_for_external_registration')
+            page.should have_content I18n.t('user_accounts.settings.sections.access.set_password_for_external_registration')
+            #find_button I18n.t('user_accounts.passwords.set_password')
           end
         
         end

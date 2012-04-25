@@ -241,23 +241,31 @@
 	
 	.info {
 		display: none;
-		position: relative;
-		top: -200px;
-		right: -170px;
-		width: 50%;
+		position: fixed;
+		margin-top: -200px;
+		margin-left: 160px;
+		width: 400px;
 		text-align: center;
 		background-color: rgba(255,255,255, 0.7);
 		color: #3E3E3E;
 		font-weight: bold;
 		font-size: 13px;
 		border: 1px solid white;
+		text-align: center;
 		
 		p {
-			margin-right: 15px;
+			margin-right: 10px;
 			display: inline-block;
 			a {
 				margin-left: 14px;
 			}
+		}
+		
+		.weight {
+			color: #4C4C4C;
+			font-weight: bold;
+			padding-left: 10px;
+			border-left: 1px solid #FFFFFF;
 		}
 		
 		.brand {
@@ -265,7 +273,7 @@
 		}
 		
 		a {
-			margin-left: 15px;
+			margin-left: 10px;
 			color: #4A8237;
 		}
 	}

@@ -1,0 +1,14 @@
+<div class="menu shadow-light">
+	<ul>
+		<% if current_user == @user %>
+			<li class="main-option"><%= link_to t('user_profiles.menu.settings'), settings_account_path %></li>
+		<% end %>
+		<li><%= link_to t('user_profiles.menu.bikes'), user_profile_path(@user.username), :class => section[:bikes] %></li>
+		<!--friends_of_user_profile_path(@user.username)-->
+		<li><%= link_to t('user_profiles.menu.friends'), 'javascript:void(0);', :class => section[:friends] %></li>
+		<% if @user.is_seller? %>
+			<li><%= link_to t('user_profiles.menu.store'), '', :class => section[:store] %></li>
+			<li><%= link_to t('user_profiles.menu.store'), '', :class => section[:seller] %></li>
+		<% end %>
+	</ul>
+</div>

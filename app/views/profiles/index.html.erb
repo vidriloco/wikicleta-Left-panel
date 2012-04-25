@@ -1,0 +1,26 @@
+<div class="profile-decorator shadow-light centered"></div>
+
+<%= render 'profiles/user_details' %>
+
+<div class="profile-sections-container centered">
+	<%= render :partial => 'left_panel', :locals => {:section => {:bikes => "selected" }} %>
+	
+	<div class="right">
+			<% if @user.bikes.empty? %>
+				<div class="panel shadow-light">
+					<p class="centered-text"><i><%= @user.username %></i><%= t('user_profiles.views.bikes.none') %></p>
+				</div>
+			<% else %>
+				<% @user.bikes.each do |bike| %>			
+						<a href="<%= bike_path(bike) %>" class="shadow-light bike-photo">
+							<span class="name shadow-light"><%= bike.name %></span>
+						<% if bike.front_picture.nil? %>
+								<%= image_tag('thumb_no_bike.png') %>
+						<% else %>
+								<%= image_tag(bike.front_picture.image.thumb.url) %>
+						<% end %>
+						</a>
+				<% end %>
+		<% end %>
+	</div>
+</div>

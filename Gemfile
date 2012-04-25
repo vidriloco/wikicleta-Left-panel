@@ -10,10 +10,13 @@ gem 'devise'
 gem 'formtastic'
 gem 'spatial_adapter', :git => 'http://github.com/Empact/spatial_adapter.git'
 # gem 'transport_adder', :require => 'transport_adder', :path => 'vendor/plugins/transport_adder/'
+
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'twitter'
+gem 'fb_graph'
+
 gem 'rails-backbone'
 gem 'redis-objects'
 gem 'acts_as_commentable'

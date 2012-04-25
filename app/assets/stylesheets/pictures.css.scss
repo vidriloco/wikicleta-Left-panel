@@ -7,9 +7,9 @@
 	width: 26px;
 	height: 20px;
 	background: url(/assets/camera.png);
-	position: relative;
-	left: 35px;
-	top: 4px;
+	float: right;
+	margin-right: 25px;
+	margin-top: 10px;
 }
 
 #picture-manager-modal {
