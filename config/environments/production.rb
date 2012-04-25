@@ -43,9 +43,9 @@ Ciudadio::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional Javascript files (excluding application.js)
-  config.assets.precompile += %w(bikes.js map.js)
+  config.assets.precompile += %w(bikes.js map.js profiles.js)
   # Precompile additional CSS files (excluding application.css)
-  config.assets.precompile += %w(welcome.css access.css settings.css)
+  config.assets.precompile += %w(welcome.css access.css settings.css profiles.css)
   config.serve_static_assets = true
   
   # Disable delivery errors, bad email addresses will be ignored
