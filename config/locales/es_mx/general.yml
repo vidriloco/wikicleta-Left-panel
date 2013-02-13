@@ -5,35 +5,45 @@ es_MX:
     firm: "El equipo detrás de Wikicleta"
     sections:
       welcome: 
-        title: "Wikicleta"
+        greet: "Hola"
+        title: "Inicio"
         subsections:
-          main: "Inicio"
           about: "Acerca de"
       incidents: 
-        title: "Reporte cletero"
+        title: "Incidentes"
         subsections:
           stolen: "Robos"
           assaults: "Asaltos"
           accidents: "Accidentes"
           regulation_infractions: "Infracciones"
           search: "Buscar"
-          new: "Reporta un incidente"
-      streets:
-        title: "Las calles"
+          new: "Reportar nuevo"
+      highlights:
+        title: "Puntos de Riesgo"
         subsections:
-          parking: "Biciestacionamientos"
-          bike_share: "Préstamo de bicis"
+          recent: "Recientes"
+          solved: "Resueltos"
+          new: "Reportar nuevo"
+          search: "Buscar"
+      routes:
+        title: "Rutas"
+        subsections:
+          featured: "Populares"
+          pooling: "Bicibuses"
+          search: "Buscar"
+      places:
+        title: "Lugares"
+        subsections:
+          bike_friendly: "Bici-amigables"
+          parking: "Bici-estacionamientos"
+          search: "Buscar"
       bikes:
-        title: "Las bicis"
+        title: "Pasarela de bicis"
         subsections:
           new: "Agrega tu bici"
           popular: "Las + populares"
           search: "Buscar"
           mine: "Tus bicis"
-      street_marks: 
-        title: "Las calles"
-      places:
-        title: "Lugares"
   messages:
     save_failure: "no pudo guardar este %{element} debido a:"
     error: "Ups! Un error"
@@ -87,10 +97,10 @@ es_MX:
       mexico: "MXN"
   
   menu:
-    login: "Entrar"
+    login: "Ingresar"
     sign_up: "Registrarse"
     logout: "Salir"
-    profile: "Perfil"
+    profile: "Ir a la página de mi perfil"
   questions:
     mobility:
       bike_parking: "¿Tiene estacionamiento para bicicletas?"

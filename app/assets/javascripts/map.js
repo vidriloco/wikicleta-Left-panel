@@ -25,6 +25,13 @@ $(document).ready(function() {
 	
 	ViewComponents.LeftBar.initialize();
 	
+	var width=$(window).width()-270;
+	$('body').append('<div style="width:'+width+'px"><div style="margin-left:270px; width:'+width+'px; height:100%;" id="map" class="<%= yield :classes_for_map %> displays-points"></div></div>');
+	
+	window.onresize = function(){
+		$('#map').css('width', $(window).width()-270);
+	}
+	
 	if($.currentSectionIs('incidents'))  {
 		
 		section = new IncidentsSection();

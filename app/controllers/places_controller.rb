@@ -1,6 +1,4 @@
-class PlacesController < ApplicationController
-  layout 'places'
-  
+class PlacesController < ApplicationController  
   before_filter :authenticate_user!, :except => [:index, :show]
 
   def new
@@ -15,7 +13,7 @@ class PlacesController < ApplicationController
     if params.has_key?(:filtered)
       @places = Place.filtering_with(params[:ordered_by], params[:categories])
     else
-      @categories = Category.all
+      #@categories = Category.all
       @places = Place.order("mobility_kindness_index DESC, created_at ASC")
     end
     

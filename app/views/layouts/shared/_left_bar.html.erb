@@ -1,13 +1,18 @@
 <div id="main-bar" class="shadow-strong">
-	<%= render 'layouts/shared/top_menu' %>
-	<div class="separator"></div>
-	<h1><%= link_to t('app.name'), root_path %></h1>
-	<p class="motto"><%= t('app.motto') %></p>
-	<div class="menu">
-		<%= menu_section_for(:bikes) %>
-		<%= menu_section_for(:incidents, :map) %>
-		<%= menu_section_for(:streets, :map) %>
-		<% menu_section_for(:street_marks, :map) %>
-		<%= menu_section_for(:welcome) %>
+	<%= link_to '', root_path, :class => 'logo' %>
+	<div class="subtle-back"></div>
+	<div class="notifications">
+		<%= render 'layouts/shared/session' %>
 	</div>
+	
+	<div class="menu">
+		<%= menu_section_for(:welcome) %>
+		<%= menu_section_for(:routes, :map) %>
+		<%= menu_section_for(:incidents, :map) %>
+		<%= menu_section_for(:places, :map) %>
+		<%= menu_section_for(:highlights, :map) %>
+		<%= menu_section_for(:bikes) %>
+	</div>
+	
+
 </div>

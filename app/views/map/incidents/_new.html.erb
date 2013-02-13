@@ -1,19 +1,20 @@
 <div id="new_incident">
-
-	<p class="required-login"><%= render 'reporting_as' %></p>
+	<div class="report-content">
+		<p class="required-login"><%= render 'reporting_as' %></p>
 	
-	<div class="styled-form clear-void">
-	<%= form_for([:map, @incident], :remote => true) do |f| %>
-		<h1><%= t('incidents.views.new.title') %></h1>
+		<div class="styled-form clear-void">
+		<%= form_for([:map, @incident], :remote => true) do |f| %>
+			<%= top_section_menu_for(link_to(t('app.sections.incidents.title'), hash_link_for(map_incidents_path)), t('incidents.views.new.title')) %>
 		
-		<h3 class="hidden error-message"><%= t('actions.verify_fields_on_red') %></h3>
+			<h3 class="hidden error-message"><%= t('actions.verify_fields_on_red') %></h3>
 		
-		<%= render :partial => 'fields', :locals => {:f => f} %>
-		<div class="actions to-right">
-			<%= link_to t('actions.cancel'), hash_link_for(map_incidents_path) %>
-			<%= f.submit t('actions.save'), :class => 'submit blue button' %>
+			<%= render :partial => 'fields', :locals => {:f => f} %>
+			<div class="actions to-right">
+				<%= link_to t('actions.cancel'), hash_link_for(map_incidents_path) %>
+				<%= f.submit t('actions.save'), :class => 'submit blue button' %>
+			</div>
+			<div style="clear: both;"></div>
+		<% end %>	
 		</div>
-		<div style="clear: both;"></div>
-	<% end %>	
 	</div>
 </div>

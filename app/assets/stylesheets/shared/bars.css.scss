@@ -12,19 +12,20 @@
 
 #dynamic-bar {
 	z-index: 9998;
-	left: 250px;
+	// left: 250px for foldable
 	height: auto;
 	min-height: 100%;
 	width: 500px;
 	position: absolute;
 	clear: left;
+	background-color: #53789D;
 	
 	.handle {
 		position: absolute;
 		right: 0px;
 		min-width: 20px;
 		width: 20px;
-		background-color: #367E24;
+		background-color: #FF7300;
 		min-height: 80%;
 		height: 80%;
 	}
@@ -48,39 +49,91 @@
 }
 
 #main-bar {
-	background: url('/assets/bar.png');
+	font-family: "gothamrndbook-Book";
 	z-index: 9999;
 	width: 250px;
-	background-color: #585858;
+	background: #e0ebf6; /* Old browsers */
+	background: -moz-linear-gradient(top,  #e0ebf6 0%, #f2f7fb 54%, #f2f5f6 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e0ebf6), color-stop(54%,#f2f7fb), color-stop(100%,#f2f5f6)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #e0ebf6 0%,#f2f7fb 54%,#f2f5f6 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #e0ebf6 0%,#f2f7fb 54%,#f2f5f6 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #e0ebf6 0%,#f2f7fb 54%,#f2f5f6 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #e0ebf6 0%,#f2f7fb 54%,#f2f5f6 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0ebf6', endColorstr='#f2f5f6',GradientType=0 ); /* IE6-9 */
+
+	.subtle-back {
+		position: fixed;
+		top: 150px;
+		width: 250px;
+		height: 583px;
+		left: 0px;
+		background: url('/assets/menu_logo.png');
+		z-index: -99999;
+	}
 	
 	h1 {
 		a { color: #E7E7E7; }
 		text-align: center;		
-		font-size: 40px;
+		font-size: 30px;
 		
 		text-shadow: 0px 1px 2px #555;
-		margin-bottom: 5px;
-		margin-top: 30px;
+		margin-bottom: 10px;
+		margin-top: 10px;
 	}
 	
-	.motto {
-		font-style: italic !important;
-		text-align: center;		
-		color: #5FB848;
-		margin-top: 0px;
-		margin-bottom: 80px;
+	.logo {
+		margin-top: 20px;
+		background: url('/assets/wikicleta-inv.png');
+		width: 200px;
+		height: 150px;
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+	}
+	
+	.notifications {
+		
+		a {
+			font-family: "gothamrndbold-Bold";
+			color:#F76100;
+		}
+		
+		span {
+			margin-right: 14px;
+			display: block;
+			color: white;
+		}
+		
+		span.exit {
+			margin-top: 10px;
+			a {
+				color: white;
+				font-size: 11px;
+				font-style: normal;
+			}
+		}
+		
+		margin: 30px 0px 70px 0px;
+		padding: 10px;
+		font-size: 15px;
+		text-align:right;
+	}
+	
+	
+	.notifications:hover {
+		background-color: rgba(244,121,32,0.1);
 	}
 	
 	.session {
 		margin: 10px;
 		text-align: center;
+		
 		a:hover {
 			color: #3ACD19;
 		}
 		a {
 			margin: 0 20px 0 20px;
 			font-size: 13px;
-			font-weight: bold;
 			color: #AAEC94;
 		}
 	}
@@ -94,37 +147,49 @@
 		display: block;
 		text-align: right;
 		margin-bottom: 10px;
-		font-size: 14px;
-
+		font-size: 15px;
+		
 		a:hover {
-			color: #FFFFFF; 
+			color: #4878FF; 
 		}
 		
 		a {
-			color: #CECECE;
+			color: #81AEFF;
 		}
 		
 		p { margin: 5px 20px 5px 20px }
 		
 		a.selected {
-			color: #FFFFFF;
-			font-weight: 600 !important;
+			color: #FF6F0C;
+		}
+		
+		a.highlighted {
+			color: #FFBF8E !important;
+		}
+		
+		a.highlighted:hover {
+			color: #FF713E !important;
+		}
+		
+		div.options:hover {
+			background-color: rgba(244,121,32,0.05);
 		}
 		
 		div.options {
 			font-size: 12px;
 			padding: 10px;
-			border-bottom: 1px solid #232323;
+			border-bottom: 1px solid #C8DCFF;
 			
-			border-top: 1px solid #3E6A30;
-			background-color: #151515;
+			border-top: 1px solid #C8DCFF;
+			//background-color: rgba(244,121,32,0.3);
+			background-color: rgba(255,255,255,0.3);
 			
 			a.selected {
 				color: #61BA47;
 			}
 			
 			a:hover {
-				color: white;
+				color: #1C2838;
 			}
 			a {
 				color: #909090;
@@ -137,4 +202,51 @@
 
 #content {
 	margin-left: 300px !important;
+}
+
+.back-menu {
+	background: url('/assets/bar.png');
+	position: absolute;
+	top: 0px;
+	width: 100%;
+	left: 0px;
+	
+	p {
+		color: white;
+		font-weight: bold;
+		display: inline-block;
+		padding: 0px 10px;
+		margin-right: 5px;
+	}
+	
+	p.path {
+		text-align: right;
+		float: right;
+		
+		span.linker {
+			font-size: 20px;
+			color: #4CB937;
+			margin: 0px 10px 0px 10px;
+			vertical-align: -3px; 
+		}
+		
+		span.section:hover {
+			a {
+				color: #A2FB84;
+			}
+		}
+		
+		span.subsection {
+			a {
+				color: #DEDEDE;
+			}
+		}
+		
+	}
+	
+	p.wikicleta {
+		font-size: 15px;
+		margin-left: 10px;
+		margin-right: 50px;
+	}
 }

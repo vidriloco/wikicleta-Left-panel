@@ -1,1 +1,20 @@
 1. Counting on announcements should show only those next, the passed ones no
+
+IDEAS:
+
+Motto:
+  0: "La bici omnipresente"
+	1: "Sale contigo a rodar"
+	2: "Andar en bici sin miedo"
+	3: "Te anima a moverte en bici"
+	4: "Por tu ciudad en bici"
+	5: "Tu guia ciclista"
+	6: "Saca la bici"
+	7: "Tu bici y tu ciudad en un solo lugar"
+	8: "La plataforma cletera en tu ciudad"
+	
+
+Idea:
+	1: "Explora tu ciudad en bici con información generada por la comunidad ciclista en tu ciudad"
+	2: "Conoce mejor tu ciudad de la mano de otros ciclistas en tu ciudad"
+	3: "Conoce nuevos amigos y lugares, arma rutas y mejora tu ciudad al usar tu bici para moverte en ella"

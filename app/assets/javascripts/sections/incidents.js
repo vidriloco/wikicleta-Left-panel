@@ -28,27 +28,30 @@ function IncidentsSection()
 		}
 	}
 	
-	var beforeViewsLoaded = function() {
-		loadMainView();
-		ViewComponents.Floating.detach();
-		ViewComponents.LeftBar.show();
+	var clearViewsAndExpand = function() {
+		resetMenuAndMap();
+		$(attachableDom).empty();
 		ViewComponents.LeftBar.expand();
+		ViewComponents.Floating.detach();
+	}
+	
+	var resetMenuAndMap = function() {
+		ViewComponents.LeftBar.clearSelected();
+		if(map == null) {
+			map = new MapFactory();
+		} 
 	}
 	
 	var afterIndexLoaded = function() {
 		var domElement = '#count_incidents';
-		ViewComponents.LeftBar.hide();
+		//ViewComponents.LeftBar.collapse();
 		ViewComponents.Floating.append($(domElement).html());
 		ViewComponents.Notification.detach();
 	}
 	
-	var loadMainView = function() {
-		$(attachableDom).empty();
-		ViewComponents.LeftBar.clearSelected();
-		map = new MapFactory();
-	}
-	
+
 	var loadIncidentsOnMap = function(items) {
+		map.resetMarkersList();
 		// Load all the incidents coordinates into the map
 		for(var idx =0; idx < items.length; idx++) {
 			var lat = $($(items[idx]).children('.lat')[0]).text();
@@ -74,7 +77,7 @@ function IncidentsSection()
 	this.newIncident = function() {
 		// TODO: validate presence of bike 
 		var domElement = '#new_incident';
-		beforeViewsLoaded();
+		clearViewsAndExpand();
 		ViewComponents.LeftBar.setSectionSelected('new');
 		
 		// Insert html form
@@ -104,8 +107,11 @@ function IncidentsSection()
 	}
 	
 	this.index = function() {	
-		loadMainView();
-		ViewComponents.LeftBar.collapse();
+		resetMenuAndMap();
+		
+		ViewComponents.LeftBar.collapse(function() {
+			$(attachableDom).empty();
+		});
 		
 		loadIncidentsIfNeeded(function(msg) {	
 			loadIncidentsOnMap($('#list_incidents .item'));			
@@ -114,12 +120,14 @@ function IncidentsSection()
 	}
 	
 	this.incidents = function(incidentKind) {
-		beforeViewsLoaded();
+		clearViewsAndExpand();
+		
 		ViewComponents.LeftBar.setSectionSelected(incidentKind);
 		
 		var sectionDom = ' .'+incidentKind;
 		loadIncidentsIfNeeded(function(msg) {	
-			$(attachableDom).append($(incidentListDom+sectionDom).html());	
+			$(attachableDom).append($(incidentListDom+sectionDom).html());
+	
 			loadIncidentsOnMap($('.kind-group .'+incidentKind+' .item'));
 
 			$('.simplePagerNav').remove();
@@ -132,15 +140,16 @@ function IncidentsSection()
 		if(!$.isDefined('#list_incidents')) {
 			$.visit('#');
 		}
-		loadMainView();
+		resetMenuAndMap();
 		ViewComponents.LeftBar.collapse();
 		loadIncidentsOnMap($('#list_incidents .item'));
 		afterIndexLoaded();
 	}
 	
 	this.loadIncident = function(incidentKind, id) {
-		beforeViewsLoaded();
+		clearViewsAndExpand();
 		ViewComponents.LeftBar.setSectionSelected(incidentKind);
+		map.resetMarkersList();
 		
 		$.ajax({
 	  	type: "GET",
@@ -166,7 +175,7 @@ function IncidentsSection()
 	
 	this.search = function() {
 		var domElement = '#searching';
-		beforeViewsLoaded();
+		clearViewsAndExpand();
 		map.enableSearch("#coordinates");
 		ViewComponents.LeftBar.setSectionSelected('search');
 		

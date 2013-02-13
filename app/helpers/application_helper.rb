@@ -26,23 +26,43 @@ module ApplicationHelper
     out
   end
   
-  def links_for_streets
-    out=  link_to(t('app.sections.streets.subsections.parking'), root_path, current_action_matches?("parking"))
-    out+=  link_to(t('app.sections.streets.subsections.bike_share'), about_path, current_action_matches?("bikeshare"))
+  def links_for_places
+    out=  link_to(t('app.sections.places.subsections.parking'), root_path, current_action_matches?("parking"))
+    out+=  link_to(t('app.sections.places.subsections.bike_friendly'), root_path, current_action_matches?("bike_friendly"))
+    out+= link_to(t('app.sections.places.subsections.search'), hash_link_for(map_incidents_path, 'search'), :id => 'places-search', :class => "highlighted")
+    
+    out
   end
   
+  def links_for_routes
+    out=  link_to(t('app.sections.routes.subsections.featured'), root_path, current_action_matches?("featured"))
+    out+=  link_to(t('app.sections.routes.subsections.pooling'), root_path, current_action_matches?("pooling"))
+    out+= link_to(t('app.sections.routes.subsections.search'), hash_link_for(map_incidents_path, 'search'), :id => 'routes-search', :class => "highlighted")
+        
+    out
+  end
+    
   def links_for_welcome
-    out=  link_to(t('app.sections.welcome.subsections.main'), root_path, current_action_matches?("index"))
-    out+=  link_to(t('app.sections.welcome.subsections.about'), about_path, current_action_matches?("about"))
+    out=  link_to(t('app.sections.welcome.subsections.about'), about_path, current_action_matches?("about"))
+    out
   end
   
   def links_for_incidents  
-    out=  link_to(t('app.sections.incidents.subsections.new'), hash_link_for(map_incidents_path, 'new'), :id => 'incidents-new')
+    out= link_to(t('app.sections.incidents.subsections.stolen'), hash_link_for(map_incidents_path, 'thefts'), :id => 'incidents-thefts') 
     out+= link_to(t('app.sections.incidents.subsections.accidents'), hash_link_for(map_incidents_path, 'accidents'), :id => 'incidents-accidents')
-    out+= link_to(t('app.sections.incidents.subsections.stolen'), hash_link_for(map_incidents_path, 'thefts'), :id => 'incidents-thefts') 
     out+= link_to(t('app.sections.incidents.subsections.assaults'), hash_link_for(map_incidents_path, 'assaults'), :id => 'incidents-assaults') 
     out+= link_to(t('app.sections.incidents.subsections.regulation_infractions'), hash_link_for(map_incidents_path, 'regulation_infractions'), :id => 'incidents-regulation_infractions') 
-    out+= link_to(t('app.sections.incidents.subsections.search'), hash_link_for(map_incidents_path, 'search'), :id => 'incidents-search')
+    out+= link_to(t('app.sections.incidents.subsections.search'), hash_link_for(map_incidents_path, 'search'), :id => 'incidents-search', :class => "highlighted")
+    out+= link_to(t('app.sections.incidents.subsections.new'), hash_link_for(map_incidents_path, 'new'), :id => 'incidents-new', :class => "highlighted")
+    
+    out
+  end
+  
+  def links_for_highlights 
+    out=  link_to(t('app.sections.highlights.subsections.recent'), root_path, current_action_matches?("featured"))
+    out+=  link_to(t('app.sections.highlights.subsections.add'), root_path, current_action_matches?("pooling"))
+    out+= link_to(t('app.sections.highlights.subsections.search'), hash_link_for(map_incidents_path, 'search'), :id => 'highlights-search', :class => "highlighted")
+    out+= link_to(t('app.sections.highlights.subsections.new'), hash_link_for(map_incidents_path, 'new'), :id => 'highlights-new', :class => "highlighted")
     
     out
   end
@@ -62,6 +82,10 @@ module ApplicationHelper
     else
       text
     end
+  end
+  
+  def top_section_menu_for(section, subsection=nil)
+    render :partial => 'map/shared/top_menu', :locals => { :section => section, :subsection => subsection }
   end
   
   def boolean_options_for_select(selected)

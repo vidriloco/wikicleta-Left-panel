@@ -76,7 +76,7 @@ es_MX:
       edit:
         destroy: "Eliminar este incidente"
       filtering:
-        title: "Filtrar incidentes por"
+        title: "Búsqueda"
         complaint_issued: "Denuncia levantada"
         map_search: "Aquellos dentro del área visible del mapa"
         date_and_time: "Por fecha"

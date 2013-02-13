@@ -1,4 +1,15 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600italic,600,400italic,300italic,800,800italic,700);
+@font-face{
+font-family: "gothamrndbook-Book";
+   font-style: normal;
+   font-weight: normal;
+   src:url("/assets/gothamrndbook.ttf");
+}
+@font-face{
+font-family: "gothamrndbold-Bold";
+   font-style: normal;
+   font-weight: normal;
+   src:url("/assets/gothamrndbold.ttf");
+}
 
 .hidden {
 	display: none;

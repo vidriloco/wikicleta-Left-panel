@@ -1,17 +1,18 @@
 <div id="list_incidents">
 	<% Bike.category_list_for(:incidents).values.each do |kind| %>
 		<div class="<%= kind.to_s.pluralize %>">
-			
-			<div class="kind-group incident-style">
-				<%= link_to t('actions.close'), hash_link_for(map_incidents_path), :class => "back" %>
-				<h2 class="<%= kind.to_s.pluralize %>"><%= t("incidents.views.index.listing.plural.#{kind}") %></h2>
+			<div class="kind-group incident-style report-content">
+				<%= top_section_menu_for(link_to(t('app.sections.incidents.title'), hash_link_for(map_incidents_path)), t("incidents.views.index.listing.plural.#{kind}")) %>
 				
 				<div id="paginated-<%= kind.to_s.pluralize %>">
 					<% incidents_for_category = @incidents[Bike.category_for(:incidents, kind)] %>
 					<% unless incidents_for_category.nil? %>
+						<div class="mark centered"></div>
+						<br/>
 						<%= render incidents_for_category %>
 					<% else %>
 						<p class="empty"><%= t("incidents.views.index.empty") %></p>
+						<div class="mark centered"></div>
 					<% end %>
 				</div>
 

@@ -1,6 +1,6 @@
 <div id="searching">
 	<div class="search with-aligned-inputs styled-form clear-void">
-		<h1><%= t('incidents.views.filtering.title') %></h1>
+		<%= top_section_menu_for(link_to(t('app.sections.incidents.title'), hash_link_for(map_incidents_path)), t('incidents.views.filtering.title')) %>
 		
 		<%= form_tag filtering_map_incidents_path, :method => :get, :remote => true do %>
 			<div>

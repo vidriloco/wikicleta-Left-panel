@@ -1,0 +1,8 @@
+
+<% if user_signed_in? %>
+	<span><%= current_user.full_name %></span>
+	<span><%= link_to t('menu.profile'), user_profile_path(current_user.username) %></span>
+	<span class="exit"><%= link_to t('menu.logout'), destroy_user_session_path, :method => :delete %></span>
+<% else %>
+	<span><%= link_to t('menu.login'), new_user_session_path %></span>
+<% end %>

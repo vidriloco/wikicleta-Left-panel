@@ -1,0 +1,12 @@
+<div class="back-menu">
+	<p class="wikicleta"><%= t('app.name') %></p>
+	<p class="path">
+		<span class="section"><%= section %></span>
+		<% unless subsection.nil? %>
+			<span class="linker"><</span>
+			<span class="subsection">
+				<%= subsection %>
+			</span>
+		<% end %>
+	</p>
+</div>
