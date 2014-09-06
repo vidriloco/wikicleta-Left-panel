@@ -22,7 +22,7 @@ gem 'redis-objects'
 gem 'acts_as_commentable'
 
 gem 'carrierwave', '0.6.2'
-gem 'rmagick'
+gem 'rmagick', '2.13.3'
 gem 'fog'
 
 group :test do
@@ -31,13 +31,10 @@ group :test do
   gem 'rspec-rails', "~> 2.6.0"
   gem 'steak'
   gem 'gherkin'
-  gem 'autotest'
 	gem 'delorean'
   gem 'ZenTest', "~> 4.4.2"
 	# macos
-	gem 'autotest-fsevent'
-  gem 'autotest-rails'
-  gem 'autotest-growl'
+
 	gem "factory_girl_rails", :require => false
   gem 'faker' #rspec fake models
   gem 'launchy' #cross plataform application helper
